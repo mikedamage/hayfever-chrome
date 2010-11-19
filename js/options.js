@@ -31,7 +31,8 @@ $(document).ready(function() {
 		}
 
 		if (localStorage['harvest_username'] && localStorage['harvest_password']) {
-			var b64AuthString = atob(localStorage['harvest_username'] + ':' + localStorage['harvest_password']);
+			var b64AuthString = btoa(localStorage['harvest_username'] + ':' + localStorage['harvest_password']);
+			localStorage['harvest_auth_string'] = b64AuthString;
 		}
 
 		$('#status').addClass('success').html('Options successfully saved');
