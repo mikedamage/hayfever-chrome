@@ -1,0 +1,20 @@
+{
+	"name": "Hayfever for Harvest",
+	"version": "0.1",
+	"description": "A simple Harvest timesheet manager for Google Chrome",
+	"background_page": "background.html",
+	"browser_action": {
+		"default_icon": "icon.png",
+		"popup": "popup"
+	},
+	"icons": {
+		"48": "app_icon_48.png",
+		"64": "app_icon_64.png",
+		"128": "app_icon_128.png"
+	},
+	"options_page": "options.html",
+	"permissions": [
+		"https://*.harvestapp.com",
+		"notifications"
+	]
+}
