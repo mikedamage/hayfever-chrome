@@ -5,7 +5,7 @@
 	"background_page": "background.html",
 	"browser_action": {
 		"default_icon": "icon.png",
-		"popup": "popup"
+		"popup": "popup.html"
 	},
 	"icons": {
 		"48": "app_icon_48.png",
