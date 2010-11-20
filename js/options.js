@@ -4,7 +4,7 @@ $(document).ready(function() {
 		, $passwordField = $('#harvest-password')
 		, subdomain = localStorage['harvest_subdomain']
 		, username = localStorage['harvest_username']
-		, password = localStorage['harvest_password'];
+		, authString = localStorage['harvest_auth_string'];
 
 	// Populate Fields if options are already set
 	if (subdomain) {
@@ -15,8 +15,8 @@ $(document).ready(function() {
 	}
 
 	// TODO: Don't store password in production version. Just store base64 encoded auth string and tell user that their password is saved.
-	if (password) {
-		$passwordField.val(password);
+	if (authString) {
+		$('#harvest-password').next('.hint').html("We've successfully used your password to build an authentication string. This field will remain blank because we don't actually store your password. You can enter a new password at any time to rebuild the authentication string.");
 	}
 
 	$('#options').submit(function() {
@@ -27,15 +27,15 @@ $(document).ready(function() {
 			localStorage['harvest_username'] = $usernameField.val();
 		}
 		if ($passwordField.val().length > 0) {
-			localStorage['harvest_password'] = $passwordField.val();
+			var tempPassword = $passwordField.val();
 		}
 
-		if (localStorage['harvest_username'] && localStorage['harvest_password']) {
-			var b64AuthString = btoa(localStorage['harvest_username'] + ':' + localStorage['harvest_password']);
+		if (localStorage['harvest_username'] && tempPassword) {
+			var b64AuthString = btoa(localStorage['harvest_username'] + ':' + tempPassword);
 			localStorage['harvest_auth_string'] = b64AuthString;
 		}
 
-		$('#status').addClass('success').html('Options successfully saved');
+		$('#status').addClass('success').html('Options successfully saved').fadeIn(400);
 		return false;
 	});
 });

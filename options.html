@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <title>Hayfever for Chrome: Options</title>
 	<link href="css/options.css" rel="stylesheet" type="text/css" />
-	<script src="js/underscore.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/underscore-min.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/jquery-1.4.4.min.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/mustache.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/options.js" charset="utf-8" type="text/javascript"></script>
 </head>
 <body>
 	<div id="header">
-		<h1>Hayfever for Chrome: Options</h1>	 
+		<h1>Hayfever Options</h1>	 
 	</div>
 
 	<div id="status"></div>
@@ -23,25 +23,28 @@
 				<p>
 					<label for="harvest-subdomain">Harvest Subdomain</label>
 					<input type="text" name="harvest_subdomain" value="" id="harvest-subdomain" />
+					<span class="hint">Just the beginning (i.e. "yourbusiness" if your Harvest subdomain is http://yourbusiness.harvestapp.com)</span>
 				</p>
 				<p>
 					<label for="harvest-username">Harvest Username</label>
 					<input type="text" name="harvest_username" value="" id="harvest-username" />
+					<span class="hint">Usually your email address</span>
 				</p>
 				<p>
 					<label for="harvest-password">Harvest Password</label>
 					<input type="password" name="harvest_password" value="" id="harvest-password" />
+					<span class="hint">Hayfever doesn't actually save your password &mdash; we just use it to build an authentication key</span>
 				</p>
 	        </fieldset>
-
+			<!--
 			<fieldset id="plugin-prefs">
 			    <legend>Plugin Preferences</legend>
 			    <p>
 			        <label></label>
-			        <input type="" name="" value="" />
+			        <input type="text" name="" value="" />
 			    </p>
 			</fieldset>
-
+			-->
 			<input type="submit" id="save-settings" value="Save Settings" />
 	    </div>
 	</form>
