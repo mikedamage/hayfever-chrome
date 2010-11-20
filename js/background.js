@@ -9,11 +9,9 @@ $(document).ready(function() {
 		chrome.browserAction.setBadgeText({text: "!"});
 	} else {
 		var harvest = new Harvest(subdomain, authString);
-		harvest.getToday(function() {
-			var dayEntries = json.day_entries;
-			if (dayEntries.length == 0) {
-				chrome.browserAction.setBadgeText({text: "0.0"});
-			}
+		harvest.getToday(function(xhr, txt) {
+			var json = JSON.parse(xhr.responseText);
+			chrome.browserAction.setBadgeText({text: "0"});
 		});
 	}
 });
