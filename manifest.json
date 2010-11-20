@@ -12,5 +12,9 @@
 		"64": "app_icon_64.png",
 		"128": "app_icon_128.png"
 	},
-	"options_page": "options.html"
+	"options_page": "options.html",
+	"permissions": [
+		"notifications",
+		"https://*.harvestapp.com/"
+	]
 }
