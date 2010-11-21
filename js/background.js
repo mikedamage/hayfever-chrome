@@ -1,12 +1,23 @@
 $(document).ready(function() {
 	// TODO: Create badge w/ total hours worked today via chrome.browserAction.setBadgeText({text: "0:00"})
-	var Application = {
-		totalHours: 0.0
-	};
+	
 	
 	var popup = chrome.extension.getURL('popup.html')
  		, authString = localStorage['harvest_auth_string']
 		, subdomain = localStorage['harvest_subdomain'];
+
+	var Application = {
+		totalHours: 0.0
+		, inPopup: function(func) {
+			var fn = func
+				, args = _.rest(arguments);
+			$.each(chrome.extension.getViews(), function() {
+				if (this.location.href == popup) {
+					fn.apply(this, args);
+				}
+			});
+		}
+	};
 
 	if (_.isEmpty(authString) || _.isEmpty(subdomain)) {
 		chrome.browserAction.setBadgeText({text: "!"});
