@@ -9,7 +9,15 @@
 Date.prototype.getDOY = function() {
 	var janOne = new Date(this.getFullYear(), 0, 1);
 	return Math.ceil((this - janOne) / 86400000);
-}
+};
+
+// DRY up the process of setting request headers for API calls
+XMLHttpRequest.prototype.setHarvestHeaders = function(authString) {
+	this.setRequestHeader('Accept', 'application/json');
+	this.setRequestHeader('Content-type', 'application/json');
+	this.setRequestHeader('Cache-Control', 'no-cache');
+	this.setRequestHeader('Authorization', 'Basic ' + authString);
+};
 
 function Harvest(subdomain, authString) {
 	var root = this
@@ -44,10 +52,7 @@ function Harvest(subdomain, authString) {
 		$.ajax({
 			url: dayURL
 			, beforeSend: function(xhr) {
-				xhr.setRequestHeader('Accept', 'application/json');
-				xhr.setRequestHeader('Content-type', 'application/json');
-				xhr.setRequestHeader('Authorization', 'Basic ' + opts.authString);
-				xhr.setRequestHeader('Cache-Control', 'no-cache');
+				xhr.setHarvestHeaders(opts.authString);
 			}
 			, complete: callback
 		});
@@ -56,6 +61,17 @@ function Harvest(subdomain, authString) {
 	this.getToday = function(callback) {
 		// convenience method for getDay('today', callback)
 		root.getDay('today', callback);
+	};
+
+	this.getEntry = function(eid, callback) {
+		var url = fullURL + '/daily/show/' + eid;
+		$.ajax({
+			url: url
+			, beforeSend: function(xhr) {
+				xhr.setHarvestHeaders(opts.authString);
+			}
+			, complete: callback
+		});
 	};
 }
 
