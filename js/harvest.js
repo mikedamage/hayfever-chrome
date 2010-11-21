@@ -1,3 +1,16 @@
+/**
+ * Harvest API Interface
+ * by Mike Green
+ *
+ * MIT License
+ */
+
+// Harvest needs the day of the year for daily timesheet fetching
+Date.prototype.getDOY = function() {
+	var janOne = new Date(this.getFullYear(), 0, 1);
+	return Math.ceil((this - janOne) / 86400000);
+}
+
 function Harvest(subdomain, authString) {
 	var root = this
 		,	opts = {
@@ -27,21 +40,9 @@ function Harvest(subdomain, authString) {
 	};
 
 	this.getDay = function(date, callback) {
-		if ($.type(date) == 'date') {
-			var first = new Date(date.getFullYear(), 0, 1)
-					, dayNum = Math.round(((date - first) / 1000 / 60 / 60 / 24) + .5, 0);
-		} else {
-			throw 'getDay requires a Date object';
-			return false;
-		}
-	};
-
-	this.getToday = function(callback) {
-		var json;
-
+		var dayURL = (date == 'today') ? (fullURL + '/daily') : (fullURL + '/daily/' + date.getDOY() + '/' + date.getFullYear());
 		$.ajax({
-			url: fullURL + '/daily'
-			, type: 'GET'
+			url: dayURL
 			, beforeSend: function(xhr) {
 				xhr.setRequestHeader('Accept', 'application/json');
 				xhr.setRequestHeader('Content-type', 'application/json');
@@ -50,6 +51,11 @@ function Harvest(subdomain, authString) {
 			}
 			, complete: callback
 		});
+	};
+
+	this.getToday = function(callback) {
+		// convenience method for getDay('today', callback)
+		root.getDay('today', callback);
 	};
 }
 
