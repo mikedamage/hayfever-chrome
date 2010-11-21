@@ -27,7 +27,7 @@ $(document).ready(function() {
 			var allHours = 0.0
 				, json = JSON.parse(xhr.responseText);
 			
-			if (json.day_entries) {
+			if (json.day_entries.length > 0) {
 				var numEntries = json.day_entries.length;
 				for (var i = 0; i < numEntries; i++) {
 					allHours += json.day_entries[i].hours;
@@ -35,7 +35,7 @@ $(document).ready(function() {
 				Application.totalHours = allHours;
 				chrome.browserAction.setBadgeText({text: String(Application.totalHours)});
 			} else {
-				chrome.browserAction.setBadgeText({text: "0.0"});
+				chrome.browserAction.setBadgeText({text: "0"});
 			}
 		});
 	}

@@ -26,6 +26,16 @@ function Harvest(subdomain, authString) {
 		return opts.authString;
 	};
 
+	this.getDay = function(date, callback) {
+		if ($.type(date) == 'date') {
+			var first = new Date(date.getFullYear(), 0, 1)
+					, dayNum = Math.round(((date - first) / 1000 / 60 / 60 / 24) + .5, 0);
+		} else {
+			throw 'getDay requires a Date object';
+			return false;
+		}
+	};
+
 	this.getToday = function(callback) {
 		var json;
 
