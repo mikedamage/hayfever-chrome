@@ -21,7 +21,7 @@ XMLHttpRequest.prototype.setHarvestHeaders = function(authString) {
 
 function Harvest(subdomain, authString) {
 	var root = this
-		,	opts = {
+		, opts = {
 			subdomain: subdomain
 			, authString: authString
 		}
@@ -103,9 +103,19 @@ function Harvest(subdomain, authString) {
 	};
 	
 	// Create a new entry, optionally starting its timer upon creation
-	this.addEntry = function(callback) {
-		var url = root.buildURL('daily', 'add');
-		// TODO: build XML from template add AJAX POST request
+	this.addEntry = function(props, callback) {
+		var url = root.buildURL('daily', 'add')
+			, json = JSON.stringify({ request: properties });
+
+		$.ajax({
+			url: url
+			, type: 'POST'
+			, data: json
+			, beforeSend: function(xhr) {
+				xhr.setHarvestHeaders(opts.authString);
+			}
+			, complete: callback
+		});
 	};
 
 	// Delete an entry
@@ -121,8 +131,19 @@ function Harvest(subdomain, authString) {
 		});
 	};
 
-	this.updateEntry = function(eid, properties, callback) {
-		// TODO: build XML from template (and properties) and send AJAX POST request
+	this.updateEntry = function(eid, props, callback) {
+		var url  = root.buildURL('daily', 'update', eid)
+			, json = JSON.stringify({ request: properties });
+
+		$.ajax({
+			url: url
+			, type: 'POST'
+			, data: json
+			, beforeSend: function(xhr) {
+				xhr.setHarvestHeaders(opts.authString);
+			}
+			, complete: callback
+		});
 	};
 }
 
