@@ -47,6 +47,16 @@ function Harvest(subdomain, authString) {
 		return opts.authString;
 	};
 
+	this.buildURL = function() {
+		var url = fullURL
+			, argc = arguments.length;
+
+		$.each(arguments, function(i, v) {
+			url += '/' + v;
+		});
+		return url;
+	};
+
 	this.getDay = function(date, callback) {
 		var dayURL = (date == 'today') ? (fullURL + '/daily') : (fullURL + '/daily/' + date.getDOY() + '/' + date.getFullYear());
 		$.ajax({
@@ -64,7 +74,7 @@ function Harvest(subdomain, authString) {
 	};
 
 	this.getEntry = function(eid, callback) {
-		var url = fullURL + '/daily/show/' + eid;
+		var url = root.buildURL('daily', 'show', eid);
 		$.ajax({
 			url: url
 			, beforeSend: function(xhr) {
@@ -72,6 +82,17 @@ function Harvest(subdomain, authString) {
 			}
 			, complete: callback
 		});
+	};
+
+	this.toggleTimer = function(callback) {
+		var url = root.buildURL('daily', 'timers', String(eid));
+		$.ajax({
+			url: url
+			, beforeSend: function(xhr) {
+				xhr.setHarvestHeaders(opts.authString);
+			}
+			, complete: callback
+		});	
 	};
 }
 
