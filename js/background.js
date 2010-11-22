@@ -6,8 +6,9 @@ $(document).ready(function() {
  		, authString = localStorage['harvest_auth_string']
 		, subdomain = localStorage['harvest_subdomain'];
 
-	var Application = {
+	window.application = {
 		totalHours: 0.0
+		, todaysEntries: []
 		, inPopup: function(func) {
 			var fn = func
 				, args = _.rest(arguments);
@@ -32,8 +33,9 @@ $(document).ready(function() {
 				for (var i = 0; i < numEntries; i++) {
 					allHours += json.day_entries[i].hours;
 				}
-				Application.totalHours = allHours;
-				chrome.browserAction.setBadgeText({text: String(Application.totalHours)});
+				window.application.totalHours = allHours;
+				window.application.todaysEntries = json.day_entries;
+				chrome.browserAction.setBadgeText({text: String(window.application.totalHours)});
 			} else {
 				chrome.browserAction.setBadgeText({text: "0"});
 			}
