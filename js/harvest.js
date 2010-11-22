@@ -90,8 +90,8 @@ function Harvest(subdomain, authString) {
 	};
 
 	// Toggle a single timer
-	this.toggleTimer = function(callback) {
-		var url = root.buildURL('daily', 'timers', String(eid));
+	this.toggleTimer = function(eid, callback) {
+		var url = root.buildURL('daily', 'timer', String(eid));
 		$.ajax({
 			url: url
 			, type: 'GET'
@@ -105,7 +105,7 @@ function Harvest(subdomain, authString) {
 	// Create a new entry, optionally starting its timer upon creation
 	this.addEntry = function(props, callback) {
 		var url = root.buildURL('daily', 'add')
-			, json = JSON.stringify({ request: properties });
+			, json = JSON.stringify({ request: props });
 
 		$.ajax({
 			url: url
