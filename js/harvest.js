@@ -47,6 +47,7 @@ function Harvest(subdomain, authString) {
 		return opts.authString;
 	};
 
+	// Build a URL for an API call
 	this.buildURL = function() {
 		var url = fullURL
 			, argc = arguments.length;
@@ -56,11 +57,13 @@ function Harvest(subdomain, authString) {
 		});
 		return url;
 	};
-
+	
+	// Get all entries for a given day
 	this.getDay = function(date, callback) {
 		var dayURL = (date == 'today') ? (fullURL + '/daily') : (fullURL + '/daily/' + date.getDOY() + '/' + date.getFullYear());
 		$.ajax({
 			url: dayURL
+			, type: 'GET'
 			, beforeSend: function(xhr) {
 				xhr.setHarvestHeaders(opts.authString);
 			}
@@ -68,15 +71,17 @@ function Harvest(subdomain, authString) {
 		});
 	};
 
+	// convenience method for getDay('today', callback)
 	this.getToday = function(callback) {
-		// convenience method for getDay('today', callback)
 		root.getDay('today', callback);
 	};
-
+	
+	// Get an individual entry (timer) by ID
 	this.getEntry = function(eid, callback) {
 		var url = root.buildURL('daily', 'show', eid);
 		$.ajax({
 			url: url
+			, type: 'GET'
 			, beforeSend: function(xhr) {
 				xhr.setHarvestHeaders(opts.authString);
 			}
@@ -84,15 +89,40 @@ function Harvest(subdomain, authString) {
 		});
 	};
 
+	// Toggle a single timer
 	this.toggleTimer = function(callback) {
 		var url = root.buildURL('daily', 'timers', String(eid));
 		$.ajax({
 			url: url
+			, type: 'GET'
 			, beforeSend: function(xhr) {
 				xhr.setHarvestHeaders(opts.authString);
 			}
 			, complete: callback
 		});	
+	};
+	
+	// Create a new entry, optionally starting its timer upon creation
+	this.addEntry = function(callback) {
+		var url = root.buildURL('daily', 'add');
+		// TODO: build XML from template add AJAX POST request
+	};
+
+	// Delete an entry
+	this.deleteEntry = function(eid, callback) {
+		var url = root.buildURL('daily', 'delete', eid);
+		$.ajax({
+			url: url
+			, type: 'DELETE'
+			, beforeSend: function(xhr) {
+				xhr.setHarvestHeaders(opts.authString);
+			}
+			, complete: callback
+		});
+	};
+
+	this.updateEntry = function(eid, properties, callback) {
+		// TODO: build XML from template (and properties) and send AJAX POST request
 	};
 }
 
