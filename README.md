@@ -10,4 +10,4 @@ Hayfever is a plugin for Google Chrome that lets you manage your [Harvest](http:
 
 ## License
 
-This extension is released according to the terms of the MIT License. See [LICENSE](#) for details.
+This extension is released according to the terms of the MIT License. See [LICENSE](https://github.com/mikedamage/hayfever-chrome/blob/master/LICENSE) for details.
