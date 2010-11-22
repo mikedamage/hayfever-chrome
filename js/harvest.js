@@ -105,7 +105,7 @@ function Harvest(subdomain, authString) {
 	// Create a new entry, optionally starting its timer upon creation
 	this.addEntry = function(props, callback) {
 		var url = root.buildURL('daily', 'add')
-			, json = JSON.stringify({ request: props });
+			, json = JSON.stringify(props);
 
 		$.ajax({
 			url: url
