@@ -3,7 +3,10 @@ $(document).ready(function() {
 	$.each(bgPage.application.todaysEntries, function() {
 		if (this.hours) {
 			$('.noentries').remove();
+			if (Views) {
+				var row = Mustache.to_html(Views['entry'], this);
+				$('#timesheet tbody').append(row);
+			}
 		}
-		$('#timesheet tbody').append('<tr><td>'+this.client+'</td><td>'+this.hours+'</td>');
 	});
 });

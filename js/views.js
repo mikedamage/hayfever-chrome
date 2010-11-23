@@ -6,11 +6,12 @@
 var Views = {};
 
 $.each(['entry', 'entry_form'], function() {
-	var view_name = this;
+	var view_name = '/views/' + this + '.mustache';
+	var view_url = chrome.extension.getURL(view_name);
 	$.ajax({
-		url: 'views/' + view_name + '.mustache'
+		url: view_url
 		, success: function(view) {
-			Views[view_name] = view;
+			Views[this] = view;
 		}
 		, error: function() {
 			alert("Couldn't load view: " + view_name);
