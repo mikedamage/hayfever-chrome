@@ -39,6 +39,7 @@ $(document).ready(function() {
 			} else {
 				chrome.browserAction.setBadgeText({text: "0"});
 			}
+			console.log(window.application.todaysEntries);
 		});
 	}
 });
