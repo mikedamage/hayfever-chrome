@@ -9,6 +9,25 @@ $(document).ready(function() {
 	window.application = {
 		totalHours: 0.0
 		, todaysEntries: []
+		, client: new Harvest(localStorage['harvest_subdomain'], localStorage['harvest_auth_string'])
+		, setBadge: function() {
+			var root = window.application;
+			chrome.browserAction.setBadgeText({text: String(root.totalHours)});
+		}
+		, refreshHours: function() {
+			console.log('refreshing hours');
+			var root = window.application;
+			root.client.getToday(function(xhr, txt) {
+				var json = JSON.parse(xhr.responseText)
+					, totalHours = 0.0;
+				root.todaysEntries = json.day_entries;
+				$.each(root.todaysEntries, function() {
+					totalHours += this.hours;
+				});
+				root.totalHours = totalHours;
+				chrome.browserAction.setBadgeText({text: String(root.totalHours)});
+			});
+		}
 		, inPopup: function(func) {
 			var fn = func
 				, args = _.rest(arguments);
@@ -22,25 +41,9 @@ $(document).ready(function() {
 
 	if (_.isEmpty(authString) || _.isEmpty(subdomain)) {
 		chrome.browserAction.setBadgeText({text: "!"});
-	} else {
-		var harvest = new Harvest(subdomain, authString);
-		harvest.getToday(function(xhr, txt) {
-			var allHours = 0.0
-				, json = JSON.parse(xhr.responseText);
-			
-			if (json.day_entries.length > 0) {
-				var numEntries = json.day_entries.length;
-				for (var i = 0; i < numEntries; i++) {
-					allHours += json.day_entries[i].hours;
-				}
-				window.application.totalHours = allHours;
-				window.application.todaysEntries = json.day_entries;
-				chrome.browserAction.setBadgeText({text: String(window.application.totalHours)});
-			} else {
-				chrome.browserAction.setBadgeText({text: "0"});
-			}
-			console.log(window.application.todaysEntries);
-		}, true);
+	} else {	
+		setTimeout(window.application.refreshHours, 500);
+		var refreshInterval = setInterval(window.application.refreshHours, 30000);
 	}
 });
 
