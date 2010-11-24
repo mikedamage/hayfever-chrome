@@ -8,8 +8,8 @@
 	<script src="js/popup.js" charset="utf-8" type="text/javascript"></script>
 </head>
 <body>
-	<script id="entry_row_template" type="text/x-jquery-tmpl">
-		<tr id="entry_${id}" class="entry">
+	<script id="entry-row-template" type="text/x-jquery-tmpl">
+		<tr id="entry-${id}" class="entry">
 			<td class="entry-name">
 				<strong>${client}:</strong> ${project} ${task}
 			</td>
@@ -19,6 +19,21 @@
 			<td class="entry-toggle">
 				<a href="#" id="toggle_${id}">On/Off</a>
 			</td>
+		</tr>
+	</script>
+	<script id="entry-form-template" type="text/x-jquery-tmpl">
+		<tr id="entry-${id}">
+			<form class="edit" id="edit-${id}" action="">
+				<td class="entry-name">
+					<select name="entry-project" id="entry-project-${id}" class="entry-project">
+						{{each projects}}
+							<option value="${this.id}">
+								${name} {{if code}}[${code}]{{/if}}
+							</option>
+						{{/each}}
+					</select>
+				</td>
+			</form>
 		</tr>
 	</script>
 
