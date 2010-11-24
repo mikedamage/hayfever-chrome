@@ -22,19 +22,24 @@
 		</tr>
 	</script>
 	<script id="entry-form-template" type="text/x-jquery-tmpl">
-		<tr id="entry-${id}">
-			<form class="edit" id="edit-${id}" action="">
-				<td class="entry-name">
-					<select name="entry-project" id="entry-project-${id}" class="entry-project">
-						{{each projects}}
-							<option value="${this.id}">
-								${name} {{if code}}[${code}]{{/if}}
-							</option>
-						{{/each}}
-					</select>
-				</td>
-			</form>
-		</tr>
+		{{if id}}
+			<tr id="entry-${id}">
+				<form class="edit" id="edit-${id}" action="">
+		{{else}}
+			<tr id="entry-new">
+				<form class="new" id="entry-new" action="">
+		{{/if}}
+					<td class="entry-name">
+						<select name="entry-project" class="entry-project">
+							{{each projects}}
+								<option value="${this.id}">
+									${name} {{if code}}[${code}]{{/if}}
+								</option>
+							{{/each}}
+						</select>
+					</td>
+				</form>
+			</tr>
 	</script>
 
 	<div id="header">
