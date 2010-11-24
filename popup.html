@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
 	<link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="js/underscore-min.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/jquery-1.4.4.min.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/jquery.tmpl.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/popup.js" charset="utf-8" type="text/javascript"></script>
@@ -17,7 +18,11 @@
 				${hours}
 			</td>
 			<td class="entry-toggle">
-				<a href="#" id="toggle_${id}">On/Off</a>
+				{{if timer_started_at}}
+					<a href="#" id="toggle_${id}">Stop</a>
+				{{else}}
+					<a href="#" id="toggle_${id}">Start</a>
+				{{/if}}
 			</td>
 		</tr>
 	</script>
