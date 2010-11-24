@@ -26,7 +26,7 @@ $(document).ready(function() {
 				});
 				root.totalHours = totalHours;
 				chrome.browserAction.setBadgeText({text: String(root.totalHours)});
-			});
+			}, true);
 		}
 		, inPopup: function(func) {
 			var fn = func
