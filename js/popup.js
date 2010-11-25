@@ -10,17 +10,6 @@ $(document).ready(function() {
 		$('#entry-row-template').tmpl(dayEntries).appendTo($timesheet);
 	}
 
-	// Add hidden 'new entry' form
-	bgPage.application.client.getToday(function(xhr, txt) {
-		var json = JSON.parse(xhr.responseText);
-		if (json.projects) {
-			// TODO: Build data structures to represent optgroups, with all projects grouped by client inside. Each project will contain an array of tasks
-		} else {
-			bgPage.console.log('Error fetching projects');
-		}
-	});
-
-	
 	// Events
 
 	$('a#refresh').click(function(e) {
