@@ -27,7 +27,10 @@ $(document).ready(function() {
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
-		, client: new Harvest(localStorage['harvest_subdomain'], localStorage['harvest_auth_string'])
+		, refreshInterval: ''
+		, configExists: function() {
+			return (!_(localStorage['harvest_subdomain']).isEmpty() && !_(localStorage['harvest_auth_string']).isEmpty());
+		}
 		, setBadge: function() {
 			var root = window.application;
 			chrome.browserAction.setBadgeText({text: String(root.totalHours)});
@@ -83,11 +86,12 @@ $(document).ready(function() {
 		}
 	};
 
-	if (_.isEmpty(authString) || _.isEmpty(subdomain)) {
-		chrome.browserAction.setBadgeText({text: "!"});
-	} else {	
+	if (window.application.configExists()) {
+		window.application.client = new Harvest(localStorage['harvest_subdomain'], localStorage['harvest_auth_string']);
 		setTimeout(window.application.refreshHours, 500);
-		var refreshInterval = setInterval(window.application.refreshHours, 30000);
+		window.application.refreshInterval = setInterval(application.refreshHours, 30000);
+	} else {	
+		chrome.browserAction.setBadgeText({text: "!"});
 	}
 });
 

@@ -3,7 +3,13 @@ $(document).ready(function() {
 	var bgPage = chrome.extension.getBackgroundPage()
 		, dayEntries = bgPage.application.todaysEntries
 		, $timesheet = $('#timesheet tbody');
-
+	
+	if (!bgPage.application.configExists()) {
+		$('#header').after($('<div/>', {
+			'class': 'notice'
+			, text: 'Please visit the Options page and configure Hayfever'
+		}));
+	}
 	// Populate table with current timesheet entries for the current day
 	if (dayEntries.length > 0) {
 		$timesheet.find('.noentries').remove();

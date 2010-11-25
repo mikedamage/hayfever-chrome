@@ -52,7 +52,13 @@ body {
 }
 
 #status.success {
-	background: #dfd;
+	background: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.61, #ddffdd),
+		color-stop(0.14, #c1e4c1)
+	);
 	border: 1px solid #9C6;
 	color: #4d4d4d;
 	-webkit-border-radius: 12px 20px; /* capsule shaped edges if the div is short enough */
