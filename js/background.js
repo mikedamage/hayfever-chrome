@@ -42,7 +42,8 @@ $(document).ready(function() {
 				// Build a grouped list of clients/projects for building optgroups later
 				if (!_(root.projects).isEmpty()) {
 					$.each(root.projects, function() {
-						var clientKey = this.client.toSlug();
+						var clientKey = this.client.toSlug()
+							, projectID = this.id;
 
 						if (!root.clients[clientKey]) {
 							root.clients[clientKey] = {
@@ -50,7 +51,11 @@ $(document).ready(function() {
 								, projects: []
 							};
 						}
-						root.clients[clientKey].projects.push(this);
+						var idExists = _(root.clients[clientKey].projects).detect(function(p) { return p.id == projectID; });
+
+						if (!idExists) {
+							root.clients[clientKey].projects.push(this);
+						}
 					});
 				}
 				
