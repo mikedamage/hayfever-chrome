@@ -1,3 +1,13 @@
+/**
+ * Hayfever for Chrome
+ * Background Script
+ *
+ * by Mike Green
+ *
+ * TODO: Figure out the best strategy for persisting data like client lists, either via Web SQL or localStorage. 
+ * 			 If localStorage, use some easily query-able schema
+ */
+
 // String prototype method, convert string to slug
 String.prototype.toSlug = function() {
 	var slug = this.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, '_');
