@@ -13,6 +13,7 @@ __The plugin is still under heavy development. Nothing is stable at this point, 
 ### Stuff Hayfever Can Do
 
 Hayfever can currently:
+
 * Authenticate w/ Harvest time tracking API
 * Display a badge with total hours worked today
 * Display a list of existing timers
