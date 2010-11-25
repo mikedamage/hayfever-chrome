@@ -27,9 +27,19 @@ $(document).ready(function() {
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
-		, refreshInterval: ''
-		, configExists: function() {
-			return (!_(localStorage['harvest_subdomain']).isEmpty() && !_(localStorage['harvest_auth_string']).isEmpty());
+		, startRefreshInterval: function() {
+			this.refreshInterval = setInterval(window.application.refreshHours, 30000);
+		}
+		, getAuthData: function() {
+			return {
+				subdomain: localStorage['harvest_subdomain']
+				, auth_string: localStorage['harvest_auth_string']
+				, username: localStorage['harvest_username'] 
+			};
+		}
+		, authDataExists: function() {
+			var auth = this.getAuthData();
+			return (!_(auth.subdomain).isEmpty() && !_(auth.auth_string).isEmpty());
 		}
 		, setBadge: function() {
 			var root = window.application;
@@ -86,10 +96,11 @@ $(document).ready(function() {
 		}
 	};
 
-	if (window.application.configExists()) {
-		window.application.client = new Harvest(localStorage['harvest_subdomain'], localStorage['harvest_auth_string']);
+	if (window.application.authDataExists()) {
+		var auth = window.application.getAuthData();
+		window.application.client = new Harvest(auth.subdomain, auth.auth_string);
 		setTimeout(window.application.refreshHours, 500);
-		window.application.refreshInterval = setInterval(application.refreshHours, 30000);
+		window.application.startRefreshInterval();
 	} else {	
 		chrome.browserAction.setBadgeText({text: "!"});
 	}

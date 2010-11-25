@@ -36,8 +36,12 @@ $(document).ready(function() {
 		}
 
 		$('#status').addClass('success').html('Options successfully saved').fadeIn(400);
+
+		if (!bgPage.application.refreshInterval) {
+			bgPage.application.startRefreshInterval();
+		}
 		return false;
 	});
 });
 
-// vim: set ts=2 sw=2 syntax=jquery
+// vim: set ts=2 sw=2 syntax=jquery :
