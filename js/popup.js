@@ -1,10 +1,11 @@
 $(document).ready(function() {
 	// Setup
 	var bgPage = chrome.extension.getBackgroundPage()
-		, dayEntries = bgPage.application.todaysEntries
+		, app = bgPage.application
+		, dayEntries = app.todaysEntries
 		, $timesheet = $('#timesheet tbody');
 	
-	if (!bgPage.application.authDataExists()) {
+	if (!app.authDataExists()) {
 		$('#header').after($('<div/>', {
 			'class': 'notice'
 			, text: 'Please visit the Options page and configure Hayfever'
@@ -19,19 +20,20 @@ $(document).ready(function() {
 	// Events
 
 	$('a#refresh').click(function(e) {
-		bgPage.application.refreshHours;
+		app.refreshHours();
 		$timesheet.find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
 			$(this).remove();
-			$('#entry-row-template').tmpl(bgPage.application.todaysEntries).appendTo($timesheet);
+			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
 		})
 	});
 
 	$('td.entry-toggle').delegate('a', 'click', function(e) {
 		var entryID = parseInt($(this).attr('id').split('_')[1], 10)
 			, $link = $(this)
-			, bgPage = chrome.extension.getBackgroundPage();
+			, bgPage = chrome.extension.getBackgroundPage()
+			, app = bgPage.application;
 		
-		bgPage.application.client.toggleTimer(entryID, function(xhr, txt) {
+		app.client.toggleTimer(entryID, function(xhr, txt) {
 			var js = JSON.parse(xhr.responseText);
 			if (js.timer_started_at) {
 				bgPage.console.log('timer started: ' + js.project_id);
