@@ -4,7 +4,7 @@ $(document).ready(function() {
 		, dayEntries = bgPage.application.todaysEntries
 		, $timesheet = $('#timesheet tbody');
 	
-	if (!bgPage.application.configExists()) {
+	if (!bgPage.application.authDataExists()) {
 		$('#header').after($('<div/>', {
 			'class': 'notice'
 			, text: 'Please visit the Options page and configure Hayfever'

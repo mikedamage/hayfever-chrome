@@ -18,3 +18,35 @@ body {
 	font-size: 24px;
 	height: 64px;
 }
+
+.notice {
+	-webkit-border-radius: 8px;
+	border: 1px solid #E9E6CF;
+	background: #FFFCE0;
+	padding: 5px;
+	font-size: 12px;
+}
+
+#timesheet {
+	margin: 10px auto;
+}
+
+#timesheet thead th {
+	background: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.52, rgb(230, 230, 230)),
+		color-stop(0.1, rgb(210, 210, 210)),
+		color-stop(0.7, rgb(236,236,236))
+	);
+	font-size: 14px;
+}
+
+#timesheet thead th.left {
+	-webkit-border-top-left-radius: 6px;
+}
+
+#timesheet thead th.right {
+	-webkit-border-top-right-radius: 6px;
+}

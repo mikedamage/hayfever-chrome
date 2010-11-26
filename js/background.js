@@ -43,6 +43,7 @@ $(document).ready(function() {
 		}
 		, setBadge: function() {
 			var root = window.application;
+			chrome.browserAction.setBadgeBackgroundColor({color: [138, 195, 255, 200]}); // light blue
 			chrome.browserAction.setBadgeText({text: String(root.totalHours)});
 		}
 		, refreshHours: function() {
@@ -81,8 +82,8 @@ $(document).ready(function() {
 						}
 					});
 				}
-				
-				chrome.browserAction.setBadgeText({text: String(root.totalHours)});
+				root.setBadge();	
+				//chrome.browserAction.setBadgeText({text: String(root.totalHours)});
 			}, true);
 		}
 		, inPopup: function(func) {
