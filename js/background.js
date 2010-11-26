@@ -55,6 +55,7 @@ $(document).ready(function() {
 				
 				// Cache projects and timesheet entries from JSON feed
 				root.projects = json.projects;
+				root.projectDB = TAFFY(root.projects);
 				root.todaysEntries = json.day_entries;
 				
 				// Calculate total hours by looping thru timesheet entries
@@ -64,6 +65,7 @@ $(document).ready(function() {
 				root.totalHours = totalHours;
 				
 				// Build a grouped list of clients/projects for building optgroups later
+				// TODO: Determine whether or not we actually need this object
 				if (!_(root.projects).isEmpty()) {
 					$.each(root.projects, function() {
 						var clientKey = this.client.toSlug()
