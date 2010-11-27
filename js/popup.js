@@ -1,3 +1,16 @@
+/**
+ * Hayfever for Chrome
+ * Popup Script
+ *
+ * by Mike Green
+ */
+
+// String prototype method, convert string to slug
+String.prototype.toSlug = function() {
+	var slug = this.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, '_');
+	return slug;
+};
+
 $(document).ready(function() {
 	// Setup
 	var bgPage = chrome.extension.getBackgroundPage()
@@ -45,6 +58,23 @@ $(document).ready(function() {
 		});
 		
 		return false;
+	});
+	
+	// loop thru the TaffyDB object and create optgroup tags for each client, option tags for each project	
+	app.projectDB.forEach(function(p, i) {
+		var $select = $('#client-select')
+			, clientSlug = p.client.toSlug()
+			, $optgroup = $select.find('#' + clientSlug);
+		
+		if ($optgroup.size() == 0) {
+			$select.append($('<optgroup/>', {
+				'label': p.client
+					, 'class': clientSlug
+			}));
+			$optgroup = $select.find('#' + clientSlug);
+		}
+		
+		$('#client-project-option-tag').tmpl(p).appendTo($optgroup);
 	});
 });
 

@@ -27,12 +27,8 @@
 			</td>
 		</tr>
 	</script>
-	<script id="client-project-optgroups" type="text/x-jquery-tmpl">
-		<optgroup label="${name}">
-			{{each projects}}
-			<option value="${id}" id="project-${id}">${name}</option>
-			{{/each}}
-		</optgroup>
+	<script id="client-project-option-tag" type="text/x-jquery-tmpl">
+		<option value="${id}" id="project-${id}">${name}</option>
 	</script>
 
 	<div id="header">
@@ -59,5 +55,13 @@
 			</tr>
 	    </tbody>
 	</table>
+	<form id="new-entry" action="">
+		<p>
+			<label for="client-select">Client</label>
+			<select id="client-select">
+				<option value="" class="no-selection">Select a Client</option>
+			</select>
+		</p>
+	</form>
 </body>
 </html>
