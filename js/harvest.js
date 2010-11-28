@@ -61,7 +61,7 @@ function Harvest(subdomain, authString) {
 	// Get all entries for a given day
 	this.getDay = function(date, callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
-		var dayURL = (date == 'today') ? (fullURL + '/daily') : (fullURL + '/daily/' + date.getDOY() + '/' + date.getFullYear());
+		var dayURL = (date == 'today') ? root.buildURL('daily') : root.buildURL('daily', date.getDOY(), date.getFullYear());
 		$.ajax({
 			url: dayURL
 			, type: 'GET'
