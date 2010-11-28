@@ -37,13 +37,24 @@ $(document).ready(function() {
 	}
 
 	// Events
-
+	
+	// Manual refresh
 	$('a#refresh').click(function(e) {
 		app.refreshHours();
 		$timesheet.find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
 			$(this).remove();
 			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
 		})
+	});
+
+	// Auto refresh, every 30 seconds
+	$('#timesheet').everyTime(30000, function() {
+		var app = chrome.extension.getBackgroundPage().application;
+		app.refreshHours();
+		$(this).find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
+			$(this).remove();
+			$('#entry-row-template').tmpl(app.todaysEntries).appendTo('#timesheet');
+		});
 	});
 
 	$('td.entry-toggle').delegate('a', 'click', function(e) {
@@ -123,7 +134,7 @@ $(document).ready(function() {
 				, project_id: $('#client-select').val()
 				, task_id: $('#task-select').val()
 				, spent_at: today.toHarvestString()
-			};
+			}
 		
 		app.client.addEntry(props, function(xhr, txt) {
 			var js = JSON.parse(xhr.responseText);
