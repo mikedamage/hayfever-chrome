@@ -134,7 +134,7 @@ $(document).ready(function() {
 				, project_id: $('#client-select').val()
 				, task_id: $('#task-select').val()
 				, spent_at: today.toHarvestString()
-			}
+			};
 		
 		app.client.addEntry(props, function(xhr, txt) {
 			var js = JSON.parse(xhr.responseText);
