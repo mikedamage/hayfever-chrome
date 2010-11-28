@@ -64,17 +64,48 @@ $(document).ready(function() {
 	app.projectDB.forEach(function(p, i) {
 		var $select = $('#client-select')
 			, clientSlug = p.client.toSlug()
-			, $optgroup = $select.find('#' + clientSlug);
+			, $optgroup = $select.find('.' + clientSlug);
 		
 		if ($optgroup.size() == 0) {
 			$select.append($('<optgroup/>', {
 				'label': p.client
 					, 'class': clientSlug
 			}));
-			$optgroup = $select.find('#' + clientSlug);
+			$optgroup = $select.find('.' + clientSlug);
 		}
 		
 		$('#client-project-option-tag').tmpl(p).appendTo($optgroup);
+	});
+
+	// When user selects a project, populate the tasks selector with that project's tasks
+	$('#client-select').change(function() {
+		var $option = $(this).find('option:selected')
+			, $taskSelect = $('#task-select')
+			, $billable = $taskSelect.find('optgroup.billable')
+			, $notBillable = $taskSelect.find('optgroup.not-billable')
+			, val = $(this).val()
+			, tasks = app.projectDB.first({id: val}).tasks;
+		
+		// clear all options from the task selector, except the first
+		$taskSelect.find('option:not(.no-selection)').remove();
+		
+		// Append each of the selected project's tasks to the task selector	
+		$.each(tasks, function() {
+			var opt = $('<option/>', {
+				'class': 'task-' + this.id
+				, value: this.id
+				, text: this.name
+			});
+
+			if (this.billable) {
+				opt.appendTo($billable);
+			} else {
+				opt.appendTo($notBillable);
+			}
+		});
+
+		// return true or else...
+		return true;
 	});
 });
 

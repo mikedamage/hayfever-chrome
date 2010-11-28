@@ -58,9 +58,17 @@
 	<form id="new-entry" action="">
 		<p>
 			<label for="client-select">Client</label>
-			<select id="client-select">
+			<select id="client-select" name="client">
 				<option value="" class="no-selection">Select a Client</option>
 			</select>
+		</p>
+		<p>
+		    <label for="task-select">Task</label>
+		    <select id="task-select" name="task">
+		        <option class="no-selection" value="">Select a Task</option>
+				<optgroup class="billable" label="Billable"></optgroup>
+				<optgroup class="not-billable" label="Not Billable"></optgroup>
+		    </select>
 		</p>
 	</form>
 </body>
