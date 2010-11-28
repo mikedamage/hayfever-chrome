@@ -51,9 +51,9 @@ $(document).ready(function() {
 	$('#timesheet').everyTime(30000, function() {
 		var app = chrome.extension.getBackgroundPage().application;
 		//app.refreshHours();
-		$(this).find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
+		$(this).find('tbody tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
 			$(this).remove();
-			$('#entry-row-template').tmpl(app.todaysEntries).appendTo('#timesheet');
+			$('#entry-row-template').tmpl(app.todaysEntries).appendTo('#timesheet tbody');
 		});
 	});
 
