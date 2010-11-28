@@ -55,7 +55,7 @@
 			</tr>
 	    </tbody>
 	</table>
-	<form id="new-entry" action="">
+	<form id="entry-form" action="">
 		<p>
 			<label for="client-select">Client</label>
 			<select id="client-select" name="client">
@@ -67,9 +67,18 @@
 		    <select id="task-select" name="task">
 		        <option class="no-selection" value="">Select a Task</option>
 				<optgroup class="billable" label="Billable"></optgroup>
-				<optgroup class="not-billable" label="Not Billable"></optgroup>
+				<optgroup class="not-billable" label="Non-Billable"></optgroup>
 		    </select>
 		</p>
+		<p>
+		    <label for="task-hours">Hours</label>
+		    <input type="text" id="task-hours" value="" name="" />
+		</p>
+		<p>
+		    <label for="task-notes">Notes</label>
+		    <textarea id="task-notes" name=""></textarea>
+		</p>
+		<button id="save-entry">Save</button>
 	</form>
 </body>
 </html>

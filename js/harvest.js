@@ -60,7 +60,7 @@ function Harvest(subdomain, authString) {
 	
 	// Get all entries for a given day
 	this.getDay = function(date, callback, async) {
-		async = (typeof async == 'undefined') ? false : async;
+		async = (typeof async == 'undefined') ? true : async;
 		var dayURL = (date == 'today') ? (fullURL + '/daily') : (fullURL + '/daily/' + date.getDOY() + '/' + date.getFullYear());
 		$.ajax({
 			url: dayURL
@@ -75,13 +75,13 @@ function Harvest(subdomain, authString) {
 
 	// convenience method for getDay('today', callback)
 	this.getToday = function(callback, async) {
-		async = (typeof async == 'undefined') ? false : async;
+		async = (typeof async == 'undefined') ? true : async;
 		root.getDay('today', callback, async);
 	};
 	
 	// Get an individual entry (timer) by ID
 	this.getEntry = function(eid, callback, async) {
-		async = (typeof async == 'undefined') ? false : async;
+		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'show', eid);
 		$.ajax({
 			url: url
@@ -96,7 +96,7 @@ function Harvest(subdomain, authString) {
 
 	// Toggle a single timer
 	this.toggleTimer = function(eid, callback, async) {
-		async = (typeof async == 'undefined') ? false : async;
+		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'timer', String(eid));
 		$.ajax({
 			url: url
@@ -111,7 +111,7 @@ function Harvest(subdomain, authString) {
 	
 	// Create a new entry, optionally starting its timer upon creation
 	this.addEntry = function(props, callback, async) {
-		async = (typeof async == 'undefined') ? false : async;
+		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'add')
 			, json = JSON.stringify(props);
 
@@ -129,7 +129,7 @@ function Harvest(subdomain, authString) {
 
 	// Delete an entry
 	this.deleteEntry = function(eid, callback, async) {
-		async = (typeof async == 'undefined') ? false : async;
+		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'delete', eid);
 		$.ajax({
 			url: url
@@ -142,7 +142,7 @@ function Harvest(subdomain, authString) {
 	};
 
 	this.updateEntry = function(eid, props, callback, async) {
-		async = (typeof async == 'undefined') ? false : async;
+		async = (typeof async == 'undefined') ? true : async;
 		var url  = root.buildURL('daily', 'update', eid)
 			, json = JSON.stringify({ request: properties });
 

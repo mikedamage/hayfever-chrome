@@ -11,6 +11,12 @@ String.prototype.toSlug = function() {
 	return slug;
 };
 
+// Date prototype method: format the date so Harvest can understand it
+Date.prototype.toHarvestString = function() {
+	var arr = this.toDateString().split(' ');
+	return arr[0] + ', ' + arr[2] + ' ' + arr[1] + ' ' + arr[3];
+}
+
 $(document).ready(function() {
 	// Setup
 	var bgPage = chrome.extension.getBackgroundPage()
@@ -106,6 +112,26 @@ $(document).ready(function() {
 
 		// return true or else...
 		return true;
+	});
+	
+	// Handle entry form submissions
+	$('#entry-form').submit(function() {
+		var today = new Date()
+			, props = {
+				notes: $('#task-notes').val()
+				, hours: $('#task-hours').val()
+				, project_id: $('#client-select').val()
+				, task_id: $('#task-select').val()
+				, spent_at: today.toHarvestString()
+			};
+		
+		app.client.addEntry(props, function(xhr, txt) {
+			var js = JSON.parse(xhr.responseText);
+			console.log(xhr);
+			console.log(js);
+		});
+		// prevent synchronous submission
+		return false;
 	});
 });
 
