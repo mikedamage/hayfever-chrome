@@ -66,6 +66,7 @@ function Harvest(subdomain, authString) {
 			url: dayURL
 			, type: 'GET'
 			, async: async
+			, contentType: 'application/json'
 			, beforeSend: function(xhr) {
 				xhr.setHarvestHeaders(opts.authString);
 			}
@@ -87,6 +88,7 @@ function Harvest(subdomain, authString) {
 			url: url
 			, type: 'GET'
 			, async: async
+			, contentType: 'application/json'
 			, beforeSend: function(xhr) {
 				xhr.setHarvestHeaders(opts.authString);
 			}
@@ -102,6 +104,7 @@ function Harvest(subdomain, authString) {
 			url: url
 			, type: 'GET'
 			, async: async
+			, contentType: 'application/json'
 			, beforeSend: function(xhr) {
 				xhr.setHarvestHeaders(opts.authString);
 			}
@@ -119,6 +122,7 @@ function Harvest(subdomain, authString) {
 			url: url
 			, type: 'POST'
 			, async: async
+			, contentType: 'application/json'
 			, data: json
 			, beforeSend: function(xhr) {
 				xhr.setHarvestHeaders(opts.authString);
@@ -134,6 +138,7 @@ function Harvest(subdomain, authString) {
 		$.ajax({
 			url: url
 			, type: 'DELETE'
+			, contentType: 'application/json'
 			, beforeSend: function(xhr) {
 				xhr.setHarvestHeaders(opts.authString);
 			}
@@ -150,6 +155,7 @@ function Harvest(subdomain, authString) {
 			url: url
 			, type: 'POST'
 			, async: async
+			, contentType: 'application/json'
 			, data: json
 			, beforeSend: function(xhr) {
 				xhr.setHarvestHeaders(opts.authString);
