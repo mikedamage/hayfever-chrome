@@ -50,3 +50,7 @@ body {
 #timesheet thead th.right {
 	-webkit-border-top-right-radius: 6px;
 }
+
+#timesheet tbody td {
+	font-size: 11px;
+}
