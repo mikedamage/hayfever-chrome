@@ -50,7 +50,7 @@ $(document).ready(function() {
 	// Auto refresh, every 30 seconds
 	$('#timesheet').everyTime(30000, function() {
 		var app = chrome.extension.getBackgroundPage().application;
-		app.refreshHours();
+		//app.refreshHours();
 		$(this).find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
 			$(this).remove();
 			$('#entry-row-template').tmpl(app.todaysEntries).appendTo('#timesheet');
