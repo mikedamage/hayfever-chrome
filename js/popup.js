@@ -127,8 +127,21 @@ $(document).ready(function() {
 		
 		app.client.addEntry(props, function(xhr, txt) {
 			var js = JSON.parse(xhr.responseText);
-			console.log(xhr);
-			console.log(js);
+			window.console.log(xhr);
+			window.console.log(js);
+
+			if (xhr.status == 201) {
+				// TODO: refresh the timesheet table to show new entry
+
+				// Clear the form
+				$('#entry-form').get(0).reset();
+				$('#task-select option:not(.no-selection)').remove();
+
+				// Print a message to the status div
+				$('#status').addClass('success').text('Entry added!');
+			} else {
+				$('#status').text('Error: Server returned status ' + xhr.status);
+			}
 		});
 		// prevent synchronous submission
 		return false;
