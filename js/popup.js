@@ -60,13 +60,14 @@ $(document).ready(function() {
 		});
 	});
 
-	$('td.entry-toggle').delegate('a', 'click', function(e) {
-		var entryID = parseInt($(this).attr('id').split('_')[1], 10)
-			, $link = $(this)
+	$('td.entry-toggle').delegate('a.toggle', 'click', function(e) {
+		// Timer toggle handler
+		var $link = $(this)
+			, timerID = parseInt($link.attr('data-timerid'), 10)
 			, bgPage = chrome.extension.getBackgroundPage()
 			, app = bgPage.application;
 		
-		app.client.toggleTimer(entryID, function(xhr, txt) {
+		app.client.toggleTimer(timerID, function(xhr, txt) {
 			var js = JSON.parse(xhr.responseText);
 			if (js.timer_started_at) {
 				bgPage.console.log('timer started: ' + js.project_id);
@@ -78,6 +79,38 @@ $(document).ready(function() {
 		});
 		
 		return false;
+	}).delegate('a.edit', 'click', function(e) {
+		// Timer edit handler
+		var $link = $(this)
+			, $form = $('#entry-form')
+			, timerID = $link.attr('data-timerid')
+			, $input = $('<input/>', {'id': 'timer-id', type: 'hidden', 'value': timerID });
+			, bgPage = chrome.extension.getBackgroundPage()
+			, app = bgPage.application;
+		
+		$form.find('h2').text('Edit Entry').end().append($input);
+		app.client.getEntry(timerID, function(xhr, txt) {
+			var json = JSON.parse(xhr.responseText);
+
+			// populate form fields with the entry's values:
+
+			// iterate thru the client options and select the one that belongs to this timer
+			$form.find('#client-select option').each(function() {
+				if ($(this).val() == js.project_id) {
+					$(this).attr('selected', 'selected');
+					$('#client-select').change();
+					return false; // break loop
+				}
+			});
+
+			// same deal for task option tags
+			$form.find('#task-select option').each(function() {
+				if ($(this).val() == js.task_id) {
+					$(this).attr('selected', 'selected');
+					return false; // break loop
+				}
+			});
+		});
 	});
 	
 	// loop thru the TaffyDB object and create optgroup tags for each client, option tags for each project	

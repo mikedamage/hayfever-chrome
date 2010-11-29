@@ -13,17 +13,18 @@
 	<script id="entry-row-template" type="text/x-jquery-tmpl">
 		<tr id="entry-${id}" class="entry">
 			<td class="entry-name">
-				<strong>${client}:</strong> ${project} ${task}
+				<strong>${client}:</strong> ${project} (${task})
 			</td>
 			<td class="entry-hours">
 				${hours}
 			</td>
 			<td class="entry-toggle">
 				{{if timer_started_at}}
-					<a href="#" id="toggle_${id}">Stop</a>
+					<a href="#" class="toggle" data-timerid="${id}">Stop</a>
 				{{else}}
-					<a href="#" id="toggle_${id}">Start</a>
+					<a href="#" class="toggle" data-timerid="${id}">Start</a>
 				{{/if}}
+				<a href="#" class="edit" data-timerid="${id}">Edit</a>
 			</td>
 		</tr>
 	</script>
