@@ -47,6 +47,19 @@ $(document).ready(function() {
 		});
 	});
 
+	// Auto refresh, every 30 seconds
+	$timesheet.everyTime(30000, function() {
+		var bg = chrome.extension.getBackgroundPage()
+			, app = bg.application;
+	
+		bg.console.log('Popup auto-refresh');
+
+		$(this).find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
+			$timesheet.find('tr').remove();
+			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
+		});
+	});
+
 	// New Entry link
 	$('#new-entry-link').click(function(e) {
 		$('#entry-form')
@@ -59,19 +72,6 @@ $(document).ready(function() {
 			.get(0)
 				.reset();
 		return false;
-	});
-
-	// Auto refresh, every 30 seconds
-	$('#timesheet').everyTime(30000, function() {
-		var bg = chrome.extension.getBackgroundPage()
-			, app = bg.application;
-	
-		bg.console.log('Popup auto-refresh');
-
-		$(this).find('tbody tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
-			$(this).remove();
-			$('#entry-row-template').tmpl(app.todaysEntries).appendTo('#timesheet tbody');
-		});
 	});
 
 	$('td.entry-toggle').delegate('a.toggle', 'click', function(e) {

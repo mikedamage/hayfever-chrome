@@ -44,7 +44,7 @@ $(document).ready(function() {
 		, setBadge: function() {
 			var root = window.application;
 			chrome.browserAction.setBadgeBackgroundColor({color: [138, 195, 255, 200]}); // light blue
-			chrome.browserAction.setBadgeText({text: String(root.totalHours)});
+			chrome.browserAction.setBadgeText({text: String(root.totalHours.toFixed(2))});
 		}
 		, refreshHours: function() {
 			console.log('refreshing hours');
