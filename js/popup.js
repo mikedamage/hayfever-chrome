@@ -42,9 +42,9 @@ $(document).ready(function() {
 	$('a#refresh').click(function(e) {
 		app.refreshHours();
 		$timesheet.find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
-			$(this).remove();
+			$timesheet.find('tr').remove();
 			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
-		})
+		});
 	});
 
 	// New Entry link
