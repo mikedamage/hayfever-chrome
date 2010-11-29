@@ -84,16 +84,18 @@ $(document).ready(function() {
 		var $link = $(this)
 			, $form = $('#entry-form')
 			, timerID = $link.attr('data-timerid')
-			, $input = $('<input/>', {'id': 'timer-id', type: 'hidden', 'value': timerID });
+			, $input = $('<input/>', {'id': 'timer-id', type: 'hidden', 'value': timerID })
 			, bgPage = chrome.extension.getBackgroundPage()
 			, app = bgPage.application;
 		
+		// append hidden field to form w/ this timer's ID
 		$form.find('h2').text('Edit Entry').end().append($input);
+
+		// fetch timer data from Harvest
 		app.client.getEntry(timerID, function(xhr, txt) {
 			var json = JSON.parse(xhr.responseText);
 
 			// populate form fields with the entry's values:
-
 			// iterate thru the client options and select the one that belongs to this timer
 			$form.find('#client-select option').each(function() {
 				if ($(this).val() == js.project_id) {
@@ -110,7 +112,11 @@ $(document).ready(function() {
 					return false; // break loop
 				}
 			});
+
+			// hours and notes fields
+			$form.find('#task-hours').val(this.hours).end().find('#task-notes').val(this.notes);
 		});
+		return false;
 	});
 	
 	// loop thru the TaffyDB object and create optgroup tags for each client, option tags for each project	
