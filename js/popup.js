@@ -116,6 +116,9 @@ $(document).ready(function() {
 			// hours and notes fields
 			$form.find('#task-hours').val(this.hours).end().find('#task-notes').val(this.notes);
 		});
+
+		// TODO: Make this function synchronous - bind the json output to an external var.
+
 		return false;
 	});
 	
