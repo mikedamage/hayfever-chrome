@@ -31,16 +31,21 @@ body {
 	margin: 10px auto;
 }
 
+#timesheet thead tr {
+	border: 1px solid #e6e6e6;
+}
+
 #timesheet thead th {
 	background: -webkit-gradient(
 		linear,
 		left bottom,
 		left top,
-		color-stop(0.52, rgb(230, 230, 230)),
-		color-stop(0.1, rgb(210, 210, 210)),
-		color-stop(0.7, rgb(236,236,236))
+		color-stop(0, #e6e6e6),
+		color-stop(1, #efefef)
 	);
 	font-size: 14px;
+	padding: 3px;
+	text-shadow: -1px -1px 1px #fff;
 }
 
 #timesheet thead th.left {

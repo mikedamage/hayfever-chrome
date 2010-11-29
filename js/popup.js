@@ -47,6 +47,20 @@ $(document).ready(function() {
 		})
 	});
 
+	// New Entry link
+	$('#new-entry-link').click(function(e) {
+		$('#entry-form')
+			.find('h2')
+				.text('New Entry')
+			.end()
+			.find('#timer-id')
+				.remove()
+			.end()
+			.get(0)
+				.reset();
+		return false;
+	});
+
 	// Auto refresh, every 30 seconds
 	$('#timesheet').everyTime(30000, function() {
 		var bg = chrome.extension.getBackgroundPage()
