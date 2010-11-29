@@ -18,6 +18,7 @@ Hayfever can currently:
 * Display a badge with total hours worked today
 * Display a list of existing timers
 * Start and stop existing timers
+* Create new timers
 
 ## License
 
