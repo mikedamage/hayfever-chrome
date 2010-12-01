@@ -133,6 +133,11 @@ $(document).ready(function() {
 
 		return false;
 	});
+
+	// Double click on a project row to toggle its timer
+	$('tr.entry').dblclick(function() {
+		$(this).find('td.entry-toggle a.toggle').click();
+	});
 	
 	// loop thru the TaffyDB object and create optgroup tags for each client, option tags for each project	
 	app.projectDB.forEach(function(p, i) {
@@ -214,6 +219,8 @@ $(document).ready(function() {
 
 					// Print a message to the status div
 					$('#status').addClass('success').text('Entry added!');
+					bgPage.application.refreshHours();
+					$('a#refresh').click();
 				} else {
 					$('#status').text('Error: Server returned status ' + xhr.status);
 				}
