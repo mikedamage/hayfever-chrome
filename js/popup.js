@@ -15,7 +15,7 @@ String.prototype.toSlug = function() {
 Date.prototype.toHarvestString = function() {
 	var arr = this.toDateString().split(' ');
 	return arr[0] + ', ' + arr[2] + ' ' + arr[1] + ' ' + arr[3];
-}
+};
 
 $(document).ready(function() {
 	// Setup
@@ -131,8 +131,6 @@ $(document).ready(function() {
 			$form.find('#task-hours').val(json.hours).end().find('#task-notes').val(json.notes);
 		});
 
-		// TODO: Make this function synchronous - bind the json output to an external var.
-
 		return false;
 	});
 	
@@ -187,6 +185,7 @@ $(document).ready(function() {
 	// Handle entry form submissions
 	$('#entry-form').submit(function() {
 		var today = new Date()
+			, $idField = $(this).find('#timer-id')
 			, props = {
 				notes: $('#task-notes').val()
 				, hours: $('#task-hours').val()
@@ -195,24 +194,32 @@ $(document).ready(function() {
 				, spent_at: today.toHarvestString()
 			};
 		
-		app.client.addEntry(props, function(xhr, txt) {
-			var js = JSON.parse(xhr.responseText);
-			window.console.log(xhr);
-			window.console.log(js);
+		if ($idField.size() > 0) {
+			var timerID = $idField.val();
+			app.client.updateEntry(timerID, function(xhr, txt) {
+				var json = JSON.parse(xhr.responseText);
+			});
+		} else {
+			app.client.addEntry(props, function(xhr, txt) {
+				var js = JSON.parse(xhr.responseText);
+				window.console.log(xhr);
+				window.console.log(js);
 
-			if (xhr.status == 201) {
-				// TODO: refresh the timesheet table to show new entry
+				if (xhr.status == 201) {
+					// TODO: refresh the timesheet table to show new entry
 
-				// Clear the form
-				$('#entry-form').get(0).reset();
-				$('#task-select option:not(.no-selection)').remove();
+					// Clear the form
+					$('#entry-form').get(0).reset();
+					$('#task-select option:not(.no-selection)').remove();
 
-				// Print a message to the status div
-				$('#status').addClass('success').text('Entry added!');
-			} else {
-				$('#status').text('Error: Server returned status ' + xhr.status);
-			}
-		});
+					// Print a message to the status div
+					$('#status').addClass('success').text('Entry added!');
+				} else {
+					$('#status').text('Error: Server returned status ' + xhr.status);
+				}
+			});
+		}
+		
 		// prevent synchronous submission
 		return false;
 	});
