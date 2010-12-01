@@ -112,7 +112,7 @@ $(document).ready(function() {
 			// populate form fields with the entry's values:
 			// iterate thru the client options and select the one that belongs to this timer
 			$form.find('#client-select option').each(function() {
-				if ($(this).val() == js.project_id) {
+				if ($(this).val() == json.project_id) {
 					$(this).attr('selected', 'selected');
 					$('#client-select').change();
 					return false; // break loop
@@ -121,14 +121,14 @@ $(document).ready(function() {
 
 			// same deal for task option tags
 			$form.find('#task-select option').each(function() {
-				if ($(this).val() == js.task_id) {
+				if ($(this).val() == json.task_id) {
 					$(this).attr('selected', 'selected');
 					return false; // break loop
 				}
 			});
 
 			// hours and notes fields
-			$form.find('#task-hours').val(this.hours).end().find('#task-notes').val(this.notes);
+			$form.find('#task-hours').val(json.hours).end().find('#task-notes').val(json.notes);
 		});
 
 		// TODO: Make this function synchronous - bind the json output to an external var.
