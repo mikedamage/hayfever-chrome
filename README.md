@@ -19,6 +19,7 @@ Hayfever can currently:
 * Display a list of existing timers
 * Start and stop existing timers
 * Create new timers
+* Edit and update existing timers
 
 ## License
 
