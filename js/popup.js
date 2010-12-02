@@ -146,6 +146,10 @@ $(document).ready(function() {
 
 			// hours and notes fields
 			$form.find('#task-hours').val(json.hours).end().find('#task-notes').val(json.notes);
+
+			if ($form.is(':not(:visible)')) {
+				$form.show();
+			}
 		});
 
 		return false;
