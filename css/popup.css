@@ -25,6 +25,7 @@ body {
 	background: #FFFCE0;
 	padding: 5px;
 	font-size: 12px;
+	clear: all;
 }
 
 #timesheet {

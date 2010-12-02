@@ -261,6 +261,8 @@ $(document).ready(function() {
 				}
 			});
 		}
+
+		$(this).hide();
 		
 		// prevent synchronous submission
 		return false;
