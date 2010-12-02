@@ -149,7 +149,7 @@ function Harvest(subdomain, authString) {
 	this.updateEntry = function(eid, props, callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url  = root.buildURL('daily', 'update', eid)
-			, json = JSON.stringify({ request: properties });
+			, json = JSON.stringify(props);
 
 		$.ajax({
 			url: url

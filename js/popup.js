@@ -206,8 +206,22 @@ $(document).ready(function() {
 		
 		if ($idField.size() > 0) {
 			var timerID = $idField.val();
-			app.client.updateEntry(timerID, function(xhr, txt) {
+			app.client.updateEntry(timerID, props, function(xhr, txt) {
 				var json = JSON.parse(xhr.responseText);
+
+				$('#entry-form').get(0).reset();
+				$idField.remove();
+				$('#task-select option:not(.no-selection)').remove();
+
+				if (xhr.status == 200) {
+					// Successful Update
+					$('#status').addClass('success').text('Entry updated!');
+					bgPage.application.refreshHours();
+					$('a#refresh').click();
+				} else {
+					// Error
+					$('#status').attr('class', '').addClass('error').text('Error updating entry!');
+				}
 			});
 		} else {
 			app.client.addEntry(props, function(xhr, txt) {
