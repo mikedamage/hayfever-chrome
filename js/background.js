@@ -28,7 +28,7 @@ $(document).ready(function() {
 		, projects: []
 		, clients: {}
 		, startRefreshInterval: function() {
-			this.refreshInterval = setInterval(window.application.refreshHours, 30000);
+			this.refreshInterval = setInterval(window.application.refreshHours, 36000);
 		}
 		, getAuthData: function() {
 			return {

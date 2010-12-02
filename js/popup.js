@@ -17,6 +17,11 @@ Date.prototype.toHarvestString = function() {
 	return arr[0] + ', ' + arr[2] + ' ' + arr[1] + ' ' + arr[3];
 };
 
+// Array prototype method: any (like Ruby's Array#any? method)
+Array.prototype.any = function() {
+	return this.length > 0;
+}
+
 $(document).ready(function() {
 	// Setup
 	var bgPage = chrome.extension.getBackgroundPage()
@@ -47,8 +52,8 @@ $(document).ready(function() {
 		});
 	});
 
-	// Auto refresh, every 30 seconds
-	$timesheet.everyTime(30000, function() {
+	// Auto refresh, every 36 seconds (1/100th of an hour)
+	$timesheet.everyTime(36000, function() {
 		var bg = chrome.extension.getBackgroundPage()
 			, app = bg.application;
 	
