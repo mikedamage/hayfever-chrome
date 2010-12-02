@@ -209,7 +209,7 @@ $(document).ready(function() {
 			app.client.updateEntry(timerID, props, function(xhr, txt) {
 				var json = JSON.parse(xhr.responseText);
 
-				$('#entry-form').get(0).reset();
+				$('#entry-form').find('h2').text('New Entry').end().get(0).reset();
 				$idField.remove();
 				$('#task-select option:not(.no-selection)').remove();
 
