@@ -59,3 +59,7 @@ body {
 #timesheet tbody td {
 	font-size: 11px;
 }
+
+#entry-form {
+	display: none;
+}

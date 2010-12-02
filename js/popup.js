@@ -20,7 +20,7 @@ Date.prototype.toHarvestString = function() {
 // Array prototype method: any (like Ruby's Array#any? method)
 Array.prototype.any = function() {
 	return this.length > 0;
-}
+};
 
 $(document).ready(function() {
 	// Setup
@@ -67,7 +67,8 @@ $(document).ready(function() {
 
 	// New Entry link
 	$('#new-entry-link').click(function(e) {
-		$('#entry-form')
+		var $form = $('#entry-form');
+		$form
 			.find('h2')
 				.text('New Entry')
 			.end()
@@ -76,8 +77,19 @@ $(document).ready(function() {
 			.end()
 			.get(0)
 				.reset();
+
+		if ($form.is(':not(:visible)')) {
+			$form.show();
+		}
 		return false;
 	});
+
+	// Close form link
+	$('a.cancel').click(function() {
+		var $form = $('#entry-form');
+		$form.hide();
+	});
+	
 
 	$('td.entry-toggle').delegate('a.toggle', 'click', function(e) {
 		// Timer toggle handler
