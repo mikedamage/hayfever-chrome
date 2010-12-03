@@ -22,6 +22,26 @@ Array.prototype.any = function() {
 	return this.length > 0;
 };
 
+// jQuery Extension Functions
+;(function() {
+	$.showStatus = function(opts) {
+		var config = $.extend($.showStatus.defaults, opts)
+			, $elem = $(config.selector);
+		$elem.attr('class', config.status).text(config.message).show();
+	};
+
+	$.hideStatus = function(elem) {
+		var $statusDiv = ($.type(elem) == 'undefined') ? $('#status') : $(elem);
+		$statusDiv.hide();
+	};
+
+	$.showStatus.defaults = {
+		selector: '#status'
+		, message: ''
+		, status: 'info'
+	};
+})(jQuery);
+
 $(document).ready(function() {
 	// Setup
 	var bgPage = chrome.extension.getBackgroundPage()
