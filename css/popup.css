@@ -19,13 +19,37 @@ body {
 	height: 64px;
 }
 
-.notice {
+#status {
 	-webkit-border-radius: 8px;
 	border: 1px solid #E9E6CF;
 	background: #FFFCE0;
 	padding: 5px;
 	font-size: 12px;
-	clear: all;
+	clear: both;
+}
+
+#status.notice {
+	background: #fff6bf;
+	border-color: #ffd324;
+	color: #514721;
+}
+
+#status.info {
+	background: #d5edf8;
+	border-color: #92cae4;
+	color: #205791;
+}
+
+#status.success {
+	background: #363fc2;
+	border-color: #c6d880;
+	color: #264409;
+}
+
+#status.error {
+	background: #fbe3e4;
+	border-color: #fbc2c4;
+	color: #8a1f11;
 }
 
 #timesheet {
