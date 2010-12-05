@@ -65,6 +65,12 @@ $(document).ready(function() {
 			, text: 'Please visit the Options page and configure Hayfever'
 		}));
 	}
+	
+	// Repaint the table rows whenever new elements are appended to the timesheet
+	$timesheet.bind('DOMNodeInserted', function(evt) {
+		$timesheet.find('tr:even').addClass('even').end().find('tr:odd').addClass('odd');
+	});
+	
 	// Populate table with current timesheet entries for the current day
 	if (dayEntries.length > 0) {
 		$timesheet.find('.noentries').remove();
