@@ -29,14 +29,14 @@ Array.prototype.any = function() {
 			, $elem = $(config.selector);
 			
 		// Show status div, auto-hide in 10 seconds.
-		$elem.attr('class', config.status).text(config.message).show().oneTime(10000, function() {
+		$elem.attr('class', config.status).text(config.message).show().oneTime(6000, function() {
 			$.hideStatus();
 		});
 	};
 
 	$.hideStatus = function(elem) {
 		var $statusDiv = ($.type(elem) == 'undefined') ? $('#status') : $(elem);
-		$statusDiv.hide();
+		$statusDiv.fadeOut(400);
 	};
 
 	$.showStatus.defaults = {

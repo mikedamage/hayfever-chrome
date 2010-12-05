@@ -26,6 +26,7 @@ body {
 	padding: 5px;
 	font-size: 12px;
 	clear: both;
+	display: none;
 }
 
 #status.notice {
@@ -41,7 +42,7 @@ body {
 }
 
 #status.success {
-	background: #363fc2;
+	background: #E6EFC2;
 	border-color: #c6d880;
 	color: #264409;
 }
@@ -65,12 +66,14 @@ body {
 		linear,
 		left bottom,
 		left top,
-		color-stop(0, #e6e6e6),
-		color-stop(1, #efefef)
+		color-stop(1, #ffedd4),
+		color-stop(0, #feebaa)
+		
 	);
 	font-size: 14px;
 	padding: 3px;
 	text-shadow: -1px -1px 1px #fff;
+	color: #817752;
 }
 
 #timesheet thead th.left {
