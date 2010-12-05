@@ -27,7 +27,11 @@ Array.prototype.any = function() {
 	$.showStatus = function(opts) {
 		var config = $.extend($.showStatus.defaults, opts)
 			, $elem = $(config.selector);
-		$elem.attr('class', config.status).text(config.message).show();
+			
+		// Show status div, auto-hide in 10 seconds.
+		$elem.attr('class', config.status).text(config.message).show().oneTime(10000, function() {
+			$.hideStatus();
+		});
 	};
 
 	$.hideStatus = function(elem) {
@@ -39,6 +43,12 @@ Array.prototype.any = function() {
 		selector: '#status'
 		, message: ''
 		, status: 'info'
+	};
+	
+	$.fn.showIfHidden = function() {
+		if ($(this).is(':not(:visible)')) {
+			$(this).show();
+		}
 	};
 })(jQuery);
 
@@ -98,9 +108,7 @@ $(document).ready(function() {
 			.get(0)
 				.reset();
 
-		if ($form.is(':not(:visible)')) {
-			$form.show();
-		}
+		$form.showIfHidden();
 		return false;
 	});
 
@@ -167,9 +175,7 @@ $(document).ready(function() {
 			// hours and notes fields
 			$form.find('#task-hours').val(json.hours).end().find('#task-notes').val(json.notes);
 
-			if ($form.is(':not(:visible)')) {
-				$form.show();
-			}
+			$form.showIfHidden();
 		});
 
 		return false;
@@ -251,7 +257,8 @@ $(document).ready(function() {
 
 				if (xhr.status == 200) {
 					// Successful Update
-					$('#status').addClass('success').text('Entry updated!');
+					// $('#status').addClass('success').text('Entry updated!');
+					$.showStatus({message: "Entry updated!", status: 'success'});
 					bgPage.application.refreshHours();
 					$('a#refresh').click();
 				} else {
