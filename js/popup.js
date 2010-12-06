@@ -65,7 +65,7 @@ Array.prototype.any = function() {
 	};
 
 	$.fn.refreshTimesheetOn = function(evt) {
-		var evtName = ($.type(evt) == 'undefined') ? 'click' : evt;
+		var evtName = (typeof evt == 'undefined' || typeof evt != 'string') ? 'click' : evt;
 
 		$(this).bind(evtName, function() {
 			$.refreshTimesheet();
