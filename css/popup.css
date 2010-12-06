@@ -16,7 +16,7 @@ body {
 #header h1 {
 	float: left;
 	font-size: 24px;
-	height: 64px;
+	margin-top: 10px;
 }
 
 #status {
@@ -66,14 +66,14 @@ body {
 		linear,
 		left bottom,
 		left top,
-		color-stop(1, #ffedd4),
-		color-stop(0, #feebaa)
+		color-stop(1, #D8EBFF),
+		color-stop(0, #B6D9FF)
 		
 	);
-	font-size: 14px;
-	padding: 3px;
-	text-shadow: -1px -1px 1px #fff;
-	color: #817752;
+	font-size: 13px;
+	padding: 5px;
+	text-shadow: -1px 1px 1px #fff;
+	color: #536082;
 }
 
 #timesheet thead th.left {
@@ -85,11 +85,12 @@ body {
 }
 
 #timesheet tbody tr.odd {
-	background: #ffedd4;
+	background: #E9F3FD;
 }
 
 #timesheet tbody td {
 	font-size: 11px;
+	padding: 8px;
 }
 
 #entry-form {

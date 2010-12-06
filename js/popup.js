@@ -133,7 +133,7 @@ $(document).ready(function() {
 	});
 	
 
-	$('td.entry-toggle').delegate('a.toggle', 'click', function(e) {
+	$timesheet.delegate('a.toggle', 'click', function(e) {
 		// Timer toggle handler
 		var $link = $(this)
 			, timerID = parseInt($link.attr('data-timerid'), 10)
@@ -209,10 +209,8 @@ $(document).ready(function() {
 				bgPage.console.log("Error deleting entry! API returned status " + stat);
 			}
 		});
-	});
-
-	// Double click on a project row to toggle its timer
-	$('tr.entry').dblclick(function() {
+	}).delegate('tr.entry', 'dblclick', function() {
+		// Double click a row to edit its timer
 		$(this).find('td.entry-toggle a.edit').click();
 	});
 	

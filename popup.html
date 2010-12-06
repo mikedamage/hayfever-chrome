@@ -35,7 +35,7 @@
 	</script>
 
 	<div id="header">
-		<img src="app_icon_64.png" alt="Harvest Icon" />
+		<img src="app_icon_48.png" alt="Harvest Icon" />
 		<h1>Hayfever for Harvest</h1>
 	</div>
 	<div id="status">
@@ -51,17 +51,20 @@
 	    </thead>
 	    <tbody>
 			<tr class="noentries">
-				<td colspan="2" align="center">
+				<td colspan="3" align="center">
 					<em>No Entries Today</em>
 				</td>
 			</tr>
 	    </tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3" align="center">
+					<a href="#" id="refresh">Refresh</a>
+					<a href="#" id="new-entry-link">New Entry</a>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
-
-	<div id="options">
-		<a href="#" id="refresh">refresh</a>
-		<a href="#" id="new-entry-link">new entry</a>
-	</div>
 
 	<form id="entry-form" action="">
 		<h2>New Entry</h2>
