@@ -75,6 +75,7 @@ $(document).ready(function() {
 	if (dayEntries.length > 0) {
 		$timesheet.find('.noentries').remove();
 		$('#entry-row-template').tmpl(dayEntries).appendTo($timesheet);
+		$timesheet.find('tr:even').addClass('even').end().find('tr:odd').addClass('odd');
 	}
 
 	// Events
@@ -185,11 +186,27 @@ $(document).ready(function() {
 		});
 
 		return false;
+	}).delegate('a.delete', 'click', function() {
+		var $link = $(this)
+			, timerID = $link.attr('data-timerid')
+			, bgPage = chrome.extension.getBackgroundPage()
+			, app = bgPage.application;
+
+		app.client.deleteEntry(timerID, function(xhr, txt) {
+			var stat = xhr.status;
+
+			if (stat == 200) {
+				app.refreshHours();
+				$('a#refresh').click();
+			} else {
+				bgPage.console.log("Error deleting entry! API returned status " + stat);
+			}
+		});
 	});
 
 	// Double click on a project row to toggle its timer
 	$('tr.entry').dblclick(function() {
-		$(this).find('td.entry-toggle a.toggle').click();
+		$(this).find('td.entry-toggle a.edit').click();
 	});
 	
 	// loop thru the TaffyDB object and create optgroup tags for each client, option tags for each project	

@@ -84,6 +84,10 @@ body {
 	-webkit-border-top-right-radius: 6px;
 }
 
+#timesheet tbody tr.odd {
+	background: #ffedd4;
+}
+
 #timesheet tbody td {
 	font-size: 11px;
 }

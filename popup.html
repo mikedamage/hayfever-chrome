@@ -26,6 +26,7 @@
 					<a href="#" class="toggle" data-timerid="${id}">Start</a>
 				{{/if}}
 				<a href="#" class="edit" data-timerid="${id}">Edit</a>
+				<a href="#" class="delete" data-timerid="${id}">Delete</a>
 			</td>
 		</tr>
 	</script>
@@ -40,12 +41,12 @@
 	<div id="status">
 		Test
 	</div>
-	<table cellspacing="0" width="275" id="timesheet">
+	<table cellspacing="0" width="340" id="timesheet">
 	    <thead>
 	        <tr>
-	            <th class="left">Task</th>
+	            <th class="left" width="60%">Task</th>
 	            <th>Time</th>
-				<th class="right">&nbsp;</th>
+				<th class="right">Options</th>
 	        </tr>
 	    </thead>
 	    <tbody>
