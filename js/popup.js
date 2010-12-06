@@ -50,6 +50,27 @@ Array.prototype.any = function() {
 			$(this).show();
 		}
 	};
+
+	// Refresh the timesheet w/ data from background page. Pass true to also refresh the background page's data.
+	$.refreshTimesheet = function(remote) {
+		var bg = chrome.extension.getBackgroundPage()
+			, app = bg.application
+			, $timesheet = $('#timesheet tbody');
+
+		if (remote === true) { app.refreshHours(); }
+		$timesheet.find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
+			$timesheet.find('tr').remove();
+			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
+		});
+	};
+
+	$.fn.refreshTimesheetOn = function(evt) {
+		var evtName = ($.type(evt) == 'undefined') ? 'click' : evt;
+
+		$(this).bind(evtName, function() {
+			$.refreshTimesheet();
+		});
+	};
 })(jQuery);
 
 $(document).ready(function() {
@@ -81,25 +102,11 @@ $(document).ready(function() {
 	// Events
 	
 	// Manual refresh
-	$('a#refresh').click(function(e) {
-		app.refreshHours();
-		$timesheet.find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
-			$timesheet.find('tr').remove();
-			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
-		});
-	});
+	$('a#refresh').refreshTimesheetOn('click');
 
 	// Auto refresh, every 36 seconds (1/100th of an hour)
 	$timesheet.everyTime(36000, function() {
-		var bg = chrome.extension.getBackgroundPage()
-			, app = bg.application;
-	
-		bg.console.log('Popup auto-refresh');
-
-		$(this).find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
-			$timesheet.find('tr').remove();
-			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
-		});
+		$.refreshTimesheet();
 	});
 
 	// New Entry link
