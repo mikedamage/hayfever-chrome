@@ -64,11 +64,11 @@ Array.prototype.any = function() {
 		});
 	};
 
-	$.fn.refreshTimesheetOn = function(evt) {
+	$.fn.refreshTimesheetOn = function(evt, bg) {
 		var evtName = (typeof evt == 'undefined' || typeof evt != 'string') ? 'click' : evt;
 
 		$(this).bind(evtName, function() {
-			$.refreshTimesheet();
+			$.refreshTimesheet(bg);
 		});
 	};
 })(jQuery);
@@ -102,7 +102,7 @@ $(document).ready(function() {
 	// Events
 	
 	// Manual refresh
-	$('a#refresh').refreshTimesheetOn('click');
+	$('a#refresh').refreshTimesheetOn('click', true);
 
 	// Auto refresh, every 36 seconds (1/100th of an hour)
 	$timesheet.everyTime(36000, function() {
