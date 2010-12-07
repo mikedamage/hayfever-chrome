@@ -98,6 +98,13 @@ body {
 #timesheet tfoot td {
 	-webkit-border-bottom-left-radius: 6px;
 	-webkit-border-bottom-right-radius: 6px;
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(1, #B6D9FF),
+		color-stop(0, #D3EBFF)
+	);
 }
 
 a#refresh {
@@ -120,4 +127,9 @@ a#new-entry-link {
 
 #entry-form {
 	display: none;
+	font-size: 12px;
+}
+
+#entry-form h2 {
+	font-size: 20px;
 }
