@@ -27,6 +27,7 @@ $(document).ready(function() {
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
+		, harvestTab: null
 		, startRefreshInterval: function() {
 			this.refreshInterval = setInterval(window.application.refreshHours, 36000);
 		}
