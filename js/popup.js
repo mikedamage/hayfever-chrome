@@ -110,23 +110,8 @@ $(document).ready(function() {
 	
 	// Harvest App Link
 	$('a#harvest-link').click(function() {
-		if (!app.harvestTab || chrome.tabs.get(app.harvestTab.id, function(tab) {return tab.id; })) {
-			if (localStorage['harvest_subdomain']) {
-				chrome.tabs.create({url: 'https://' + localStorage['harvest_subdomain'] + '.harvestapp.com', selected: true}, function(tab) {
-					app.harvestTab = tab;
-				});
-			} else {
-				alert('Hayfever needs to know your Harvest subdomain! Please visit Options and configure me!');
-			}
-		} else {
-			try {
-				chrome.tabs.update(app.harvestTab.id, {selected: true});
-			} catch (e) {
-				chrome.tabs.create({url: 'https://' + localStorage['harvest_subdomain'] + '.harvestapp.com', selected: true}, function(tab) {
-					app.harvestTab = tab;
-				});
-			}
-		}
+		// TODO: re-implement this event handler w/ a try/catch block	
+		return false;
 	});
 	
 	// Manual refresh
