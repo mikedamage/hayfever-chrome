@@ -100,6 +100,24 @@ body {
 	-webkit-border-bottom-right-radius: 6px;
 }
 
+a#refresh {
+	background: url(../img/buttons/reload.gif) top left no-repeat;
+	text-indent: -9999px;
+	display: block;
+	width: 19px;
+	height: 12px;
+	float: left;
+}
+
+a#new-entry-link {
+	background: url(../img/buttons/plus.gif) top left no-repeat;
+	text-indent: -9999px;
+	display: block;
+	width: 19px;
+	height: 12px;
+	float: left;
+}
+
 #entry-form {
 	display: none;
 }
