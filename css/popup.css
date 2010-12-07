@@ -61,7 +61,7 @@ body {
 	border: 1px solid #e6e6e6;
 }
 
-#timesheet thead th {
+#timesheet thead th, #timesheet tfoot td {
 	background: -webkit-gradient(
 		linear,
 		left bottom,
@@ -72,7 +72,7 @@ body {
 	);
 	font-size: 13px;
 	padding: 5px;
-	text-shadow: -1px 1px 1px #fff;
+	text-shadow: 0 1px 0px #fff;
 	color: #536082;
 }
 
@@ -84,13 +84,20 @@ body {
 	-webkit-border-top-right-radius: 6px;
 }
 
+
 #timesheet tbody tr.odd {
-	background: #E9F3FD;
+	/*background: #F7FBFF;*/
+	background: #F3F3F3;
 }
 
 #timesheet tbody td {
 	font-size: 11px;
 	padding: 8px;
+}
+
+#timesheet tfoot td {
+	-webkit-border-bottom-left-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
 }
 
 #entry-form {
