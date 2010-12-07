@@ -108,6 +108,21 @@ $(document).ready(function() {
 
 	// Events
 	
+	// Harvest App Link
+	$('a#harvest-link').click(function() {
+		if (!bgPage.harvestTab) {
+			if (localStorage['harvest_subdomain']) {
+				chrome.tabs.create({url: 'https://' + localStorage['harvest_subdomain'] + '.harvestapp.com', selected: true}, function(tab) {
+					bgPage.harvestTab = tab;
+				});
+			} else {
+				alert('Hayfever needs to know your Harvest subdomain! Please visit Options and configure me!');
+			}
+		} else {
+			chrome.tabs.update(bgPage.harvestTab.id, {selected: true});
+		}
+	});
+	
 	// Manual refresh
 	$('a#refresh').refreshTimesheetOn('click', true);
 
