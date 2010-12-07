@@ -5,6 +5,13 @@
  * by Mike Green
  */
 
+/**
+ * TODO LIST
+ *
+ * - Add 'tabs' to the permissions section of manifest.json
+ * - Write a click() handler for a#harvest-link that opens user's Harvest subdomain in new tab.
+ */
+
 // String prototype method, convert string to slug
 String.prototype.toSlug = function() {
 	var slug = this.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, '_');
