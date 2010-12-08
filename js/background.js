@@ -94,6 +94,18 @@ $(document).ready(function() {
 				}
 			});
 		}
+		, openHarvestTab: function() {
+			var root = window.application
+				, auth = root.getAuthData();
+
+			if (root.harvestTab) {
+				chrome.tabs.update(root.harvestTab.id, { selected: true });
+			} else {
+				chrome.tabs.create({ url: 'https://' + auth.subdomain + '.harvestapp.com', selected: true }, function(tab) {
+					app.harvestTab = tab;
+				});
+			}
+		}
 	};
 
 	if (window.application.authDataExists()) {
