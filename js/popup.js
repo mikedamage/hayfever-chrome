@@ -109,6 +109,15 @@ $(document).ready(function() {
 	// Events
 	
 	// Harvest App Link
+
+	// Add event listener for closed tabs (just look for the Harvest app tab)
+	chrome.tabs.onRemoved.addListener(function(tabID) {
+		if (tabID == app.harvestTab.id) {
+			delete app.harvestTab;
+		}
+	});
+
+	// "Open Harvest" link
 	$('a#harvest-link').click(function() {
 		if (app.harvestTab) {
 			chrome.tabs.update(app.harvestTab.id, { selected: true });
