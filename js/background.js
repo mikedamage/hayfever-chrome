@@ -27,7 +27,6 @@ $(document).ready(function() {
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
-		, harvestTab: null
 		, startRefreshInterval: function() {
 			this.refreshInterval = setInterval(window.application.refreshHours, 36000);
 		}
@@ -108,6 +107,13 @@ $(document).ready(function() {
 	} else {	
 		chrome.browserAction.setBadgeText({text: "!"});
 	}
+
+	// Add event listener for closed tabs (just look for the Harvest app tab)
+	chrome.tabs.onRemoved.addListener(function(tabID) {
+		if (tabID == window.application.harvestTab.id) {
+			delete window.application.harvestTab;
+		}
+	});
 });
 
 // vim: set ts=2 sw=2 syntax=jquery smartindent :

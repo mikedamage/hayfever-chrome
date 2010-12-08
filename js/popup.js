@@ -110,7 +110,16 @@ $(document).ready(function() {
 	
 	// Harvest App Link
 	$('a#harvest-link').click(function() {
-		// TODO: re-implement this event handler w/ a try/catch block	
+		if (app.harvestTab) {
+			chrome.tabs.update(app.harvestTab.id, { selected: true });
+		} else {
+			chrome.tabs.create({
+				url: 'https://' + app.getAuthData().subdomain + '.harvestapp.com'
+				, selected: true
+			}, function(tab) {
+				app.harvestTab = tab;
+			});
+		}
 		return false;
 	});
 	
