@@ -116,6 +116,14 @@ $(document).ready(function() {
 	} else {	
 		chrome.browserAction.setBadgeText({text: "!"});
 	}
+
+	// If user closes the harvest tab, remove it from our cache
+	chrome.tabs.onRemoved.addListener(function(tabID) {
+		if (tabID == window.application.harvestTab.id) {
+			delete window.application.harvestTab;
+			console.log('Deleting cached Harvest tab (tab ID: ' + tabID + ')');
+		}
+	});
 });
 
 // vim: set ts=2 sw=2 syntax=jquery smartindent :
