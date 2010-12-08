@@ -15,8 +15,6 @@ String.prototype.toSlug = function() {
 };
 
 $(document).ready(function() {
-	// TODO: Create badge w/ total hours worked today via chrome.browserAction.setBadgeText({text: "0:00"})
-	
 	
 	var popup = chrome.extension.getURL('popup.html')
  		, authString = localStorage['harvest_auth_string']
@@ -85,7 +83,6 @@ $(document).ready(function() {
 					});
 				}
 				root.setBadge();	
-				//chrome.browserAction.setBadgeText({text: String(root.totalHours)});
 			}, true);
 		}
 		, inPopup: function(func) {
@@ -107,13 +104,6 @@ $(document).ready(function() {
 	} else {	
 		chrome.browserAction.setBadgeText({text: "!"});
 	}
-
-	// Add event listener for closed tabs (just look for the Harvest app tab)
-	chrome.tabs.onRemoved.addListener(function(tabID) {
-		if (tabID == window.application.harvestTab.id) {
-			delete window.application.harvestTab;
-		}
-	});
 });
 
 // vim: set ts=2 sw=2 syntax=jquery smartindent :
