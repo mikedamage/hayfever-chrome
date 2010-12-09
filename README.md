@@ -24,7 +24,10 @@ Hayfever can currently:
 ## Screenshots
 
 ![Hayfever Hours Badge](http://s3.fifthroomcreative.com/mikedamage/hayfever-badge.png)
+Hayfever Hours Badge
+
 ![Hayfever Popup Timesheet](http://s3.fifthroomcreative.com/mikedamage/hayfever-popup.png)
+Hayfever Popup Timesheet
 
 ## License
 
