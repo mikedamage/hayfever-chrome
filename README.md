@@ -21,6 +21,11 @@ Hayfever can currently:
 * Create new timers
 * Edit and update existing timers
 
+## Screenshots
+
+![Hayfever Hours Badge](http://s3.fifthroomcreative.com/mikedamage/hayfever-badge.png)
+![Hayfever Popup Timesheet](http://s3.fifthroomcreative.com/mikedamage/hayfever-popup.png)
+
 ## License
 
 This extension is released according to the terms of the MIT License. See [LICENSE](https://github.com/mikedamage/hayfever-chrome/blob/master/LICENSE) for details.
