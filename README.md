@@ -40,4 +40,6 @@ Hayfever Popup Timesheet
 
 ## License
 
-This extension is released according to the terms of the MIT License. See [LICENSE](https://github.com/mikedamage/hayfever-chrome/blob/master/LICENSE) for details.
+_I recently changed this project's license to the GNU General Public License v3. The reason for this change is so that I can have some reasonable expectation of exclusivity if I ever choose to release a premium version of the plugin. Rest assured that Hayfever will always be free, and I don't anticipate any futrher license changes._
+
+This extension is released according to the terms of the GNU General Public License, version 3. See [LICENSE](https://github.com/mikedamage/hayfever-chrome/blob/master/LICENSE) for details.
