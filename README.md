@@ -2,7 +2,7 @@
 
 _A Google Chrome plugin for managing Harvest timers_
 
-Copyright &copy; Mike Green (mike.is.green AT gmail DOT com)
+Copyright &copy; 2010, Mike Green (mike.is.green AT gmail DOT com)
 
 ## Summary
 
