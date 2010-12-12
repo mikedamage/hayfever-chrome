@@ -32,10 +32,10 @@ If you've read through all the disclaimers and still wanna give Hayfever a try i
 
 ## Screenshots
 
-![Hayfever Hours Badge](http://s3.fifthroomcreative.com/mikedamage/hayfever-badge.png)
+![Hayfever Hours Badge](http://mikegreen.s3.amazonaws.com/projects/hayfever/hayfever-badge.png)
 Hayfever Hours Badge
 
-![Hayfever Popup Timesheet](http://s3.fifthroomcreative.com/mikedamage/hayfever-popup.png)
+![Hayfever Popup Timesheet](http://mikegreen.s3.amazonaws.com/projects/hayfever/hayfever-popup.png)
 Hayfever Popup Timesheet
 
 ## License
