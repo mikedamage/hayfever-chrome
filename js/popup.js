@@ -235,6 +235,7 @@ $(document).ready(function() {
 
 			if (stat == 200) {
 				app.refreshHours();
+				$.showStatus({status: 'success', message: 'Entry deleted'});
 				$('a#refresh').click();
 			} else {
 				bgPage.console.log("Error deleting entry! API returned status " + stat);
@@ -339,11 +340,11 @@ $(document).ready(function() {
 					$('#task-select option:not(.no-selection)').remove();
 
 					// Print a message to the status div
-					$('#status').addClass('success').text('Entry added!');
+					$.showStatus({status: 'success', message: 'New entry successfully created!'});
 					bgPage.application.refreshHours();
 					$('a#refresh').click();
 				} else {
-					$('#status').text('Error: Server returned status ' + xhr.status);
+					$.showStatus({status: 'error', message: 'Error saving entry!'});
 				}
 			});
 		}
