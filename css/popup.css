@@ -159,6 +159,12 @@ a#new-entry-link {
 		color-stop(10%, #f7f7f7),
 		to(#fff)
 	);
+	-webkit-transition: all 200ms ease-in 50ms;
+}
+
+#entry-form input[type='text']:hover, #entry-form textarea:hover,
+#entry-form input[type='text']:focus, #entry-form textarea:focus {
+	-webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 8px;
 }
 
 #entry-form input[type='text'] {
