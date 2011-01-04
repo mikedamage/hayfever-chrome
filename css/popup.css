@@ -1,5 +1,5 @@
 body {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 1em;
 	color: #4d4d4d;
 }
@@ -131,9 +131,42 @@ a#new-entry-link {
 #entry-form {
 	display: none;
 	font-size: 12px;
-/*	-webkit-transition: all 500ms ease-out 100ms; */
 }
 
 #entry-form h2 {
 	font-size: 20px;
+}
+
+#entry-form label {
+	float: left;
+	display: block;
+	width: 65px;
+	font-size: 14px;
+}
+
+#entry-form input[type='text'], #entry-form textarea {
+	padding: 4px;
+	border: 1px solid #e5e5e5;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: #4d4d4d;
+	width: 253px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left 25,
+		from(#fff),
+		color-stop(10%, #f7f7f7),
+		to(#fff)
+	);
+}
+
+#entry-form input[type='text'] {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#entry-form textarea {
+	font-size: 14px;
+	height: 60px;
 }
