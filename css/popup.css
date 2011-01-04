@@ -4,6 +4,10 @@ body {
 	color: #4d4d4d;
 }
 
+a {
+	color: #DB9C59;
+}
+
 #header {
 	width: 325px;
 }
@@ -84,10 +88,9 @@ body {
 	-webkit-border-top-right-radius: 6px;
 }
 
-
 #timesheet tbody tr.odd {
 	/*background: #F7FBFF;*/
-	background: #F3F3F3;
+	background: #EBF5FC;
 }
 
 #timesheet tbody td {
@@ -128,6 +131,7 @@ a#new-entry-link {
 #entry-form {
 	display: none;
 	font-size: 12px;
+/*	-webkit-transition: all 500ms ease-out 100ms; */
 }
 
 #entry-form h2 {

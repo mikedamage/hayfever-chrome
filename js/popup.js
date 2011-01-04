@@ -154,6 +154,7 @@ $(document).ready(function() {
 				.reset();
 
 		$form.showIfHidden();
+		//$form.addClass('visible');
 		return false;
 	});
 
@@ -161,6 +162,7 @@ $(document).ready(function() {
 	$('a.cancel').click(function() {
 		var $form = $('#entry-form');
 		$form.hide();
+		//$form.removeClass('visible');
 	});
 	
 
