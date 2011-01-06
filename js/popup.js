@@ -142,7 +142,8 @@ $(document).ready(function() {
 
 	// New Entry link
 	$('#new-entry-link').click(function(e) {
-		var $form = $('#entry-form');
+		var $form = $('#entry-form')
+			, $overlay = $('#form-overlay');
 		$form
 			.find('h2')
 				.text('New Entry')
@@ -153,15 +154,15 @@ $(document).ready(function() {
 			.get(0)
 				.reset();
 
-		$form.showIfHidden();
+		$overlay.fadeIn(300);
 		//$form.addClass('visible');
 		return false;
 	});
 
 	// Close form link
 	$('a.cancel').click(function() {
-		var $form = $('#entry-form');
-		$form.hide();
+		var $overlay = $('#form-overlay');
+		$overlay.fadeOut(300);
 		//$form.removeClass('visible');
 	});
 	
@@ -188,6 +189,7 @@ $(document).ready(function() {
 	}).delegate('a.edit', 'click', function(e) {
 		// Timer edit handler
 		var $link = $(this)
+			, $overlay = $('#form-overlay')
 			, $form = $('#entry-form')
 			, timerID = $link.attr('data-timerid')
 			, $input = $('<input/>', {'id': 'timer-id', type: 'hidden', 'value': timerID })
@@ -222,7 +224,7 @@ $(document).ready(function() {
 			// hours and notes fields
 			$form.find('#task-hours').val(json.hours).end().find('#task-notes').val(json.notes);
 
-			$form.showIfHidden();
+			$overlay.fadeIn(300);
 		});
 
 		return false;

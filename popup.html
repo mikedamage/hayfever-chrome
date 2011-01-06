@@ -70,34 +70,36 @@
 	    <a id="harvest-link" href="#">&laquo; Visit Harvest App</a>
 	</p>
 
-	<form id="entry-form" action="">
-		<h2>New Entry</h2>
-		<p>
-			<a class="cancel" href="#">Cancel</a>
-		</p>
-		<p>
-			<label for="client-select">Client</label>
-			<select id="client-select" name="client">
-				<option value="" class="no-selection">Select a Client</option>
-			</select>
-		</p>
-		<p>
-		    <label for="task-select">Task</label>
-		    <select id="task-select" name="task">
-		        <option class="no-selection" value="">Select a Task</option>
-				<optgroup class="billable" label="Billable"></optgroup>
-				<optgroup class="not-billable" label="Non-Billable"></optgroup>
-		    </select>
-		</p>
-		<p>
-		    <label for="task-hours">Hours</label>
-		    <input type="text" id="task-hours" value="" name="" />
-		</p>
-		<p>
-		    <label for="task-notes">Notes</label>
-		    <textarea id="task-notes" name=""></textarea>
-		</p>
-		<button id="save-entry">Save</button>
-	</form>
+	<div id="form-overlay">
+		<form id="entry-form" action="">
+			<h2>New Entry</h2>
+			<p>
+				<a class="cancel" href="#">Cancel</a>
+			</p>
+			<p>
+				<label for="client-select">Client</label>
+				<select id="client-select" name="client">
+					<option value="" class="no-selection">Select a Client</option>
+				</select>
+			</p>
+			<p>
+				<label for="task-select">Task</label>
+				<select id="task-select" name="task">
+					<option class="no-selection" value="">Select a Task</option>
+					<optgroup class="billable" label="Billable"></optgroup>
+					<optgroup class="not-billable" label="Non-Billable"></optgroup>
+				</select>
+			</p>
+			<p>
+				<label for="task-hours">Hours</label>
+				<input type="text" id="task-hours" value="" name="" />
+			</p>
+			<p>
+				<label for="task-notes">Notes</label>
+				<textarea id="task-notes" name=""></textarea>
+			</p>
+			<button id="save-entry">Save</button>
+		</form>
+	</div>
 </body>
 </html>
