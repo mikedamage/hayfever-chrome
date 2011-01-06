@@ -156,6 +156,8 @@ $(document).ready(function() {
 		
 		if ($('body').height() < 300) {
 			$('body').data('oldHeight', $('body').height()).animate({height: '300px'}, 300);
+		} else {
+			$('body').removeData('oldHeight');
 		}
 
 		$overlay.fadeIn(300);
@@ -233,6 +235,12 @@ $(document).ready(function() {
 
 			// hours and notes fields
 			$form.find('#task-hours').val(json.hours).end().find('#task-notes').val(json.notes);
+			
+			if ($('body').height() < 300) {
+				$('body').data('oldHeight', $('body').height()).animate({height: '300px'}, 300);
+			} else {
+				$('body').removeData('oldHeight');
+			}
 
 			$overlay.fadeIn(300);
 		});
@@ -311,6 +319,7 @@ $(document).ready(function() {
 	// Handle entry form submissions
 	$('#entry-form').submit(function() {
 		var today = new Date()
+			, $overlay = $(this).closest('#form-overlay')
 			, $idField = $(this).find('#timer-id')
 			, props = {
 				notes: $('#task-notes').val()
@@ -362,9 +371,11 @@ $(document).ready(function() {
 				}
 			});
 		}
-
-		$(this).hide();
 		
+	
+
+		$overlay.fadeOut(300);
+
 		// prevent synchronous submission
 		return false;
 	});
