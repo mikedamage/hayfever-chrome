@@ -153,6 +153,10 @@ $(document).ready(function() {
 			.end()
 			.get(0)
 				.reset();
+		
+		if ($('body').height() < 300) {
+			$('body').data('oldHeight', $('body').height()).animate({height: '300px'}, 300);
+		}
 
 		$overlay.fadeIn(300);
 		//$form.addClass('visible');
@@ -162,7 +166,13 @@ $(document).ready(function() {
 	// Close form link
 	$('a.cancel').click(function() {
 		var $overlay = $('#form-overlay');
+
+		if ($('body').data('oldHeight')) {
+			$('body').animate({height: $('body').data('oldHeight') + 'px'}, 300);
+		}
+
 		$overlay.fadeOut(300);
+
 		//$form.removeClass('visible');
 	});
 	
