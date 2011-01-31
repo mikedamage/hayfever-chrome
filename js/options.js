@@ -4,7 +4,8 @@ $(document).ready(function() {
 		, $passwordField = $('#harvest-password')
 		, subdomain = localStorage['harvest_subdomain']
 		, username = localStorage['harvest_username']
-		, authString = localStorage['harvest_auth_string'];
+		, authString = localStorage['harvest_auth_string']
+		, bgPage = chrome.extension.getBackgroundPage();
 
 	// Populate Fields if options are already set
 	if (subdomain) {
