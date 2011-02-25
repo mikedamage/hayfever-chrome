@@ -112,8 +112,10 @@ function Harvest(subdomain, authString) {
 			url: dayURL
 			, type: 'GET'
 			, async: async
-		}).complete(callback);
-		return request;
+		});
+
+		request.complete(callback); // Support legacy API
+		return request; // Return promise object
 	};
 
 	/**
@@ -125,7 +127,7 @@ function Harvest(subdomain, authString) {
 	 */
 	this.getToday = function(callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
-		root.getDay('today', callback, async);
+		return root.getDay('today', callback, async);
 	};
 	
 	/**
@@ -139,13 +141,14 @@ function Harvest(subdomain, authString) {
 	this.getEntry = function(eid, callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'show', eid);
-		$.ajax({
+		var request = $.ajax({
 			url: url
 			, type: 'GET'
 			, async: async
-			, contentType: 'application/json'
-			, authString: opts.authString
-		}).complete(callback);
+		});
+
+		request.complete(callback);
+		return request;
 	};
 
 	/**
@@ -159,13 +162,14 @@ function Harvest(subdomain, authString) {
 	this.toggleTimer = function(eid, callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'timer', String(eid));
-		$.ajax({
+		var request = $.ajax({
 			url: url
 			, type: 'GET'
 			, async: async
-			, contentType: 'application/json'
-			, authString: opts.authString
-		}).complete(callback);	
+		});	
+
+		request.complete(callback);
+		return request;
 	};
 	
 	// Create a new entry, optionally starting its timer upon creation
@@ -174,26 +178,28 @@ function Harvest(subdomain, authString) {
 		var url = root.buildURL('daily', 'add')
 			, json = JSON.stringify(props);
 
-		$.ajax({
+		var request = $.ajax({
 			url: url
 			, type: 'POST'
 			, async: async
-			, contentType: 'application/json'
 			, data: json
-			, authString: opts.authString
-		}).complete(callback);
+		});
+
+		request.complete(callback);
+		return request;
 	};
 
 	// Delete an entry
 	this.deleteEntry = function(eid, callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'delete', eid);
-		$.ajax({
+		var request = $.ajax({
 			url: url
 			, type: 'DELETE'
-			, contentType: 'application/json'
-			, authString: opts.authString
-		}).complete(callback);
+		});
+
+		request.complete(callback);
+		return request;
 	};
 
 	this.updateEntry = function(eid, props, callback, async) {
@@ -201,14 +207,15 @@ function Harvest(subdomain, authString) {
 		var url  = root.buildURL('daily', 'update', eid)
 			, json = JSON.stringify(props);
 
-		$.ajax({
+		var request = $.ajax({
 			url: url
 			, type: 'POST'
 			, async: async
-			, contentType: 'application/json'
 			, data: json
-			, authString: opts.authString
-		}).complete(callback);
+		});
+
+		request.complete(callback);
+		return request;
 	};
 }
 
