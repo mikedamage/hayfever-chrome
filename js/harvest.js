@@ -21,20 +21,25 @@ function Harvest(subdomain, authString) {
 			, authString: authString
 		}
 		, fullURL = 'https://'+opts.subdomain+'.harvestapp.com';
-	
+
+	/**
+	 * Set default AJAX options
+	 *
+	 * Harvest is very picky about headers. Simply setting dataType to 'json'
+	 * will not produce the correct response from the Harvest API.
+	 */	
 	$.ajaxSetup({
-		accepts: 'application/json'
-		, contentType: 'application/json'
-		, cache: false
-		, beforeSend: function(jxhr) {
-			jxhr.setRequestHeader('Authorization', 'Basic ' + opts.authString);
+		headers: {
+			'Accept': 'application/json'
+			, 'Content-Type': 'application/json'
+			, 'Cache-Control': 'no-cache'
+			, 'Authorization': 'Basic ' + opts.authString 
 		}
 	});
 
-	$.ajaxPrefilter(function(jaxOpts, origOpts, jXHR) {
-		jXHR.setRequestHeader('Authorization', 'Basic ' + jaxOpts.authString);
-	});
-
+	/**
+	 * Getters & Setters
+	 */
 	this.getOpts = function() {
 		return opts;
 	};
@@ -55,7 +60,32 @@ function Harvest(subdomain, authString) {
 		return opts.authString;
 	};
 
-	// Build a URL for an API call
+	this.setOpts = function(newOpts) {
+		opts = newOpts;
+		return opts;
+	};
+
+	this.setSubdomain = function(subdomain) {
+		opts.subdomain = subdomain;
+		return opts.subdomain;
+	};
+
+	this.setUsername = function(username) {
+		opts.username = username;
+		return username;
+	};
+
+	this.setAuthString = function(auth) {
+		opts.authString = auth;
+		return opts.authString;
+	};
+
+	/**
+	 * Build a URL for an API call
+	 *
+	 * @param {String[]} arguments
+	 * @returns {String}
+	 */
 	this.buildURL = function() {
 		var url = fullURL
 			, argc = arguments.length;
@@ -66,26 +96,46 @@ function Harvest(subdomain, authString) {
 		return url;
 	};
 	
-	// Get all entries for a given day
+	/**
+	 * Get all timesheet entries (and project list)
+	 * for a given day.
+	 *
+	 * @param {Date} date
+	 * @param {Function} callback
+	 * @param {Boolean} async
+	 * @returns {jqXHR}
+	 */
 	this.getDay = function(date, callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var dayURL = (date == 'today') ? root.buildURL('daily') : root.buildURL('daily', date.getDOY(), date.getFullYear());
-		$.ajax({
+		var request = $.ajax({
 			url: dayURL
 			, type: 'GET'
 			, async: async
-			, contentType: 'application/json'
-			, authString: opts.authString
 		}).complete(callback);
+		return request;
 	};
 
-	// convenience method for getDay('today', callback)
+	/**
+	 * Convenience method for getting today's entries
+	 *
+	 * @param {Function} callback
+	 * @param {Boolean} async
+	 * @returns {jqXHR}
+	 */
 	this.getToday = function(callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		root.getDay('today', callback, async);
 	};
 	
-	// Get an individual entry (timer) by ID
+	/**
+	 * Get an individual timer by ID
+	 *
+	 * @param {Number} eid
+	 * @param {Function} callback
+	 * @param {Boolean} async
+	 * @returns {jqXHR}
+	 */
 	this.getEntry = function(eid, callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'show', eid);
@@ -98,7 +148,14 @@ function Harvest(subdomain, authString) {
 		}).complete(callback);
 	};
 
-	// Toggle a single timer
+	/**
+	 * Toggle a single timer on/off
+	 *
+	 * @param {Number} eid
+	 * @param {Function} callback
+	 * @param {Boolean} async
+	 * @returns {jqXHR}
+	 */
 	this.toggleTimer = function(eid, callback, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'timer', String(eid));
