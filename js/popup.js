@@ -189,11 +189,22 @@ $(document).ready(function() {
 		app.client.toggleTimer(timerID, function(xhr, txt) {
 			var js = JSON.parse(xhr.responseText);
 			if (js.timer_started_at) {
+				var $activeImg = $('<img/>', {
+					'src': 'img/progress.gif'
+					, 'id': 'active-timer-img'
+					, 'alt': 'Timer Running'
+					, 'css': {
+						display: 'none'
+					}
+				});
+
 				bgPage.console.log('timer started: ' + js.project_id);
 				$link.text('Stop');
+				$activeImg.prependTo($link.parent().siblings('.entry-hours')).fadeIn(250);
 			} else {
 				bgPage.console.log('timer stopped');
 				$link.text('Start');
+				$('#active-timer-img').fadeOut(250, function() {$(this).remove(); });
 			}
 		});
 		
