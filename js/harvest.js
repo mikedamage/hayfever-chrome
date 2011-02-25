@@ -11,14 +11,9 @@ Date.prototype.getDOY = function() {
 	return Math.ceil((this - janOne) / 86400000);
 };
 
-// DRY up the process of setting request headers for API calls
-XMLHttpRequest.prototype.setHarvestHeaders = function(authString) {
-	this.setRequestHeader('Accept', 'application/json');
-	this.setRequestHeader('Content-type', 'application/json');
-	this.setRequestHeader('Cache-Control', 'no-cache');
-	this.setRequestHeader('Authorization', 'Basic ' + authString);
-};
-
+/**
+ * Harvest API Class
+ */
 function Harvest(subdomain, authString) {
 	var root = this
 		, opts = {
@@ -26,6 +21,19 @@ function Harvest(subdomain, authString) {
 			, authString: authString
 		}
 		, fullURL = 'https://'+opts.subdomain+'.harvestapp.com';
+	
+	$.ajaxSetup({
+		accepts: 'application/json'
+		, contentType: 'application/json'
+		, cache: false
+		, beforeSend: function(jxhr) {
+			jxhr.setRequestHeader('Authorization', 'Basic ' + opts.authString);
+		}
+	});
+
+	$.ajaxPrefilter(function(jaxOpts, origOpts, jXHR) {
+		jXHR.setRequestHeader('Authorization', 'Basic ' + jaxOpts.authString);
+	});
 
 	this.getOpts = function() {
 		return opts;
@@ -67,11 +75,8 @@ function Harvest(subdomain, authString) {
 			, type: 'GET'
 			, async: async
 			, contentType: 'application/json'
-			, beforeSend: function(xhr) {
-				xhr.setHarvestHeaders(opts.authString);
-			}
-			, complete: callback
-		});
+			, authString: opts.authString
+		}).complete(callback);
 	};
 
 	// convenience method for getDay('today', callback)
@@ -89,11 +94,8 @@ function Harvest(subdomain, authString) {
 			, type: 'GET'
 			, async: async
 			, contentType: 'application/json'
-			, beforeSend: function(xhr) {
-				xhr.setHarvestHeaders(opts.authString);
-			}
-			, complete: callback
-		});
+			, authString: opts.authString
+		}).complete(callback);
 	};
 
 	// Toggle a single timer
@@ -105,11 +107,8 @@ function Harvest(subdomain, authString) {
 			, type: 'GET'
 			, async: async
 			, contentType: 'application/json'
-			, beforeSend: function(xhr) {
-				xhr.setHarvestHeaders(opts.authString);
-			}
-			, complete: callback
-		});	
+			, authString: opts.authString
+		}).complete(callback);	
 	};
 	
 	// Create a new entry, optionally starting its timer upon creation
@@ -124,11 +123,8 @@ function Harvest(subdomain, authString) {
 			, async: async
 			, contentType: 'application/json'
 			, data: json
-			, beforeSend: function(xhr) {
-				xhr.setHarvestHeaders(opts.authString);
-			}
-			, complete: callback
-		});
+			, authString: opts.authString
+		}).complete(callback);
 	};
 
 	// Delete an entry
@@ -139,11 +135,8 @@ function Harvest(subdomain, authString) {
 			url: url
 			, type: 'DELETE'
 			, contentType: 'application/json'
-			, beforeSend: function(xhr) {
-				xhr.setHarvestHeaders(opts.authString);
-			}
-			, complete: callback
-		});
+			, authString: opts.authString
+		}).complete(callback);
 	};
 
 	this.updateEntry = function(eid, props, callback, async) {
@@ -157,11 +150,8 @@ function Harvest(subdomain, authString) {
 			, async: async
 			, contentType: 'application/json'
 			, data: json
-			, beforeSend: function(xhr) {
-				xhr.setHarvestHeaders(opts.authString);
-			}
-			, complete: callback
-		});
+			, authString: opts.authString
+		}).complete(callback);
 	};
 }
 
