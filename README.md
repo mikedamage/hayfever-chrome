@@ -4,6 +4,8 @@ _A Google Chrome plugin for managing Harvest timers_
 
 Copyright &copy; 2010, Mike Green (mike.is.green AT gmail DOT com)
 
+<a href='http://www.pledgie.com/campaigns/14742'><img alt='Click here to lend your support to: Hayfever Chrome Plugin and make a donation at www.pledgie.com!' src='http://www.pledgie.com/campaigns/14742.png?skin_name=chrome' border='0' /></a>
+
 ## Summary
 
 Hayfever is a plugin for Google Chrome that lets you manage your [Harvest](http://www.getharvest.com) timers and timesheets.
