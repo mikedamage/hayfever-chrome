@@ -39,6 +39,7 @@ $(document).ready(function() {
 		$('#status').addClass('success').html('Options successfully saved').fadeIn(400);
 
 		if (!bgPage.application.refreshInterval) {
+			bgPage.location.reload(); // Kludge: refresh the background page
 			bgPage.application.startRefreshInterval();
 		}
 		return false;
