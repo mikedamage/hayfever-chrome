@@ -29,7 +29,8 @@ function Harvest(subdomain, authString) {
 	 * will not produce the correct response from the Harvest API.
 	 */	
 	$.ajaxSetup({
-		headers: {
+		dataType: 'json'
+		, headers: {
 			'Accept': 'application/json'
 			, 'Content-Type': 'application/json'
 			, 'Cache-Control': 'no-cache'
