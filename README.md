@@ -4,7 +4,7 @@ _A Google Chrome plugin for managing Harvest timers_
 
 Copyright &copy; 2010, Mike Green (mike.is.green AT gmail DOT com)
 
-<a href='http://www.pledgie.com/campaigns/14742'><img alt='Click here to lend your support to: Hayfever Chrome Plugin and make a donation at www.pledgie.com!' src='http://www.pledgie.com/campaigns/14742.png?skin_name=chrome' border='0' /></a>
+[![Donate to the development of Hayfever](2)](1)
 
 ## Summary
 
@@ -47,3 +47,6 @@ Hayfever Popup Timesheet
 _I recently changed this project's license to the GNU General Public License v3. The reason for this change is so that I can have some reasonable expectation of exclusivity if I ever choose to release a premium version of the plugin. Rest assured that Hayfever will always be free, and I don't anticipate any futrher license changes._
 
 This extension is released according to the terms of the GNU General Public License, version 3. See [LICENSE](https://github.com/mikedamage/hayfever-chrome/blob/master/LICENSE) for details.
+
+[1]: http://www.pledgie.com/campaigns/14742
+[2]: http://www.pledgie.com/campaigns/14742.png?skin_name=chrome
