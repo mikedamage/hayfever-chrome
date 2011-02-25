@@ -16,7 +16,10 @@
 			<td class="entry-name">
 				<strong>${client}:</strong> ${project} (${task})
 			</td>
-			<td class="entry-hours">
+			<td class="entry-hours" width="50" align="right">
+				{{if timer_started_at}}
+					<img src="img/progress.gif" alt="Timer Running" />
+				{{/if}}
 				${hours}
 			</td>
 			<td class="entry-toggle">
