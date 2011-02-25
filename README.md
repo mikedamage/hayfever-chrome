@@ -4,7 +4,7 @@ _A Google Chrome plugin for managing Harvest timers_
 
 Copyright &copy; 2010, Mike Green (mike.is.green AT gmail DOT com)
 
-[![Donate to the development of Hayfever][2]][1]
+[![Donate to the development of Hayfever](http://pledgie.com/campaigns/14742.png?skin_name=chrome)][1]
 
 ## Summary
 
