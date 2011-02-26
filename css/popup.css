@@ -110,17 +110,21 @@ a {
 	);
 }
 
+a.icon {
+	margin-right: 5px;
+}
+
 a#refresh {
-	background: url(../img/icons/arrows_circle.gif) top left no-repeat;
+	background: url(../img/icons/silk/arrow_refresh_bw.png) top left no-repeat;
 	text-indent: -9999px;
 	display: block;
-	width: 19px;
-	height: 12px;
+	width: 16px;
+	height: 16px;
 	float: left;
 }
 
 a#new-entry-link {
-	background: url(../img/icons/symbol_addition.gif) top left no-repeat;
+	background: url(../img/icons/silk/add_bw.png) top left no-repeat;
 	text-indent: -9999px;
 	display: block;
 	width: 18px;
@@ -129,11 +133,11 @@ a#new-entry-link {
 }
 
 a#options-link {
-	background: url(../img/icons/cog.gif) top left no-repeat;
+	background: url(../img/icons/silk/cog.png) top left no-repeat;
 	text-indent: -9999px;
 	display: block;
-	width: 18px;
-	height: 18px;
+	width: 16px;
+	height: 16px;
 	float: left;
 }
 
