@@ -111,11 +111,29 @@ a {
 }
 
 a#refresh {
-	background: url(../img/buttons/reload.gif) top left no-repeat;
+	background: url(../img/icons/arrows_circle.gif) top left no-repeat;
 	text-indent: -9999px;
 	display: block;
 	width: 19px;
 	height: 12px;
+	float: left;
+}
+
+a#new-entry-link {
+	background: url(../img/icons/symbol_addition.gif) top left no-repeat;
+	text-indent: -9999px;
+	display: block;
+	width: 18px;
+	height: 18px;
+	float: left;
+}
+
+a#options-link {
+	background: url(../img/icons/cog.gif) top left no-repeat;
+	text-indent: -9999px;
+	display: block;
+	width: 18px;
+	height: 18px;
 	float: left;
 }
 
@@ -127,15 +145,6 @@ ul.toolbar {
 ul.toolbar li {
 	display: inline-block;
 	font-size: 0.8em;
-}
-
-a#new-entry-link {
-	background: url(../img/buttons/plus.gif) top left no-repeat;
-	text-indent: -9999px;
-	display: block;
-	width: 19px;
-	height: 12px;
-	float: left;
 }
 
 #form-overlay {
