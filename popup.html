@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+	<meta charset="UTF-8" />
 	<link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
 	<script src="js/underscore-min.js" charset="utf-8" type="text/javascript"></script>
 	<!--<script src="js/taffy-min.js" charset="utf-8" type="text/javascript"></script>-->
@@ -49,27 +49,25 @@
 	</script>
 
 	<div id="header">
-		<img src="app_icon_48.png" alt="Harvest Icon" />
-		<h1>Hayfever for Harvest</h1>
 	</div>
 	<div id="status">
 		Test
 	</div>
 	<table cellspacing="0" width="340" id="timesheet">
-	    <thead>
-	        <tr>
-	            <th class="left" width="60%">Task</th>
-	            <th>Time</th>
+		<thead>
+			<tr>
+				<th class="left" width="60%">Task</th>
+				<th>Time</th>
 				<th class="right">Options</th>
-	        </tr>
-	    </thead>
-	    <tbody>
+			</tr>
+		</thead>
+		<tbody>
 			<tr class="noentries">
 				<td colspan="3" align="center">
 					<em>No Entries Today</em>
 				</td>
 			</tr>
-	    </tbody>
+		</tbody>
 		<tfoot>
 			<tr>
 				<td colspan="3" align="center">
@@ -80,9 +78,14 @@
 		</tfoot>
 	</table>
 
-	<p>
-	    <a id="harvest-link" href="#">&laquo; Visit Harvest App</a>
-	</p>
+	<ul class="toolbar">
+		<li>
+			<a href="#" id="harvest-link">&laquo; Visit Harvest App</a>
+		</li>
+		<li>
+		    <a href="#">Test</a>
+		</li>
+	</ul>
 
 	<div id="form-overlay">
 		<form id="entry-form" action="">
