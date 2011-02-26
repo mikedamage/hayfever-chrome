@@ -67,6 +67,7 @@ body {
 fieldset {
 	border: 1px #ccc solid;
 	-webkit-border-radius: 8px;
+	margin-bottom: 20px;
 }
 
 fieldset p span.hint {
@@ -80,4 +81,9 @@ input[type="text"], input[type="password"] {
 	padding: 5px;
 	border: 1px solid #ccc;
 	-webkit-border-radius: 8px;
+}
+
+p.info {
+	font-size: 11px;
+	font-style: italic;
 }

@@ -5,6 +5,7 @@ $(document).ready(function() {
 		, subdomain = localStorage['harvest_subdomain']
 		, username = localStorage['harvest_username']
 		, authString = localStorage['harvest_auth_string']
+		, pluginPrefs = localStorage['hayfever_prefs']
 		, bgPage = chrome.extension.getBackgroundPage();
 
 	// Populate Fields if options are already set
@@ -18,6 +19,14 @@ $(document).ready(function() {
 	// TODO: Don't store password in production version. Just store base64 encoded auth string and tell user that their password is saved.
 	if (authString) {
 		$('#harvest-password').next('.hint').html("We've successfully used your password to build an authentication string. This field will remain blank because we don't actually store your password. You can enter a new password at any time to rebuild the authentication string.");
+	}
+
+	if (pluginPrefs) {
+		var preferences = JSON.parse(pluginPrefs);
+
+		if (preferences.hasOwnProperty('enable_analytics') && preferences.enable_analytics) {
+			$('#enable-analytics').attr('checked', 'checked');
+		}
 	}
 
 	$('#options').submit(function() {

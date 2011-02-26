@@ -35,15 +35,19 @@
 					<span class="hint">Hayfever doesn't actually save your password &mdash; we just use it to build an authentication key</span>
 				</p>
 	        </fieldset>
-			<!--
 			<fieldset id="plugin-prefs">
 			    <legend>Plugin Preferences</legend>
-			    <p>
-			        <label></label>
-			        <input type="text" name="" value="" />
-			    </p>
+				<p class="info">You can also set these options from the Hayfever popup by clicking on the gear icon.
+
+				<div class="field">
+					
+					<input type="checkbox" name="enable_analytics" id="enable-analytics" />
+			        <label for="enable-analytics">Collect anonymous usage statistics?</label>
+					<p class="info">
+						Help us improve Hayfever by allowing us to collect anonymous usage info. Enabling this option injects a Google Analytics snippet into the extension's popup page.
+					</p>
+				</div>
 			</fieldset>
-			-->
 			<input type="submit" id="save-settings" value="Save Settings" />
 	    </div>
 	</form>
