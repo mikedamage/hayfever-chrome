@@ -1,15 +1,31 @@
+/*!
+ * Hayfever for Chrome
+ * Options Page JavaScript
+ *
+ * by Mike Green (mike.is.green@gmail.com)
+ */
+
+;(function($) {
+	$.fn.selectOption = function(name) {
+		this.find('option[value="' + name + '"]').attr('selected', 'selected');
+		return this;
+	};
+})(jQuery);
+
 $(document).ready(function() {
 	var $subdomainField = $('#harvest-subdomain')
 		, $usernameField = $('#harvest-username')
 		, $passwordField = $('#harvest-password')
-		, $formFields = $('input[type!="submit"]')
+		, $formFields = $('input[type!="submit"], select')
 		, subdomain = localStorage['harvest_subdomain']
 		, username = localStorage['harvest_username']
 		, authString = localStorage['harvest_auth_string']
 		, pluginPrefs = localStorage['hayfever_prefs']
 		, bgPage = chrome.extension.getBackgroundPage();
 
-	// Populate Fields if options are already set
+	/**
+ 	 * Populate form fields if options are already set
+	 */
 	if (subdomain) {
 		$subdomainField.val(subdomain);
 	}
@@ -26,6 +42,14 @@ $(document).ready(function() {
 
 		if (preferences.hasOwnProperty('enable_analytics') && preferences.enable_analytics) {
 			$('#enable-analytics').attr('checked', 'checked');
+		}
+
+		if (preferences.hasOwnProperty('badge_display')) {
+			$('#badge-display').selectOption(preferences.badge_display);
+		}
+
+		if (preferences.hasOwnProperty('badge_format')) {
+			$('#badge-format').selectOption(preferences.badge_format);
 		}
 	}
 

@@ -44,6 +44,23 @@
 			        <label for="enable-analytics">Collect anonymous usage statistics?</label>
 					<span class="hint">Help us improve Hayfever by allowing us to collect anonymous usage info. Enabling this option injects a Google Analytics snippet into the extension's popup page.</span>
 				</p>
+
+				<p>
+					<label for="badge-display">Badge displays</label>
+					<select name="badge_display" id="badge-display">
+						<option value="total">Total Hours Today</option>
+						<option value="current">Active Task Hours</option>
+						<option value="nothing">Nothing (disable badge)</option>
+					</select>
+				</p>
+
+				<p>
+					<label for="badge-format">Badge Format</label>
+					<select name="badge_format" id="badge-format">
+						<option value="decimal">Decimal (i.e. 1.50)</option>
+						<option value="clock">Clock (i.e. 1:30)</option>
+					</select>
+				</p>
 			</fieldset>
 			<input type="submit" id="save-settings" value="Save Settings" />
 	    </div>

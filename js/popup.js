@@ -89,10 +89,7 @@ $(document).ready(function() {
 		, $timesheet = $('#timesheet tbody');
 	
 	if (!app.authDataExists()) {
-		$('#header').after($('<div/>', {
-			'class': 'notice'
-			, text: 'Please visit the Options page and configure Hayfever'
-		}));
+		$('tr.noentries').html('<div class="notice">Please visit the Options page and configure Hayfever. Right-click the Hayfever toolbar icon and select Options.</div>');
 	}
 	
 	// Repaint the table rows whenever new elements are appended to the timesheet
