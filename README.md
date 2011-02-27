@@ -10,7 +10,9 @@ Copyright &copy; 2010, Mike Green (mike.is.green AT gmail DOT com)
 
 Hayfever is a plugin for Google Chrome that lets you manage your [Harvest](http://www.getharvest.com) timers and timesheets.
 
-__The plugin is still under heavy development. Install at your own risk. Nothing is stable at this point, but I'll maintain a list below of stuff it can currently do.__
+Hayfever currently duplicates the feature set of the Harvest desktop widget, but I've got plans to extend its functionality far beyond that.
+
+It's currently in private beta on the Chrome Web Store, but you can download it and install it on your own via the Downloads link above.
 
 ### Stuff Hayfever Can Do
 
@@ -25,12 +27,16 @@ Hayfever can currently:
 
 ## Installation Instructions
 
-If you've read through all the disclaimers and still wanna give Hayfever a try in its current raw state - that's great! I use it every day in my work and thus far it works pretty well. Once I've prettied it up and done some more testing, I'll release it on the Chrome Extensions Gallery. But for now you can download a .crx package, bundled by yours truly.
+If you've read through all the disclaimers and still wanna give Hayfever a try in its current raw state - that's great! I use it every day in my work and thus far it works pretty well.
+
+If you're not one of the lucky few who got onto my Web Store testers list, don't despair! Google only lets me have 255 characters worth of beta tester email addresses, but you can still download the plugin as a CRX file bundled by yours truly.
 
 1. Click the downloads link above and grab the most recent CRX file.
 2. Open it in Chrome.
-3. Go to `chrome://extensions` and hit up Hayfever's options page. Add your Harvest subdomain, username, and password. _Note: Hayfever doesn't store your password. It just uses it to build an auth string, then it throws it away._
-4. Use Hayfever!
+3. Install it, then right-click on the Hayfever icon in your toolbar.
+4. Fill in your Harvest subdomain, username, and password.
+	* Please consider allowing me to gather usage statistics! I'm a privacy nut, so I turned this off by default, but it would definitely help me to understand my users.
+5. Use Hayfever!
 
 ## Screenshots
 
@@ -40,11 +46,15 @@ Hayfever Hours Badge
 ![Hayfever Popup Timesheet](http://mikegreen.s3.amazonaws.com/projects/hayfever/hayfever-popup.png)
 Hayfever Popup Timesheet
 
+## Usage Statistics
+
+Hayfever gathers usage statistics via Google Analytics, but only if you decide to let it. Right now I do __not__ do any event tracking, so the only data I get is how many people use the plugin and how often.
+
+Analytics are turned off by default because I believe it should be a matter of choice.
+
 ## License
 
 ![GNU General Public License v3](http://mikegreen.s3.amazonaws.com/projects/hayfever/gpl-logo-127x51.png)
-
-_I recently changed this project's license to the GNU General Public License v3. The reason for this change is so that I can have some reasonable expectation of exclusivity if I ever choose to release a premium version of the plugin. Rest assured that Hayfever will always be free, and I don't anticipate any futrher license changes._
 
 This extension is released according to the terms of the GNU General Public License, version 3. See [LICENSE](https://github.com/mikedamage/hayfever-chrome/blob/master/LICENSE) for details.
 
