@@ -59,6 +59,14 @@ Array.prototype.any = function() {
 		}
 	};
 
+	$.fn.showAndGrow = function(duration, elem) {
+		var $elem = (typeof elem == 'undefined') ? $('#entry-form') : $(elem);
+		$(this).fadeIn(duration, function() {
+			var formHeight = $elem.height();
+			$('body').animate({height: (formHeight + 30) + 'px'}, duration);
+		});
+	};
+
 	// Refresh the timesheet w/ data from background page. Pass true to also refresh the background page's data.
 	$.refreshTimesheet = function(remote) {
 		var bg = chrome.extension.getBackgroundPage()
@@ -158,10 +166,7 @@ $(document).ready(function() {
 			$('body').removeData('oldHeight');
 		}
 
-		$overlay.fadeIn(300, function() {
-			var formHeight = $form.height() + 30;
-			$('body').animate({height: formHeight + 'px'}, 300);
-		});
+		$overlay.showAndGrow(300);
 		return false;
 	});
 
