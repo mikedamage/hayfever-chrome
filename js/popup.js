@@ -153,13 +153,15 @@ $(document).ready(function() {
 				.reset();
 		
 		if ($('body').height() < 300) {
-			$('body').data('oldHeight', $('body').height()).animate({height: '300px'}, 300);
+			$('body').data('oldHeight', $('body').height());
 		} else {
 			$('body').removeData('oldHeight');
 		}
 
-		$overlay.fadeIn(300);
-		//$form.addClass('visible');
+		$overlay.fadeIn(300, function() {
+			var formHeight = $form.height() + 30;
+			$('body').animate({height: formHeight + 'px'}, 300);
+		});
 		return false;
 	});
 
