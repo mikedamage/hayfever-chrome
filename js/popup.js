@@ -252,13 +252,7 @@ $(document).ready(function() {
 			// hours and notes fields
 			$form.find('#task-hours').val(json.hours).end().find('#task-notes').val(json.notes);
 			
-			if ($('body').height() < 300) {
-				$('body').data('oldHeight', $('body').height()).animate({height: '300px'}, 300);
-			} else {
-				$('body').removeData('oldHeight');
-			}
-
-			$overlay.fadeIn(300);
+			$overlay.showAndGrow(300);
 		});
 
 		return false;
