@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 	window.application = {
 		totalHours: 0.0
-		, currentHours: 0.0
+		, currentHours: ''
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
@@ -75,7 +75,7 @@ $(document).ready(function() {
 					badgeText = (prefs.badge_format == 'decimal') ? String(root.totalHours.toFixed(2)) : root.totalHours.toClockTime();
 				break;
 				case 'nothing':
-					badgeText = null;
+					badgeText = '';
 				break;
 			}
 
@@ -87,7 +87,8 @@ $(document).ready(function() {
 			var root = window.application;
 			root.client.getToday(function(xhr, txt) {
 				var json = JSON.parse(xhr.responseText)
-					, totalHours = 0.0;
+					, totalHours = 0.0
+					, currentHours = '';
 				
 				// Cache projects and timesheet entries from JSON feed
 				root.projects = json.projects;
@@ -97,8 +98,13 @@ $(document).ready(function() {
 				// Calculate total hours by looping thru timesheet entries
 				$.each(root.todaysEntries, function() {
 					totalHours += this.hours;
+
+					if (this.hasOwnProperty('timer_started_at')) {
+						currentHours = this.hours;
+					}
 				});
 				root.totalHours = totalHours;
+				root.currentHours = currentHours;
 				
 				// Build a grouped list of clients/projects for building optgroups later
 				// TODO: Determine whether or not we actually need this object
