@@ -3,23 +3,21 @@ class Project < Thor
 	include Thor::Actions
 
 	desc 'bundle', 'Bundle the project into a zip file'
-	def bundle(filename)
+	def bundle(dirname)
 		require "pathname"
 		
-		file = Pathname.new(filename)
-		dir = file.dirname
-		temp = dir + 'hayfever-chrome'
+		dir = Pathname.new(dirname)
 
 		say "Syncing files to temp. location"
-		IO.popen("rsync -avr --exclude=.git --exclude=.gitignore --exclude=Thorfile --exclude=.DS_Store ./ #{temp.expand_path.to_s}/") do |rsync|
+		IO.popen("rsync -avr --exclude=.git --exclude=.gitignore --exclude=Thorfile --exclude=.DS_Store ./ #{dir.expand_path.to_s}/") do |rsync|
 			while line = rsync.gets
 				say line
 			end
 		end
 
 		say "Compressing"
-		Dir.chdir(dir)
-		`zip -r hayfever.zip #{temp.basename.to_s}`
+		Dir.chdir(dir.dirname)
+		`zip -r hayfever.zip #{dir.basename.to_s}`
 	end
 end
 
