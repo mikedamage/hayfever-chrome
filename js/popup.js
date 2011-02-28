@@ -353,8 +353,7 @@ $(document).ready(function() {
 					// Successful Update
 					// $('#status').addClass('success').text('Entry updated!');
 					$.showStatus({message: "Entry updated!", status: 'success'});
-					bgPage.application.refreshHours();
-					$('a#refresh').click();
+					$.refreshTimesheet(true);
 				} else {
 					// Error
 					$('#status').attr('class', '').addClass('error').text('Error updating entry!');
@@ -383,9 +382,11 @@ $(document).ready(function() {
 			});
 		}
 		
-	
-
-		$overlay.fadeOut(300);
+		$overlay.fadeOut(300, function() {
+			if ($('body').data('oldHeight')) {
+				$('body').animate({height: $('body').data('oldHeight') + 'px'}, 300);
+			}
+		});
 
 		// prevent synchronous submission
 		return false;
