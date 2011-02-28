@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+	<meta charset="UTF-8" />
 	<link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
 	<script src="js/underscore-min.js" charset="utf-8" type="text/javascript"></script>
 	<!--<script src="js/taffy-min.js" charset="utf-8" type="text/javascript"></script>-->
@@ -9,6 +9,21 @@
 	<script src="js/jquery.timers.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/jquery.tmpl.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/popup.js" charset="utf-8" type="text/javascript"></script>
+	<script type="text/javascript">
+		var prefs = JSON.parse(localStorage.getItem('hayfever_prefs'));
+
+		if (prefs.enable_analytics) {
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-21680103-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = 'https://ssl.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		}
+	</script>
 </head>
 <body>
 	<script id="entry-row-template" type="text/x-jquery-tmpl">
@@ -16,7 +31,10 @@
 			<td class="entry-name">
 				<strong>${client}:</strong> ${project} (${task})
 			</td>
-			<td class="entry-hours">
+			<td class="entry-hours" width="50" align="right">
+				{{if timer_started_at}}
+					<img src="img/progress.gif" alt="Timer Running" id="active-timer-img" />
+				{{/if}}
 				${hours}
 			</td>
 			<td class="entry-toggle">
@@ -35,40 +53,41 @@
 	</script>
 
 	<div id="header">
-		<img src="app_icon_48.png" alt="Harvest Icon" />
-		<h1>Hayfever for Harvest</h1>
 	</div>
 	<div id="status">
 		Test
 	</div>
 	<table cellspacing="0" width="340" id="timesheet">
-	    <thead>
-	        <tr>
-	            <th class="left" width="60%">Task</th>
-	            <th>Time</th>
+		<thead>
+			<tr>
+				<th class="left" width="60%">Task</th>
+				<th>Time</th>
 				<th class="right">Options</th>
-	        </tr>
-	    </thead>
-	    <tbody>
+			</tr>
+		</thead>
+		<tbody>
 			<tr class="noentries">
 				<td colspan="3" align="center">
 					<em>No Entries Today</em>
 				</td>
 			</tr>
-	    </tbody>
+		</tbody>
 		<tfoot>
 			<tr>
 				<td colspan="3" align="center">
-					<a href="#" id="new-entry-link">New Entry</a>
-					<a href="#" id="refresh">Refresh</a>
+					<a href="#" class="icon" id="new-entry-link">New Entry</a>
+					<a href="#" class="icon" id="refresh">Refresh</a>
+					<a href="#" class="icon" id="options-link">Options</a>
 				</td>
 			</tr>
 		</tfoot>
 	</table>
 
-	<p>
-	    <a id="harvest-link" href="#">&laquo; Visit Harvest App</a>
-	</p>
+	<ul class="toolbar">
+		<li>
+			<a href="#" id="harvest-link">&laquo; Visit Harvest App</a>
+		</li>
+	</ul>
 
 	<div id="form-overlay">
 		<form id="entry-form" action="">

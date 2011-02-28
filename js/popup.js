@@ -1,4 +1,4 @@
-/**
+/*!
  * Hayfever for Chrome
  * Popup Script
  *
@@ -6,30 +6,31 @@
  */
 
 /**
- * TODO LIST
- *
- * - Add 'tabs' to the permissions section of manifest.json
- * - Write a click() handler for a#harvest-link that opens user's Harvest subdomain in new tab.
+ * String prototype method, convert string to slug
  */
-
-// String prototype method, convert string to slug
 String.prototype.toSlug = function() {
 	var slug = this.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, '_');
 	return slug;
 };
 
-// Date prototype method: format the date so Harvest can understand it
+/**
+ * Date prototype method: format the date so Harvest can understand it
+ */
 Date.prototype.toHarvestString = function() {
 	var arr = this.toDateString().split(' ');
 	return arr[0] + ', ' + arr[2] + ' ' + arr[1] + ' ' + arr[3];
 };
 
-// Array prototype method: any (like Ruby's Array#any? method)
+/**
+ * Array prototype method: any (like Ruby's Array#any? method)
+ */
 Array.prototype.any = function() {
 	return this.length > 0;
 };
 
-// jQuery Extension Functions
+/**
+ * jQuery Extension Functions
+ */
 ;(function() {
 	$.showStatus = function(opts) {
 		var config = $.extend($.showStatus.defaults, opts)
@@ -88,10 +89,7 @@ $(document).ready(function() {
 		, $timesheet = $('#timesheet tbody');
 	
 	if (!app.authDataExists()) {
-		$('#header').after($('<div/>', {
-			'class': 'notice'
-			, text: 'Please visit the Options page and configure Hayfever'
-		}));
+		$('tr.noentries').html('<div class="notice">Please visit the Options page and configure Hayfever. Right-click the Hayfever toolbar icon and select Options.</div>');
 	}
 	
 	// Repaint the table rows whenever new elements are appended to the timesheet
@@ -189,11 +187,22 @@ $(document).ready(function() {
 		app.client.toggleTimer(timerID, function(xhr, txt) {
 			var js = JSON.parse(xhr.responseText);
 			if (js.timer_started_at) {
+				var $activeImg = $('<img/>', {
+					'src': 'img/progress.gif'
+					, 'id': 'active-timer-img'
+					, 'alt': 'Timer Running'
+					, 'css': {
+						display: 'none'
+					}
+				});
+
 				bgPage.console.log('timer started: ' + js.project_id);
 				$link.text('Stop');
+				$activeImg.prependTo($link.parent().siblings('.entry-hours')).fadeIn(250);
 			} else {
 				bgPage.console.log('timer stopped');
 				$link.text('Start');
+				$('#active-timer-img').fadeOut(250, function() {$(this).remove(); });
 			}
 		});
 		

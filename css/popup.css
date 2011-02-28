@@ -110,22 +110,45 @@ a {
 	);
 }
 
+a.icon {
+	margin-right: 5px;
+}
+
 a#refresh {
-	background: url(../img/buttons/reload.gif) top left no-repeat;
+	background: url(../img/icons/silk/arrow_refresh_bw.png) top left no-repeat;
 	text-indent: -9999px;
 	display: block;
-	width: 19px;
-	height: 12px;
+	width: 16px;
+	height: 16px;
 	float: left;
 }
 
 a#new-entry-link {
-	background: url(../img/buttons/plus.gif) top left no-repeat;
+	background: url(../img/icons/silk/add_bw.png) top left no-repeat;
 	text-indent: -9999px;
 	display: block;
-	width: 19px;
-	height: 12px;
+	width: 18px;
+	height: 18px;
 	float: left;
+}
+
+a#options-link {
+	background: url(../img/icons/silk/cog.png) top left no-repeat;
+	text-indent: -9999px;
+	display: block;
+	width: 16px;
+	height: 16px;
+	float: left;
+}
+
+ul.toolbar {
+	list-style: none;
+	padding-left: 0;
+}
+
+ul.toolbar li {
+	display: inline-block;
+	font-size: 0.8em;
 }
 
 #form-overlay {
@@ -197,8 +220,4 @@ a#new-entry-link {
 #entry-form textarea {
 	font-size: 12px;
 	height: 60px;
-}
-
-#harvest-link {
-	font-size: 0.8em;
 }
