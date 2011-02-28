@@ -24,7 +24,12 @@ Number.prototype.toClockTime = function() {
 		, minutes = parseFloat('0.' + decimalSplit[1]);
 	
 	minutes = parseInt((minutes * 60), 10);
-	return hours + ':' + minutes;
+
+	if (minutes < 10) {
+		return hours + ':0' + minutes;
+	} else {
+		return hours + ':' + minutes;
+	}
 };
 
 $(document).ready(function() {
