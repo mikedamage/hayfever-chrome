@@ -14,6 +14,19 @@ String.prototype.toSlug = function() {
 	return slug;
 };
 
+Number.prototype.toClockTime = function() {
+	if (this == 0) {
+		return '0:00';
+	}
+	var stringVal = this.toFixed(2)
+		, decimalSplit = stringVal.split('.')
+		, hours = parseInt(decimalSplit[0], 10)
+		, minutes = parseFloat('0.' + decimalSplit[1]);
+	
+	minutes = parseInt((minutes * 60), 10);
+	return hours + ':' + minutes;
+};
+
 $(document).ready(function() {
 	
 	var popup = chrome.extension.getURL('popup.html')
@@ -22,11 +35,21 @@ $(document).ready(function() {
 
 	window.application = {
 		totalHours: 0.0
+		, currentHours: 0.0
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
+		, preferences: {}
 		, startRefreshInterval: function() {
 			this.refreshInterval = setInterval(window.application.refreshHours, 36000);
+		}
+		, getPreferences: function() {
+			var prefs = localStorage.getItem('hayfever_prefs');
+			if (prefs) {
+				prefs = JSON.parse(prefs);
+				window.application.preferences = prefs;
+			}
+			return window.application.preferences;
 		}
 		, getAuthData: function() {
 			return {
@@ -40,9 +63,24 @@ $(document).ready(function() {
 			return (!_(auth.subdomain).isEmpty() && !_(auth.auth_string).isEmpty());
 		}
 		, setBadge: function() {
-			var root = window.application;
+			var root = window.application
+				, prefs = root.getPreferences()
+				, badgeText;
+
+			switch (prefs.badge_display) {
+				case 'current':
+					badgeText = (prefs.badge_format == 'decimal') ? String(root.currentHours.toFixed(2)) : root.currentHours.toClockTime();
+				break;
+				case 'total':
+					badgeText = (prefs.badge_format == 'decimal') ? String(root.totalHours.toFixed(2)) : root.totalHours.toClockTime();
+				break;
+				case 'nothing':
+					badgeText = null;
+				break;
+			}
+
 			chrome.browserAction.setBadgeBackgroundColor({color: [138, 195, 255, 200]}); // light blue
-			chrome.browserAction.setBadgeText({text: String(root.totalHours.toFixed(2))});
+			chrome.browserAction.setBadgeText({text: badgeText});
 		}
 		, refreshHours: function() {
 			console.log('refreshing hours');
@@ -108,13 +146,25 @@ $(document).ready(function() {
 		}
 	};
 
-	if (window.application.authDataExists()) {
-		var auth = window.application.getAuthData();
-		window.application.client = new Harvest(auth.subdomain, auth.auth_string);
-		setTimeout(window.application.refreshHours, 500);
-		window.application.startRefreshInterval();
-	} else {	
+	window.application.init = function() {
+		var root = window.application;
+
+		if (root.authDataExists()) {
+			var auth = root.getAuthData()
+				, prefs = root.getPreferences();
+
+			root.client = new Harvest(auth.subdomain, auth.auth_string);
+			setTimeout(root.refreshHours, 500);
+			root.startRefreshInterval();
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	if (!window.application.init()) {
 		chrome.browserAction.setBadgeText({text: "!"});
+		console.error("Error initializing Hayfever. Please visit the Options page");
 	}
 
 	// If user closes the harvest tab, remove it from our cache
