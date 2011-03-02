@@ -97,7 +97,7 @@ $(document).ready(function() {
 		, $timesheet = $('#timesheet tbody');
 	
 	if (!app.authDataExists()) {
-		$('tr.noentries').html('<div class="notice">Please visit the Options page and configure Hayfever. Right-click the Hayfever toolbar icon and select Options.</div>');
+		$('tr.noentries').html('<td colspan="3" align="center"><div class="notice">Please visit the <a href="options.html" target="_blank">Options page</a> and configure Hayfever. Follow the link or click on the gear icon below to access the options page.</div></td>');
 	}
 	
 	// Repaint the table rows whenever new elements are appended to the timesheet
