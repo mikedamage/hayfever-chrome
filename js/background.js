@@ -39,12 +39,27 @@ $(document).ready(function() {
 		, subdomain = localStorage['harvest_subdomain'];
 
 	window.application = {
-		totalHours: 0.0
+		version: '0.1.2'
+		, totalHours: 0.0
 		, currentHours: ''
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
 		, preferences: {}
+		, upgradeDetected: function() {
+			var storedVersion = localStorage.getItem('hayfever_version');
+
+			if (!storedVersion) {
+				localStorage.setItem('hayfever_version', this.version);
+				return false;
+			} else {
+				if (storedVersion == this.version) {
+					return false
+				} else {
+					return true;
+				}
+			}
+		}
 		, startRefreshInterval: function() {
 			this.refreshInterval = setInterval(window.application.refreshHours, 36000);
 		}
