@@ -179,6 +179,14 @@ $(document).ready(function() {
 			var auth = root.getAuthData()
 				, prefs = root.getPreferences();
 
+			// Initialize Preferences if none are found
+			if (_(prefs).isEmpty()) {
+				prefs.badge_display = 'total';
+				prefs.badge_format = 'decimal';
+				prefs.enable_analytics = false;
+				localStorage.setItem('hayfever_prefs', JSON.stringify(prefs));
+			}
+
 			root.client = new Harvest(auth.subdomain, auth.auth_string);
 			setTimeout(root.refreshHours, 500);
 			root.startRefreshInterval();
