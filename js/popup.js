@@ -337,7 +337,8 @@ $(document).ready(function() {
 				, project_id: $('#client-select').val()
 				, task_id: $('#task-select').val()
 				, spent_at: today.toHarvestString()
-			};
+			}
+			, autoStart = $('#start-on-save').is(':checked');
 		
 		if ($idField.size() > 0) {
 			var timerID = $idField.val();
@@ -350,8 +351,15 @@ $(document).ready(function() {
 
 				if (xhr.status == 200) {
 					// Successful Update
-					// $('#status').addClass('success').text('Entry updated!');
 					$.showStatus({message: "Entry updated!", status: 'success'});
+					
+					// Auto-start timer if box is checked
+					if (autoStart) {
+						timerID = json.id;
+						console.log('toggling timer ' + timerID);
+						app.client.toggleTimer(timerID);
+					}
+
 					$.refreshTimesheet(true);
 				} else {
 					// Error
@@ -373,6 +381,17 @@ $(document).ready(function() {
 
 					// Print a message to the status div
 					$.showStatus({status: 'success', message: 'New entry successfully created!'});
+
+					if (autoStart && !_(props.hours).isEmpty()) {
+						var timerID = js.id
+							, alreadyRunning = js.hasOwnProperty('timer_started_at');
+
+						if (_(timerID).isNumber() && !alreadyRunning) {
+							console.log('toggling timer ' + timerID);
+							app.client.toggleTimer(timerID);
+						}
+					}
+
 					bgPage.application.refreshHours();
 					$('a#refresh').click();
 				} else {

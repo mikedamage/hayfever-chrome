@@ -98,8 +98,10 @@ function Harvest(subdomain, authString) {
 
 	// Toggle a single timer
 	this.toggleTimer = function(eid, callback, async) {
-		async = (typeof async == 'undefined') ? true : async;
-		var url = root.buildURL('daily', 'timer', String(eid));
+		async    = (typeof async == 'undefined') ? true : async;
+		callback = (typeof callback == 'undefined') ? function() {} : callback;
+		var url  = root.buildURL('daily', 'timer', String(eid));
+
 		$.ajax({
 			url: url
 			, type: 'GET'
