@@ -41,7 +41,7 @@ $(document).ready(function() {
 	window.application = {
 		version: '0.1.2'
 		, totalHours: 0.0
-		, currentHours: ''
+		, currentHours: 0.0
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
@@ -89,10 +89,10 @@ $(document).ready(function() {
 
 			switch (prefs.badge_display) {
 				case 'current':
-					badgeText = (prefs.badge_format == 'decimal') ? String(root.currentHours.toFixed(2)) : root.currentHours.toClockTime();
+					badgeText = (prefs.badge_format == 'decimal') ? root.currentHours.toFixed(2) : root.currentHours.toClockTime();
 				break;
 				case 'total':
-					badgeText = (prefs.badge_format == 'decimal') ? String(root.totalHours.toFixed(2)) : root.totalHours.toClockTime();
+					badgeText = (prefs.badge_format == 'decimal') ? root.totalHours.toFixed(2) : root.totalHours.toClockTime();
 				break;
 				case 'nothing':
 					badgeText = '';
