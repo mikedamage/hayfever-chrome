@@ -57,7 +57,7 @@ $(document).ready(function() {
 		, subdomain = localStorage['harvest_subdomain'];
 
 	window.application = {
-		version: '0.1.4'
+		version: '0.1.5'
 		, totalHours: 0.0
 		, currentHours: 0.0
 		, todaysEntries: []
