@@ -23,6 +23,10 @@ $(document).ready(function() {
 		, pluginPrefs = localStorage['hayfever_prefs']
 		, bgPage = chrome.extension.getBackgroundPage();
 
+	var colorPicker = $.farbtastic('#badge-color-picker', function(color) {
+		$('#badge-color').val(color).css('background-color', color);
+	});
+	
 	/**
  	 * Populate form fields if options are already set
 	 */
@@ -50,6 +54,11 @@ $(document).ready(function() {
 
 		if (preferences.hasOwnProperty('badge_format')) {
 			$('#badge-format').selectOption(preferences.badge_format);
+		}
+
+		if (preferences.hasOwnProperty('badge_color')) {
+			$('#badge-color').val(preferences.badge_color);
+			colorPicker.setColor(preferences.badge_color);
 		}
 	}
 
@@ -97,8 +106,8 @@ $(document).ready(function() {
 
 		$('#status').addClass('success').html('Options successfully saved').fadeIn(400);
 
+		bgPage.location.reload(); // Kludge: refresh the background page
 		if (!bgPage.application.refreshInterval) {
-			bgPage.location.reload(); // Kludge: refresh the background page
 			bgPage.application.startRefreshInterval();
 		}
 		return false;

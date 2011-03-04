@@ -1,19 +1,21 @@
-/**
+/*!
  * Hayfever for Chrome
  * Background Script
  *
  * by Mike Green
- *
- * TODO: Figure out the best strategy for persisting data like client lists, either via Web SQL or localStorage. 
- * 			 If localStorage, use some easily query-able schema
  */
 
-// String prototype method, convert string to slug
+/**
+ * Convert string to slug
+ */
 String.prototype.toSlug = function() {
 	var slug = this.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, '_');
 	return slug;
 };
 
+/**
+ * Convert decimal time to clock time (sexagesimal)
+ */
 Number.prototype.toClockTime = function() {
 	if (this == 0) {
 		return '0:00';
@@ -31,6 +33,22 @@ Number.prototype.toClockTime = function() {
 		return hours + ':' + minutes;
 	}
 };
+
+(function($) {
+	$.hexPairToDecimal = function(hex) {
+		return parseInt(hex, 16);
+	};
+
+	$.hexColorToRGBA = function(str, alpha) {
+		var alphaVal = (typeof alpha == 'undefined' || typeof alpha != 'number') ? 255 : alpha
+			, hexString = str.replace('#', '')
+			, redVal = hexString.substring(0, 2)
+			, greenVal = hexString.substring(2, 4)
+			, blueVal = hexString.substring(4, 6);
+
+		return [$.hexPairToDecimal(redVal), $.hexPairToDecimal(greenVal), $.hexPairToDecimal(blueVal), alphaVal];
+	};
+})(jQuery);
 
 $(document).ready(function() {
 	
@@ -85,6 +103,7 @@ $(document).ready(function() {
 		, setBadge: function() {
 			var root = window.application
 				, prefs = root.getPreferences()
+				, badgeColor = $.hexColorToRGBA(prefs.badge_color)
 				, badgeText;
 
 			switch (prefs.badge_display) {
@@ -99,7 +118,7 @@ $(document).ready(function() {
 				break;
 			}
 
-			chrome.browserAction.setBadgeBackgroundColor({color: [138, 195, 255, 200]}); // light blue
+			chrome.browserAction.setBadgeBackgroundColor({color: badgeColor});
 			chrome.browserAction.setBadgeText({text: badgeText});
 		}
 		, refreshHours: function() {
