@@ -1,0 +1,6 @@
+@mixin replace-text($img, $width, $height) {
+  background: url($img) top left no-repeat;
+  width: $width;
+  height: $height;
+  text-indent: -9999px;
+}

@@ -17,6 +17,9 @@
 // But Compass recommends that you scope your blueprint styles
 // So that you can better control what pages use blueprint
 // when stylesheets are concatenated together.
+
+@import "partials/mixins";
+
 @include blueprint-scaffolding("body.bp");
 
 body.bp {
@@ -28,7 +31,21 @@ body.bp {
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 
   #container {
-	  @include container;
+    @include container;
+
+    #header {
+      h1#logo {
+        @include replace-text('../img/Hayfever_logo.png', 302px, 232px);
+        margin: {
+          right: auto;
+          left: auto;
+        }
+      }
+
+      p.tagline {
+        text-align: center;
+      }
+    }
   }
 }
 
@@ -51,3 +68,5 @@ body.two-col {
     $content-columns: ceil(2 * $blueprint-grid-columns / 3);
     // true means it's the last column in the row
     @include column($content-columns, true); } }
+
+// vim: set ts=2 sw=2 expandtab :
