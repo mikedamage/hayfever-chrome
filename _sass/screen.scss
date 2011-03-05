@@ -97,6 +97,10 @@ body.bp {
       margin-bottom: 10px;
     }
 
+    em {
+      font-weight: 100;
+    }
+
     #header {
       h1#logo {
         @include replace-text('../img/Hayfever_logo.png', 302px, 232px);
@@ -163,6 +167,19 @@ body.bp {
       .unavailable {
         color: $gray;
         text-decoration: line-through;
+      }
+
+      #github-feed {
+        list-style: none;
+        padding-left: 20px;
+
+        li {
+          margin-bottom: 10px;
+
+          &.more {
+            text-align: right;
+          }
+        }
       }
     }
 
