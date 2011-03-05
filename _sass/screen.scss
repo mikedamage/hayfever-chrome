@@ -39,8 +39,13 @@ body.bp {
 
     h1, h2, h3 {
       font: {
+        family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         weight: 100;
       }
+    }
+
+    h2 {
+      font-size: 2.5em;
     }
 
     #header {
@@ -64,8 +69,27 @@ body.bp {
       }
     }
 
+    #main {
+      @include column(17);
+    }
+
+    #sidebar {
+      @include column(7, true);
+      
+      #downloads {
+        list-style: none;
+        font-size: 1.2em;
+      }
+
+      .unavailable {
+        color: $gray;
+        text-decoration: line-through;
+      }
+    }
+
     #footer {
-      font-size: 12px;
+      @include column(24);
+      font-size: 1em;
     }
 
   }
