@@ -1,18 +1,54 @@
-/**
+/*!
  * Hayfever for Chrome
  * Background Script
  *
  * by Mike Green
- *
- * TODO: Figure out the best strategy for persisting data like client lists, either via Web SQL or localStorage. 
- * 			 If localStorage, use some easily query-able schema
  */
 
-// String prototype method, convert string to slug
+/**
+ * Convert string to slug
+ */
 String.prototype.toSlug = function() {
 	var slug = this.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, '_');
 	return slug;
 };
+
+/**
+ * Convert decimal time to clock time (sexagesimal)
+ */
+Number.prototype.toClockTime = function() {
+	if (this == 0) {
+		return '0:00';
+	}
+	var stringVal = this.toFixed(2)
+		, decimalSplit = stringVal.split('.')
+		, hours = parseInt(decimalSplit[0], 10)
+		, minutes = parseFloat('0.' + decimalSplit[1]);
+	
+	minutes = parseInt((minutes * 60), 10);
+
+	if (minutes < 10) {
+		return hours + ':0' + minutes;
+	} else {
+		return hours + ':' + minutes;
+	}
+};
+
+(function($) {
+	$.hexPairToDecimal = function(hex) {
+		return parseInt(hex, 16);
+	};
+
+	$.hexColorToRGBA = function(str, alpha) {
+		var alphaVal = (typeof alpha == 'undefined' || typeof alpha != 'number') ? 255 : alpha
+			, hexString = str.replace('#', '')
+			, redVal = hexString.substring(0, 2)
+			, greenVal = hexString.substring(2, 4)
+			, blueVal = hexString.substring(4, 6);
+
+		return [$.hexPairToDecimal(redVal), $.hexPairToDecimal(greenVal), $.hexPairToDecimal(blueVal), alphaVal];
+	};
+})(jQuery);
 
 $(document).ready(function() {
 	
@@ -21,12 +57,37 @@ $(document).ready(function() {
 		, subdomain = localStorage['harvest_subdomain'];
 
 	window.application = {
-		totalHours: 0.0
+		version: '0.1.5'
+		, totalHours: 0.0
+		, currentHours: 0.0
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
+		, preferences: {}
+		, upgradeDetected: function() {
+			var storedVersion = localStorage.getItem('hayfever_version');
+
+			if (!storedVersion) {
+				localStorage.setItem('hayfever_version', this.version);
+				return false;
+			} else {
+				if (storedVersion == this.version) {
+					return false
+				} else {
+					return true;
+				}
+			}
+		}
 		, startRefreshInterval: function() {
 			this.refreshInterval = setInterval(window.application.refreshHours, 36000);
+		}
+		, getPreferences: function() {
+			var prefs = localStorage.getItem('hayfever_prefs');
+			if (prefs) {
+				prefs = JSON.parse(prefs);
+				window.application.preferences = prefs;
+			}
+			return window.application.preferences;
 		}
 		, getAuthData: function() {
 			return {
@@ -40,16 +101,33 @@ $(document).ready(function() {
 			return (!_(auth.subdomain).isEmpty() && !_(auth.auth_string).isEmpty());
 		}
 		, setBadge: function() {
-			var root = window.application;
-			chrome.browserAction.setBadgeBackgroundColor({color: [138, 195, 255, 200]}); // light blue
-			chrome.browserAction.setBadgeText({text: String(root.totalHours.toFixed(2))});
+			var root = window.application
+				, prefs = root.getPreferences()
+				, badgeColor = $.hexColorToRGBA(prefs.badge_color)
+				, badgeText;
+
+			switch (prefs.badge_display) {
+				case 'current':
+					badgeText = (prefs.badge_format == 'decimal') ? root.currentHours.toFixed(2) : root.currentHours.toClockTime();
+				break;
+				case 'total':
+					badgeText = (prefs.badge_format == 'decimal') ? root.totalHours.toFixed(2) : root.totalHours.toClockTime();
+				break;
+				case 'nothing':
+					badgeText = '';
+				break;
+			}
+
+			chrome.browserAction.setBadgeBackgroundColor({color: badgeColor});
+			chrome.browserAction.setBadgeText({text: badgeText});
 		}
 		, refreshHours: function() {
 			console.log('refreshing hours');
 			var root = window.application;
 			root.client.getToday(function(xhr, txt) {
 				var json = JSON.parse(xhr.responseText)
-					, totalHours = 0.0;
+					, totalHours = 0.0
+					, currentHours = '';
 				
 				// Cache projects and timesheet entries from JSON feed
 				root.projects = json.projects;
@@ -59,8 +137,13 @@ $(document).ready(function() {
 				// Calculate total hours by looping thru timesheet entries
 				$.each(root.todaysEntries, function() {
 					totalHours += this.hours;
+
+					if (this.hasOwnProperty('timer_started_at')) {
+						currentHours = this.hours;
+					}
 				});
 				root.totalHours = totalHours;
+				root.currentHours = currentHours;
 				
 				// Build a grouped list of clients/projects for building optgroups later
 				// TODO: Determine whether or not we actually need this object
@@ -108,13 +191,25 @@ $(document).ready(function() {
 		}
 	};
 
-	if (window.application.authDataExists()) {
-		var auth = window.application.getAuthData();
-		window.application.client = new Harvest(auth.subdomain, auth.auth_string);
-		setTimeout(window.application.refreshHours, 500);
-		window.application.startRefreshInterval();
-	} else {	
+	window.application.init = function() {
+		var root = window.application;
+
+		if (root.authDataExists()) {
+			var auth = root.getAuthData()
+				, prefs = root.getPreferences();
+
+			root.client = new Harvest(auth.subdomain, auth.auth_string);
+			setTimeout(root.refreshHours, 500);
+			root.startRefreshInterval();
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	if (!window.application.init()) {
 		chrome.browserAction.setBadgeText({text: "!"});
+		console.error("Error initializing Hayfever. Please visit the Options page");
 	}
 
 	// If user closes the harvest tab, remove it from our cache

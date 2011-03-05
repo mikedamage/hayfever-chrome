@@ -186,6 +186,11 @@ ul.toolbar li {
 	font-size: 14px;
 }
 
+#entry-form label.checkbox {
+	float: right;
+	width: 216px;
+}
+
 #entry-form select {
 	width: 205px;
 }

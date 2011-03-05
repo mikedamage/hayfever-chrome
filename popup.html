@@ -77,7 +77,7 @@
 				<td colspan="3" align="center">
 					<a href="#" class="icon" id="new-entry-link">New Entry</a>
 					<a href="#" class="icon" id="refresh">Refresh</a>
-					<a href="#" class="icon" id="options-link">Options</a>
+					<a href="options.html" target="_blank" class="icon" id="options-link">Options</a>
 				</td>
 			</tr>
 		</tfoot>
@@ -116,6 +116,10 @@
 			<p>
 				<label for="task-notes">Notes</label>
 				<textarea id="task-notes" name=""></textarea>
+			</p>
+			<p>
+				<input class="left" type="checkbox" name="start_timer" id="start-on-save" value="true" />
+				<label class="checkbox" for="start-on-save">Start timer (if hours are already on the clock)</label>
 			</p>
 			<button id="save-entry">Save</button>
 		</form>

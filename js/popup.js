@@ -59,6 +59,14 @@ Array.prototype.any = function() {
 		}
 	};
 
+	$.fn.showAndGrow = function(duration, elem) {
+		var $elem = (typeof elem == 'undefined') ? $('#entry-form') : $(elem);
+		$(this).fadeIn(duration, function() {
+			var formHeight = $elem.height();
+			$('body').animate({height: (formHeight + 30) + 'px'}, duration);
+		});
+	};
+
 	// Refresh the timesheet w/ data from background page. Pass true to also refresh the background page's data.
 	$.refreshTimesheet = function(remote) {
 		var bg = chrome.extension.getBackgroundPage()
@@ -89,7 +97,7 @@ $(document).ready(function() {
 		, $timesheet = $('#timesheet tbody');
 	
 	if (!app.authDataExists()) {
-		$('tr.noentries').html('<div class="notice">Please visit the Options page and configure Hayfever. Right-click the Hayfever toolbar icon and select Options.</div>');
+		$('tr.noentries').html('<td colspan="3" align="center"><div class="notice">Please visit the <a href="options.html" target="_blank">Options page</a> and configure Hayfever. Follow the link or click on the gear icon below to access the options page.</div></td>');
 	}
 	
 	// Repaint the table rows whenever new elements are appended to the timesheet
@@ -153,13 +161,12 @@ $(document).ready(function() {
 				.reset();
 		
 		if ($('body').height() < 300) {
-			$('body').data('oldHeight', $('body').height()).animate({height: '300px'}, 300);
+			$('body').data('oldHeight', $('body').height());
 		} else {
 			$('body').removeData('oldHeight');
 		}
 
-		$overlay.fadeIn(300);
-		//$form.addClass('visible');
+		$overlay.showAndGrow(300);
 		return false;
 	});
 
@@ -245,13 +252,7 @@ $(document).ready(function() {
 			// hours and notes fields
 			$form.find('#task-hours').val(json.hours).end().find('#task-notes').val(json.notes);
 			
-			if ($('body').height() < 300) {
-				$('body').data('oldHeight', $('body').height()).animate({height: '300px'}, 300);
-			} else {
-				$('body').removeData('oldHeight');
-			}
-
-			$overlay.fadeIn(300);
+			$overlay.showAndGrow(300);
 		});
 
 		return false;
@@ -336,7 +337,8 @@ $(document).ready(function() {
 				, project_id: $('#client-select').val()
 				, task_id: $('#task-select').val()
 				, spent_at: today.toHarvestString()
-			};
+			}
+			, autoStart = $('#start-on-save').is(':checked');
 		
 		if ($idField.size() > 0) {
 			var timerID = $idField.val();
@@ -349,10 +351,16 @@ $(document).ready(function() {
 
 				if (xhr.status == 200) {
 					// Successful Update
-					// $('#status').addClass('success').text('Entry updated!');
 					$.showStatus({message: "Entry updated!", status: 'success'});
-					bgPage.application.refreshHours();
-					$('a#refresh').click();
+					
+					// Auto-start timer if box is checked
+					if (autoStart) {
+						timerID = json.id;
+						console.log('toggling timer ' + timerID);
+						app.client.toggleTimer(timerID);
+					}
+
+					$.refreshTimesheet(true);
 				} else {
 					// Error
 					$('#status').attr('class', '').addClass('error').text('Error updating entry!');
@@ -373,6 +381,17 @@ $(document).ready(function() {
 
 					// Print a message to the status div
 					$.showStatus({status: 'success', message: 'New entry successfully created!'});
+
+					if (autoStart && !_(props.hours).isEmpty()) {
+						var timerID = js.id
+							, alreadyRunning = js.hasOwnProperty('timer_started_at');
+
+						if (_(timerID).isNumber() && !alreadyRunning) {
+							console.log('toggling timer ' + timerID);
+							app.client.toggleTimer(timerID);
+						}
+					}
+
 					bgPage.application.refreshHours();
 					$('a#refresh').click();
 				} else {
@@ -381,9 +400,11 @@ $(document).ready(function() {
 			});
 		}
 		
-	
-
-		$overlay.fadeOut(300);
+		$overlay.fadeOut(300, function() {
+			if ($('body').data('oldHeight')) {
+				$('body').animate({height: $('body').data('oldHeight') + 'px'}, 300);
+			}
+		});
 
 		// prevent synchronous submission
 		return false;
