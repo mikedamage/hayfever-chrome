@@ -1,3 +1,5 @@
+@import "compass";
+
 // This import applies a global reset to any page that imports this stylesheet.
 @import "blueprint/reset";
 
@@ -30,11 +32,57 @@ body.bp {
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 100;
+
+  #fork-me {
+    left: -65px;
+    height: 30px;
+    top: 40px;
+    position: absolute;
+    text-decoration: none;
+    width: 250px;
+    @include rotate(-45deg);
+
+    span {
+      background: black;
+      color: white;
+      font-size: 14px;
+      left: 0;
+      padding: 5px 0;
+      position: absolute;
+      text-align: center;
+      width: 250px;
+      @include box-shadow(rgba(black, 0.2) 1px 1px 10px);
+      @include transition(opacity, 1s);
+
+      &:last-child {
+        background: red;
+        opacity: 0;
+      }
+    }
+
+    &:hover span {
+      &:first-child {
+        opacity: 0;
+      }
+
+      &:last-child {
+        opacity: 1;
+      }
+    }
+  }
+
   #container {
     @include container;
 
-    font: {
-      family: "Helvetic Neue", Helvetica, Arial, sans-serif;
+    a {
+      color: $orange;
+      @include transition(color, 0.5s);
+
+      &:hover {
+        color: $link-color;
+      }
     }
 
     h1, h2, h3 {
@@ -46,6 +94,7 @@ body.bp {
 
     h2 {
       font-size: 2.5em;
+      margin-bottom: 10px;
     }
 
     #header {
@@ -71,6 +120,13 @@ body.bp {
 
     #main {
       @include column(17);
+
+      p {
+        font: {
+          size: 1.3em;
+          weight: 100;
+        }
+      }
     }
 
     #sidebar {
@@ -79,6 +135,29 @@ body.bp {
       #downloads {
         list-style: none;
         font-size: 1.2em;
+        padding-left: 20px;
+
+        .download-link {
+          padding: {
+            top: 2px;
+            left: 30px;
+          }
+          height: 24px;
+          display: block;
+
+          &.crx-file {
+            background: url(../img/chrome.png) top left no-repeat;
+          }
+
+          &.zipball {
+            background: url(../img/zip.png) top left no-repeat;
+          }
+
+          &.github {
+            background: url(../img/github.png) top left no-repeat;
+          }
+        }
+
       }
 
       .unavailable {
@@ -114,5 +193,6 @@ body.two-col {
     $content-columns: ceil(2 * $blueprint-grid-columns / 3);
     // true means it's the last column in the row
     @include column($content-columns, true); } }
+
 
 // vim: set ts=2 sw=2 expandtab :
