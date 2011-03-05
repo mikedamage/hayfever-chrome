@@ -141,7 +141,7 @@ body.bp .top { margin-top: 0; padding-top: 0; }
 /* line 35, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .bottom { margin-bottom: 0; padding-bottom: 0; }
 /* line 8, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_debug.scss */
-body.bp .showgrid { background: url('/img/grid.png?1299252104'); }
+body.bp .showgrid { background: url('/img/grid.png?1299284436'); }
 /* line 4, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
 body.bp .error { padding: 0.8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
 /* line 29, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
@@ -163,11 +163,15 @@ body.bp .added { background: #006600; color: white; }
 /* line 16, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
 body.bp .removed { background: #990000; color: white; }
 /* line 33, ../_sass/screen.scss */
-body.bp #container { width: 950px; margin: 0 auto; overflow: hidden; *zoom: 1; }
-/* line 37, ../_sass/screen.scss */
-body.bp #container #header h1#logo { background: url("../img/Hayfever_logo.png") top left no-repeat; width: 302px; height: 232px; text-indent: -9999px; margin-right: auto; margin-left: auto; }
-/* line 45, ../_sass/screen.scss */
-body.bp #container #header p.tagline { text-align: center; }
+body.bp #container { width: 950px; margin: 0 auto; overflow: hidden; *zoom: 1; font-family: "Helvetic Neue", Helvetica, Arial, sans-serif; }
+/* line 40, ../_sass/screen.scss */
+body.bp #container h1, body.bp #container h2, body.bp #container h3 { font-weight: 100; }
+/* line 47, ../_sass/screen.scss */
+body.bp #container #header h1#logo { background: url("../img/Hayfever_logo.png") top left no-repeat; width: 302px; height: 232px; text-indent: -9999px; margin-right: auto; margin-left: auto; margin-bottom: 0; }
+/* line 56, ../_sass/screen.scss */
+body.bp #container #header p.tagline { text-align: center; font-size: 36px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 100; color: #f26522; }
+/* line 67, ../_sass/screen.scss */
+body.bp #container #footer { font-size: 12px; }
 
 /* line 18, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
 form.bp label { font-weight: bold; }
@@ -196,17 +200,17 @@ form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp inpu
 /* line 50, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
 form.bp textarea { width: 390px; height: 250px; }
 
-/* line 57, ../_sass/screen.scss */
+/* line 79, ../_sass/screen.scss */
 body.two-col #container { width: 950px; margin: 0 auto; overflow: hidden; *zoom: 1; }
-/* line 59, ../_sass/screen.scss */
+/* line 81, ../_sass/screen.scss */
 body.two-col #header, body.two-col #footer { display: inline; float: left; margin-right: 10px; width: 950px; }
 /* line 138, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #header, * html body.two-col #footer { overflow-x: hidden; }
-/* line 61, ../_sass/screen.scss */
+/* line 83, ../_sass/screen.scss */
 body.two-col #sidebar { display: inline; float: left; margin-right: 10px; width: 310px; }
 /* line 138, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #sidebar { overflow-x: hidden; }
-/* line 65, ../_sass/screen.scss */
+/* line 87, ../_sass/screen.scss */
 body.two-col #content { display: inline; float: left; margin-right: 0; width: 630px; }
 /* line 138, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #content { overflow-x: hidden; }

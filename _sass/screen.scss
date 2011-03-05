@@ -33,19 +33,41 @@ body.bp {
   #container {
     @include container;
 
+    font: {
+      family: "Helvetic Neue", Helvetica, Arial, sans-serif;
+    }
+
+    h1, h2, h3 {
+      font: {
+        weight: 100;
+      }
+    }
+
     #header {
       h1#logo {
         @include replace-text('../img/Hayfever_logo.png', 302px, 232px);
         margin: {
           right: auto;
           left: auto;
+          bottom: 0;
         }
       }
 
       p.tagline {
         text-align: center;
+        font: {
+          size: 36px;
+          family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          weight: 100;
+        }
+        color: $orange;
       }
     }
+
+    #footer {
+      font-size: 12px;
+    }
+
   }
 }
 
