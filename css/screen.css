@@ -141,7 +141,7 @@ body.bp .top { margin-top: 0; padding-top: 0; }
 /* line 35, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .bottom { margin-bottom: 0; padding-bottom: 0; }
 /* line 8, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_debug.scss */
-body.bp .showgrid { background: url('/img/grid.png?1299356688'); }
+body.bp .showgrid { background: url('/img/grid.png?1299399572'); }
 /* line 4, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
 body.bp .error { padding: 0.8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
 /* line 29, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
@@ -167,7 +167,7 @@ body.bp #fork-me { left: -65px; height: 30px; top: 40px; position: absolute; tex
 /* line 47, ../_sass/screen.scss */
 body.bp #fork-me span { background: black; color: white; font-size: 14px; left: 0; padding: 5px 0; position: absolute; text-align: center; width: 250px; -moz-box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 10px 1px 1px 5px 0; -webkit-box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 10px 1px 1px 5px 0; -o-box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 10px 1px 1px 5px 0; box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 10px 1px 1px 5px 0; -moz-transition-property: opacity; -webkit-transition-property: opacity; -o-transition-property: opacity; transition-property: opacity; -moz-transition-duration: 1s; -webkit-transition-duration: 1s; -o-transition-duration: 1s; transition-duration: 1s; }
 /* line 59, ../_sass/screen.scss */
-body.bp #fork-me span:last-child { background: red; opacity: 0; }
+body.bp #fork-me span:last-child { background: #f26522; opacity: 0; }
 /* line 66, ../_sass/screen.scss */
 body.bp #fork-me:hover span:first-child { opacity: 0; }
 /* line 70, ../_sass/screen.scss */
