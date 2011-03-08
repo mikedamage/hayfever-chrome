@@ -199,38 +199,42 @@ body.bp #container #header .subscribe input.placeholder { color: #999; }
 /* line 162, ../_sass/screen.scss */
 body.bp #container #header .subscribe input:hover { -moz-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 8px 0; -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 8px 0; -o-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 8px 0; box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 8px 0; }
 /* line 167, ../_sass/screen.scss */
-body.bp #container #header .subscribe button { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f58752), color-stop(100%, #d44d0d)); background-image: -moz-linear-gradient(top, #f58752 0%, #d44d0d 100%); background-image: linear-gradient(top, #f58752 0%, #d44d0d 100%); -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 1px; -moz-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; -o-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; border: none; color: white; font-weight: bold; font-weight: bold; font-size: 15px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; cursor: pointer; text-align: center; padding: 7px; margin-bottom: 1px; }
-/* line 188, ../_sass/screen.scss */
+body.bp #container #header .subscribe button { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f58752), color-stop(100%, #d44d0d)); background-image: -moz-linear-gradient(top, #f58752 0%, #d44d0d 100%); background-image: linear-gradient(top, #f58752 0%, #d44d0d 100%); -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 1px; -moz-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; -o-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; -moz-transition-property: all; -webkit-transition-property: all; -o-transition-property: all; transition-property: all; -moz-transition-duration: 200ms; -webkit-transition-duration: 200ms; -o-transition-duration: 200ms; transition-duration: 200ms; -moz-transition-timing-function: ease-in; -webkit-transition-timing-function: ease-in; -o-transition-timing-function: ease-in; transition-timing-function: ease-in; -moz-transition-delay: 50ms; -webkit-transition-delay: 50ms; -o-transition-delay: 50ms; transition-delay: 50ms; border: none; color: white; font-weight: bold; font-weight: bold; font-size: 15px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; cursor: pointer; text-align: center; padding: 7px; margin-bottom: 1px; }
+/* line 186, ../_sass/screen.scss */
+body.bp #container #header .subscribe button:hover { -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0; -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0; -o-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0; box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f6976a), color-stop(100%, #f26522)); background-image: -moz-linear-gradient(top, #f6976a 0%, #f26522 100%); background-image: linear-gradient(top, #f6976a 0%, #f26522 100%); }
+/* line 191, ../_sass/screen.scss */
+body.bp #container #header .subscribe button:active { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f26522), color-stop(100%, #f58752)); background-image: -moz-linear-gradient(top, #f26522 0%, #f58752 100%); background-image: linear-gradient(top, #f26522 0%, #f58752 100%); }
+/* line 198, ../_sass/screen.scss */
 body.bp #container #main { display: inline; float: left; margin-right: 10px; width: 670px; }
 /* line 138, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.bp #container #main { overflow-x: hidden; }
-/* line 191, ../_sass/screen.scss */
+/* line 201, ../_sass/screen.scss */
 body.bp #container #main p { font-size: 1.3em; font-weight: 100; }
-/* line 198, ../_sass/screen.scss */
+/* line 208, ../_sass/screen.scss */
 body.bp #container #main .screenshots { list-style: none; padding-left: 0; }
-/* line 205, ../_sass/screen.scss */
+/* line 215, ../_sass/screen.scss */
 body.bp #container #sidebar { display: inline; float: left; margin-right: 0; width: 270px; }
 /* line 138, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.bp #container #sidebar { overflow-x: hidden; }
-/* line 208, ../_sass/screen.scss */
+/* line 218, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads { list-style: none; font-size: 1.2em; padding-left: 20px; }
-/* line 213, ../_sass/screen.scss */
+/* line 223, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads .download-link { padding-top: 2px; padding-left: 30px; height: 24px; display: block; }
-/* line 221, ../_sass/screen.scss */
+/* line 231, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads .download-link.crx-file { background: url(../img/chrome.png) top left no-repeat; }
-/* line 225, ../_sass/screen.scss */
+/* line 235, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads .download-link.zipball { background: url(../img/zip.png) top left no-repeat; }
-/* line 229, ../_sass/screen.scss */
+/* line 239, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads .download-link.github { background: url(../img/github.png) top left no-repeat; }
-/* line 236, ../_sass/screen.scss */
+/* line 246, ../_sass/screen.scss */
 body.bp #container #sidebar .unavailable { color: #888888; text-decoration: line-through; }
-/* line 241, ../_sass/screen.scss */
+/* line 251, ../_sass/screen.scss */
 body.bp #container #sidebar #github-feed { list-style: none; padding-left: 20px; }
-/* line 245, ../_sass/screen.scss */
-body.bp #container #sidebar #github-feed li { margin-bottom: 10px; }
-/* line 248, ../_sass/screen.scss */
-body.bp #container #sidebar #github-feed li.more { text-align: right; }
 /* line 255, ../_sass/screen.scss */
+body.bp #container #sidebar #github-feed li { margin-bottom: 10px; }
+/* line 258, ../_sass/screen.scss */
+body.bp #container #sidebar #github-feed li.more { text-align: right; }
+/* line 265, ../_sass/screen.scss */
 body.bp #container #footer { display: inline; float: left; margin-right: 10px; width: 950px; font-size: 1em; }
 /* line 138, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.bp #container #footer { overflow-x: hidden; }
@@ -262,17 +266,17 @@ form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp inpu
 /* line 50, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
 form.bp textarea { width: 390px; height: 250px; }
 
-/* line 268, ../_sass/screen.scss */
+/* line 278, ../_sass/screen.scss */
 body.two-col #container { width: 950px; margin: 0 auto; overflow: hidden; *zoom: 1; }
-/* line 270, ../_sass/screen.scss */
+/* line 280, ../_sass/screen.scss */
 body.two-col #header, body.two-col #footer { display: inline; float: left; margin-right: 10px; width: 950px; }
 /* line 138, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #header, * html body.two-col #footer { overflow-x: hidden; }
-/* line 272, ../_sass/screen.scss */
+/* line 282, ../_sass/screen.scss */
 body.two-col #sidebar { display: inline; float: left; margin-right: 10px; width: 310px; }
 /* line 138, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #sidebar { overflow-x: hidden; }
-/* line 276, ../_sass/screen.scss */
+/* line 286, ../_sass/screen.scss */
 body.two-col #content { display: inline; float: left; margin-right: 0; width: 630px; }
 /* line 138, ../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #content { overflow-x: hidden; }
