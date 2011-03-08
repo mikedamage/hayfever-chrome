@@ -74,6 +74,29 @@ $(document).ready(function() {
 		});
 	}
 
+	/**
+ 	 * Detect the #subscribed hash URI and record user subscription status in localStorage.
+	 */
+	if (window.location.hash && window.location.hash == '#subscribed') {
+		var $thanks = $('#tmpl-thanks').html();
+		$('#subscribe-form').fadeOut(400, function() {
+			$('.subscribe').append($thanks);
+		});
+	} else if (window.location.href.match(/\#subscribed$/)){
+		var $thanks = $('#tmpl-thanks').html();
+		$('#subscribe-form').fadeOut(400, function() {
+			$('.subscribe').append($thanks);
+		});
+	}
+
+	$('.reset-form').live('click', function() {
+		$('.thanks').fadeOut(400, function() {
+			$(this).remove();
+			$('#subscribe-form').fadeIn(400);
+		});
+		return false;
+	});
+
 
 }); 
 
