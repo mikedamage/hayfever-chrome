@@ -47,6 +47,7 @@ $(document).ready(function() {
 				name: $oldEmail.attr('name')
 				, type: 'text'
 				, id: $oldEmail.attr('id')
+				, placeholder: 'Email'
 			});
 		$oldEmail.after($newEmail);
 		$oldEmail.remove();
@@ -57,17 +58,17 @@ $(document).ready(function() {
 			//$(this).before($('<label/>', {'for': $(this).attr('id'), 'text': $(this).attr('placeholder')}));
 			var placeholder = $(this).attr('placeholder');
 
-			$(this).val(placeholder);
+			$(this).val(placeholder).addClass('placeholder');
 
 			$(this).focus(function() {
 				var value = $(this).val();
 				if (value == placeholder) {
-					$(this).val('');
+					$(this).val('').removeClass('placeholder');
 				}
 			}).blur(function() {
 				var value = $(this).val();
 				if (value == '') {
-					$(this).val(placeholder);
+					$(this).val(placeholder).addClass('placeholder');
 				}
 			});
 		});
