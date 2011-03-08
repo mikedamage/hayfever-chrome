@@ -37,6 +37,43 @@ $(document).ready(function() {
 		}
 	});
 
+	/**
+ 	 * Subscribe Form Placeholders and HTML5 Inputs
+	 * Regressive Enhancement - Most visitors use Chrome, but we'll downgrade the form if they don't.
+	 */
+	if (!Modernizr.inputtypes.email) {
+		var $oldEmail = $('#subscribe-email')
+			, $newEmail = $('<input/>', {
+				name: $oldEmail.attr('name')
+				, type: 'text'
+				, id: $oldEmail.attr('id')
+			});
+		$oldEmail.after($newEmail);
+		$oldEmail.remove();
+	}
+
+	if (!Modernizr.input.placeholder) {
+		$('#subscribe-form input[type!="hidden"]').each(function() {
+			//$(this).before($('<label/>', {'for': $(this).attr('id'), 'text': $(this).attr('placeholder')}));
+			var placeholder = $(this).attr('placeholder');
+
+			$(this).val(placeholder);
+
+			$(this).focus(function() {
+				var value = $(this).val();
+				if (value == placeholder) {
+					$(this).val('');
+				}
+			}).blur(function() {
+				var value = $(this).val();
+				if (value == '') {
+					$(this).val(placeholder);
+				}
+			});
+		});
+	}
+
+
 }); 
 
 // vim: set ts=2 sw=2 syntax=jquery :
