@@ -66,15 +66,25 @@ fieldset {
 
 input {
   &[type="text"], &[type="password"] {
+		@include linear-gradient(color-stops(white, #f7f7f7 10%, white), top);
+		@include box-shadow($ultralight-shadow, 0, 0, 8px);
+		@include border-radius(5px);
+		-webkit-transition: all 200ms ease-in 50ms;
     width: 300px;
     padding: 5px;
-    border: 1px solid #ccc;
-    -webkit-border-radius: 8px; } }
+		border: 1px solid $light-gray;
+		color: $dark-gray;
+
+		&:hover {
+			@include box-shadow($medium-shadow, 0, 0, 8px);
+		}
+	} 
+}
 
 button {
 	@include simple-gradient-vert($button-top, $button-bottom);
-	-webkit-border-radius: 5px;
-	-webkit-box-shadow: $light-shadow 0 1px 3px 0;
+	@include border-radius(5px);
+	@include box-shadow($light-shadow, 0, 1px, 3px);
 	-webkit-transition: all 200ms ease-in 50ms;
 	text-shadow: $light-shadow 0 -1px 1px;
 	color: white;

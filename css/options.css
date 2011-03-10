@@ -80,17 +80,46 @@ fieldset p span.hint {
 
 /* line 68, ../sass/options.scss */
 input[type="text"], input[type="password"] {
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ffffff), color-stop(10%, #f7f7f7), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #f7f7f7 10%, #ffffff 100%);
+  background-image: linear-gradient(top, #ffffff 0%, #f7f7f7 10%, #ffffff 100%);
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px 0;
+  -o-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px 0;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px 0;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-transition: all 200ms ease-in 50ms;
   width: 300px;
   padding: 5px;
-  border: 1px solid #ccc;
-  -webkit-border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  color: #4d4d4d;
+}
+/* line 78, ../sass/options.scss */
+input[type="text"]:hover, input[type="password"]:hover {
+  -moz-box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px 0;
+  -o-box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px 0;
 }
 
-/* line 74, ../sass/options.scss */
+/* line 84, ../sass/options.scss */
 button {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f58752), to(#d44d0d));
+  -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 3px 0;
   -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 3px 0;
+  -o-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 3px 0;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 1px 3px 0;
   -webkit-transition: all 200ms ease-in 50ms;
   text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 1px;
   color: white;
@@ -102,17 +131,17 @@ button {
   padding: 7px;
   border: none;
 }
-/* line 91, ../sass/options.scss */
+/* line 101, ../sass/options.scss */
 button:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 1px 3px 0;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f6976a), to(#f26522));
 }
-/* line 96, ../sass/options.scss */
+/* line 106, ../sass/options.scss */
 button:active {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f26522), to(#f6976a));
 }
 
-/* line 101, ../sass/options.scss */
+/* line 111, ../sass/options.scss */
 p.info {
   font-size: 11px;
   font-style: italic;
