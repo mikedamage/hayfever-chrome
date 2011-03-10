@@ -4,7 +4,7 @@
  *
  * Plagiarized from Skeet's options page styles (https://github.com/presently/skeet)
  */
-/* line 8, ../sass/options.scss */
+/* line 12, ../sass/options.scss */
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1em;
@@ -12,12 +12,12 @@ body {
   color: #4d4d4d;
 }
 
-/* line 14, ../sass/options.scss */
+/* line 18, ../sass/options.scss */
 #header {
   padding-bottom: 2.5em;
   padding-top: 1.5em;
 }
-/* line 17, ../sass/options.scss */
+/* line 21, ../sass/options.scss */
 #header h1 {
   font-size: 1.8em;
   display: inline;
@@ -30,14 +30,14 @@ body {
   letter-spacing: -1px;
 }
 
-/* line 28, ../sass/options.scss */
+/* line 32, ../sass/options.scss */
 #footer {
   float: left;
   margin-left: 24px;
   margin-top: 12px;
 }
 
-/* line 33, ../sass/options.scss */
+/* line 37, ../sass/options.scss */
 .gc-settings-content {
   margin: 15px 6px 0 6px;
   padding: 10px;
@@ -46,7 +46,7 @@ body {
   -webkit-border-radius: 5px 5px;
 }
 
-/* line 40, ../sass/options.scss */
+/* line 44, ../sass/options.scss */
 #status {
   display: none;
   width: 70%;
@@ -54,29 +54,31 @@ body {
   margin: 10px auto;
   padding: 10px;
 }
-/* line 46, ../sass/options.scss */
+/* line 50, ../sass/options.scss */
 #status.success {
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0.61, #ddffdd), color-stop(0.14, #c1e4c1));
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ddffdd), color-stop(100%, #c1e4c1));
+  background-image: -moz-linear-gradient(top, #ddffdd 0%, #c1e4c1 100%);
+  background-image: linear-gradient(top, #ddffdd 0%, #c1e4c1 100%);
   border: 1px solid #9C6;
   color: #4d4d4d;
-  -webkit-border-radius: 12px 20px;
+  -webkit-border-radius: 5px;
   /* capsule shaped edges if the div is short enough */
 }
 
-/* line 53, ../sass/options.scss */
+/* line 58, ../sass/options.scss */
 fieldset {
   border: 1px #ccc solid;
   -webkit-border-radius: 8px;
   margin-bottom: 20px;
 }
-/* line 57, ../sass/options.scss */
+/* line 62, ../sass/options.scss */
 fieldset p span.hint {
   font-size: 11px;
   display: block;
   font-style: italic;
 }
 
-/* line 63, ../sass/options.scss */
+/* line 68, ../sass/options.scss */
 input[type="text"], input[type="password"] {
   width: 300px;
   padding: 5px;
@@ -84,7 +86,7 @@ input[type="text"], input[type="password"] {
   -webkit-border-radius: 8px;
 }
 
-/* line 69, ../sass/options.scss */
+/* line 74, ../sass/options.scss */
 p.info {
   font-size: 11px;
   font-style: italic;

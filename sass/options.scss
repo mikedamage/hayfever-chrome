@@ -5,6 +5,10 @@
  * Plagiarized from Skeet's options page styles (https://github.com/presently/skeet)
  */
 
+@import "compass";
+@import "partials/base";
+@import "partials/mixins";
+
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1em;
@@ -44,10 +48,11 @@ body {
   margin: 10px auto;
   padding: 10px;
   &.success {
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0.61, #ddffdd), color-stop(0.14, #c1e4c1));
+    //background: -webkit-gradient(linear, left bottom, left top, color-stop(0.61, #ddffdd), color-stop(0.14, #c1e4c1));
+    @include linear-gradient(color-stops(#ddffdd, #c1e4c1), top);
     border: 1px solid #9C6;
     color: #4d4d4d;
-    -webkit-border-radius: 12px 20px;
+    -webkit-border-radius: 5px;
     /* capsule shaped edges if the div is short enough */ } }
 
 fieldset {
