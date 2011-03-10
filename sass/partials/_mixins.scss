@@ -1,0 +1,6 @@
+// Hayfever for Chrome
+// Sass Mixins File
+
+@mixin simple-gradient-vert($top-color, $bottom-color) {
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($top-color), to($bottom-color));
+}

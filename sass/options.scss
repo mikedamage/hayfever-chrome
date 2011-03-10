@@ -49,7 +49,7 @@ body {
   padding: 10px;
   &.success {
     //background: -webkit-gradient(linear, left bottom, left top, color-stop(0.61, #ddffdd), color-stop(0.14, #c1e4c1));
-    @include linear-gradient(color-stops(#ddffdd, #c1e4c1), top);
+    @include linear-gradient(color-stops($success-green, #c1e4c1), top);
     border: 1px solid #9C6;
     color: #4d4d4d;
     -webkit-border-radius: 5px;
@@ -70,6 +70,33 @@ input {
     padding: 5px;
     border: 1px solid #ccc;
     -webkit-border-radius: 8px; } }
+
+button {
+	@include simple-gradient-vert($button-top, $button-bottom);
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: $light-shadow 0 1px 3px 0;
+	-webkit-transition: all 200ms ease-in 50ms;
+	text-shadow: $light-shadow 0 -1px 1px;
+	color: white;
+	cursor: pointer;
+	font: {
+		size: 14px;
+		weight: bold;
+		family: Helvetica, Arial, sans-serif;
+	}
+	text-align: center;
+	padding: 7px;
+	border: none;
+
+	&:hover {
+		-webkit-box-shadow: $dark-shadow 0 1px 3px 0;
+		@include simple-gradient-vert($button-hover-top, $orange);
+	}
+
+	&:active {
+		@include simple-gradient-vert($orange, $button-hover-top);
+	}
+}
 
 p.info {
   font-size: 11px;
