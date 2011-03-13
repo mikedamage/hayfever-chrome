@@ -9,6 +9,7 @@
 		"default_icon": "icon.png",
 		"popup": "popup.html"
 	},
+	"omnibox": { "keyword": "hayfever" },
 	"icons": {
 		"48": "app_icon_48.png",
 		"64": "app_icon_64.png",
