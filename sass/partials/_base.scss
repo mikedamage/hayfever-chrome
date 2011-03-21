@@ -1,0 +1,18 @@
+// Hayfever for Chrome
+// Sass Variables and Configuration Stylesheet
+
+// Colors
+$orange: #F26522;
+$success-green: #ddffdd;
+$light-gray: #e5e5e5;
+$dark-gray: #4d4d4d;
+
+$ultralight-shadow: rgba(0, 0, 0, 0.1);
+$light-shadow: rgba(0, 0, 0, 0.25);
+$medium-shadow: rgba(0, 0, 0, 0.35);
+$dark-shadow: rgba(0, 0, 0, 0.5);
+
+// Derivitive Colors
+$button-top: lighten($orange, 10%);
+$button-bottom: darken($orange, 10%);
+$button-hover-top: lighten($orange, 15%);

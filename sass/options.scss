@@ -1,0 +1,113 @@
+/*
+ * Hayfever for Harvest
+ * Options Page Stylesheet
+ *
+ * Plagiarized from Skeet's options page styles (https://github.com/presently/skeet)
+ */
+
+@import "compass";
+@import "partials/base";
+@import "partials/mixins";
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  margin: 10px;
+  color: #4d4d4d; }
+
+#header {
+  padding-bottom: 2.5em;
+  padding-top: 1.5em;
+  h1 {
+    font-size: 1.8em;
+    display: inline;
+    padding-bottom: 43px;
+    padding-left: 75px;
+    padding-top: 34px;
+    background: url(../app_icon_64.png) no-repeat;
+    background-size: 64px;
+    background-position: 1px 18px;
+    letter-spacing: -1px; } }
+
+#footer {
+  float: left;
+  margin-left: 24px;
+  margin-top: 12px; }
+
+.gc-settings-content {
+  margin: 15px 6px 0 6px;
+  padding: 10px;
+  color: #333;
+  border: 1px solid #dedede;
+  -webkit-border-radius: 5px 5px; }
+
+#status {
+  display: none;
+  width: 70%;
+  text-align: center;
+  margin: 10px auto;
+  padding: 10px;
+  &.success {
+    //background: -webkit-gradient(linear, left bottom, left top, color-stop(0.61, #ddffdd), color-stop(0.14, #c1e4c1));
+    @include linear-gradient(color-stops($success-green, #c1e4c1), top);
+    border: 1px solid #9C6;
+    color: #4d4d4d;
+    -webkit-border-radius: 5px;
+    /* capsule shaped edges if the div is short enough */ } }
+
+fieldset {
+  border: 1px #ccc solid;
+  -webkit-border-radius: 8px;
+  margin-bottom: 20px;
+  p span.hint {
+    font-size: 11px;
+    display: block;
+    font-style: italic; } }
+
+input {
+  &[type="text"], &[type="password"] {
+		@include linear-gradient(color-stops(white, #f7f7f7 10%, white), top);
+		@include box-shadow($ultralight-shadow, 0, 0, 8px);
+		@include border-radius(5px);
+		-webkit-transition: all 200ms ease-in 50ms;
+    width: 300px;
+    padding: 5px;
+		border: 1px solid $light-gray;
+		color: $dark-gray;
+
+		&:hover {
+			@include box-shadow($medium-shadow, 0, 0, 8px);
+		}
+	} 
+}
+
+button {
+	@include simple-gradient-vert($button-top, $button-bottom);
+	@include border-radius(5px);
+	@include box-shadow($light-shadow, 0, 1px, 3px);
+	-webkit-transition: all 200ms ease-in 50ms;
+	text-shadow: $light-shadow 0 -1px 1px;
+	color: white;
+	cursor: pointer;
+	font: {
+		size: 14px;
+		weight: bold;
+		family: Helvetica, Arial, sans-serif;
+	}
+	text-align: center;
+	padding: 7px;
+	border: none;
+
+	&:hover {
+		-webkit-box-shadow: $dark-shadow 0 1px 3px 0;
+		@include simple-gradient-vert($button-hover-top, $orange);
+	}
+
+	&:active {
+		@include simple-gradient-vert($orange, $button-hover-top);
+	}
+}
+
+p.info {
+  font-size: 11px;
+  font-style: italic; }
