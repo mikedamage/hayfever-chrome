@@ -2,19 +2,8 @@
  * Harvest API Interface
  * by Mike Green
  *
- * MIT License
+ * GNU GPL v3
  */
-
-// Harvest needs the day of the year for daily timesheet fetching
-Date.prototype.getDOY = function() {
-	var janOne = new Date(this.getFullYear(), 0, 1);
-	return Math.ceil((this - janOne) / 86400000);
-};
-
-Date.prototype.toHarvestString = function() {
-	var arr = this.toDateString().split(' ');
-	return arr[0] + ', ' + arr[2] + ' ' + arr[1] + ' ' + arr[3];
-};
 
 /**
  * Harvest API Class

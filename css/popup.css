@@ -157,25 +157,24 @@ ul.toolbar li {
 #stats .stat-clock {
   width: 50%;
   float: left;
-  display: none;
 }
-/* line 116, ../sass/popup.scss */
+/* line 115, ../sass/popup.scss */
 #stats .stat-clock p {
   font-weight: bold;
   font-size: 30px;
   margin: 10px 0;
   margin-bottom: 0;
 }
-/* line 125, ../sass/popup.scss */
+/* line 124, ../sass/popup.scss */
 #stats .stat-clock span.stat-caption {
   font-size: 11px;
 }
-/* line 129, ../sass/popup.scss */
+/* line 128, ../sass/popup.scss */
 #stats .stat-clock#current-hours-stat {
   text-align: right;
 }
 
-/* line 136, ../sass/popup.scss */
+/* line 135, ../sass/popup.scss */
 #form-overlay {
   display: none;
   position: absolute;
@@ -186,7 +185,7 @@ ul.toolbar li {
   background: rgba(0, 0, 0, 0.55);
 }
 
-/* line 145, ../sass/popup.scss */
+/* line 144, ../sass/popup.scss */
 #entry-form {
   font-size: 12px;
   -webkit-border-radius: 8px;
@@ -195,32 +194,32 @@ ul.toolbar li {
   margin: 0 auto;
   padding: 0 5px 10px 10px;
 }
-/* line 152, ../sass/popup.scss */
+/* line 151, ../sass/popup.scss */
 #entry-form h2 {
   font-size: 20px;
   padding-top: 5px;
 }
-/* line 155, ../sass/popup.scss */
+/* line 154, ../sass/popup.scss */
 #entry-form a.cancel {
   /* TODO: Display block, background image of an X */
 }
-/* line 157, ../sass/popup.scss */
+/* line 156, ../sass/popup.scss */
 #entry-form label {
   float: left;
   display: block;
   width: 65px;
   font-size: 14px;
 }
-/* line 162, ../sass/popup.scss */
+/* line 161, ../sass/popup.scss */
 #entry-form label.checkbox {
   float: right;
   width: 216px;
 }
-/* line 165, ../sass/popup.scss */
+/* line 164, ../sass/popup.scss */
 #entry-form select {
   width: 205px;
 }
-/* line 167, ../sass/popup.scss */
+/* line 166, ../sass/popup.scss */
 #entry-form input[type='text'], #entry-form textarea {
   border: 1px solid #e5e5e5;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -230,16 +229,16 @@ ul.toolbar li {
   background: -webkit-gradient(linear, left top, left 25, from(white), color-stop(10%, #f7f7f7), to(white));
   -webkit-transition: all 200ms ease-in 50ms;
 }
-/* line 175, ../sass/popup.scss */
+/* line 174, ../sass/popup.scss */
 #entry-form input[type='text']:hover, #entry-form textarea:hover, #entry-form input[type='text']:focus, #entry-form textarea:focus {
   -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 8px;
 }
-/* line 177, ../sass/popup.scss */
+/* line 176, ../sass/popup.scss */
 #entry-form input[type='text'] {
   font-size: 14px;
   font-weight: bold;
 }
-/* line 180, ../sass/popup.scss */
+/* line 179, ../sass/popup.scss */
 #entry-form textarea {
   font-size: 12px;
   height: 60px;

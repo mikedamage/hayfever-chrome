@@ -5,35 +5,6 @@
  * by Mike Green
  */
 
-/**
- * Convert string to slug
- */
-String.prototype.toSlug = function() {
-	var slug = this.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, '_');
-	return slug;
-};
-
-/**
- * Convert decimal time to clock time (sexagesimal)
- */
-Number.prototype.toClockTime = function() {
-	if (this == 0) {
-		return '0:00';
-	}
-	var stringVal = this.toFixed(2)
-		, decimalSplit = stringVal.split('.')
-		, hours = parseInt(decimalSplit[0], 10)
-		, minutes = parseFloat('0.' + decimalSplit[1]);
-	
-	minutes = parseInt((minutes * 60), 10);
-
-	if (minutes < 10) {
-		return hours + ':0' + minutes;
-	} else {
-		return hours + ':' + minutes;
-	}
-};
-
 (function($) {
 	$.hexPairToDecimal = function(hex) {
 		return parseInt(hex, 16);

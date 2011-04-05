@@ -6,29 +6,6 @@
  */
 
 /**
- * String prototype method, convert string to slug
- */
-String.prototype.toSlug = function() {
-	var slug = this.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, '_');
-	return slug;
-};
-
-/**
- * Date prototype method: format the date so Harvest can understand it
- */
-Date.prototype.toHarvestString = function() {
-	var arr = this.toDateString().split(' ');
-	return arr[0] + ', ' + arr[2] + ' ' + arr[1] + ' ' + arr[3];
-};
-
-/**
- * Array prototype method: any (like Ruby's Array#any? method)
- */
-Array.prototype.any = function() {
-	return this.length > 0;
-};
-
-/**
  * jQuery Extension Functions
  */
 ;(function() {
@@ -76,6 +53,12 @@ Array.prototype.any = function() {
 		if (remote === true) { app.refreshHours(); }
 		$timesheet.find('tr').remove();
 		$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
+
+		// Set big clocks in footer
+		var totalHoursTime = app.totalHours.toClockTime()
+			, currentHoursTime = app.currentHours.toClockTime();
+		$('#total-hours-time').text(totalHoursTime);
+		$('#current-hours-time').text(currentHoursTime);
 	};
 
 	$.fn.refreshTimesheetOn = function(evt, bg) {
