@@ -11,6 +11,11 @@ Date.prototype.getDOY = function() {
 	return Math.ceil((this - janOne) / 86400000);
 };
 
+Date.prototype.toHarvestString = function() {
+	var arr = this.toDateString().split(' ');
+	return arr[0] + ', ' + arr[2] + ' ' + arr[1] + ' ' + arr[3];
+};
+
 /**
  * Harvest API Class
  */
@@ -102,11 +107,10 @@ function Harvest(subdomain, authString) {
 	 * for a given day.
 	 *
 	 * @param {Date} date
-	 * @param {Function} callback
 	 * @param {Boolean} async
 	 * @returns {jqXHR}
 	 */
-	this.getDay = function(date, callback, async) {
+	this.getDay = function(date, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var dayURL = (date == 'today') ? root.buildURL('daily') : root.buildURL('daily', date.getDOY(), date.getFullYear());
 		var request = $.ajax({
@@ -115,31 +119,28 @@ function Harvest(subdomain, authString) {
 			, async: async
 		});
 
-		request.complete(callback); // Support legacy API
 		return request; // Return promise object
 	};
 
 	/**
 	 * Convenience method for getting today's entries
 	 *
-	 * @param {Function} callback
 	 * @param {Boolean} async
 	 * @returns {jqXHR}
 	 */
-	this.getToday = function(callback, async) {
+	this.getToday = function(async) {
 		async = (typeof async == 'undefined') ? true : async;
-		return root.getDay('today', callback, async);
+		return root.getDay('today', async);
 	};
 	
 	/**
 	 * Get an individual timer by ID
 	 *
 	 * @param {Number} eid
-	 * @param {Function} callback
 	 * @param {Boolean} async
 	 * @returns {jqXHR}
 	 */
-	this.getEntry = function(eid, callback, async) {
+	this.getEntry = function(eid, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'show', eid);
 		var request = $.ajax({
@@ -148,7 +149,6 @@ function Harvest(subdomain, authString) {
 			, async: async
 		});
 
-		request.complete(callback);
 		return request;
 	};
 
@@ -156,13 +156,11 @@ function Harvest(subdomain, authString) {
 	 * Toggle a single timer on/off
 	 *
 	 * @param {Number} eid
-	 * @param {Function} callback
 	 * @param {Boolean} async
 	 * @returns {jqXHR}
 	 */
-	this.toggleTimer = function(eid, callback, async) {
+	this.toggleTimer = function(eid, async) {
 		async = (typeof async == 'undefined') ? true : async;
-		callback = (typeof callback == 'undefined') ? function() {} : callback;
 		var url = root.buildURL('daily', 'timer', String(eid));
 		var request = $.ajax({
 			url: url
@@ -170,12 +168,24 @@ function Harvest(subdomain, authString) {
 			, async: async
 		});	
 
-		request.complete(callback);
 		return request;
 	};
 	
-	// Create a new entry, optionally starting its timer upon creation
-	this.addEntry = function(props, callback, async) {
+	/**
+	 * Create a new entry, optionally starting its timer upon creation
+	 *
+	 * @param {Object} props
+	 * @param {Boolean} async
+	 * @returns {jqXHR}
+	 *
+	 * Expected properties:
+	 *   - notes
+	 *   - hours
+	 *   - project_id
+	 *   - task_id
+	 *   - spent_at
+	 */
+	this.addEntry = function(props, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'add')
 			, json = JSON.stringify(props);
@@ -187,12 +197,11 @@ function Harvest(subdomain, authString) {
 			, data: json
 		});
 
-		request.complete(callback);
 		return request;
 	};
 
 	// Delete an entry
-	this.deleteEntry = function(eid, callback, async) {
+	this.deleteEntry = function(eid, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url = root.buildURL('daily', 'delete', eid);
 		var request = $.ajax({
@@ -200,11 +209,10 @@ function Harvest(subdomain, authString) {
 			, type: 'DELETE'
 		});
 
-		request.complete(callback);
 		return request;
 	};
 
-	this.updateEntry = function(eid, props, callback, async) {
+	this.updateEntry = function(eid, props, async) {
 		async = (typeof async == 'undefined') ? true : async;
 		var url  = root.buildURL('daily', 'update', eid)
 			, json = JSON.stringify(props);
@@ -216,7 +224,6 @@ function Harvest(subdomain, authString) {
 			, data: json
 		});
 
-		request.complete(callback);
 		return request;
 	};
 }
