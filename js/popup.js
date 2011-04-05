@@ -141,8 +141,8 @@ $(document).ready(function() {
 	// Manual refresh
 	$('a#refresh').refreshTimesheetOn('click', true);
 
-	// Auto refresh, every 36 seconds (1/100th of an hour)
-	$timesheet.everyTime(36000, function() {
+	// Auto refresh - poll background page every 10 seconds for updates
+	$timesheet.everyTime(10000, function() {
 		$.refreshTimesheet();
 	});
 
@@ -189,11 +189,11 @@ $(document).ready(function() {
 		var $link = $(this)
 			, timerID = parseInt($link.attr('data-timerid'), 10)
 			, bgPage = chrome.extension.getBackgroundPage()
-			, app = bgPage.application;
+			, app = bgPage.application
+			, toggleResult = app.client.toggleTimer(timerID);
 		
-		app.client.toggleTimer(timerID, function(xhr, txt) {
-			var js = JSON.parse(xhr.responseText);
-			if (js.timer_started_at) {
+		toggleResult.success(function(json) {
+			if (json.timer_started_at) {
 				var $activeImg = $('<img/>', {
 					'src': 'img/progress.gif'
 					, 'id': 'active-timer-img'
@@ -203,13 +203,13 @@ $(document).ready(function() {
 					}
 				});
 
-				bgPage.console.log('timer started: ' + js.project_id);
+				bgPage.console.log('timer started: ' + json.project_id);
 				$link.text('Stop');
 				$activeImg.prependTo($link.parent().siblings('.entry-hours')).fadeIn(250);
 			} else {
 				bgPage.console.log('timer stopped');
 				$link.text('Start');
-				$('#active-timer-img').fadeOut(250, function() {$(this).remove(); });
+				$('#active-timer-img').fadeOut(250, function() { $(this).remove(); });
 			}
 		});
 		
@@ -228,9 +228,8 @@ $(document).ready(function() {
 		$form.find('h2').text('Edit Entry').end().append($input);
 
 		// fetch timer data from Harvest
-		app.client.getEntry(timerID, function(xhr, txt) {
-			var json = JSON.parse(xhr.responseText);
-
+		var entryFetch = app.client.getEntry(timerID);
+		entryFetch.success(function(json) {
 			// populate form fields with the entry's values:
 			// iterate thru the client options and select the one that belongs to this timer
 			$form.find('#client-select option').each(function() {
@@ -262,7 +261,8 @@ $(document).ready(function() {
 			, bgPage = chrome.extension.getBackgroundPage()
 			, app = bgPage.application;
 
-		app.client.deleteEntry(timerID, function(xhr, txt) {
+		var deleteEntry = app.client.deleteEntry(timerID);
+		deleteEntry.complete(function(xhr) {
 			var stat = xhr.status;
 
 			if (stat == 200) {
@@ -342,9 +342,9 @@ $(document).ready(function() {
 		
 		if ($idField.size() > 0) {
 			var timerID = $idField.val();
-			app.client.updateEntry(timerID, props, function(xhr, txt) {
-				var json = JSON.parse(xhr.responseText);
+			var updateResult = app.client.updateEntry(timerID, props);
 
+			updateResult.success(function(json, status, xhr) {
 				$('#entry-form').find('h2').text('New Entry').end().get(0).reset();
 				$idField.remove();
 				$('#task-select option:not(.no-selection)').remove();
@@ -367,14 +367,9 @@ $(document).ready(function() {
 				}
 			});
 		} else {
-			app.client.addEntry(props, function(xhr, txt) {
-				var js = JSON.parse(xhr.responseText);
-				window.console.log(xhr);
-				window.console.log(js);
-
+			var addResult = app.client.addEntry(props);
+			addResult.success(function(json, status, xhr) {
 				if (xhr.status == 201) {
-					// TODO: refresh the timesheet table to show new entry
-
 					// Clear the form
 					$('#entry-form').get(0).reset();
 					$('#task-select option:not(.no-selection)').remove();
