@@ -74,10 +74,8 @@ Array.prototype.any = function() {
 			, $timesheet = $('#timesheet tbody');
 
 		if (remote === true) { app.refreshHours(); }
-		$timesheet.find('tr').animate({height: 'toggle', opacity: 'toggle'}, 350, function() {
-			$timesheet.find('tr').remove();
-			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
-		});
+		$timesheet.find('tr').remove();
+		$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
 	};
 
 	$.fn.refreshTimesheetOn = function(evt, bg) {
@@ -141,8 +139,8 @@ $(document).ready(function() {
 	// Manual refresh
 	$('a#refresh').refreshTimesheetOn('click', true);
 
-	// Auto refresh - poll background page every 10 seconds for updates
-	$timesheet.everyTime(10000, function() {
+	// Auto refresh - poll background page every 36 seconds for updates
+	$timesheet.everyTime(36000, function() {
 		$.refreshTimesheet();
 	});
 
