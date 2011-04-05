@@ -107,6 +107,32 @@ ul.toolbar {
     display: inline-block;
     font-size: 0.8em; } }
 
+#stats {
+	.stat-clock {
+		width: 50%;
+		float: left;
+		display: none;
+
+		p {
+			font: {
+				weight: bold;
+				size: 30px;
+			}
+			margin: 10px 0;
+			margin-bottom: 0;
+		}
+
+		span.stat-caption {
+			font-size: 11px;
+		}
+
+		&#current-hours-stat {
+			text-align: right;
+		}
+	}
+
+}
+
 #form-overlay {
   display: none;
   position: absolute;
