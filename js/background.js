@@ -123,10 +123,11 @@ $(document).ready(function() {
 		}
 		, refreshHours: function() {
 			console.log('refreshing hours');
-			var root = window.application;
-			root.client.getToday(function(xhr, txt) {
-				var json = JSON.parse(xhr.responseText)
-					, totalHours = 0.0
+			var root = window.application
+				, todaysHours = root.client.getToday();
+
+			todaysHours.success(function(json) {
+				var totalHours = 0.0
 					, currentHours = '';
 				
 				// Cache projects and timesheet entries from JSON feed
@@ -166,7 +167,11 @@ $(document).ready(function() {
 					});
 				}
 				root.setBadge();	
-			}, true);
+			});
+
+			todaysHours.error(function() {
+				console.log("Error refreshing hours!");
+			})
 		}
 		, inPopup: function(func) {
 			var fn = func
