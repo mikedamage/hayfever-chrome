@@ -91,6 +91,9 @@ $(document).ready(function() {
 		$timesheet.find('.noentries').remove();
 		$('#entry-row-template').tmpl(dayEntries).appendTo($timesheet);
 		$timesheet.find('tr:even').addClass('even').end().find('tr:odd').addClass('odd');
+
+		$('#total-hours-time').text(app.totalHours.toClockTime());
+		$('#current-hours-time').text(app.totalHours.toClockTime());
 	}
 
 	// Events
