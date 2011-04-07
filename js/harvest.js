@@ -142,6 +142,30 @@ function Harvest(subdomain, authString) {
 	};
 
 	/**
+	 * Find runaway timers from yesterday
+	 *
+	 * Grabs yesterday's timers and checks for timer_started_at properties
+	 *
+	 * @returns {Boolean}
+	 */
+	this.runawayTimers = function(async) {
+		async = (typeof async == 'undefined') ? true : async;
+		var today = new Date()
+			, yesterday = today.yesterday()
+			, request = root.getDay(yesterday, async);
+
+		request.success(function(json) {
+			if (json.hasOwnProperty('day_entries')) {
+				var entries = json.day_entries;
+
+				return _(entries).detect(function(entry) { return entry.hasOwnProperty('timer_started_at'); });
+			} else {
+				return false;
+			}
+		});
+	};
+
+	/**
 	 * Toggle a single timer on/off
 	 *
 	 * @param {Number} eid
