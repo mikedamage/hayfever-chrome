@@ -32,6 +32,13 @@ Number.prototype.toClockTime = function() {
 };
 
 /**
+ * Date prototype method: return a date object for yesterday
+ */
+Date.prototype.yesterday = function() {
+	return (new Date(this.getTime() - 86400000));
+};
+
+/**
  * Date prototype method: format the date so Harvest can understand it
  */
 Date.prototype.toHarvestString = function() {
