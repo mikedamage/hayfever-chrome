@@ -28,7 +28,7 @@ $(document).ready(function() {
 		, subdomain = localStorage['harvest_subdomain'];
 
 	window.application = {
-		version: '0.2.0'
+		version: '0.2.1'
 		, totalHours: 0.0
 		, currentHours: 0.0
 		, todaysEntries: []
