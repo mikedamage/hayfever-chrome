@@ -50,9 +50,11 @@
 			, app = bg.application
 			, $timesheet = $('#timesheet tbody');
 
-		if (remote === true) { app.refreshHours(); }
-		$timesheet.find('tr').remove();
-		$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
+		if (remote) { app.refreshHours(); }
+		$timesheet.find('tr').fadeOut(300, function() {
+			$(this).remove();
+			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
+		});
 
 		// Set big clocks in footer
 		var totalHoursTime = app.totalHours.toClockTime()
