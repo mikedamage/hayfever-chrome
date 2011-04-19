@@ -2,7 +2,12 @@
  * Harvest API Interface
  * by Mike Green
  *
- * GNU GPL v3
+ * # Summary
+ * This library consumes the Harvest REST API. It currently depends on jQuery and Underscore.js,
+ * and I have no plans on generalizing it any further. It might be a good starting point for anyone
+ * looking to build a similar library for Node.js, etc.
+ * 
+ * Released under the terms of the GNU GPLv2. See LICENSE for details.
  */
 
 /**
@@ -73,6 +78,18 @@ function Harvest(subdomain, authString) {
 	this.setAuthString = function(auth) {
 		opts.authString = auth;
 		return opts.authString;
+	};
+
+	this.get = function(prop) {
+		if (prop in opts) {
+			return opts[prop];
+		} 
+		return null;
+	};
+
+	this.set = function(prop, val) {
+		opts[prop] = val;
+		return val;
 	};
 
 	/**
