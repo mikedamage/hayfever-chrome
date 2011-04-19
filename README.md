@@ -46,12 +46,12 @@ If you're *REALLY* the DIY type, you can clone this repo and install it ninja-st
 
 ## Screenshots
 
-![Hayfever Hours Badge](http://mikedamage.github.com/hayfever-chrome/img/screenshot-02.png)
-![Hayfever Hours Badge: Red](http://mikedamage.github.com/hayfever-chrome/img/hours-badge-red.png)
-![Hayfever Hours Badge: Blue](http://mikedamage.github.com/hayfever-chrome/img/hours-badge-blue.png)
+![Hayfever Hours Badge](http://mikegreen.s3.amazonaws.com/projects/hayfever/screenshot-02.png)
+![Hayfever Hours Badge: Red](http://mikegreen.s3.amazonaws.com/projects/hayfever/hours-badge-red.png)
+![Hayfever Hours Badge: Blue](http://mikegreen.s3.amazonaws.com/projects/hayfever/hours-badge-blue.png)
 Hayfever Hours Badge (omg colorz!)
 
-![Hayfever Popup Timesheet](http://mikedamage.github.com/hayfever-chrome/img/screenshot-01.png)
+![Hayfever Popup Timesheet](http://mikegreen.s3.amazonaws.com/projects/hayfever/screenshot-01.png)
 Hayfever Popup Timesheet
 
 ## Usage Statistics
@@ -62,9 +62,7 @@ Analytics are turned off by default because I believe it should be a matter of c
 
 ## License
 
-![GNU General Public License v3](http://mikegreen.s3.amazonaws.com/projects/hayfever/gpl-logo-127x51.png)
-
-This extension is released according to the terms of the GNU General Public License, version 3. See [LICENSE](https://github.com/mikedamage/hayfever-chrome/blob/master/LICENSE) for details.
+This extension is released according to the terms of the GNU General Public License, version 2. See [LICENSE](https://github.com/mikedamage/hayfever-chrome/blob/master/LICENSE) for details.
 
 [1]: http://www.pledgie.com/campaigns/14742
 [2]: http://www.pledgie.com/campaigns/14742.png?skin_name=chrome
