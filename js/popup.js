@@ -3,6 +3,8 @@
  * Popup Script
  *
  * by Mike Green
+ * 
+ * Released under the terms of the GNU GPLv2. See LICENSE for details.
  */
 
 /**

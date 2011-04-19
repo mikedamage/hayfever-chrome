@@ -1,5 +1,9 @@
 /*!
  * JavaScript Prototype Extensions
+ *
+ * Crockford says modifying global objects is a bad idea, but it's so damn convenient. Plus I do it in Ruby all the time, so there.
+ *
+ * Released under the terms of the GNU GPLv2. See LICENSE for details.
  */
 
 /**

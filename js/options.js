@@ -3,6 +3,8 @@
  * Options Page JavaScript
  *
  * by Mike Green (mike.is.green@gmail.com)
+ *
+ * Released under the terms of the GNU GPLv2. See LICENSE for details.
  */
 
 ;(function($) {
