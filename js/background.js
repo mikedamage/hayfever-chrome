@@ -94,9 +94,10 @@ $(document).ready(function() {
 			chrome.browserAction.setBadgeBackgroundColor({color: badgeColor});
 			chrome.browserAction.setBadgeText({text: badgeText});
 		}
-		, refreshHours: function() {
+		, refreshHours: function(callback) {
 			console.log('refreshing hours');
 			var root = window.application
+				, callback = (typeof callback === 'function') ? callback : function() {}
 				, todaysHours = root.client.getToday();
 
 			todaysHours.success(function(json) {
@@ -140,6 +141,7 @@ $(document).ready(function() {
 					});
 				}
 				root.setBadge();	
+				callback.call(root.todaysEntries);
 			});
 
 			todaysHours.error(function() {

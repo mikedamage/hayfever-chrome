@@ -52,19 +52,28 @@
 			, app = bg.application
 			, $timesheet = $('#timesheet tbody');
 
-		if (remote) { app.refreshHours(); }
-		/*$timesheet.find('tr').fadeOut(300, function() {
-			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
-		});*/
+		//if (remote) { app.refreshHours(); }
+		/*
 		$timesheet.find('tr').each(function() {
 			$(this).remove();
-		}).end().append($('#entry-row-template').tmpl(app.todaysEntries));
+		}).end().oneTime(100, function() {
+			$(this).html($('#entry-row-template').tmpl(app.todaysEntries));
+		});
+		*/
 
-		// Set big clocks in footer
-		var totalHoursTime = app.totalHours.toClockTime()
-			, currentHoursTime = app.currentHours.toClockTime();
-		$('#total-hours-time').text(totalHoursTime);
-		$('#current-hours-time').text(currentHoursTime);
+		// Force UI updates to happen after hours are refreshed
+		// `this` is bound to app.todaysEntries
+		app.refreshHours(function() {
+			// Repopulate table rows
+			$timesheet.html($('#entry-row-template').tmpl(this));
+
+			// Set big clocks in footer
+			var totalHoursTime = app.totalHours.toClockTime()
+				, currentHoursTime = app.currentHours.toClockTime();
+			$('#total-hours-time').text(totalHoursTime);
+			$('#current-hours-time').text(currentHoursTime);
+		});
+		
 	};
 
 	$.fn.refreshTimesheetOn = function(evt, bg) {
