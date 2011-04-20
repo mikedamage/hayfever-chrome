@@ -174,29 +174,21 @@ $(document).ready(function() {
 
 	$timesheet.delegate('a.toggle', 'click', function(e) {
 		// Timer toggle handler
-		var $link = $(this)
-			, timerID = parseInt($link.attr('data-timerid'), 10)
-			, bgPage = chrome.extension.getBackgroundPage()
-			, app = bgPage.application
+		var $link        = $(this)
+			, $tableRow    = $link.closest('tr')
+			, timerID      = parseInt($link.attr('data-timerid'), 10)
+			, bgPage       = chrome.extension.getBackgroundPage()
+			, app          = bgPage.application
 			, toggleResult = app.client.toggleTimer(timerID);
 		
 		toggleResult.success(function(json) {
 			if (json.timer_started_at) {
-				var $activeImg = $('<img/>', {
-					'src': 'img/progress.gif'
-					, 'id': 'active-timer-img'
-					, 'alt': 'Timer Running'
-					, 'css': {
-						display: 'none'
-					}
-				});
-
 				bgPage.console.log('timer started: ' + json.project_id);
-				$link.text('Stop');
+				$tableRow.addClass('running');
 				$activeImg.prependTo($link.parent().siblings('.entry-hours')).fadeIn(250);
 			} else {
 				bgPage.console.log('timer stopped');
-				$link.text('Start');
+				$tableRow.removeClass('running');
 				$('#active-timer-img').fadeOut(250, function() { $(this).remove(); });
 			}
 		});

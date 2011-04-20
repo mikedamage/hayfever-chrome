@@ -1,3 +1,5 @@
+@import 'partials/base';
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
@@ -65,11 +67,45 @@ a {
       -webkit-border-top-right-radius: 6px; } }
   tbody {
     tr.odd {
-      /*background: #F7FBFF;*/
-      background: #EBF5FC; }
+      background: $tr-odd-bg;
+    }
     td {
       font-size: 11px;
-      padding: 8px; } }
+      padding: 8px;
+
+      a.toggle {
+        background: url(../img/icons/silk/control_play_blue.png) top left no-repeat;
+        text-indent: -9999px;
+        display: block;
+        width: 16px;
+        height: 16px;
+        float: left;
+      }
+
+      a.edit {
+        background: url(../img/icons/silk/clock_edit.png) top left no-repeat;
+        text-indent: -9999px;
+        display: block;
+        width: 16px;
+        height: 16px;
+        float: left;
+      }
+
+      a.delete {
+        background: url(../img/icons/silk/delete.png) top left no-repeat;
+        text-indent: -9999px;
+        display: block;
+        width: 16px;
+        height: 16px;
+        float: left;
+      }
+    } 
+    tr.running {
+      td a.toggle {
+        background: url(../img/icons/silk/control_pause_blue.png) top left no-repeat !important;
+      }
+    }
+  }
   tfoot td {
     -webkit-border-bottom-left-radius: 6px;
     -webkit-border-bottom-right-radius: 6px;
@@ -77,28 +113,33 @@ a {
 
 a {
   &.icon {
-    margin-right: 5px; }
+    margin-right: 5px;
+  }
   &#refresh {
     background: url(../img/icons/silk/arrow_refresh_bw.png) top left no-repeat;
     text-indent: -9999px;
     display: block;
     width: 16px;
     height: 16px;
-    float: left; }
+    float: left;
+  }
   &#new-entry-link {
     background: url(../img/icons/silk/add_bw.png) top left no-repeat;
     text-indent: -9999px;
     display: block;
     width: 18px;
     height: 18px;
-    float: left; }
+    float: left;
+  }
   &#options-link {
     background: url(../img/icons/silk/cog.png) top left no-repeat;
     text-indent: -9999px;
     display: block;
     width: 16px;
     height: 16px;
-    float: left; } }
+    float: left;
+  }
+}
 
 ul.toolbar {
   list-style: none;
@@ -108,27 +149,27 @@ ul.toolbar {
     font-size: 0.8em; } }
 
 #stats {
-	.stat-clock {
-		width: 50%;
-		float: left;
+  .stat-clock {
+    width: 50%;
+    float: left;
 
-		p {
-			font: {
-				weight: bold;
-				size: 30px;
-			}
-			margin: 10px 0;
-			margin-bottom: 0;
-		}
+    p {
+      font: {
+        weight: bold;
+        size: 30px;
+      }
+      margin: 10px 0;
+      margin-bottom: 0;
+    }
 
-		span.stat-caption {
-			font-size: 11px;
-		}
+    span.stat-caption {
+      font-size: 11px;
+    }
 
-		&#current-hours-stat {
-			text-align: right;
-		}
-	}
+    &#current-hours-stat {
+      text-align: right;
+    }
+  }
 
 }
 

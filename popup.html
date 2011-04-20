@@ -28,22 +28,19 @@
 </head>
 <body>
 	<script id="entry-row-template" type="text/x-jquery-tmpl">
+    {{if timer_started_at}}
+    <tr id="entry-${id}" class="entry running">
+    {{else}}
 		<tr id="entry-${id}" class="entry">
+    {{/if}}
 			<td class="entry-name">
 				<strong>${client}:</strong> ${project} (${task})
 			</td>
 			<td class="entry-hours" width="50" align="right">
-				{{if timer_started_at}}
-					<img src="img/progress.gif" alt="Timer Running" id="active-timer-img" />
-				{{/if}}
 				${hours}
 			</td>
 			<td class="entry-toggle">
-				{{if timer_started_at}}
-					<a href="#" class="toggle" data-timerid="${id}">Stop</a>
-				{{else}}
-					<a href="#" class="toggle" data-timerid="${id}">Start</a>
-				{{/if}}
+        <a href="#" class="toggle" data-timerid="${id}">Toggle</a>
 				<a href="#" class="edit" data-timerid="${id}">Edit</a>
 				<a href="#" class="delete" data-timerid="${id}">Delete</a>
 			</td>
