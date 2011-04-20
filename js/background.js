@@ -113,11 +113,11 @@ $(document).ready(function() {
 					totalHours += this.hours;
 
 					if (this.hasOwnProperty('timer_started_at')) {
-						currentHours = this.hours;
+						currentHours = parseFloat(this.hours);
 					}
 				});
 				root.totalHours = totalHours;
-				root.currentHours = currentHours;
+				root.currentHours = (typeof currentHours === 'number') ? currentHours : 0.0;
 				
 				// Build a grouped list of clients/projects for building optgroups later
 				// TODO: Determine whether or not we actually need this object
