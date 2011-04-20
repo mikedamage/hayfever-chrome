@@ -133,7 +133,7 @@ $(document).ready(function() {
 
 	// Auto refresh - poll background page every 36 seconds for updates
 	$timesheet.everyTime(36000, function() {
-		$.refreshTimesheet();
+		$.refreshTimesheet(true);
 	});
 
 	// New Entry link
