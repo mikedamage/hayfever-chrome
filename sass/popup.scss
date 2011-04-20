@@ -101,6 +101,9 @@ a {
       }
     } 
     tr.running {
+
+      -webkit-animation: runningtimer 4s;
+      -webkit-animation-iteration-count: infinite;
       td a.toggle {
         background: url(../img/icons/silk/control_pause_blue.png) top left no-repeat !important;
       }
@@ -220,3 +223,29 @@ ul.toolbar {
   textarea {
     font-size: 12px;
     height: 60px; } }
+
+@-webkit-keyframes runningtimer {
+  0% {
+    background: #F2FFEC;
+  }
+
+  50% {
+    background: #DBF8CD;
+  }
+
+  100% {
+    background: #F2FFEC;
+  }
+}
+
+@-webkit-keyframes blinkey {
+  0% {
+    color: #000;
+  }
+  50% {
+    color: #FFEFC7;
+  }
+  100% {
+    color: #000;
+  }
+}

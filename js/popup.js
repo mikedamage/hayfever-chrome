@@ -53,10 +53,12 @@
 			, $timesheet = $('#timesheet tbody');
 
 		if (remote) { app.refreshHours(); }
-		$timesheet.find('tr').fadeOut(300, function() {
-			$(this).remove();
+		/*$timesheet.find('tr').fadeOut(300, function() {
 			$('#entry-row-template').tmpl(app.todaysEntries).appendTo($timesheet);
-		});
+		});*/
+		$timesheet.find('tr').each(function() {
+			$(this).remove();
+		}).end().append($('#entry-row-template').tmpl(app.todaysEntries));
 
 		// Set big clocks in footer
 		var totalHoursTime = app.totalHours.toClockTime()

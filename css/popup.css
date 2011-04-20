@@ -129,22 +129,27 @@ a {
   height: 16px;
   float: left;
 }
-/* line 104, ../sass/popup.scss */
+/* line 103, ../sass/popup.scss */
+#timesheet tbody tr.running {
+  -webkit-animation: runningtimer 4s;
+  -webkit-animation-iteration-count: infinite;
+}
+/* line 107, ../sass/popup.scss */
 #timesheet tbody tr.running td a.toggle {
   background: url(../img/icons/silk/control_pause_blue.png) top left no-repeat !important;
 }
-/* line 109, ../sass/popup.scss */
+/* line 112, ../sass/popup.scss */
 #timesheet tfoot td {
   -webkit-border-bottom-left-radius: 6px;
   -webkit-border-bottom-right-radius: 6px;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(1, #b6d9ff), color-stop(0, #d3ebff));
 }
 
-/* line 115, ../sass/popup.scss */
+/* line 118, ../sass/popup.scss */
 a.icon {
   margin-right: 5px;
 }
-/* line 118, ../sass/popup.scss */
+/* line 121, ../sass/popup.scss */
 a#refresh {
   background: url(../img/icons/silk/arrow_refresh_bw.png) top left no-repeat;
   text-indent: -9999px;
@@ -153,7 +158,7 @@ a#refresh {
   height: 16px;
   float: left;
 }
-/* line 126, ../sass/popup.scss */
+/* line 129, ../sass/popup.scss */
 a#new-entry-link {
   background: url(../img/icons/silk/add_bw.png) top left no-repeat;
   text-indent: -9999px;
@@ -162,7 +167,7 @@ a#new-entry-link {
   height: 18px;
   float: left;
 }
-/* line 134, ../sass/popup.scss */
+/* line 137, ../sass/popup.scss */
 a#options-link {
   background: url(../img/icons/silk/cog.png) top left no-repeat;
   text-indent: -9999px;
@@ -172,39 +177,39 @@ a#options-link {
   float: left;
 }
 
-/* line 144, ../sass/popup.scss */
+/* line 147, ../sass/popup.scss */
 ul.toolbar {
   list-style: none;
   padding-left: 0;
 }
-/* line 147, ../sass/popup.scss */
+/* line 150, ../sass/popup.scss */
 ul.toolbar li {
   display: inline-block;
   font-size: 0.8em;
 }
 
-/* line 152, ../sass/popup.scss */
+/* line 155, ../sass/popup.scss */
 #stats .stat-clock {
   width: 50%;
   float: left;
 }
-/* line 156, ../sass/popup.scss */
+/* line 159, ../sass/popup.scss */
 #stats .stat-clock p {
   font-weight: bold;
   font-size: 30px;
   margin: 10px 0;
   margin-bottom: 0;
 }
-/* line 165, ../sass/popup.scss */
+/* line 168, ../sass/popup.scss */
 #stats .stat-clock span.stat-caption {
   font-size: 11px;
 }
-/* line 169, ../sass/popup.scss */
+/* line 172, ../sass/popup.scss */
 #stats .stat-clock#current-hours-stat {
   text-align: right;
 }
 
-/* line 176, ../sass/popup.scss */
+/* line 179, ../sass/popup.scss */
 #form-overlay {
   display: none;
   position: absolute;
@@ -215,7 +220,7 @@ ul.toolbar li {
   background: rgba(0, 0, 0, 0.55);
 }
 
-/* line 185, ../sass/popup.scss */
+/* line 188, ../sass/popup.scss */
 #entry-form {
   font-size: 12px;
   -webkit-border-radius: 8px;
@@ -224,32 +229,32 @@ ul.toolbar li {
   margin: 0 auto;
   padding: 0 5px 10px 10px;
 }
-/* line 192, ../sass/popup.scss */
+/* line 195, ../sass/popup.scss */
 #entry-form h2 {
   font-size: 20px;
   padding-top: 5px;
 }
-/* line 195, ../sass/popup.scss */
+/* line 198, ../sass/popup.scss */
 #entry-form a.cancel {
   /* TODO: Display block, background image of an X */
 }
-/* line 197, ../sass/popup.scss */
+/* line 200, ../sass/popup.scss */
 #entry-form label {
   float: left;
   display: block;
   width: 65px;
   font-size: 14px;
 }
-/* line 202, ../sass/popup.scss */
+/* line 205, ../sass/popup.scss */
 #entry-form label.checkbox {
   float: right;
   width: 216px;
 }
-/* line 205, ../sass/popup.scss */
+/* line 208, ../sass/popup.scss */
 #entry-form select {
   width: 205px;
 }
-/* line 207, ../sass/popup.scss */
+/* line 210, ../sass/popup.scss */
 #entry-form input[type='text'], #entry-form textarea {
   border: 1px solid #e5e5e5;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -259,17 +264,51 @@ ul.toolbar li {
   background: -webkit-gradient(linear, left top, left 25, from(white), color-stop(10%, #f7f7f7), to(white));
   -webkit-transition: all 200ms ease-in 50ms;
 }
-/* line 215, ../sass/popup.scss */
+/* line 218, ../sass/popup.scss */
 #entry-form input[type='text']:hover, #entry-form textarea:hover, #entry-form input[type='text']:focus, #entry-form textarea:focus {
   -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 8px;
 }
-/* line 217, ../sass/popup.scss */
+/* line 220, ../sass/popup.scss */
 #entry-form input[type='text'] {
   font-size: 14px;
   font-weight: bold;
 }
-/* line 220, ../sass/popup.scss */
+/* line 223, ../sass/popup.scss */
 #entry-form textarea {
   font-size: 12px;
   height: 60px;
+}
+
+@-webkit-keyframes runningtimer {
+  /* line 228, ../sass/popup.scss */
+  0% {
+    background: #F2FFEC;
+  }
+
+  /* line 232, ../sass/popup.scss */
+  50% {
+    background: #DBF8CD;
+  }
+
+  /* line 236, ../sass/popup.scss */
+  100% {
+    background: #F2FFEC;
+  }
+}
+
+@-webkit-keyframes blinkey {
+  /* line 242, ../sass/popup.scss */
+  0% {
+    color: #000;
+  }
+
+  /* line 245, ../sass/popup.scss */
+  50% {
+    color: #FFEFC7;
+  }
+
+  /* line 248, ../sass/popup.scss */
+  100% {
+    color: #000;
+  }
 }
