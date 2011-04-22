@@ -1,0 +1,11 @@
+# Jekyll Configuration File
+# Hayfever for Chrome Website
+#
+# http://mikedamage.github.com/hayfever-chrome
+
+destination: /Users/mike/ProjectFiles/Hayfever/site
+auto: false
+lsi: false
+pygments: true
+markdown: maruku
+permalink: date
