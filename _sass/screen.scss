@@ -270,6 +270,15 @@ body.bp {
       font-size: 1em;
     }
 
+    ul {
+      font-size: 14px;
+
+      &#news {
+        list-style: none;
+        padding-left: 0;
+      }
+    }
+
   }
 }
 
