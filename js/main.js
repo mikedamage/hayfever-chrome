@@ -6,11 +6,12 @@
 $(document).ready(function() {
 	
 	/**
- 	 * Initialize jQuery Templates
+ 	 * Initialize Handlebars.js Templates
 	 */
 	
-	$('#tmpl-github-feed-item').template('gitFeedItem');
-	$('#tmpl-twitter-feed-item').template('twitterFeedItem');
+	var templates = {
+		git_feed_item: Handlebars.compile($('#tmpl-git-feed-item').html())
+	};
 
 	// GitHub Feed
 	var githubFeed = $.getJSON('http://github.com/api/v2/json/commits/list/mikedamage/hayfever-chrome/master?callback=?', function(json) {
@@ -30,7 +31,7 @@ $(document).ready(function() {
 						, url: c.url
 					};
 				
-				$commitList.append($.tmpl('gitFeedItem', commitInfo));
+				$commitList.append(templates.git_feed_item(commitInfo));
 			}
 
 			$commitList.append('<li class="more"><a href="https://github.com/mikedamage/hayfever-chrome/commits/master" target="_blank">More &raquo;</a></li>');
