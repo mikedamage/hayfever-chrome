@@ -17,10 +17,10 @@
 
 	<title>{{page.title}} // Hayfever: A Harvest time tracking plugin for Google Chrome</title>
 
-	<link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-	<link href="css/print.css" media="print" rel="stylesheet" type="text/css" />
+	<link href="/hayfever-chrome/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="/hayfever-chrome/css/print.css" media="print" rel="stylesheet" type="text/css" />
 	<!--[if lt IE 8]>
-		<link href="/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<link href="/hayfever-chrome/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
 	<![endif]-->
 
 	<script type="text/javascript">
@@ -64,7 +64,7 @@
 			{% for post in site.posts limit:5 %}
 				<li class="post">
 					<strong>{{ post.date | date: '%Y-%m-%d' }}</strong>
-					<a href="{{ post.url }}">{{ post.title }}</a>
+					<a href="/hayfever-chrome{{ post.url }}">{{ post.title }}</a>
 				</li>
 			{% endfor %}
 		</ul>
@@ -104,12 +104,12 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="js/modernizr-1.7.min.js"></script>
-	<script type="text/javascript" src="js/underscore-min.js"></script>
-	<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
-	<script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
-	<script type="text/javascript" src="js/handlebars-0.9.0.pre.5.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="/hayfever-chrome/js/modernizr-1.7.min.js"></script>
+	<script type="text/javascript" src="/hayfever-chrome/js/underscore-min.js"></script>
+	<script type="text/javascript" src="/hayfever-chrome/js/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript" src="/hayfever-chrome/js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="/hayfever-chrome/js/handlebars-0.9.0.pre.5.js"></script>
+	<script type="text/javascript" src="/hayfever-chrome/js/main.js"></script>
 
 	{% include handlebars_templates.html %}
 
