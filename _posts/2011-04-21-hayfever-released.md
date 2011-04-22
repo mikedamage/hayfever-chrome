@@ -1,6 +1,6 @@
 ---
 title: Hayfever Released!
-layout: default
+layout: post
 ---
 
 # Hayfever Released
