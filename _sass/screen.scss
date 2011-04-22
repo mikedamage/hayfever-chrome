@@ -95,6 +95,13 @@ body.bp {
     h2 {
       font-size: 2.5em;
       margin-bottom: 10px;
+
+      img {
+        vertical-align: baseline;
+        position: relative;
+        top: 3px;
+        margin-right: 10px;
+      }
     }
 
     em {
