@@ -59,15 +59,9 @@
 			</div>
 		</div>
 
-		<h2>Hayfever News</h2>
-		<ul id="news">
-			{% for post in site.posts limit:5 %}
-				<li class="post">
-					<strong>{{ post.date | date: '%Y-%m-%d' }}</strong>
-					<a href="/hayfever-chrome{{ post.url }}">{{ post.title }}</a>
-				</li>
-			{% endfor %}
-		</ul>
+		<p>
+			<a href="/hayfever-chrome">&laquo; back to homepage</a>
+		</p>
 
 		<div id="main">
 			{{ content }}
