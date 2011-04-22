@@ -187,66 +187,66 @@ body.bp #container em { font-weight: 100; }
 /* line 105, ../_sass/screen.scss */
 body.bp #container #header h1#logo { background: url("../img/Hayfever_logo.png") top left no-repeat; width: 302px; height: 232px; text-indent: -9999px; margin-right: auto; margin-left: auto; margin-bottom: 0; }
 /* line 114, ../_sass/screen.scss */
-body.bp #container #header #addthis-links { text-align: center; }
-/* line 117, ../_sass/screen.scss */
+body.bp #container #header #addthis-links { text-align: center; margin-top: 25px; }
+/* line 118, ../_sass/screen.scss */
 body.bp #container #header #addthis-links .addthis_toolbox { width: 300px; margin: 0 auto; }
-/* line 123, ../_sass/screen.scss */
+/* line 124, ../_sass/screen.scss */
 body.bp #container #header p.tagline { text-align: center; font-size: 36px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 100; color: #f26522; margin-bottom: 0.2em; }
-/* line 134, ../_sass/screen.scss */
+/* line 135, ../_sass/screen.scss */
 body.bp #container #header .subscribe { width: 760px; margin-top: 2em; margin-bottom: 4em; margin-left: auto; margin-right: auto; text-align: center; }
-/* line 144, ../_sass/screen.scss */
+/* line 145, ../_sass/screen.scss */
 body.bp #container #header .subscribe p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 200; }
-/* line 152, ../_sass/screen.scss */
+/* line 153, ../_sass/screen.scss */
 body.bp #container #header .subscribe input { border: 1px solid #e5e5e5; color: #4d4d4d; width: 200px; padding: 5px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: bold; font-size: 18px; letter-spacing: -1px; -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px 0; -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px 0; -o-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px 0; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px 0; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ffffff), color-stop(10%, #f7f7f7), color-stop(100%, #ffffff)); background-image: -moz-linear-gradient(top, #ffffff 0%, #f7f7f7 10%, #ffffff 100%); background-image: linear-gradient(top, #ffffff 0%, #f7f7f7 10%, #ffffff 100%); -moz-transition-property: all; -webkit-transition-property: all; -o-transition-property: all; transition-property: all; -moz-transition-duration: 200ms; -webkit-transition-duration: 200ms; -o-transition-duration: 200ms; transition-duration: 200ms; -moz-transition-timing-function: ease-in; -webkit-transition-timing-function: ease-in; -o-transition-timing-function: ease-in; transition-timing-function: ease-in; -moz-transition-delay: 50ms; -webkit-transition-delay: 50ms; -o-transition-delay: 50ms; transition-delay: 50ms; }
-/* line 167, ../_sass/screen.scss */
+/* line 168, ../_sass/screen.scss */
 body.bp #container #header .subscribe input.placeholder { color: #999; }
-/* line 171, ../_sass/screen.scss */
+/* line 172, ../_sass/screen.scss */
 body.bp #container #header .subscribe input:hover { -moz-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 8px 0; -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 8px 0; -o-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 8px 0; box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 8px 0; }
-/* line 176, ../_sass/screen.scss */
+/* line 177, ../_sass/screen.scss */
 body.bp #container #header .subscribe button { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f58752), color-stop(100%, #d44d0d)); background-image: -moz-linear-gradient(top, #f58752 0%, #d44d0d 100%); background-image: linear-gradient(top, #f58752 0%, #d44d0d 100%); -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 1px; -moz-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; -o-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px 0; -moz-transition-property: all; -webkit-transition-property: all; -o-transition-property: all; transition-property: all; -moz-transition-duration: 200ms; -webkit-transition-duration: 200ms; -o-transition-duration: 200ms; transition-duration: 200ms; -moz-transition-timing-function: ease-in; -webkit-transition-timing-function: ease-in; -o-transition-timing-function: ease-in; transition-timing-function: ease-in; -moz-transition-delay: 50ms; -webkit-transition-delay: 50ms; -o-transition-delay: 50ms; transition-delay: 50ms; border: none; color: white; font-weight: bold; font-weight: bold; font-size: 15px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; cursor: pointer; text-align: center; padding: 7px; margin-bottom: 1px; }
-/* line 195, ../_sass/screen.scss */
+/* line 196, ../_sass/screen.scss */
 body.bp #container #header .subscribe button:hover { -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0; -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0; -o-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0; box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f6976a), color-stop(100%, #f26522)); background-image: -moz-linear-gradient(top, #f6976a 0%, #f26522 100%); background-image: linear-gradient(top, #f6976a 0%, #f26522 100%); }
-/* line 200, ../_sass/screen.scss */
+/* line 201, ../_sass/screen.scss */
 body.bp #container #header .subscribe button:active { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f26522), color-stop(100%, #f58752)); background-image: -moz-linear-gradient(top, #f26522 0%, #f58752 100%); background-image: linear-gradient(top, #f26522 0%, #f58752 100%); }
-/* line 207, ../_sass/screen.scss */
+/* line 208, ../_sass/screen.scss */
 body.bp #container #main { display: inline; float: left; margin-right: 10px; width: 670px; }
 /* line 138, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.bp #container #main { overflow-x: hidden; }
-/* line 210, ../_sass/screen.scss */
+/* line 211, ../_sass/screen.scss */
 body.bp #container #main p { font-size: 1.3em; font-weight: 100; }
-/* line 217, ../_sass/screen.scss */
+/* line 218, ../_sass/screen.scss */
 body.bp #container #main .screenshots { list-style: none; padding-left: 0; }
-/* line 221, ../_sass/screen.scss */
+/* line 222, ../_sass/screen.scss */
 body.bp #container #main .screenshots li { margin-bottom: 15px; }
-/* line 227, ../_sass/screen.scss */
+/* line 228, ../_sass/screen.scss */
 body.bp #container #sidebar { display: inline; float: left; margin-right: 0; width: 270px; }
 /* line 138, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.bp #container #sidebar { overflow-x: hidden; }
-/* line 230, ../_sass/screen.scss */
+/* line 231, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads { list-style: none; font-size: 1.2em; padding-left: 20px; }
-/* line 235, ../_sass/screen.scss */
+/* line 236, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads .download-link { padding-top: 2px; padding-left: 30px; height: 24px; display: block; }
-/* line 243, ../_sass/screen.scss */
+/* line 244, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads .download-link.crx-file { background: url(../img/chrome-2.png) top left no-repeat; }
-/* line 247, ../_sass/screen.scss */
+/* line 248, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads .download-link.zipball { background: url(../img/zip.png) top left no-repeat; }
-/* line 251, ../_sass/screen.scss */
+/* line 252, ../_sass/screen.scss */
 body.bp #container #sidebar #downloads .download-link.github { background: url(../img/github.png) top left no-repeat; }
-/* line 258, ../_sass/screen.scss */
+/* line 259, ../_sass/screen.scss */
 body.bp #container #sidebar .unavailable { color: #888888; text-decoration: line-through; }
-/* line 263, ../_sass/screen.scss */
+/* line 264, ../_sass/screen.scss */
 body.bp #container #sidebar #github-feed { list-style: none; padding-left: 20px; }
-/* line 267, ../_sass/screen.scss */
+/* line 268, ../_sass/screen.scss */
 body.bp #container #sidebar #github-feed li { margin-bottom: 10px; }
-/* line 270, ../_sass/screen.scss */
+/* line 271, ../_sass/screen.scss */
 body.bp #container #sidebar #github-feed li.more { text-align: right; }
-/* line 277, ../_sass/screen.scss */
+/* line 278, ../_sass/screen.scss */
 body.bp #container #footer { display: inline; float: left; margin-right: 10px; width: 950px; font-size: 1em; }
 /* line 138, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.bp #container #footer { overflow-x: hidden; }
-/* line 282, ../_sass/screen.scss */
+/* line 283, ../_sass/screen.scss */
 body.bp #container ul { font-size: 14px; }
-/* line 285, ../_sass/screen.scss */
+/* line 286, ../_sass/screen.scss */
 body.bp #container ul#news { list-style: none; padding-left: 0; }
 
 /* line 18, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
@@ -276,17 +276,17 @@ form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp inpu
 /* line 50, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
 form.bp textarea { width: 390px; height: 250px; }
 
-/* line 299, ../_sass/screen.scss */
+/* line 300, ../_sass/screen.scss */
 body.two-col #container { width: 950px; margin: 0 auto; overflow: hidden; *zoom: 1; }
-/* line 301, ../_sass/screen.scss */
+/* line 302, ../_sass/screen.scss */
 body.two-col #header, body.two-col #footer { display: inline; float: left; margin-right: 10px; width: 950px; }
 /* line 138, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #header, * html body.two-col #footer { overflow-x: hidden; }
-/* line 303, ../_sass/screen.scss */
+/* line 304, ../_sass/screen.scss */
 body.two-col #sidebar { display: inline; float: left; margin-right: 10px; width: 310px; }
 /* line 138, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #sidebar { overflow-x: hidden; }
-/* line 307, ../_sass/screen.scss */
+/* line 308, ../_sass/screen.scss */
 body.two-col #content { display: inline; float: left; margin-right: 0; width: 630px; }
 /* line 138, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #content { overflow-x: hidden; }
