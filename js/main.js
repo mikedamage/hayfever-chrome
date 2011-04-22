@@ -9,35 +9,16 @@ $(document).ready(function() {
  	 * Initialize Handlebars.js Templates
 	 */
 	
-	var templates = {
-		git_feed_item: Handlebars.compile($('#tmpl-git-feed-item').html())
-	};
+	Handlebars.registerHelper('debug', function(optionalVal) {
+		console.log("Current Context: ");
+		console.log(this);
 
-	// GitHub Feed
-	var githubFeed = $.getJSON('http://github.com/api/v2/json/commits/list/mikedamage/hayfever-chrome/master?callback=?', function(json) {
-		if ('commits' in json) {
-			var commits = json.commits
-				, $commitList = $('#github-feed');
-
-			$commitList.find('.loading').remove();
-
-			for (var i=0; i < 3; i++) {
-				var c          = json.commits[i]
-					, shortHash  = c.id.substring(0, 12) + '...'
-					, commitInfo = {
-						hash: shortHash
-						, date: new Date(c.committed_date)
-						, message: c.message
-						, url: c.url
-					};
-				
-				$commitList.append(templates.git_feed_item(commitInfo));
-			}
-
-			$commitList.append('<li class="more"><a href="https://github.com/mikedamage/hayfever-chrome/commits/master" target="_blank">More &raquo;</a></li>');
+		if (optionalVal) {
+			console.log("Value:");
+			console.log(optionalVal);
 		}
 	});
-
+	
 	/**
  	 * Subscribe Form Placeholders and HTML5 Inputs
 	 * Regressive Enhancement - Most visitors use Chrome, but we'll downgrade the form if they don't.
