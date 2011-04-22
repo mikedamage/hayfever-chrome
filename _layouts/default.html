@@ -62,7 +62,7 @@
 		<ul id="news">
 			{% for post in site.posts limit:5 %}
 				<li class="post">
-					<strong>{{ post.date }}</strong>
+					<strong>{{ post.date | date: '%Y-%m-%d' }}</strong>
 					<a href="{{ post.url }}">{{ post.title }}</a>
 				</li>
 			{% endfor %}
