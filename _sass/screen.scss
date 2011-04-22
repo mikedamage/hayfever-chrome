@@ -113,6 +113,11 @@ body.bp {
 
       #addthis-links {
         text-align: center;
+
+        .addthis_toolbox {
+          width: 320px;
+          margin: 0 auto;
+        }
       }
 
       p.tagline {
