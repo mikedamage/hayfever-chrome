@@ -59,31 +59,23 @@
 			</div>
 		</div>
 
+		<ul id="news">
+			{% for post in site.posts limit:5 %}
+				<li class="post">
+					<strong>{{ post.date }}</strong>
+					<a href="{{ post.url }}">{{ post.title }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+
 		<div id="main">
 			{{ content }}
 		</div>
 
 		<div id="sidebar">
-			<h2>Download Hayfever</h2>
-			<ul id="downloads">
-				<li>
-					<a href="https://chrome.google.com/extensions/detail/hieiheiincjomjoiiknfcmiioakhlhmj" target="_blank" class="download-link crx-file"><strong>Chrome Web Store &raquo;</strong></a>
-				</li>
-				<li>
-					<a href="https://github.com/mikedamage/hayfever-chrome/zipball/master" class="download-link zipball">Source Code (Zip Archive) &raquo;</a>
-				</li>
-				<li>
-					<a href="https://github.com/mikedamage/hayfever-chrome" class="download-link github" target="_blank">Source Code on GitHub &raquo;</a>
-				</li>
-			</ul>
+			{% include downloads.html %}
 
-			<h2>Donate</h2>
-			<p>
-				<a href='http://www.pledgie.com/campaigns/14742'><img alt='Click here to lend your support to: Hayfever Chrome Plugin and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/14742.png?skin_name=chrome' border='0' /></a>
-				<br />
-				If you like using Hayfever, please consider buying me a cup of coffee. Your generous donations of caffeine help me to spend more time improving Hayfever for the masses.
-			</p>
-
+			{% include donate.html %}
 
 			<h2>Development Activity</h2>
 			<ul id="github-feed">
@@ -118,22 +110,10 @@
 	<script type="text/javascript" src="js/modernizr-1.7.min.js"></script>
 	<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="js/handlebars-0.9.0.pre.5.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 
-	<script type="application/x-jquery-tmpl" id="tmpl-github-feed-item">
-		<li class="feed-item">
-			<a href="${url}" target="_blank">${hash}</a>
-			<br />
-			<em>${message}</em>
-			<br />
-			${date}
-		</li>
-	</script>
+	{% include handlebars_templates.html %}
 
-	<script type="application/x-jquery-tmpl" id="tmpl-thanks">
-		<p class="thanks">
-			<strong>Thanks for subscribing!</strong> If you'd like to subscribe another email address, you can <a href="" class="reset-form">reset the form</a>.
-		</p>
-	</script>
 </body>
 </html>
