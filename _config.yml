@@ -8,4 +8,4 @@ auto: false
 lsi: false
 pygments: true
 markdown: maruku
-permalink: /hayfever-chrome/:year/:month/:day/:title
+permalink: /hayfever-chrome/:year/:month/:day/:title.html
