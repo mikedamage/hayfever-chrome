@@ -112,6 +112,13 @@ $(document).ready(function() {
 						prefs.enable_analytics = false;
 					}
 				break;
+				case 'show_task_notes':
+					if ($(this).is(':checked')) {
+						prefs.show_task_notes = true;
+					} else {
+						prefs.show_task_notes = false;
+					}
+				break;
 				default:
 					prefs[fieldName] = fieldVal;
 			}

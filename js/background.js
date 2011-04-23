@@ -97,6 +97,7 @@ $(document).ready(function() {
 		, refreshHours: function(callback) {
 			console.log('refreshing hours');
 			var root = window.application
+				, prefs = root.getPreferences()
 				, callback = (typeof callback === 'function') ? callback : function() {}
 				, todaysHours = root.client.getToday();
 

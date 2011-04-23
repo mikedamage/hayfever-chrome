@@ -35,6 +35,10 @@
     {{/if}}
 			<td class="entry-name">
 				<strong>${client}:</strong> ${project} (${task})
+				{{if window.preferences.show_task_notes}}
+					<br />
+					<strong>Notes:</strong> <em>${notes}</em>
+				{{/if}}
 			</td>
 			<td class="entry-hours" width="50" align="right">
 				${hours}
