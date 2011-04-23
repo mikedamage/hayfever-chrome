@@ -198,11 +198,9 @@ $(document).ready(function() {
 			if (json.timer_started_at) {
 				bgPage.console.log('timer started: ' + json.project_id);
 				$tableRow.addClass('running');
-				$activeImg.prependTo($link.parent().siblings('.entry-hours')).fadeIn(250);
 			} else {
 				bgPage.console.log('timer stopped');
 				$tableRow.removeClass('running');
-				$('#active-timer-img').fadeOut(250, function() { $(this).remove(); });
 			}
 		});
 		
