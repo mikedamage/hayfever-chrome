@@ -81,7 +81,7 @@ $(document).ready(function() {
 			colorPicker.setColor(preferences.badge_color);
 		}
 
-		if (preferences.hasOwnProperty('show_task_notes')) {
+		if (preferences.hasOwnProperty('show_task_notes') && preferences.show_task_notes) {
 			$('#show-task-notes').attr('checked', 'checked');
 		}
 	}
@@ -105,22 +105,12 @@ $(document).ready(function() {
 				case 'harvest_password':
 					tempPassword = fieldVal;
 				break;
-				case 'enable_analytics':
-					if ($(this).is(':checked')) {
-						prefs.enable_analytics = true;
-					} else {
-						prefs.enable_analytics = false;
-					}
-				break;
-				case 'show_task_notes':
-					if ($(this).is(':checked')) {
-						prefs.show_task_notes = true;
-					} else {
-						prefs.show_task_notes = false;
-					}
-				break;
 				default:
 					prefs[fieldName] = fieldVal;
+			}
+
+			if ($(this).attr('type') == 'checkbox') {
+				prefs[fieldName] = ($(this).is(':checked')) ? true : false;
 			}
 		});
 
