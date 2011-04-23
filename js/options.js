@@ -7,6 +7,24 @@
  * Released under the terms of the GNU GPLv2. See LICENSE for details.
  */
 
+/**
+ * These are the things Hayfever stores in localStorage. (each root item is a property of localStorage).
+ *   Ex. localStorage['harvest_subdomain'] //=> 'fo'
+ *
+ *   {
+ *     'harvest_subdomain': 'foo',
+ *     'harvest_username': 'foo@bar.com',
+ *     'harvest_auth_string': 'Zm9vQGJhci5jb206Zm9vYmFyMTIz',
+ *     'hayfever_prefs': {
+ *       'enable_analytics': true,
+ *       'badge_display': 'total',
+ *       'badge_format': 'clock',
+ *       'badge_color': '#108fbc',
+ *       'show_task_notes': false
+ *     }
+ *   }
+ */
+
 ;(function($) {
 	$.fn.selectOption = function(name) {
 		this.find('option[value="' + name + '"]').attr('selected', 'selected');
@@ -62,6 +80,10 @@ $(document).ready(function() {
 			$('#badge-color').val(preferences.badge_color);
 			colorPicker.setColor(preferences.badge_color);
 		}
+
+		if (preferences.hasOwnProperty('show_task_notes')) {
+			$('#show-task-notes').attr('checked', 'checked');
+		}
 	}
 
 	$('#options').submit(function() {
@@ -102,6 +124,10 @@ $(document).ready(function() {
 
 		if (!prefs.hasOwnProperty('enable_analytics')) {
 			prefs.enable_analytics = false;
+		}
+
+		if (!prefs.hasOwnProperty('show_task_notes')) {
+			prefs.show_task_notes = false;
 		}
 
 		localStorage.setItem('hayfever_prefs', JSON.stringify(prefs));
