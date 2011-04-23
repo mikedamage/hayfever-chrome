@@ -142,6 +142,9 @@ $(document).ready(function() {
 		}
 		return false;
 	});
+
+	// Refresh timesheet when popup opens
+	$.refreshTimesheet();
 	
 	// Manual refresh
 	$('a#refresh').refreshTimesheetOn('click', true);
