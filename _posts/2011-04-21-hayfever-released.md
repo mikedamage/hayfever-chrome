@@ -3,7 +3,7 @@ title: Hayfever Released!
 layout: post
 ---
 
-# Hayfever Released
+# Hayfever Released!
 
 As of April 18, 2011, Hayfever is available for download on the Chrome Web Store. So [download it](https://chrome.google.com/extensions/detail/hieiheiincjomjoiiknfcmiioakhlhmj) and give it a spin!
 
