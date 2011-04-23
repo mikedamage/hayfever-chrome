@@ -145,9 +145,16 @@ $(document).ready(function() {
 				callback.call(root.todaysEntries);
 			});
 
-			todaysHours.error(function() {
+			todaysHours.error(function(xhr, textStatus, errorThrown) {
 				console.log("Error refreshing hours!");
-			})
+
+				if (xhr.status == 401) {
+					// Authentication Failure
+					root.authorized = false;
+					chrome.browserAction.setBadgeBackgroundColor({color: [255, 0, 0, 255]});
+					chrome.browserAction.setBadgeText({text: "!"});
+				}
+			});
 		}
 		, inPopup: function(func) {
 			var fn = func

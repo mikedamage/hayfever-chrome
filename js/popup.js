@@ -97,6 +97,10 @@ $(document).ready(function() {
 	if (!app.authDataExists()) {
 		$('tr.noentries').html('<td colspan="3" align="center"><div class="notice">Please visit the <a href="options.html" target="_blank">Options page</a> and configure Hayfever. Follow the link or click on the gear icon below to access the options page.</div></td>');
 	}
+
+	if (!app.authorized) {
+		$('tr.noentries').html('<td colspan="3" align="center"><div class="notice">Your Harvest authentication information is incorrect. Please visit the <a href="options.html" target="_blank">Options page</a> and correct your subdomain, username, and password.</div></tr>');
+	}
 	
 	// Repaint the table rows whenever new elements are appended to the timesheet
 	$timesheet.bind('DOMNodeInserted', function(evt) {
