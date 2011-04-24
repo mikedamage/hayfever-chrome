@@ -14,6 +14,9 @@
  * Harvest API Class
  */
 function Harvest(subdomain, authString) {
+	if (typeof subdomain === "undefined" || typeof authString === "undefined") {
+		throw {error: "InvalidArguments", message: "Must include both a subdomain and auth string in constructor"};
+	}
 	var root = this
 		, opts = {
 			subdomain: subdomain
