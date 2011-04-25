@@ -110,6 +110,21 @@ function Harvest(subdomain, authString) {
 		});
 		return url;
 	};
+
+	/**
+	 * Get API rate limit status
+	 *
+	 * @returns {jqXHR}
+	 */
+	this.rateLimitStatus = function() {
+		var statusURL = root.buildURL('account', 'rate_limit_status')
+	 	, request = $.ajax({
+			url: statusURL
+			, type: 'GET'
+		});
+
+		return request;
+	};
 	
 	/**
 	 * Get all timesheet entries (and project list)
