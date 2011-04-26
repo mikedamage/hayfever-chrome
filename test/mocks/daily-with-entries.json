@@ -1,0 +1,106 @@
+{
+   "day_entries": [ {
+  "timer_started_at":  "2011-04-26T14:20:00Z",
+ "project_id": "963424",
+ "project": "Web Site Development",
+ "task_id": "69547",
+ "task": "Coding (HTML, CSS)",
+ "client": "Ignition",
+ "id": 44779029,
+ "notes": "Finishing up with tasks for James",
+ "created_at": "2011-04-26T14:20:39Z",
+ "updated_at": "2011-04-26T14:20:39Z",
+ 
+ "hours": 0.02}
+,
+{ "project_id": "1078306",
+ "project": "Web Site Updates",
+ "task_id": "69546",
+ "task": "Programming (PHP, Ruby, MySQL)",
+ "client": "Alternative Press",
+ "id": 44779073,
+ "notes": "Adding Google Translate",
+ "created_at": "2011-04-26T14:21:00Z",
+ "updated_at": "2011-04-26T14:21:00Z",
+ 
+ "hours": 0.50}
+],
+   "projects": [{
+"name": "Branding and Web Site",
+"id": 863082,
+"tasks": [{"name": "Coding (HTML, CSS)", "billable": true, "id": 69547}, {"name": "Design", "billable": true, "id": 69540}, {"name": "Development Meetings", "billable": true, "id": 69545}, {"name": "File Preperation", "billable": true, "id": 69548}, {"name": "Project Management", "billable": true, "id": 69537}, {"name": "Proposal / Estimating", "billable": true, "id": 69536}, {"name": "Search Engine Optimization", "billable": true, "id": 242247}, {"name": "Server Setup", "billable": true, "id": 79611}, {"name": "Testing", "billable": true, "id": 69542}],
+ "client": "Advanced Solar Products"}
+,
+{
+"name": "Web Site Updates",
+"id": 1078306,
+"tasks": [{"name": "Coding (HTML, CSS)", "billable": true, "id": 69547}, {"name": "Design", "billable": true, "id": 69540}, {"name": "Development Meetings", "billable": false, "id": 69545}, {"name": "Programming (PHP, Ruby, MySQL)", "billable": true, "id": 69546}, {"name": "Project Management", "billable": false, "id": 69537}, {"name": "Proposal / Estimating", "billable": false, "id": 69536}, {"name": "Search Engine Optimization", "billable": true, "id": 242247}],
+ "client": "Alternative Press"}
+,
+{
+"name": "Campaign Five",
+"id": 87851,
+"tasks": [{"name": "Coding (HTML, CSS)", "billable": false, "id": 69547}, {"name": "Design", "billable": false, "id": 69540}, {"name": "Development Meetings", "billable": false, "id": 69545}, {"name": "Project Management", "billable": false, "id": 69537}, {"name": "Proposal / Estimating", "billable": false, "id": 69536}],
+ "client": "Fifth Room Creative"}
+,
+{
+"name": "Converge Coworking",
+"id": 561224,
+"tasks": [{"name": "Ad Design", "billable": false, "id": 77209}, {"name": "Bookkeeping", "billable": false, "id": 73118}, {"name": "Business Development", "billable": false, "id": 69538}, {"name": "Coding (HTML, CSS)", "billable": false, "id": 69547}, {"name": "Copyrighting", "billable": false, "id": 70375}, {"name": "Design", "billable": false, "id": 69540}, {"name": "Development", "billable": false, "id": 69541}, {"name": "Development Meetings", "billable": false, "id": 69545}, {"name": "Event Management", "billable": false, "id": 576053}, {"name": "Programming (PHP, Ruby, MySQL)", "billable": false, "id": 69546}, {"name": "Project Management", "billable": false, "id": 69537}, {"name": "Proposal / Estimating", "billable": false, "id": 69536}, {"name": "Research", "billable": false, "id": 140204}, {"name": "Search Engine Optimization", "billable": false, "id": 242247}, {"name": "Server Setup", "billable": false, "id": 79611}, {"name": "Social Media", "billable": false, "id": 320139}],
+ "client": "Fifth Room Creative"}
+,
+{
+"name": "Internal",
+"id": 54031,
+"tasks": [{"name": "Billing", "billable": false, "id": 70822}, {"name": "Business Development", "billable": false, "id": 69538}, {"name": "Design", "billable": false, "id": 69540}, {"name": "Development Meetings", "billable": false, "id": 69545}, {"name": "FRC Marketing", "billable": false, "id": 69543}, {"name": "FRC.com", "billable": false, "id": 69544}, {"name": "Project Management", "billable": false, "id": 69537}, {"name": "Proposal / Estimating", "billable": false, "id": 69536}, {"name": "Research", "billable": false, "id": 140204}, {"name": "Vacation", "billable": false, "id": 69539}],
+ "client": "Fifth Room Creative"}
+,
+{
+"name": "Web Site",
+"id": 894776,
+"tasks": [{"name": "CMS Setup", "billable": true, "id": 573812}, {"name": "Coding (HTML, CSS)", "billable": true, "id": 69547}, {"name": "Design", "billable": true, "id": 69540}, {"name": "Development Meetings", "billable": true, "id": 69545}, {"name": "Programming (PHP, Ruby, MySQL)", "billable": true, "id": 69546}, {"name": "Project Management", "billable": true, "id": 69537}, {"name": "Proposal / Estimating", "billable": true, "id": 69536}, {"name": "Search Engine Analysis", "billable": true, "id": 246932}, {"name": "Search Engine Optimization", "billable": true, "id": 242247}, {"name": "Server Setup", "billable": false, "id": 79611}],
+ "client": "Flow Safe"}
+,
+{
+"name": "Web Site Development",
+"id": 963424,
+"tasks": [{"name": "CMS Setup", "billable": true, "id": 573812}, {"name": "Coding (HTML, CSS)", "billable": true, "id": 69547}, {"name": "Design", "billable": true, "id": 69540}, {"name": "Development", "billable": true, "id": 69541}, {"name": "Development Meetings", "billable": true, "id": 69545}, {"name": "Programming (PHP, Ruby, MySQL)", "billable": true, "id": 69546}, {"name": "Project Management", "billable": true, "id": 69537}, {"name": "Proposal / Estimating", "billable": true, "id": 69536}, {"name": "Search Engine Optimization", "billable": true, "id": 242247}, {"name": "Server Setup", "billable": true, "id": 79611}],
+ "client": "Ignition"}
+,
+{
+"name": "Website",
+"id": 1073118,
+"tasks": [{"name": "Coding (HTML, CSS)", "billable": true, "id": 69547}, {"name": "Design", "billable": true, "id": 69540}, {"name": "Development Meetings", "billable": true, "id": 69545}, {"name": "Programming (PHP, Ruby, MySQL)", "billable": true, "id": 69546}, {"name": "Project Management", "billable": true, "id": 69537}, {"name": "Proposal / Estimating", "billable": true, "id": 69536}, {"name": "Search Engine Analysis", "billable": true, "id": 246932}, {"name": "Search Engine Optimization", "billable": true, "id": 242247}, {"name": "Testing", "billable": true, "id": 69542}],
+ "client": "MindClings"}
+,
+{
+"name": "Web site Redesign",
+"id": 916480,
+"tasks": [{"name": "CMS Setup", "billable": true, "id": 573812}, {"name": "Design", "billable": true, "id": 69540}, {"name": "Development Meetings", "billable": true, "id": 69545}, {"name": "Programming (PHP, Ruby, MySQL)", "billable": true, "id": 69546}, {"name": "Project Management", "billable": true, "id": 69537}, {"name": "Proposal / Estimating", "billable": true, "id": 69536}, {"name": "Search Engine Optimization", "billable": true, "id": 242247}],
+ "client": "Performing Arts Consultants"}
+,
+{
+"name": "Redeem Her Web Site",
+"id": 553835,
+"tasks": [{"name": "Coding (HTML, CSS)", "billable": false, "id": 69547}, {"name": "Design", "billable": false, "id": 69540}, {"name": "Development Meetings", "billable": false, "id": 69545}, {"name": "Programming (PHP, Ruby, MySQL)", "billable": false, "id": 69546}, {"name": "Project Management", "billable": false, "id": 69537}, {"name": "Proposal / Estimating", "billable": false, "id": 69536}, {"name": "Search Engine Optimization", "billable": false, "id": 242247}, {"name": "Server Setup", "billable": false, "id": 79611}],
+ "client": "Redeem Her"}
+,
+{
+"name": "2011 Web Site Updates",
+"id": 1016534,
+"tasks": [{"name": "Coding (HTML, CSS)", "billable": true, "id": 69547}, {"name": "Design", "billable": true, "id": 69540}, {"name": "Development Meetings", "billable": true, "id": 69545}, {"name": "Project Management", "billable": true, "id": 69537}, {"name": "Proposal / Estimating", "billable": true, "id": 69536}, {"name": "Search Engine Optimization", "billable": true, "id": 242247}],
+ "client": "Rudolph Research Analytical"}
+,
+{
+"name": "Email Marketing Campaign",
+"id": 834523,
+"tasks": [{"name": "CampaignFive Setup", "billable": true, "id": 86644}, {"name": "Coding (HTML, CSS)", "billable": true, "id": 69547}, {"name": "Design", "billable": true, "id": 69540}, {"name": "Development Meetings", "billable": false, "id": 69545}, {"name": "Project Management", "billable": false, "id": 69537}, {"name": "Proposal / Estimating", "billable": false, "id": 69536}, {"name": "Search Engine Optimization", "billable": false, "id": 242247}],
+ "client": "SCBP"}
+,
+{
+"name": "Website",
+"id": 1073125,
+"tasks": [{"name": "Design", "billable": true, "id": 69540}, {"name": "Development Meetings", "billable": true, "id": 69545}, {"name": "Programming (PHP, Ruby, MySQL)", "billable": true, "id": 69546}, {"name": "Project Management", "billable": true, "id": 69537}, {"name": "Proposal / Estimating", "billable": false, "id": 69536}, {"name": "Search Engine Optimization", "billable": true, "id": 242247}, {"name": "Testing", "billable": true, "id": 69542}],
+ "client": "Toro Satchels"}
+],
+   "for_day": "2011-04-26"}
