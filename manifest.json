@@ -16,7 +16,6 @@
 	},
 	"options_page": "options.html",
 	"permissions": [
-		"tabs",
 		"https://*.harvestapp.com/"
 	]
 }

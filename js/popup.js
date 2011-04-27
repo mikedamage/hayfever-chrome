@@ -101,6 +101,11 @@ $(document).ready(function() {
 	if (!app.authorized) {
 		$('tr.noentries').html('<td colspan="3" align="center"><div class="notice">Your Harvest authentication information is incorrect. Please visit the <a href="options.html" target="_blank">Options page</a> and correct your subdomain, username, and password.</div></tr>');
 	}
+
+	if (app.authorized) {
+		var harvestSubdomain = app.getAuthData().subdomain;
+		$('#harvest-link').attr('href', 'https://' + harvestSubdomain + '.harvestapp.com');
+	}
 	
 	// Repaint the table rows whenever new elements are appended to the timesheet
 	$timesheet.bind('DOMNodeInserted', function(evt) {
@@ -126,21 +131,6 @@ $(document).ready(function() {
 		if (tabID == app.harvestTab.id) {
 			delete app.harvestTab;
 		}
-	});
-
-	// "Open Harvest" link
-	$('a#harvest-link').click(function() {
-		if (app.harvestTab) {
-			chrome.tabs.update(app.harvestTab.id, { selected: true });
-		} else {
-			chrome.tabs.create({
-				url: 'https://' + app.getAuthData().subdomain + '.harvestapp.com'
-				, selected: true
-			}, function(tab) {
-				app.harvestTab = tab;
-			});
-		}
-		return false;
 	});
 
 	// Refresh timesheet when popup opens

@@ -31,6 +31,7 @@ $(document).ready(function() {
 
 	window.application = {
 		version: '0.2.2'
+		, authorized: false
 		, totalHours: 0.0
 		, currentHours: 0.0
 		, todaysEntries: []
@@ -102,6 +103,8 @@ $(document).ready(function() {
 				, todaysHours = root.client.getToday();
 
 			todaysHours.success(function(json) {
+				root.authorized = true;
+
 				var totalHours = 0.0
 					, currentHours = '';
 				
@@ -165,18 +168,6 @@ $(document).ready(function() {
 				}
 			});
 		}
-		, openHarvestTab: function() {
-			var root = window.application
-				, auth = root.getAuthData();
-
-			if (root.harvestTab) {
-				chrome.tabs.update(root.harvestTab.id, { selected: true });
-			} else {
-				chrome.tabs.create({ url: 'https://' + auth.subdomain + '.harvestapp.com', selected: true }, function(tab) {
-					app.harvestTab = tab;
-				});
-			}
-		}
 	};
 
 	window.application.init = function() {
@@ -199,14 +190,6 @@ $(document).ready(function() {
 		chrome.browserAction.setBadgeText({text: "!"});
 		console.error("Error initializing Hayfever. Please visit the Options page");
 	}
-
-	// If user closes the harvest tab, remove it from our cache
-	chrome.tabs.onRemoved.addListener(function(tabID) {
-		if (tabID == window.application.harvestTab.id) {
-			delete window.application.harvestTab;
-			console.log('Deleting cached Harvest tab (tab ID: ' + tabID + ')');
-		}
-	});
 });
 
 // vim: set ts=2 sw=2 syntax=jquery smartindent :
