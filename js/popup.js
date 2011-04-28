@@ -65,7 +65,12 @@
 		// `this` is bound to app.todaysEntries
 		app.refreshHours(function() {
 			// Repopulate table rows
-			$timesheet.html($('#entry-row-template').tmpl(this));
+			if (this.length > 0) {
+				$timesheet.html($('#entry-row-template').tmpl(this));
+				console.log("Refreshed hours, printed to timesheet.");
+			} else {
+				console.log("Refreshed hours, nothing to print.");
+			}
 
 			// Set big clocks in footer
 			var totalHoursTime = app.totalHours.toClockTime()
