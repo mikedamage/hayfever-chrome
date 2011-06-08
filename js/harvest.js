@@ -13,7 +13,7 @@
 /**
  * Harvest API Class
  */
-function Harvest(subdomain, authString) {
+function Harvest(subdomain, authString, options) {
 	if (typeof subdomain === "undefined" || typeof authString === "undefined") {
 		throw {error: "InvalidArguments", message: "Must include both a subdomain and auth string in constructor"};
 	}
@@ -22,7 +22,8 @@ function Harvest(subdomain, authString) {
 			subdomain: subdomain
 			, authString: authString
 		}
-		, fullURL = 'https://'+opts.subdomain+'.harvestapp.com';
+		, fullURL = 'https://'+opts.subdomain+'.harvestapp.com'
+		, clientOptions = typeof options == 'object' ? options : {};
 
 	/**
 	 * Set default AJAX options
@@ -33,9 +34,7 @@ function Harvest(subdomain, authString) {
 	$.ajaxSetup({
 		dataType: 'json'
 		, headers: {
-			'Accept': 'application/json'
-			, 'Content-Type': 'application/json'
-			, 'Cache-Control': 'no-cache'
+			'Cache-Control': 'no-cache'
 			, 'Authorization': 'Basic ' + opts.authString 
 		}
 	});
@@ -108,7 +107,7 @@ function Harvest(subdomain, authString) {
 		$.each(arguments, function(i, v) {
 			url += '/' + v;
 		});
-		return url;
+		return url + '.json';
 	};
 
 	/**
