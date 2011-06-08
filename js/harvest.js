@@ -35,6 +35,7 @@ function Harvest(subdomain, authString, options) {
 		dataType: 'json'
 		, headers: {
 			'Cache-Control': 'no-cache'
+			, 'Content-Type': 'application/json'
 			, 'Authorization': 'Basic ' + opts.authString 
 		}
 	});
