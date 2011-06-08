@@ -30,7 +30,7 @@ $(document).ready(function() {
 		, subdomain = localStorage['harvest_subdomain'];
 
 	window.application = {
-		version: '0.2.2'
+		version: '0.2.3'
 		, authorized: false
 		, totalHours: 0.0
 		, currentHours: 0.0
