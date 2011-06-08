@@ -35,7 +35,6 @@ function Harvest(subdomain, authString, options) {
 		dataType: 'json'
 		, headers: {
 			'Cache-Control': 'no-cache'
-			, 'Content-Type': 'application/json'
 			, 'Authorization': 'Basic ' + opts.authString 
 		}
 	});
@@ -235,14 +234,13 @@ function Harvest(subdomain, authString, options) {
 	 */
 	this.addEntry = function(props, async) {
 		async = (typeof async == 'undefined') ? true : async;
-		var url = root.buildURL('daily', 'add')
-			, json = JSON.stringify(props);
+		var url = root.buildURL('daily', 'add');
 
 		var request = $.ajax({
 			url: url
 			, type: 'POST'
 			, async: async
-			, data: json
+			, data: props
 		});
 
 		return request;
@@ -262,14 +260,13 @@ function Harvest(subdomain, authString, options) {
 
 	this.updateEntry = function(eid, props, async) {
 		async = (typeof async == 'undefined') ? true : async;
-		var url  = root.buildURL('daily', 'update', eid)
-			, json = JSON.stringify(props);
+		var url  = root.buildURL('daily', 'update', eid);
 
 		var request = $.ajax({
 			url: url
 			, type: 'POST'
 			, async: async
-			, data: json
+			, data: props
 		});
 
 		return request;
