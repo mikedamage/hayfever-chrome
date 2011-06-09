@@ -91,7 +91,8 @@
 
 	$.fn.validateTaskForm = function(properties) {
 		var $fields = $(this).find('select')
-			, errors = [];
+			, errors = []
+			, formHeight = $(this).height();
 
 		$fields.each(function() {
 			if (_.isEmpty($(this).val())) {
@@ -104,6 +105,13 @@
 				$(this).next('.error').remove();
 			}
 		});
+
+		if (errors.length > 0) {
+			var newHeight = $(this).height()
+				, diff = newHeight - formHeight;
+			
+			$('body').animate({height: '+=' + diff + 'px'}, 200);
+		}
 
 		return errors;
 	};
