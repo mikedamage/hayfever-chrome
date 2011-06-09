@@ -197,6 +197,9 @@ ul.toolbar {
     padding-top: 5px; }
   a.cancel {
     /* TODO: Display block, background image of an X */ }
+	.error {
+		color: $error-color;
+		font-size: 11px; }
   label {
     float: left;
     display: block;

@@ -88,6 +88,25 @@
 			$.refreshTimesheet(bg);
 		});
 	};
+
+	$.fn.validateTaskForm = function(properties) {
+		var $fields = $(this).find('select')
+			, errors = [];
+
+		$fields.each(function() {
+			if (_.isEmpty($(this).val())) {
+				errors.push({field: $(this), name: $(this).attr('name')});
+
+				if ($(this).next('.error').size() == 0) {
+					$(this).after('<span class="error">Cannot be blank</span>');
+				}
+			} else {
+				$(this).next('.error').remove();
+			}
+		});
+
+		return errors;
+	};
 })(jQuery);
 
 $(document).ready(function() {
@@ -312,7 +331,8 @@ $(document).ready(function() {
 	
 	// Handle entry form submissions
 	$('#entry-form').submit(function() {
-		var today = new Date()
+		var $form = $(this)
+			, today = new Date()
 			, $overlay = $(this).closest('#form-overlay')
 			, $idField = $(this).find('#timer-id')
 			, props = {
@@ -325,7 +345,13 @@ $(document).ready(function() {
 			, autoStart = $('#start-on-save').is(':checked');
 		
 		if ($idField.size() > 0) {
-			var timerID = $idField.val();
+			var timerID = $idField.val()
+				, errors = $form.validateTaskForm(props);
+
+			if (errors.length > 0) {
+				return false;
+			}
+
 			var updateResult = app.client.updateEntry(timerID, props);
 
 			updateResult.success(function(json, status, xhr) {
@@ -351,6 +377,12 @@ $(document).ready(function() {
 				}
 			});
 		} else {
+			var errors = $form.validateTaskForm(props);
+
+			if (errors.length > 0) {
+				return false;
+			}
+
 			var addResult = app.client.addEntry(props);
 			addResult.success(function(json, status, xhr) {
 				if (xhr.status == 201) {

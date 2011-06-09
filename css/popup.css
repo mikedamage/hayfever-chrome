@@ -239,22 +239,27 @@ ul.toolbar li {
   /* TODO: Display block, background image of an X */
 }
 /* line 200, ../sass/popup.scss */
+#entry-form .error {
+  color: #a33434;
+  font-size: 11px;
+}
+/* line 203, ../sass/popup.scss */
 #entry-form label {
   float: left;
   display: block;
   width: 65px;
   font-size: 14px;
 }
-/* line 205, ../sass/popup.scss */
+/* line 208, ../sass/popup.scss */
 #entry-form label.checkbox {
   float: right;
   width: 216px;
 }
-/* line 208, ../sass/popup.scss */
+/* line 211, ../sass/popup.scss */
 #entry-form select {
   width: 205px;
 }
-/* line 210, ../sass/popup.scss */
+/* line 213, ../sass/popup.scss */
 #entry-form input[type='text'], #entry-form textarea {
   border: 1px solid #e5e5e5;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -264,50 +269,50 @@ ul.toolbar li {
   background: -webkit-gradient(linear, left top, left 25, from(white), color-stop(10%, #f7f7f7), to(white));
   -webkit-transition: all 200ms ease-in 50ms;
 }
-/* line 218, ../sass/popup.scss */
+/* line 221, ../sass/popup.scss */
 #entry-form input[type='text']:hover, #entry-form textarea:hover, #entry-form input[type='text']:focus, #entry-form textarea:focus {
   -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 8px;
 }
-/* line 220, ../sass/popup.scss */
+/* line 223, ../sass/popup.scss */
 #entry-form input[type='text'] {
   font-size: 14px;
   font-weight: bold;
 }
-/* line 223, ../sass/popup.scss */
+/* line 226, ../sass/popup.scss */
 #entry-form textarea {
   font-size: 12px;
   height: 60px;
 }
 
 @-webkit-keyframes runningtimer {
-  /* line 228, ../sass/popup.scss */
+  /* line 231, ../sass/popup.scss */
   0% {
     background: #F2FFEC;
   }
 
-  /* line 232, ../sass/popup.scss */
+  /* line 235, ../sass/popup.scss */
   50% {
     background: #DBF8CD;
   }
 
-  /* line 236, ../sass/popup.scss */
+  /* line 239, ../sass/popup.scss */
   100% {
     background: #F2FFEC;
   }
 }
 
 @-webkit-keyframes blinkey {
-  /* line 242, ../sass/popup.scss */
+  /* line 245, ../sass/popup.scss */
   0% {
     color: #000;
   }
 
-  /* line 245, ../sass/popup.scss */
+  /* line 248, ../sass/popup.scss */
   50% {
     color: #FFEFC7;
   }
 
-  /* line 248, ../sass/popup.scss */
+  /* line 251, ../sass/popup.scss */
   100% {
     color: #000;
   }

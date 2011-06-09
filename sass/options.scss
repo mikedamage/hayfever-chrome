@@ -48,8 +48,7 @@ body {
   margin: 10px auto;
   padding: 10px;
   &.success {
-    //background: -webkit-gradient(linear, left bottom, left top, color-stop(0.61, #ddffdd), color-stop(0.14, #c1e4c1));
-    @include linear-gradient(color-stops($success-green, #c1e4c1), top);
+		@include background-image(linear-gradient(top, $success-green, #c1e4c1));
     border: 1px solid #9C6;
     color: #4d4d4d;
     -webkit-border-radius: 5px;
@@ -66,8 +65,8 @@ fieldset {
 
 input {
   &[type="text"], &[type="password"] {
-		@include linear-gradient(color-stops(white, #f7f7f7 10%, white), top);
-		@include box-shadow($ultralight-shadow, 0, 0, 8px);
+		@include background-image(linear-gradient(top, white, #f7f7f7 10%, white));
+		@include box-shadow($ultralight-shadow 0 0 8px);
 		@include border-radius(5px);
 		-webkit-transition: all 200ms ease-in 50ms;
     width: 300px;
@@ -76,7 +75,7 @@ input {
 		color: $dark-gray;
 
 		&:hover {
-			@include box-shadow($medium-shadow, 0, 0, 8px);
+			@include box-shadow($medium-shadow 0 0 8px);
 		}
 	} 
 }
@@ -84,7 +83,7 @@ input {
 button {
 	@include simple-gradient-vert($button-top, $button-bottom);
 	@include border-radius(5px);
-	@include box-shadow($light-shadow, 0, 1px, 3px);
+	@include box-shadow($light-shadow 0 1px 3px);
 	-webkit-transition: all 200ms ease-in 50ms;
 	text-shadow: $light-shadow 0 -1px 1px;
 	color: white;
