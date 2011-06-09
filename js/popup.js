@@ -95,7 +95,13 @@ $(document).ready(function() {
 	var bgPage = chrome.extension.getBackgroundPage()
 		, app = bgPage.application
 		, dayEntries = app.todaysEntries
-		, $timesheet = $('#timesheet tbody');
+		, $timesheet = $('#timesheet tbody')
+		, templates = {
+			toggle: "timer toggled: (id: ${id}, client: ${client}, project: ${project}, project_id: ${project_id}, task: ${task}, task_id: ${task_id})"
+		};
+
+	// Compile the debug template for toggling timers
+	$.template(templates.toggle, "toggleTimer");
 	
 	window.preferences = app.getPreferences();
 	
@@ -182,17 +188,17 @@ $(document).ready(function() {
 		// Timer toggle handler
 		var $link        = $(this)
 			, $tableRow    = $link.closest('tr')
-			, timerID      = parseInt($link.attr('data-timerid'), 10)
+			, timerID      = parseInt($link.data('timerId'), 10)
 			, bgPage       = chrome.extension.getBackgroundPage()
 			, app          = bgPage.application
 			, toggleResult = app.client.toggleTimer(timerID);
 		
 		toggleResult.success(function(json) {
 			if (json.timer_started_at) {
-				bgPage.console.log('timer started: ' + json.project_id);
+				bgPage.console.log('timer started: ' + json.id + ', project_id: ' + json.project_id + ', task_id: ' + json.task_id);
 				$tableRow.addClass('running');
 			} else {
-				bgPage.console.log('timer stopped');
+				bgPage.console.log('timer stopped: ' + json.id + ', project_id: ' + json.project_id + ', task_id: ' + json.task_id);
 				$tableRow.removeClass('running');
 			}
 		});
@@ -203,7 +209,7 @@ $(document).ready(function() {
 		var $link = $(this)
 			, $overlay = $('#form-overlay')
 			, $form = $('#entry-form')
-			, timerID = $link.attr('data-timerid')
+			, timerID = $link.data('timerId')
 			, $input = $('<input/>', {'id': 'timer-id', type: 'hidden', 'value': timerID })
 			, bgPage = chrome.extension.getBackgroundPage()
 			, app = bgPage.application;
@@ -241,7 +247,7 @@ $(document).ready(function() {
 		return false;
 	}).delegate('a.delete', 'click', function() {
 		var $link = $(this)
-			, timerID = $link.attr('data-timerid')
+			, timerID = $link.data('timerId')
 			, bgPage = chrome.extension.getBackgroundPage()
 			, app = bgPage.application;
 
