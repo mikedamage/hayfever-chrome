@@ -95,13 +95,7 @@ $(document).ready(function() {
 	var bgPage = chrome.extension.getBackgroundPage()
 		, app = bgPage.application
 		, dayEntries = app.todaysEntries
-		, $timesheet = $('#timesheet tbody')
-		, templates = {
-			toggle: "timer toggled: (id: ${id}, client: ${client}, project: ${project}, project_id: ${project_id}, task: ${task}, task_id: ${task_id})"
-		};
-
-	// Compile the debug template for toggling timers
-	$.template(templates.toggle, "toggleTimer");
+		, $timesheet = $('#timesheet tbody');
 	
 	window.preferences = app.getPreferences();
 	
