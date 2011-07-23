@@ -3,7 +3,8 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
-  color: #4d4d4d; }
+  color: #4d4d4d; 
+	width: $popup-width; }
 
 a {
   color: #DB9C59; }
@@ -45,6 +46,7 @@ a {
 
 #timesheet {
   margin: 10px auto;
+	width: $popup-width;
   thead {
     tr {
       border: 1px solid #e6e6e6; }
@@ -189,7 +191,7 @@ ul.toolbar {
   font-size: 12px;
   -webkit-border-radius: 8px;
   background: #fff;
-  width: 280px;
+  width: 85%;
   margin: 0 auto;
   padding: 0 5px 10px 10px;
   h2 {
