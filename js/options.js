@@ -46,7 +46,7 @@ $(document).ready(function() {
 	var colorPicker = $.farbtastic('#badge-color-picker', function(color) {
 		$('#badge-color').val(color).css('background-color', color);
 	});
-	
+
 	/**
  	 * Populate form fields if options are already set
 	 */
