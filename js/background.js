@@ -34,6 +34,7 @@ $(document).ready(function() {
 		, authorized: false
 		, totalHours: 0.0
 		, currentHours: 0.0
+		, timerRunning: false
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
