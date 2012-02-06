@@ -157,7 +157,7 @@ $(document).ready(function() {
 	// Events
 	
 	// Refresh timesheet when popup opens
-	$.refreshTimesheet();
+	$.refreshTimesheet(true);
 	
 	// Manual refresh
 	$('a#refresh').refreshTimesheetOn('click', true);
@@ -218,8 +218,10 @@ $(document).ready(function() {
 			if (json.timer_started_at) {
 				bgPage.console.log('timer started: ' + json.id + ', project_id: ' + json.project_id + ', task_id: ' + json.task_id);
 				$tableRow.addClass('running');
+				app.startBadgeFlash();
 			} else {
 				bgPage.console.log('timer stopped: ' + json.id + ', project_id: ' + json.project_id + ', task_id: ' + json.task_id);
+				app.stopBadgeFlash();
 				$tableRow.removeClass('running');
 			}
 		});

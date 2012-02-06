@@ -193,7 +193,7 @@ $(document).ready(function() {
 			var root = window.application;
 
 			if (root.badgeFlashInterval == 0) {
-				window.application.badgeFlashInterval = setInterval(window.application.badgeFlash, 2000);
+				root.badgeFlashInterval = setInterval(root.badgeFlash, 2000);
 			}
 		}
 		, stopBadgeFlash: function() {
@@ -201,7 +201,7 @@ $(document).ready(function() {
 			var root = window.application;
 			clearInterval(root.badgeFlashInterval);
 			root.badgeFlashInterval = 0;
-			window.application.badgeColor(255);
+			root.badgeColor(255);
 		}
 	};
 
