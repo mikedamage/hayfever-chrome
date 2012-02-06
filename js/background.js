@@ -35,6 +35,7 @@ $(document).ready(function() {
 		, totalHours: 0.0
 		, currentHours: 0.0
 		, timerRunning: false
+		, badgeFlashInterval: 0
 		, todaysEntries: []
 		, projects: []
 		, clients: {}
@@ -176,6 +177,20 @@ $(document).ready(function() {
 					fn.apply(this, args);
 				}
 			});
+		}
+		, badgeColor: function(alpha) {
+			var color = $.hexColorToRGBA(prefs.badge_color, alpha)
+			chrome.browserAction.setBadgeBackgroundColor({ color: color });
+		}
+		, badgeFlash: function(alpha) {
+			window.application.badgeColor(255);
+			setTimeout(window.application.badgeColor, 1000, 100);
+		}
+		, startBadgeFlash: function() {
+			window.application.badgeFlashInterval = setInterval(window.application.badgeFlash, 2000);
+		}
+		, stopBadgeFlash: function() {
+			clearInterval(window.application.badgeFlashInterval);
 		}
 	};
 
