@@ -130,12 +130,10 @@ $(document).ready(function() {
 					root.currentHours = currentHours;
 					root.timerRunning = true;
 					root.startBadgeFlash();
-					console.log("Starting badge blink");
 				} else {
 					root.currentHours = 0.0;
 					root.timerRunning = false;
 					root.stopBadgeFlash();
-					console.log("Stopping badge blink");
 				}
 				
 				// Build a grouped list of clients/projects for building optgroups later
@@ -191,6 +189,7 @@ $(document).ready(function() {
 			setTimeout(window.application.badgeColor, 1000, 100);
 		}
 		, startBadgeFlash: function() {
+			console.log("Starting badge blink");
 			var root = window.application;
 
 			if (root.badgeFlashInterval == 0) {
@@ -198,6 +197,7 @@ $(document).ready(function() {
 			}
 		}
 		, stopBadgeFlash: function() {
+			console.log("Stopping badge blink");
 			var root = window.application;
 			clearInterval(root.badgeFlashInterval);
 			root.badgeFlashInterval = 0;
