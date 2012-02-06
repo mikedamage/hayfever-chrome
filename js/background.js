@@ -191,6 +191,7 @@ $(document).ready(function() {
 		}
 		, stopBadgeFlash: function() {
 			clearInterval(window.application.badgeFlashInterval);
+			window.application.badgeColor(255);
 		}
 	};
 
