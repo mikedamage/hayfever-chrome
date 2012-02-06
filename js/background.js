@@ -192,16 +192,19 @@ $(document).ready(function() {
 			console.log("Starting badge blink");
 			var root = window.application;
 
-			if (root.badgeFlashInterval == 0) {
+			if (root.badgeFlashInterval == 0 && prefs.badge_blink) {
 				root.badgeFlashInterval = setInterval(root.badgeFlash, 2000);
 			}
 		}
 		, stopBadgeFlash: function() {
-			console.log("Stopping badge blink");
 			var root = window.application;
-			clearInterval(root.badgeFlashInterval);
-			root.badgeFlashInterval = 0;
-			root.badgeColor(255);
+
+			if (root.badgeFlashInterval != 0) {
+				console.log("Stopping badge blink");
+				clearInterval(root.badgeFlashInterval);
+				root.badgeFlashInterval = 0;
+				root.badgeColor(255);
+			}
 		}
 	};
 
