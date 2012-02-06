@@ -84,6 +84,10 @@ $(document).ready(function() {
 		if (preferences.hasOwnProperty('show_task_notes') && preferences.show_task_notes) {
 			$('#show-task-notes').attr('checked', 'checked');
 		}
+
+		if (preferences.hasOwnProperty('badge_blink') && preferences.badge_blink) {
+			$('#badge-blink').attr('checked', 'checked');
+		}
 	}
 
 	$('#options').submit(function() {
