@@ -129,9 +129,11 @@ $(document).ready(function() {
 				if (typeof currentHours == 'number') {
 					root.currentHours = currentHours;
 					root.timerRunning = true;
+					root.startBadgeFlash();
 				} else {
 					root.currentHours = 0.0;
 					root.timerRunning = false;
+					root.stopBadgeFlash();
 				}
 				
 				// Build a grouped list of clients/projects for building optgroups later
