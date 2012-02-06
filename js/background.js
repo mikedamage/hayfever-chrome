@@ -123,7 +123,15 @@ $(document).ready(function() {
 					}
 				});
 				root.totalHours = totalHours;
-				root.currentHours = (typeof currentHours === 'number') ? currentHours : 0.0;
+				//root.currentHours = (typeof currentHours === 'number') ? currentHours : 0.0;
+
+				if (typeof currentHours == 'number') {
+					root.currentHours = currentHours;
+					root.timerRunning = true;
+				} else {
+					root.currentHours = 0.0;
+					root.timerRunning = false;
+				}
 				
 				// Build a grouped list of clients/projects for building optgroups later
 				// TODO: Determine whether or not we actually need this object
