@@ -12,7 +12,7 @@ class Project < Thor
 		'test'
 	].map {|exc| "--exclude=#{exc}"}.join(' ')
 
-	desc 'bundle', 'Bundle the project into a zip file'
+	desc 'bundle DIRNAME', 'Bundle the project into a zip file'
 	def bundle(dirname)
 		require "pathname"
 		
