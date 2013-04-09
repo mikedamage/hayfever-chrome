@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
 <head>
 	<meta charset="UTF-8" />
 	<link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
@@ -9,7 +9,9 @@
 	<script src="js/jquery-1.7.1.min.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/jquery.timers.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/jquery.tmpl.js" charset="utf-8" type="text/javascript"></script>
-	<script src="js/popup.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/angular.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/tasks_controller.js" charset="utf-8" type="text/javascript"></script>
+	<!--<script src="js/popup.js" charset="utf-8" type="text/javascript"></script>-->
 	<script type="text/javascript" src="js/google-analytics.js"></script>
 </head>
 <body>
@@ -46,7 +48,7 @@
 	<div id="status">
 		Test
 	</div>
-	<table cellspacing="0" width="340" id="timesheet">
+	<table cellspacing="0" width="340" id="timesheet" ng-controller="TasksController">
 		<thead>
 			<tr>
 				<th class="left" width="60%">Task</th>
@@ -55,6 +57,11 @@
 			</tr>
 		</thead>
 		<tbody>
+			<tr ng-repeat="timer in timers">
+				<td colspan="3" align="center">
+					{{timer.client}}
+				</td>
+			</tr>
 			<tr class="noentries">
 				<td colspan="3" align="center">
 					<em>No Entries Today</em>
