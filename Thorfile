@@ -9,7 +9,8 @@ class Project < Thor
 		'.DS_Store',
 		'sass',
 		'.sass-cache',
-		'test'
+		'test',
+		'coffeescripts'
 	].map {|exc| "--exclude=#{exc}"}.join(' ')
 
 	desc 'bundle DIRNAME', 'Bundle the project into a zip file'
@@ -40,6 +41,34 @@ class Project < Thor
 		end
 		say 'Done.', :green
 	end
+end
+
+# module: coffeescript
+class Coffeescript < Thor
+	include Thor::Actions
+
+	desc 'compile', 'Compile CoffeeScripts to js/ folder'
+	def compile
+		require 'pathname'
+		`which coffee`
+
+		if $?.exitstatus != 0
+			say 'CoffeeScript executable not found', :red
+			exit
+		end
+
+		project_dir = Pathname.new(File.dirname(__FILE__))
+		cs_dir = project_dir.join 'coffeescripts'
+		js_dir = project_dir.join 'js'
+
+		cs_dir.children.each do |child|
+			if child.basename.to_s =~ /\.coffee$/
+				say_status 'compile', child.basename.to_s, :blue
+				`coffee -o js/ -c #{child.expand_path.to_s}`
+			end
+		end
+	end
+
 end
 
 # vim: set ft=ruby sw=2 ts=2 :
