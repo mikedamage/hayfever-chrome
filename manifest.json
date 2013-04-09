@@ -1,13 +1,16 @@
 {
+	"manifest_version": 2,
 	"name": "Hayfever for Harvest",
-	"version": "0.2.5",
+	"version": "0.2.6",
 	"description": "A simple Harvest timesheet manager for Google Chrome",
 	"homepage_url": "https://github.com/mikedamage/hayfever-chrome",
 	"minimum_chrome_version": "8",
-	"background_page": "background.html",
+	"background": {
+		"page": "background.html"
+	},
 	"browser_action": {
 		"default_icon": "icon.png",
-		"popup": "popup.html"
+		"default_popup": "popup.html"
 	},
 	"icons": {
 		"48": "app_icon_48.png",

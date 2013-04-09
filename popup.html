@@ -10,21 +10,7 @@
 	<script src="js/jquery.timers.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/jquery.tmpl.js" charset="utf-8" type="text/javascript"></script>
 	<script src="js/popup.js" charset="utf-8" type="text/javascript"></script>
-	<script type="text/javascript">
-		var prefs = JSON.parse(localStorage.getItem('hayfever_prefs'));
-
-		if (prefs.enable_analytics) {
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-21680103-1']);
-			_gaq.push(['_trackPageview']);
-
-			(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = 'https://ssl.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-		}
-	</script>
+	<script type="text/javascript" src="js/google-analytics.js"></script>
 </head>
 <body>
 	<script id="entry-row-template" type="text/x-jquery-tmpl">
