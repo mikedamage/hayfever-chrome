@@ -18,7 +18,7 @@ Depends on:
     function Harvest(subdomain, auth_string) {
       this.subdomain = subdomain;
       this.auth_string = auth_string;
-      this.full_url = "http://" + this.subdomain + ".harvestapp.com";
+      this.full_url = "https://" + this.subdomain + ".harvestapp.com";
       this.ajax_defaults = {
         type: 'GET',
         dataType: 'json',

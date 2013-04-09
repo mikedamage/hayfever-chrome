@@ -9,7 +9,7 @@ Depends on:
 
 class Harvest
 	constructor: (@subdomain, @auth_string) ->
-		@full_url = "http://#{@subdomain}.harvestapp.com"
+		@full_url = "https://#{@subdomain}.harvestapp.com"
 		@ajax_defaults =
 			type: 'GET'
 			dataType: 'json'

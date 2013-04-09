@@ -14,7 +14,7 @@ Background Page Main JavaScript
       auth_string: localStorage['harvest_auth_string'],
       username: localStorage['harvest_username']
     };
-    if (!(auth_data.subdomain.isEmpty() || auth_data.auth_string.isEmpty())) {
+    if (!(auth_data.subdomain.isBlank() || auth_data.auth_string.isBlank())) {
       window.application = new BackgroundApplication(auth_data.subdomain, auth_data.auth_string);
       setTimeout(window.application.refresh_hours, 500);
       return window.application.start_refresh_interval();

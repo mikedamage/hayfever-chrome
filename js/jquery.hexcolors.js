@@ -15,7 +15,7 @@ Hex Color Utility Functions
   };
 
   $.hexColorToRGBA = function(str, alpha) {
-    var blue_val, green_val, hex_string, red_val;
+    var blue_val, color_array, green_val, hex_string, red_val;
     if (alpha == null) {
       alpha = 255;
     }
@@ -23,9 +23,11 @@ Hex Color Utility Functions
     red_val = hex_string.substring(0, 2);
     green_val = hex_string.substring(2, 4);
     blue_val = hex_string.substring(4, 6);
-    return [red_val, green_val, blue_val].map(function(val) {
+    color_array = [red_val, green_val, blue_val].map(function(val) {
       return $.hexPairToDecimal(val);
     });
+    color_array[3] = alpha;
+    return color_array;
   };
 
 }).call(this);

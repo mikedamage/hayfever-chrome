@@ -24,6 +24,13 @@ class BackgroundApplication
 			auth_string: localStorage.getItem 'harvest_auth_string'
 			username: localStorage.getItem 'harvest_username'
 		data
+	
+	@get_preferences: ->
+		prefs = localStorage.getItem 'hayfever_prefs'
+		if prefs then JSON.parse(prefs) else {}
+	
+	get_version: ->
+		@version
 
 	# Instance Methods	
 	upgrade_detected: ->
@@ -39,12 +46,7 @@ class BackgroundApplication
 		@refresh_interval = setInterval @refresh_hours, 36000
 	
 	get_preferences: ->
-		prefs = localStorage.getItem 'hayfever_prefs'
-
-		if prefs
-			prefs = JSON.parse prefs
-			@preferences = prefs
-		@preferences
+		@preferences = BackgroundApplication.get_preferences()
 	
 	get_auth_data: ->
 		data =
@@ -58,7 +60,7 @@ class BackgroundApplication
 		!auth.subdomain.isBlank() and !auth.auth_string.isBlank()
 	
 	set_badge: ->
-		prefs = @get_preferences()
+		prefs = BackgroundApplication.get_preferences()
 		badge_color = $.hexColorToRGBA prefs.badge_color
 
 		switch prefs.badge_display
@@ -72,9 +74,9 @@ class BackgroundApplication
 		chrome.browserAction.setBadgeBackgroundColor color: badge_color
 		chrome.browserAction.setBadgeText text: badge_text
 	
-	refresh_hours: (callback) ->
+	refresh_hours: (callback) =>
 		console.log 'refreshing hours'
-		prefs = @get_preferences()
+		prefs = BackgroundApplication.get_preferences()
 		callback = if typeof callback is 'function' then callback else $.noop
 		todays_hours = @client.get_today()
 

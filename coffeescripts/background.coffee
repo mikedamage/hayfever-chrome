@@ -8,7 +8,7 @@ $ ->
 		auth_string: localStorage['harvest_auth_string']
 		username: localStorage['harvest_username']
 	
-	unless auth_data.subdomain.isEmpty() or auth_data.auth_string.isEmpty()
+	unless auth_data.subdomain.isBlank() or auth_data.auth_string.isBlank()
 		window.application = new BackgroundApplication auth_data.subdomain, auth_data.auth_string
 		setTimeout window.application.refresh_hours, 500
 		window.application.start_refresh_interval()

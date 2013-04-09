@@ -6,13 +6,16 @@ Background Page Application Class
 
 
 (function() {
-  var BackgroundApplication;
+  var BackgroundApplication,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   BackgroundApplication = (function() {
 
     function BackgroundApplication(subdomain, auth_string) {
       this.subdomain = subdomain;
       this.auth_string = auth_string;
+      this.refresh_hours = __bind(this.refresh_hours, this);
+
       this.client = new Harvest(this.subdomain, this.auth_string);
       this.version = '0.3.0';
       this.authorized = false;
@@ -26,6 +29,30 @@ Background Page Application Class
       this.preferences = {};
       this.timer_running = false;
     }
+
+    BackgroundApplication.get_auth_data = function() {
+      var data;
+      data = {
+        subdomain: localStorage.getItem('harvest_subdomain'),
+        auth_string: localStorage.getItem('harvest_auth_string'),
+        username: localStorage.getItem('harvest_username')
+      };
+      return data;
+    };
+
+    BackgroundApplication.get_preferences = function() {
+      var prefs;
+      prefs = localStorage.getItem('hayfever_prefs');
+      if (prefs) {
+        return JSON.parse(prefs);
+      } else {
+        return {};
+      }
+    };
+
+    BackgroundApplication.prototype.get_version = function() {
+      return this.version;
+    };
 
     BackgroundApplication.prototype.upgrade_detected = function() {
       var stored_version;
@@ -43,13 +70,7 @@ Background Page Application Class
     };
 
     BackgroundApplication.prototype.get_preferences = function() {
-      var prefs;
-      prefs = localStorage.getItem('hayfever_prefs');
-      if (prefs) {
-        prefs = JSON.parse(prefs);
-        this.preferences = prefs;
-      }
-      return this.preferences;
+      return this.preferences = BackgroundApplication.get_preferences();
     };
 
     BackgroundApplication.prototype.get_auth_data = function() {
@@ -70,7 +91,7 @@ Background Page Application Class
 
     BackgroundApplication.prototype.set_badge = function() {
       var badge_color, badge_text, prefs;
-      prefs = this.get_preferences();
+      prefs = BackgroundApplication.get_preferences();
       badge_color = $.hexColorToRGBA(prefs.badge_color);
       switch (prefs.badge_display) {
         case 'current':
@@ -94,7 +115,7 @@ Background Page Application Class
       var prefs, todays_hours,
         _this = this;
       console.log('refreshing hours');
-      prefs = this.get_preferences();
+      prefs = BackgroundApplication.get_preferences();
       callback = typeof callback === 'function' ? callback : $.noop;
       todays_hours = this.client.get_today();
       todays_hours.success(function(json) {
