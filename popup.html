@@ -91,23 +91,14 @@
 			</p>
 			<p>
 				<label for="client-select">Client</label>
-				<select id="client-select" name="client" ng-model="task_project" ng-change="project_change()">
-					<option value="" class="no-selection">Select a Client</option>
-					<optgroup ng-repeat="client in clients" label="{{client.name}}">
-						<option ng-repeat="project in client.projects" value="{{project.id}}">{{project.name}}</option>
-					</optgroup>
+				<select id="client-select" name="client" ng-model="task_project" ng-change="project_change()" ng-options="p.id as p.name group by p.client for p in projects">
+					<option value="">- Select a Project -</option>
 				</select>
 			</p>
 			<p>
 				<label for="task-select">Task</label>
-				<select id="task-select" name="task" ng-model="task_task">
-					<option class="no-selection" value="">Select a Task</option>
-					<optgroup class="billable" label="Billable">
-						<option ng-repeat="task in tasks.billable" value="{{task.id}}">{{task.name}}</option>
-					</optgroup>
-					<optgroup class="not-billable" label="Non-Billable">
-						<option ng-repeat="task in tasks.non_billable" value="{{task.id}}">{{task.name}}</option>
-					</optgroup>
+				<select id="task-select" name="task" ng-model="task_task" ng-options="t.id as t.name group by t.billable_text for t in tasks">
+					<option value="">- Select Task -</option>
 				</select>
 			</p>
 			<p>

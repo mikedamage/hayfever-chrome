@@ -52,19 +52,13 @@ Angular.js Popup Tasks Controller
     };
     $scope.project_change = function() {
       var tasks;
-      $scope.tasks = {
-        billable: [],
-        non_billable: []
-      };
+      $scope.tasks = [];
       tasks = bg_app.project_db.first({
         id: parseInt($scope.task_project)
       }).tasks;
       return tasks.forEach(function(task) {
-        if (task.billable) {
-          return $scope.tasks.billable.push(task);
-        } else {
-          return $scope.tasks.non_billable.push(task);
-        }
+        task.billable_text = task.billable ? 'Billable' : 'Non Billable';
+        return $scope.tasks.push(task);
       });
     };
     $scope.toggle_timer = function(timer_id) {

@@ -42,19 +42,15 @@ TasksController = ($scope) ->
 		#$scope.reset_form_fields()
 	
 	$scope.project_change = ->
-		$scope.tasks =
-			billable: []
-			non_billable: []
+		$scope.tasks = []
 		tasks = bg_app
 			.project_db
 			.first(id: parseInt($scope.task_project))
 			.tasks
 
 		tasks.forEach (task) ->
-			if task.billable
-				$scope.tasks.billable.push task
-			else
-				$scope.tasks.non_billable.push task
+			task.billable_text = if task.billable then 'Billable' else 'Non Billable'
+			$scope.tasks.push task
 	
 	$scope.toggle_timer = (timer_id) ->
 		result = bg_app.client.toggle_timer timer_id
