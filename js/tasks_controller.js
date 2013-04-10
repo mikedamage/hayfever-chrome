@@ -20,6 +20,7 @@ Angular.js Popup Tasks Controller
     $scope.prefs = bg_app.get_preferences();
     $scope.current_hours = bg_app.current_hours.toClockTime();
     $scope.total_hours = bg_app.total_hours.toClockTime();
+    $scope.active_timer_id = 0;
     $scope.tasks = {
       billable: [],
       non_billable: []
@@ -36,14 +37,18 @@ Angular.js Popup Tasks Controller
       });
     };
     $scope.add_timer = function() {
-      var task;
+      var result, task;
       task = {
         project_id: $scope.task_project,
         task_id: $scope.task_task,
         hours: $scope.task_hours,
         notes: $scope.task_notes
       };
-      return console.log(task);
+      result = $scope.active_timer_id !== 0 ? bg_app.client.update_entry($scope.active_timer_id, task) : bg_app.client.add_entry(task);
+      return result.success(function(json) {
+        $scope.hide_form();
+        return $scope.refresh();
+      });
     };
     $scope.project_change = function() {
       var tasks;
@@ -77,8 +82,12 @@ Angular.js Popup Tasks Controller
         return $scope.refresh();
       });
     };
-    $scope.show_form = function() {
+    $scope.show_form = function(timer_id) {
       var $overlay;
+      if (timer_id == null) {
+        timer_id = 0;
+      }
+      $scope.active_timer_id = timer_id;
       $overlay = $('#form-overlay');
       if ($('body').height() < 300) {
         $('body').data('oldHeight', $('body').height());
@@ -93,7 +102,7 @@ Angular.js Popup Tasks Controller
         }
       });
     };
-    return $scope.hide_form = function() {
+    $scope.hide_form = function() {
       var $overlay;
       $overlay = $('#form-overlay');
       if ($('body').data('oldHeight')) {
@@ -103,6 +112,12 @@ Angular.js Popup Tasks Controller
           return $overlay.fadeOut(300);
         });
       }
+    };
+    return $scope.reset_form_fields = function() {
+      $scope.task_project = null;
+      $scope.task_task = null;
+      $scope.task_hours = null;
+      return $scope.task_notes = null;
     };
   };
 

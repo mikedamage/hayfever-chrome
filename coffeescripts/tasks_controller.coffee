@@ -14,6 +14,7 @@ TasksController = ($scope) ->
 	$scope.prefs         = bg_app.get_preferences()
 	$scope.current_hours = bg_app.current_hours.toClockTime()
 	$scope.total_hours   = bg_app.total_hours.toClockTime()
+	$scope.active_timer_id = 0
 	$scope.tasks =
 		billable: []
 		non_billable: []
@@ -34,7 +35,11 @@ TasksController = ($scope) ->
 			task_id: $scope.task_task
 			hours: $scope.task_hours
 			notes: $scope.task_notes
-		console.log task
+		result = if $scope.active_timer_id != 0 then bg_app.client.update_entry($scope.active_timer_id, task) else bg_app.client.add_entry(task)
+		result.success (json) ->
+			$scope.hide_form()
+			$scope.refresh()
+		#$scope.reset_form_fields()
 	
 	$scope.project_change = ->
 		$scope.tasks =
@@ -62,7 +67,8 @@ TasksController = ($scope) ->
 			console.log "#{timer_id} deleted"
 			$scope.refresh()
 	
-	$scope.show_form = ->
+	$scope.show_form = (timer_id=0) ->
+		$scope.active_timer_id = timer_id
 		$overlay = $('#form-overlay')
 		
 		if $('body').height() < 300
@@ -79,5 +85,11 @@ TasksController = ($scope) ->
 		if $('body').data 'oldHeight'
 			$('body').animate {height: "#{$('body').data('oldHeight')}px"}, 300, ->
 				$overlay.fadeOut 300
+	
+	$scope.reset_form_fields = ->
+		$scope.task_project = null
+		$scope.task_task = null
+		$scope.task_hours = null
+		$scope.task_notes = null
 
 window.TasksController = TasksController

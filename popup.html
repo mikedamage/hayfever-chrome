@@ -45,7 +45,7 @@
 
 				<td class="entry-toggle" align="center">
 					<a href="#" class="toggle" ng-click="toggle_timer(timer.id)" data-timer-id="{{timer.id}}">Toggle</a>
-					<a href="#" class="edit" data-timer-id="{{timer.id}}">Edit</a>
+					<a href="#" class="edit" ng-click="show_form(timer.id)" data-timer-id="{{timer.id}}">Edit</a>
 					<a href="#" class="delete" ng-click="delete_timer(timer.id)" data-timer-id="{{timer.id}}">Delete</a>
 				</td>
 			</tr>
@@ -118,6 +118,7 @@
 				<label for="task-notes">Notes</label>
 				<textarea id="task-notes" name="task_notes" ng-model="task_notes"></textarea>
 			</p>
+			<input type="hidden" value="{{active_timer_id}}" ng-model="active_timer_id" name="timer_id">
 			<input type="submit" value="Save">
 		</form>
 	</div>
