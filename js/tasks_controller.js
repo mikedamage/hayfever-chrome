@@ -69,13 +69,40 @@ Angular.js Popup Tasks Controller
         return $scope.refresh();
       });
     };
-    return $scope.delete_timer = function(timer_id) {
+    $scope.delete_timer = function(timer_id) {
       var result;
       result = bg_app.client.delete_entry(timer_id);
       return result.complete(function() {
         console.log("" + timer_id + " deleted");
         return $scope.refresh();
       });
+    };
+    $scope.show_form = function() {
+      var $overlay;
+      $overlay = $('#form-overlay');
+      if ($('body').height() < 300) {
+        $('body').data('oldHeight', $('body').height());
+      } else {
+        $('body').removeData('oldHeight');
+      }
+      return $overlay.fadeIn(300, function() {
+        if ($('body').height() < $overlay.height()) {
+          return $('body').animate({
+            height: "" + ($overlay.height()) + "px"
+          }, 300);
+        }
+      });
+    };
+    return $scope.hide_form = function() {
+      var $overlay;
+      $overlay = $('#form-overlay');
+      if ($('body').data('oldHeight')) {
+        return $('body').animate({
+          height: "" + ($('body').data('oldHeight')) + "px"
+        }, 300, function() {
+          return $overlay.fadeOut(300);
+        });
+      }
     };
   };
 

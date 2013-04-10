@@ -58,7 +58,7 @@
 		<tfoot>
 			<tr>
 				<td colspan="3" align="center">
-					<a href="#" class="icon" id="new-entry-link">New Entry</a>
+					<a href="#" class="icon" id="new-entry-link" ng-click="show_form()">New Entry</a>
 					<a href="#" class="icon" id="refresh" ng-click="refresh()">Refresh</a>
 					<a href="options.html" target="_blank" class="icon" id="options-link">Options</a>
 				</td>
@@ -86,9 +86,8 @@
 
 	<div id="form-overlay">
 		<form id="entry-form" ng-submit="add_timer()">
-			<h2>New Entry</h2>
 			<p>
-				<a class="cancel" href="#">Cancel</a>
+				<a class="cancel" href="#" ng-click="hide_form()">Cancel</a>
 			</p>
 			<p>
 				<label for="client-select">Client</label>

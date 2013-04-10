@@ -61,5 +61,23 @@ TasksController = ($scope) ->
 		result.complete ->
 			console.log "#{timer_id} deleted"
 			$scope.refresh()
+	
+	$scope.show_form = ->
+		$overlay = $('#form-overlay')
+		
+		if $('body').height() < 300
+			$('body').data 'oldHeight', $('body').height()
+		else
+			$('body').removeData 'oldHeight'
+
+		$overlay.fadeIn 300, ->
+			$('body').animate {height: "#{$overlay.height()}px"}, 300 if $('body').height() < $overlay.height()
+	
+	$scope.hide_form = ->
+		$overlay = $('#form-overlay')
+
+		if $('body').data 'oldHeight'
+			$('body').animate {height: "#{$('body').data('oldHeight')}px"}, 300, ->
+				$overlay.fadeOut 300
 
 window.TasksController = TasksController
