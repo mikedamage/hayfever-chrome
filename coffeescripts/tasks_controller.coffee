@@ -8,18 +8,24 @@ TasksController = ($scope) ->
 	bg_page = chrome.extension.getBackgroundPage()
 	bg_app = bg_page.application
 
-	$scope.projects = bg_app.projects
-	$scope.clients = bg_app.clients
-	$scope.timers = bg_app.todays_entries
-	$scope.prefs = bg_app.get_preferences()
+	$scope.projects      = bg_app.projects
+	$scope.clients       = bg_app.clients
+	$scope.timers        = bg_app.todays_entries
+	$scope.prefs         = bg_app.get_preferences()
+	$scope.current_hours = bg_app.current_hours.toClockTime()
+	$scope.total_hours   = bg_app.total_hours.toClockTime()
 	$scope.tasks =
 		billable: []
 		non_billable: []
 
 	$scope.refresh = ->
 		bg_app.refresh_hours ->
-			$scope.projects = bg_app.projects
-			$scope.timers = bg_app.todays_entries
+			$scope.projects      = bg_app.projects
+			$scope.clients       = bg_app.clients
+			$scope.timers        = bg_app.todays_entries
+			$scope.prefs         = bg_app.get_preferences()
+			$scope.current_hours = bg_app.current_hours.toClockTime()
+			$scope.total_hours   = bg_app.total_hours.toClockTime()
 			$scope.$apply()
 	
 	$scope.add_timer = ->
@@ -48,7 +54,12 @@ TasksController = ($scope) ->
 	$scope.toggle_timer = (timer_id) ->
 		result = bg_app.client.toggle_timer timer_id
 		result.success (json) ->
-			console.log json
+			$scope.refresh()
+	
+	$scope.delete_timer = (timer_id) ->
+		result = bg_app.client.delete_entry timer_id
+		result.complete ->
+			console.log "#{timer_id} deleted"
 			$scope.refresh()
 
 window.TasksController = TasksController

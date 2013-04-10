@@ -18,6 +18,8 @@ Angular.js Popup Tasks Controller
     $scope.clients = bg_app.clients;
     $scope.timers = bg_app.todays_entries;
     $scope.prefs = bg_app.get_preferences();
+    $scope.current_hours = bg_app.current_hours.toClockTime();
+    $scope.total_hours = bg_app.total_hours.toClockTime();
     $scope.tasks = {
       billable: [],
       non_billable: []
@@ -25,7 +27,11 @@ Angular.js Popup Tasks Controller
     $scope.refresh = function() {
       return bg_app.refresh_hours(function() {
         $scope.projects = bg_app.projects;
+        $scope.clients = bg_app.clients;
         $scope.timers = bg_app.todays_entries;
+        $scope.prefs = bg_app.get_preferences();
+        $scope.current_hours = bg_app.current_hours.toClockTime();
+        $scope.total_hours = bg_app.total_hours.toClockTime();
         return $scope.$apply();
       });
     };
@@ -56,11 +62,18 @@ Angular.js Popup Tasks Controller
         }
       });
     };
-    return $scope.toggle_timer = function(timer_id) {
+    $scope.toggle_timer = function(timer_id) {
       var result;
       result = bg_app.client.toggle_timer(timer_id);
       return result.success(function(json) {
-        console.log(json);
+        return $scope.refresh();
+      });
+    };
+    return $scope.delete_timer = function(timer_id) {
+      var result;
+      result = bg_app.client.delete_entry(timer_id);
+      return result.complete(function() {
+        console.log("" + timer_id + " deleted");
         return $scope.refresh();
       });
     };

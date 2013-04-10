@@ -16,33 +16,6 @@
 	<script type="text/javascript" src="js/google-analytics.js"></script>
 </head>
 <body ng-controller="TasksController">
-	<script id="entry-row-template" type="text/x-jquery-tmpl">
-    {{if timer_started_at}}
-    <tr id="entry-${id}" class="entry running">
-    {{else}}
-		<tr id="entry-${id}" class="entry">
-    {{/if}}
-			<td class="entry-name">
-				<strong>${client}:</strong> ${project} (${task})
-				{{if window.preferences.show_task_notes}}
-					<br />
-					<strong>Notes:</strong> <em>${notes}</em>
-				{{/if}}
-			</td>
-			<td class="entry-hours" width="50" align="right">
-				${hours}
-			</td>
-			<td class="entry-toggle">
-        <a href="#" class="toggle" data-timer-id="${id}">Toggle</a>
-				<a href="#" class="edit" data-timer-id="${id}">Edit</a>
-				<a href="#" class="delete" data-timer-id="${id}">Delete</a>
-			</td>
-		</tr>
-	</script>
-	<script id="client-project-option-tag" type="text/x-jquery-tmpl">
-		<option value="${id}" id="project-${id}">${name}</option>
-	</script>
-
 	<div id="header">
 	</div>
 
@@ -73,7 +46,7 @@
 				<td class="entry-toggle" align="center">
 					<a href="#" class="toggle" ng-click="toggle_timer(timer.id)" data-timer-id="{{timer.id}}">Toggle</a>
 					<a href="#" class="edit" data-timer-id="{{timer.id}}">Edit</a>
-					<a href="#" class="delete" data-timer-id="{{timer.id}}">Delete</a>
+					<a href="#" class="delete" ng-click="delete_timer(timer.id)" data-timer-id="{{timer.id}}">Delete</a>
 				</td>
 			</tr>
 			<tr class="noentries" ng-show="timers.length == 0">
@@ -95,11 +68,11 @@
 
 	<div id="stats">
 		<div class="stat-clock" id="total-hours-stat">
-			<p id="total-hours-time">0:00</p>
+			<p id="total-hours-time">{{total_hours}}</p>
 			<span class="stat-caption">Total Hours Today</span>
 		</div>
 		<div class="stat-clock" id="current-hours-stat">
-			<p id="current-hours-time">0:00</p>
+			<p id="current-hours-time">{{current_hours}}</p>
 			<span class="stat-caption">Current Task Hours</span>
 		</div>
 		<div class="clear">&nbsp;</div>
