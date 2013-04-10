@@ -11,6 +11,7 @@ class BackgroundApplication
 		@current_hours = 0.0
 		@badge_flash_interval = 0
 		@refresh_interval = 0
+		@refresh_interval_time = 36000
 		@todays_entries = []
 		@projects = []
 		@clients = {}
@@ -74,10 +75,12 @@ class BackgroundApplication
 		chrome.browserAction.setBadgeBackgroundColor color: badge_color
 		chrome.browserAction.setBadgeText text: badge_text
 	
-	refresh_hours: (callback) =>
+	refresh_hours: (callback, force=false) =>
 		console.log 'refreshing hours'
 		prefs = BackgroundApplication.get_preferences()
 		callback = if typeof callback is 'function' then callback else $.noop
+		#last_updated = localStorage.getItem 'hayfever_last_refresh'
+		#now = new Date().getTime()
 		todays_hours = @client.get_today()
 
 		todays_hours.success (json) =>
@@ -90,9 +93,11 @@ class BackgroundApplication
 			@todays_entries = json.day_entries
 
 			# Add up total hours by looping thru timesheet entries
-			$.each @todays_entries, (i, v) ->
+			$.each @todays_entries, (i, v) =>
 				total_hours += v.hours
 				current_hours = parseFloat(v.hours) if v.timer_started_at?
+				v.running = v.hasOwnProperty 'timer_started_at'
+				@todays_entries[i] = v
 			@total_hours = total_hours
 
 			if typeof current_hours is 'number'
@@ -115,8 +120,9 @@ class BackgroundApplication
 					client = clients[client_key]
 					id_exists = _(client.projects).detect (p) ->
 						p.id == project_id
-
 					clients[client_key].projects.push(v) unless id_exists
+
+				@clients = clients
 
 			@set_badge()
 			callback.call(@todays_entries)

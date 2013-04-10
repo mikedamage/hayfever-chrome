@@ -8,12 +8,52 @@ Angular.js Popup Tasks Controller
 (function() {
   var TasksController;
 
+  angular.module('hayfeverApp', ['ui']);
+
   TasksController = function($scope) {
     var bg_app, bg_page;
     bg_page = chrome.extension.getBackgroundPage();
     bg_app = bg_page.application;
     $scope.projects = bg_app.projects;
-    return $scope.timers = bg_app.todays_entries;
+    $scope.clients = bg_app.clients;
+    $scope.timers = bg_app.todays_entries;
+    $scope.tasks = {
+      billable: [],
+      non_billable: []
+    };
+    $scope.refresh = function() {
+      return bg_app.refresh_hours(function() {
+        $scope.projects = bg_app.projects;
+        return $scope.timers = this;
+      });
+    };
+    $scope.add_timer = function() {
+      var task;
+      task = {
+        project_id: $scope.task_project,
+        task_id: $scope.task_task,
+        hours: $scope.task_hours,
+        notes: $scope.task_notes
+      };
+      return console.log(task);
+    };
+    return $scope.project_change = function() {
+      var tasks;
+      $scope.tasks = {
+        billable: [],
+        non_billable: []
+      };
+      tasks = bg_app.project_db.first({
+        id: parseInt($scope.task_project)
+      }).tasks;
+      return tasks.forEach(function(task) {
+        if (task.billable) {
+          return $scope.tasks.billable.push(task);
+        } else {
+          return $scope.tasks.non_billable.push(task);
+        }
+      });
+    };
   };
 
   window.TasksController = TasksController;

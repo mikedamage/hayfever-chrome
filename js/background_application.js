@@ -23,6 +23,7 @@ Background Page Application Class
       this.current_hours = 0.0;
       this.badge_flash_interval = 0;
       this.refresh_interval = 0;
+      this.refresh_interval_time = 36000;
       this.todays_entries = [];
       this.projects = [];
       this.clients = {};
@@ -111,9 +112,12 @@ Background Page Application Class
       });
     };
 
-    BackgroundApplication.prototype.refresh_hours = function(callback) {
+    BackgroundApplication.prototype.refresh_hours = function(callback, force) {
       var prefs, todays_hours,
         _this = this;
+      if (force == null) {
+        force = false;
+      }
       console.log('refreshing hours');
       prefs = BackgroundApplication.get_preferences();
       callback = typeof callback === 'function' ? callback : $.noop;
@@ -129,8 +133,10 @@ Background Page Application Class
         $.each(_this.todays_entries, function(i, v) {
           total_hours += v.hours;
           if (v.timer_started_at != null) {
-            return current_hours = parseFloat(v.hours);
+            current_hours = parseFloat(v.hours);
           }
+          v.running = v.hasOwnProperty('timer_started_at');
+          return _this.todays_entries[i] = v;
         });
         _this.total_hours = total_hours;
         if (typeof current_hours === 'number') {
@@ -163,6 +169,7 @@ Background Page Application Class
               return clients[client_key].projects.push(v);
             }
           });
+          _this.clients = clients;
         }
         _this.set_badge();
         return callback.call(_this.todays_entries);

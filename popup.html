@@ -3,18 +3,19 @@
 <head>
 	<meta charset="UTF-8" />
 	<link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
-	<script src="js/prototype-extensions.js" charset="utf-8" type="text/javascript"></script>
-	<script src="js/underscore-min.js" charset="utf-8" type="text/javascript"></script>
-	<!--<script src="js/taffy-min.js" charset="utf-8" type="text/javascript"></script>-->
-	<script src="js/jquery-1.7.1.min.js" charset="utf-8" type="text/javascript"></script>
-	<script src="js/jquery.timers.js" charset="utf-8" type="text/javascript"></script>
-	<script src="js/jquery.tmpl.js" charset="utf-8" type="text/javascript"></script>
-	<script src="js/angular.min.js" charset="utf-8" type="text/javascript"></script>
-	<script src="js/tasks_controller.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/prototype-extensions.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<!--<script src="js/taffy-min.js"></script>-->
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.timers.js"></script>
+	<script src="js/jquery.tmpl.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-ui.js"></script>
+	<script src="js/tasks_controller.js"></script>
 	<!--<script src="js/popup.js" charset="utf-8" type="text/javascript"></script>-->
 	<script type="text/javascript" src="js/google-analytics.js"></script>
 </head>
-<body>
+<body ng-controller="TasksController">
 	<script id="entry-row-template" type="text/x-jquery-tmpl">
     {{if timer_started_at}}
     <tr id="entry-${id}" class="entry running">
@@ -48,7 +49,7 @@
 	<div id="status">
 		Test
 	</div>
-	<table cellspacing="0" width="340" id="timesheet" ng-controller="TasksController">
+	<table cellspacing="0" width="340" id="timesheet" >
 		<thead>
 			<tr>
 				<th class="left" width="60%">Task</th>
@@ -72,7 +73,7 @@
 			<tr>
 				<td colspan="3" align="center">
 					<a href="#" class="icon" id="new-entry-link">New Entry</a>
-					<a href="#" class="icon" id="refresh">Refresh</a>
+					<a href="#" class="icon" id="refresh" ng-click="refresh()">Refresh</a>
 					<a href="options.html" target="_blank" class="icon" id="options-link">Options</a>
 				</td>
 			</tr>
@@ -98,38 +99,41 @@
 	</ul>
 
 	<div id="form-overlay">
-		<form id="entry-form" action="">
+		<form id="entry-form" ng-submit="add_timer()">
 			<h2>New Entry</h2>
 			<p>
 				<a class="cancel" href="#">Cancel</a>
 			</p>
 			<p>
 				<label for="client-select">Client</label>
-				<select id="client-select" name="client">
+				<select id="client-select" name="client" ng-model="task_project" ng-change="project_change()">
 					<option value="" class="no-selection">Select a Client</option>
+					<optgroup ng-repeat="client in clients" label="{{client.name}}">
+						<option ng-repeat="project in client.projects" value="{{project.id}}">{{project.name}}</option>
+					</optgroup>
 				</select>
 			</p>
 			<p>
 				<label for="task-select">Task</label>
-				<select id="task-select" name="task">
+				<select id="task-select" name="task" ng-model="task_task">
 					<option class="no-selection" value="">Select a Task</option>
-					<optgroup class="billable" label="Billable"></optgroup>
-					<optgroup class="not-billable" label="Non-Billable"></optgroup>
+					<optgroup class="billable" label="Billable">
+						<option ng-repeat="task in tasks.billable" value="{{task.id}}">{{task.name}}</option>
+					</optgroup>
+					<optgroup class="not-billable" label="Non-Billable">
+						<option ng-repeat="task in tasks.non_billable" value="{{task.id}}">{{task.name}}</option>
+					</optgroup>
 				</select>
 			</p>
 			<p>
 				<label for="task-hours">Hours</label>
-				<input type="text" id="task-hours" value="" name="task_hours" />
+				<input type="text" id="task-hours" value="" name="task_hours" ng-model="task_hours" />
 			</p>
 			<p>
 				<label for="task-notes">Notes</label>
-				<textarea id="task-notes" name="task_notes"></textarea>
+				<textarea id="task-notes" name="task_notes" ng-model="task_notes"></textarea>
 			</p>
-			<p>
-				<input class="left" type="checkbox" name="start_timer" id="start-on-save" value="true" />
-				<label class="checkbox" for="start-on-save">Start timer (if hours are already on the clock)</label>
-			</p>
-			<button id="save-entry">Save</button>
+			<input type="submit" value="Save">
 		</form>
 	</div>
 </body>
