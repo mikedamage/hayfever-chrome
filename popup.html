@@ -58,7 +58,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="timer in timers" id="entry-{{timer.id}}" class="entry running-{{timer.running}}">
+			<tr ng-repeat="timer in timers" id="entry-{{timer.id}}" ng-class="{entry: true, running: timer.running, even: ($index % 2 == 0), odd: ($index % 2 != 0)}">
 				<td class="entry-name">
 					<strong>{{timer.client}}</strong> {{timer.project}} ({{timer.task}})
 					<div class="notes" ng-show="prefs.show_task_notes">

@@ -19,7 +19,8 @@ TasksController = ($scope) ->
 	$scope.refresh = ->
 		bg_app.refresh_hours ->
 			$scope.projects = bg_app.projects
-			$scope.timers = this
+			$scope.timers = bg_app.todays_entries
+			$scope.$apply()
 	
 	$scope.add_timer = ->
 		task =
@@ -49,9 +50,5 @@ TasksController = ($scope) ->
 		result.success (json) ->
 			console.log json
 			$scope.refresh()
-
-			log_timers = ->
-				console.log $scope.timers
-			setTimeout log_timers, 500
 
 window.TasksController = TasksController

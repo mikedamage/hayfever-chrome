@@ -25,7 +25,8 @@ Angular.js Popup Tasks Controller
     $scope.refresh = function() {
       return bg_app.refresh_hours(function() {
         $scope.projects = bg_app.projects;
-        return $scope.timers = this;
+        $scope.timers = bg_app.todays_entries;
+        return $scope.$apply();
       });
     };
     $scope.add_timer = function() {
@@ -59,13 +60,8 @@ Angular.js Popup Tasks Controller
       var result;
       result = bg_app.client.toggle_timer(timer_id);
       return result.success(function(json) {
-        var log_timers;
         console.log(json);
-        $scope.refresh();
-        log_timers = function() {
-          return console.log($scope.timers);
-        };
-        return setTimeout(log_timers, 500);
+        return $scope.refresh();
       });
     };
   };

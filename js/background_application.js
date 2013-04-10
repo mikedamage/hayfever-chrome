@@ -14,6 +14,10 @@ Background Page Application Class
     function BackgroundApplication(subdomain, auth_string) {
       this.subdomain = subdomain;
       this.auth_string = auth_string;
+      this.badge_flash = __bind(this.badge_flash, this);
+
+      this.badge_color = __bind(this.badge_color, this);
+
       this.refresh_hours = __bind(this.refresh_hours, this);
 
       this.client = new Harvest(this.subdomain, this.auth_string);
@@ -135,7 +139,7 @@ Background Page Application Class
           if (v.timer_started_at != null) {
             current_hours = parseFloat(v.hours);
           }
-          v.running = v.hasOwnProperty('timer_started_at');
+          v.running = v.hasOwnProperty('timer_started_at') && v.timer_started_at;
           return _this.todays_entries[i] = v;
         });
         _this.total_hours = total_hours;
@@ -190,7 +194,7 @@ Background Page Application Class
 
     BackgroundApplication.prototype.badge_color = function(alpha) {
       var color, prefs;
-      prefs = this.get_preferences;
+      prefs = this.get_preferences();
       color = $.hexColorToRGBA(prefs.badge_color, alpha);
       return chrome.browserAction.setBadgeBackgroundColor({
         color: color

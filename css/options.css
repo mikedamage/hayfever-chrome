@@ -87,15 +87,13 @@ input[type="text"], input[type="password"] {
   background-image: -moz-linear-gradient(top, #ffffff, #f7f7f7 10%, #ffffff);
   background-image: -o-linear-gradient(top, #ffffff, #f7f7f7 10%, #ffffff);
   background-image: linear-gradient(top, #ffffff, #f7f7f7 10%, #ffffff);
-  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
-  -o-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
-  -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
   -webkit-transition: all 200ms ease-in 50ms;
   width: 300px;
@@ -105,24 +103,21 @@ input[type="text"], input[type="password"] {
 }
 /* line 77, ../sass/options.scss */
 input[type="text"]:hover, input[type="password"]:hover {
-  -moz-box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px;
-  -o-box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px;
   box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px;
 }
 
 /* line 83, ../sass/options.scss */
 button {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f58752), to(#d44d0d));
-  -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 3px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 3px;
-  -o-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 3px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 3px;
   box-shadow: rgba(0, 0, 0, 0.25) 0 1px 3px;
   -webkit-transition: all 200ms ease-in 50ms;
   text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 1px;

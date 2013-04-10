@@ -96,7 +96,7 @@ class BackgroundApplication
 			$.each @todays_entries, (i, v) =>
 				total_hours += v.hours
 				current_hours = parseFloat(v.hours) if v.timer_started_at?
-				v.running = v.hasOwnProperty 'timer_started_at'
+				v.running = v.hasOwnProperty('timer_started_at') and v.timer_started_at
 				@todays_entries[i] = v
 			@total_hours = total_hours
 
@@ -136,12 +136,12 @@ class BackgroundApplication
 				chrome.browserAction.setBadgeBackgroundColor color: [255, 0, 0, 255]
 				chrome.browserAction.setBadgeText text: '!'
 	
-	badge_color: (alpha) ->
-		prefs = @get_preferences
+	badge_color: (alpha) =>
+		prefs = @get_preferences()
 		color = $.hexColorToRGBA prefs.badge_color, alpha
 		chrome.browserAction.setBadgeBackgroundColor color: color
 	
-	badge_flash: (alpha) ->
+	badge_flash: (alpha) =>
 		@badge_color(255)
 		setTimeout @badge_color, 1000, 100
 	
