@@ -33,6 +33,8 @@ class Project < Thor
 
 	desc 'prep_release', 'Syncs all necessary files to ~/ProjectFiles/Hayfever/hayfever in preparation for packing in Chrome'
 	def prep_release
+		invoke 'coffeescript:compile'
+
 		say_status 'sync', 'Copying files to ~/ProjectFiles/Hayfever/hayfever'
 		IO.popen("rsync -avr #{@@excludes} ./ /Users/mike/ProjectFiles/Hayfever/hayfever/") do |rsync|
 			while line = rsync.gets

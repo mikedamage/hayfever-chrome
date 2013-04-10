@@ -17,6 +17,7 @@ Angular.js Popup Tasks Controller
     $scope.projects = bg_app.projects;
     $scope.clients = bg_app.clients;
     $scope.timers = bg_app.todays_entries;
+    $scope.prefs = bg_app.get_preferences();
     $scope.tasks = {
       billable: [],
       non_billable: []
@@ -37,7 +38,7 @@ Angular.js Popup Tasks Controller
       };
       return console.log(task);
     };
-    return $scope.project_change = function() {
+    $scope.project_change = function() {
       var tasks;
       $scope.tasks = {
         billable: [],
@@ -52,6 +53,19 @@ Angular.js Popup Tasks Controller
         } else {
           return $scope.tasks.non_billable.push(task);
         }
+      });
+    };
+    return $scope.toggle_timer = function(timer_id) {
+      var result;
+      result = bg_app.client.toggle_timer(timer_id);
+      return result.success(function(json) {
+        var log_timers;
+        console.log(json);
+        $scope.refresh();
+        log_timers = function() {
+          return console.log($scope.timers);
+        };
+        return setTimeout(log_timers, 500);
       });
     };
   };

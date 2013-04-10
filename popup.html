@@ -58,12 +58,25 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="timer in timers">
-				<td colspan="3" align="center">
-					{{timer.client}}
+			<tr ng-repeat="timer in timers" id="entry-{{timer.id}}" class="entry running-{{timer.running}}">
+				<td class="entry-name">
+					<strong>{{timer.client}}</strong> {{timer.project}} ({{timer.task}})
+					<div class="notes" ng-show="prefs.show_task_notes">
+						<strong>Notes:</strong> <em>{{timer.notes}}</em>
+					</div>
+				</td>
+
+				<td class="entry-hours" width="50" align="right">
+					{{timer.hours}}
+				</td>
+
+				<td class="entry-toggle" align="center">
+					<a href="#" class="toggle" ng-click="toggle_timer(timer.id)" data-timer-id="{{timer.id}}">Toggle</a>
+					<a href="#" class="edit" data-timer-id="{{timer.id}}">Edit</a>
+					<a href="#" class="delete" data-timer-id="{{timer.id}}">Delete</a>
 				</td>
 			</tr>
-			<tr class="noentries">
+			<tr class="noentries" ng-show="timers.length == 0">
 				<td colspan="3" align="center">
 					<em>No Entries Today</em>
 				</td>

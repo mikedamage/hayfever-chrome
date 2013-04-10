@@ -11,6 +11,7 @@ TasksController = ($scope) ->
 	$scope.projects = bg_app.projects
 	$scope.clients = bg_app.clients
 	$scope.timers = bg_app.todays_entries
+	$scope.prefs = bg_app.get_preferences()
 	$scope.tasks =
 		billable: []
 		non_billable: []
@@ -42,6 +43,15 @@ TasksController = ($scope) ->
 				$scope.tasks.billable.push task
 			else
 				$scope.tasks.non_billable.push task
+	
+	$scope.toggle_timer = (timer_id) ->
+		result = bg_app.client.toggle_timer timer_id
+		result.success (json) ->
+			console.log json
+			$scope.refresh()
 
+			log_timers = ->
+				console.log $scope.timers
+			setTimeout log_timers, 500
 
 window.TasksController = TasksController
