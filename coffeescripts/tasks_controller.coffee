@@ -46,10 +46,8 @@ TasksController = ($scope) ->
 	
 	$scope.project_change = ->
 		$scope.tasks = []
-		tasks = bg_app
-			.project_db
-			.first(id: parseInt($scope.form_task.project))
-			.tasks
+		current_project = _(bg_app.projects).find (p) -> p.id == parseInt($scope.form_task.project)
+		tasks = current_project.tasks
 
 		tasks.forEach (task) ->
 			task.billable_text = if task.billable then 'Billable' else 'Non Billable'
