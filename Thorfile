@@ -35,8 +35,15 @@ class Project < Thor
 	def prep_release
 		invoke 'coffeescript:compile'
 
+		sync_dir = Pathname.new("~/ProjectFiles/Hayfever/hayfever")
+		
+		unless sync_dir.directory?
+			say_status 'mkdir', 'Creating sync directory', :yellow
+			`mkdir -p ~/ProjectFiles/Hayfever/hayfever`
+		end
+
 		say_status 'sync', 'Copying files to ~/ProjectFiles/Hayfever/hayfever'
-		IO.popen("rsync -avr #{@@excludes} ./ /Users/mike/ProjectFiles/Hayfever/hayfever/") do |rsync|
+		IO.popen("rsync -avr #{@@excludes} ./ ~/ProjectFiles/Hayfever/hayfever/") do |rsync|
 			while line = rsync.gets
 				say line
 			end
