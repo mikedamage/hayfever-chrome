@@ -8,16 +8,19 @@ TasksController = ($scope) ->
 	bg_page = chrome.extension.getBackgroundPage()
 	bg_app = bg_page.application
 
-	$scope.projects      = bg_app.projects
-	$scope.clients       = bg_app.clients
-	$scope.timers        = bg_app.todays_entries
-	$scope.prefs         = bg_app.get_preferences()
-	$scope.current_hours = bg_app.current_hours.toClockTime()
-	$scope.total_hours   = bg_app.total_hours.toClockTime()
+	$scope.projects        = bg_app.projects
+	$scope.clients         = bg_app.clients
+	$scope.timers          = bg_app.todays_entries
+	$scope.prefs           = bg_app.get_preferences()
+	$scope.current_hours   = bg_app.current_hours.toClockTime()
+	$scope.total_hours     = bg_app.total_hours.toClockTime()
 	$scope.active_timer_id = 0
-	$scope.tasks =
-		billable: []
-		non_billable: []
+	$scope.tasks           = []
+	$scope.form_task       =
+		project: null
+		task: null
+		hours: null
+		notes: null
 
 	$scope.refresh = ->
 		bg_app.refresh_hours ->
@@ -31,21 +34,21 @@ TasksController = ($scope) ->
 	
 	$scope.add_timer = ->
 		task =
-			project_id: $scope.task_project
-			task_id: $scope.task_task
-			hours: $scope.task_hours
-			notes: $scope.task_notes
+			project_id: $scope.form_task.project
+			task_id: $scope.form_task.task
+			hours: $scope.form_task.hours
+			notes: $scope.form_task.notes
 		result = if $scope.active_timer_id != 0 then bg_app.client.update_entry($scope.active_timer_id, task) else bg_app.client.add_entry(task)
 		result.success (json) ->
 			$scope.hide_form()
+			$scope.reset_form_fields()
 			$scope.refresh()
-		#$scope.reset_form_fields()
 	
 	$scope.project_change = ->
 		$scope.tasks = []
 		tasks = bg_app
 			.project_db
-			.first(id: parseInt($scope.task_project))
+			.first(id: parseInt($scope.form_task.project))
 			.tasks
 
 		tasks.forEach (task) ->
@@ -79,13 +82,14 @@ TasksController = ($scope) ->
 		$overlay = $('#form-overlay')
 
 		if $('body').data 'oldHeight'
-			$('body').animate {height: "#{$('body').data('oldHeight')}px"}, 300, ->
-				$overlay.fadeOut 300
+			$overlay.fadeOut 300, ->
+				$('body').animate {height: "#{$('body').data('oldHeight')}px"}, 300
 	
 	$scope.reset_form_fields = ->
-		$scope.task_project = null
-		$scope.task_task = null
-		$scope.task_hours = null
-		$scope.task_notes = null
+		$scope.form_task =
+			project: null
+			task: null
+			hours: null
+			notes: null
 
 window.TasksController = TasksController

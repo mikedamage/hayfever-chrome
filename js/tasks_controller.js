@@ -21,9 +21,12 @@ Angular.js Popup Tasks Controller
     $scope.current_hours = bg_app.current_hours.toClockTime();
     $scope.total_hours = bg_app.total_hours.toClockTime();
     $scope.active_timer_id = 0;
-    $scope.tasks = {
-      billable: [],
-      non_billable: []
+    $scope.tasks = [];
+    $scope.form_task = {
+      project: null,
+      task: null,
+      hours: null,
+      notes: null
     };
     $scope.refresh = function() {
       return bg_app.refresh_hours(function() {
@@ -39,14 +42,15 @@ Angular.js Popup Tasks Controller
     $scope.add_timer = function() {
       var result, task;
       task = {
-        project_id: $scope.task_project,
-        task_id: $scope.task_task,
-        hours: $scope.task_hours,
-        notes: $scope.task_notes
+        project_id: $scope.form_task.project,
+        task_id: $scope.form_task.task,
+        hours: $scope.form_task.hours,
+        notes: $scope.form_task.notes
       };
       result = $scope.active_timer_id !== 0 ? bg_app.client.update_entry($scope.active_timer_id, task) : bg_app.client.add_entry(task);
       return result.success(function(json) {
         $scope.hide_form();
+        $scope.reset_form_fields();
         return $scope.refresh();
       });
     };
@@ -54,7 +58,7 @@ Angular.js Popup Tasks Controller
       var tasks;
       $scope.tasks = [];
       tasks = bg_app.project_db.first({
-        id: parseInt($scope.task_project)
+        id: parseInt($scope.form_task.project)
       }).tasks;
       return tasks.forEach(function(task) {
         task.billable_text = task.billable ? 'Billable' : 'Non Billable';
@@ -100,18 +104,20 @@ Angular.js Popup Tasks Controller
       var $overlay;
       $overlay = $('#form-overlay');
       if ($('body').data('oldHeight')) {
-        return $('body').animate({
-          height: "" + ($('body').data('oldHeight')) + "px"
-        }, 300, function() {
-          return $overlay.fadeOut(300);
+        return $overlay.fadeOut(300, function() {
+          return $('body').animate({
+            height: "" + ($('body').data('oldHeight')) + "px"
+          }, 300);
         });
       }
     };
     return $scope.reset_form_fields = function() {
-      $scope.task_project = null;
-      $scope.task_task = null;
-      $scope.task_hours = null;
-      return $scope.task_notes = null;
+      return $scope.form_task = {
+        project: null,
+        task: null,
+        hours: null,
+        notes: null
+      };
     };
   };
 

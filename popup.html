@@ -91,23 +91,23 @@
 			</p>
 			<p>
 				<label for="client-select">Client</label>
-				<select id="client-select" name="client" ng-model="task_project" ng-change="project_change()" ng-options="p.id as p.name group by p.client for p in projects">
+				<select id="client-select" name="client" ng-model="form_task.project" ng-change="project_change()" ng-options="p.id as p.name group by p.client for p in projects" required>
 					<option value="">- Select a Project -</option>
 				</select>
 			</p>
 			<p>
 				<label for="task-select">Task</label>
-				<select id="task-select" name="task" ng-model="task_task" ng-options="t.id as t.name group by t.billable_text for t in tasks">
+				<select id="task-select" name="task" ng-model="form_task.task" ng-options="t.id as t.name group by t.billable_text for t in tasks" required>
 					<option value="">- Select Task -</option>
 				</select>
 			</p>
 			<p>
 				<label for="task-hours">Hours</label>
-				<input type="text" id="task-hours" value="" name="task_hours" ng-model="task_hours" />
+				<input type="text" id="task-hours" value="" name="task_hours" ng-model="form_task.hours" />
 			</p>
 			<p>
 				<label for="task-notes">Notes</label>
-				<textarea id="task-notes" name="task_notes" ng-model="task_notes"></textarea>
+				<textarea id="task-notes" name="task_notes" ng-model="form_task.notes"></textarea>
 			</p>
 			<input type="hidden" value="{{active_timer_id}}" ng-model="active_timer_id" name="timer_id">
 			<input type="submit" value="Save">
