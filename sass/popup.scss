@@ -75,31 +75,23 @@ a {
       font-size: 11px;
       padding: 8px;
 
+	  a {
+	  	text-indent: -9999px;
+		width: 16px;
+		height: 16px;
+		display: inline-block;
+	  }
+
       a.toggle {
         background: url(../img/icons/silk/control_play_blue.png) top left no-repeat;
-        text-indent: -9999px;
-        display: block;
-        width: 16px;
-        height: 16px;
-        float: left;
       }
 
       a.edit {
         background: url(../img/icons/silk/clock_edit.png) top left no-repeat;
-        text-indent: -9999px;
-        display: block;
-        width: 16px;
-        height: 16px;
-        float: left;
       }
 
       a.delete {
         background: url(../img/icons/silk/delete.png) top left no-repeat;
-        text-indent: -9999px;
-        display: block;
-        width: 16px;
-        height: 16px;
-        float: left;
       }
     } 
     tr.running {

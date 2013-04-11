@@ -77,7 +77,6 @@ Angular.js Popup Tasks Controller
       var result;
       result = bg_app.client.delete_entry(timer_id);
       return result.complete(function() {
-        console.log("" + timer_id + " deleted");
         return $scope.refresh();
       });
     };

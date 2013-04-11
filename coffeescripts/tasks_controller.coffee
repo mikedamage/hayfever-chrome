@@ -61,7 +61,6 @@ TasksController = ($scope) ->
 	$scope.delete_timer = (timer_id) ->
 		result = bg_app.client.delete_entry timer_id
 		result.complete ->
-			console.log "#{timer_id} deleted"
 			$scope.refresh()
 	
 	$scope.show_form = (timer_id=0) ->
