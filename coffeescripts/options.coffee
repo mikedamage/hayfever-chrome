@@ -12,14 +12,14 @@ $.fn.selectOption = (val) ->
 
 $ ->
 	$subdomain_field = $('#harvest-subdomain')
-	$username_field = $('#harvest-username')
-	$password_field = $('#harvest-password')
-	$form_fields = $('input[type!="submit"], select')
-	subdomain = localStorage['harvest_subdomain']
-	username = localStorage['harvest_username']
-	auth_string = localStorage['harvest_auth_string']
-	plugin_prefs = localStorage['hayfever_prefs']
-	bg_page = chrome.extension.getBackgroundPage()
+	$username_field  = $('#harvest-username')
+	$password_field  = $('#harvest-password')
+	$form_fields     = $('input[type!= "submit"], select')
+	subdomain        = localStorage['harvest_subdomain']
+	username         = localStorage['harvest_username']
+	auth_string      = localStorage['harvest_auth_string']
+	plugin_prefs     = localStorage['hayfever_prefs']
+	bg_page          = chrome.extension.getBackgroundPage()
 
 	# Badge color picker
 	color_picker = $.farbtastic '#badge-color-picker', (color) ->
