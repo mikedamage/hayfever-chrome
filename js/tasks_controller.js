@@ -14,6 +14,7 @@ Angular.js Popup Tasks Controller
     var bg_app, bg_page;
     bg_page = chrome.extension.getBackgroundPage();
     bg_app = bg_page.application;
+    $scope.harvest_url = bg_app.client.full_url;
     $scope.projects = bg_app.projects;
     $scope.clients = bg_app.clients;
     $scope.timers = bg_app.todays_entries;
