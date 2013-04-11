@@ -6,23 +6,22 @@ Angular.js Popup Tasks Controller
 
 
 (function() {
-  var TasksController;
+  var app, clock_time_filter, tasks_controller;
 
-  angular.module('hayfeverApp', ['ui']);
+  app = angular.module('hayfeverApp', ['ui']);
 
-  TasksController = function($scope) {
+  tasks_controller = function($scope) {
     var bg_app, bg_page;
     bg_page = chrome.extension.getBackgroundPage();
     bg_app = bg_page.application;
-    if (bg_app.client) {
-      $scope.harvest_url = bg_app.client.full_url;
-    }
+    $scope.harvest_url = bg_app.client.subdomain ? bg_app.client.full_url : null;
+    $scope.authorized = bg_app.authorized;
     $scope.projects = bg_app.projects;
     $scope.clients = bg_app.clients;
     $scope.timers = bg_app.todays_entries;
     $scope.prefs = bg_app.get_preferences();
-    $scope.current_hours = bg_app.current_hours.toClockTime();
-    $scope.total_hours = bg_app.total_hours.toClockTime();
+    $scope.current_hours = bg_app.current_hours;
+    $scope.total_hours = bg_app.total_hours;
     $scope.active_timer_id = 0;
     $scope.tasks = [];
     $scope.form_task = {
@@ -33,12 +32,14 @@ Angular.js Popup Tasks Controller
     };
     $scope.refresh = function() {
       return bg_app.refresh_hours(function() {
+        $scope.harvest_url = bg_app.client.subdomain ? bg_app.client.full_url : null;
+        $scope.authorized = bg_app.authorized;
         $scope.projects = bg_app.projects;
         $scope.clients = bg_app.clients;
         $scope.timers = bg_app.todays_entries;
         $scope.prefs = bg_app.get_preferences();
-        $scope.current_hours = bg_app.current_hours.toClockTime();
-        $scope.total_hours = bg_app.total_hours.toClockTime();
+        $scope.current_hours = bg_app.current_hours;
+        $scope.total_hours = bg_app.total_hours;
         return $scope.$apply();
       });
     };
@@ -136,6 +137,14 @@ Angular.js Popup Tasks Controller
     };
   };
 
-  window.TasksController = TasksController;
+  clock_time_filter = function() {
+    return function(input) {
+      return input.toClockTime();
+    };
+  };
+
+  app.controller('TasksController', ['$scope', tasks_controller]);
+
+  app.filter('clockTime', clock_time_filter);
 
 }).call(this);

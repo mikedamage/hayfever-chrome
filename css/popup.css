@@ -105,7 +105,7 @@ a {
   padding: 8px;
 }
 /* line 78, ../sass/popup.scss */
-#timesheet tbody td a {
+#timesheet tbody td a.option {
   text-indent: -9999px;
   width: 16px;
   height: 16px;

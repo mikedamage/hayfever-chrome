@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app ng-csp>
+<html lang="en" ng-app="hayfeverApp" ng-csp>
 <head>
 	<meta charset="UTF-8" />
 	<link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
@@ -34,14 +34,19 @@
 				</td>
 
 				<td class="entry-toggle" align="center">
-					<a href="#" class="toggle" ng-click="toggle_timer(timer.id)" data-timer-id="{{timer.id}}">Toggle</a>
-					<a href="#" class="edit" ng-click="show_form(timer.id)" data-timer-id="{{timer.id}}">Edit</a>
-					<a href="#" class="delete" ng-click="delete_timer(timer.id)" data-timer-id="{{timer.id}}">Delete</a>
+					<a href="#" class="toggle option" ng-click="toggle_timer(timer.id)" data-timer-id="{{timer.id}}">Toggle</a>
+					<a href="#" class="edit option" ng-click="show_form(timer.id)" data-timer-id="{{timer.id}}">Edit</a>
+					<a href="#" class="delete option" ng-click="delete_timer(timer.id)" data-timer-id="{{timer.id}}">Delete</a>
 				</td>
 			</tr>
-			<tr class="noentries" ng-show="timers.length == 0">
+			<tr class="noentries" ui-if="authorized && timers.length == 0">
 				<td colspan="3" align="center">
 					<em>No Entries Today</em>
+				</td>
+			</tr>
+			<tr class="configure" ui-if="!authorized">
+				<td colspan="3" align="center">
+					<em>Please visit the <a href="options.html" target="_blank">Options Page</a> and sign in to Harvest.</em>
 				</td>
 			</tr>
 		</tbody>
@@ -58,17 +63,17 @@
 
 	<div id="stats">
 		<div class="stat-clock" id="total-hours-stat">
-			<p id="total-hours-time">{{total_hours}}</p>
+			<p id="total-hours-time">{{total_hours | clockTime}}</p>
 			<span class="stat-caption">Total Hours Today</span>
 		</div>
 		<div class="stat-clock" id="current-hours-stat">
-			<p id="current-hours-time">{{current_hours}}</p>
+			<p id="current-hours-time">{{current_hours | clockTime}}</p>
 			<span class="stat-caption">Current Task Hours</span>
 		</div>
 		<div class="clear">&nbsp;</div>
 	</div>
 
-	<ul class="toolbar">
+	<ul class="toolbar" ui-if="harvest_url">
 		<li>
 			<a href="{{harvest_url}}" id="harvest-link" target="_blank">&laquo; Visit Harvest App</a>
 		</li>

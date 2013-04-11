@@ -2,19 +2,21 @@
 Angular.js Popup Tasks Controller
 ###
 
-angular.module 'hayfeverApp', ['ui']
+app = angular.module 'hayfeverApp', ['ui']
 
-TasksController = ($scope) ->
+
+tasks_controller = ($scope) ->
 	bg_page = chrome.extension.getBackgroundPage()
 	bg_app = bg_page.application
 
-	$scope.harvest_url     = bg_app.client.full_url if bg_app.client
+	$scope.harvest_url     = if bg_app.client.subdomain then bg_app.client.full_url else null
+	$scope.authorized      = bg_app.authorized
 	$scope.projects        = bg_app.projects
 	$scope.clients         = bg_app.clients
 	$scope.timers          = bg_app.todays_entries
 	$scope.prefs           = bg_app.get_preferences()
-	$scope.current_hours   = bg_app.current_hours.toClockTime()
-	$scope.total_hours     = bg_app.total_hours.toClockTime()
+	$scope.current_hours   = bg_app.current_hours
+	$scope.total_hours     = bg_app.total_hours
 	$scope.active_timer_id = 0
 	$scope.tasks           = []
 	$scope.form_task       =
@@ -25,12 +27,14 @@ TasksController = ($scope) ->
 
 	$scope.refresh = ->
 		bg_app.refresh_hours ->
+			$scope.harvest_url   = if bg_app.client.subdomain then bg_app.client.full_url else null
+			$scope.authorized    = bg_app.authorized
 			$scope.projects      = bg_app.projects
 			$scope.clients       = bg_app.clients
 			$scope.timers        = bg_app.todays_entries
 			$scope.prefs         = bg_app.get_preferences()
-			$scope.current_hours = bg_app.current_hours.toClockTime()
-			$scope.total_hours   = bg_app.total_hours.toClockTime()
+			$scope.current_hours = bg_app.current_hours
+			$scope.total_hours   = bg_app.total_hours
 			$scope.$apply()
 	
 	$scope.add_timer = ->
@@ -100,4 +104,9 @@ TasksController = ($scope) ->
 			hours: null
 			notes: null
 
-window.TasksController = TasksController
+clock_time_filter = ->
+	(input) ->
+		input.toClockTime()
+
+app.controller 'TasksController', [ '$scope', tasks_controller ]
+app.filter 'clockTime', clock_time_filter
