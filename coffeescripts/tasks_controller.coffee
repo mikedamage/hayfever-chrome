@@ -41,7 +41,6 @@ TasksController = ($scope) ->
 		result = if $scope.active_timer_id != 0 then bg_app.client.update_entry($scope.active_timer_id, task) else bg_app.client.add_entry(task)
 		result.success (json) ->
 			$scope.hide_form()
-			$scope.reset_form_fields()
 			$scope.refresh()
 	
 	$scope.project_change = ->
@@ -69,6 +68,17 @@ TasksController = ($scope) ->
 	$scope.show_form = (timer_id=0) ->
 		$scope.active_timer_id = timer_id
 		$overlay = $('#form-overlay')
+
+		unless $scope.active_timer_id is 0
+			timer = _(bg_app.todays_entries).find (item) ->
+				item.id == $scope.active_timer_id
+
+			if timer
+				$scope.form_task.project = parseInt timer.project_id, 10
+				$scope.form_task.task = parseInt timer.task_id, 10
+				$scope.form_task.hours = timer.hours
+				$scope.form_task.notes = timer.notes
+				$scope.project_change()
 		
 		if $('body').height() < 300
 			$('body').data 'oldHeight', $('body').height()
@@ -84,6 +94,7 @@ TasksController = ($scope) ->
 		if $('body').data 'oldHeight'
 			$overlay.fadeOut 300, ->
 				$('body').animate {height: "#{$('body').data('oldHeight')}px"}, 300
+				$scope.reset_form_fields()
 	
 	$scope.reset_form_fields = ->
 		$scope.form_task =

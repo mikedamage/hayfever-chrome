@@ -50,7 +50,6 @@ Angular.js Popup Tasks Controller
       result = $scope.active_timer_id !== 0 ? bg_app.client.update_entry($scope.active_timer_id, task) : bg_app.client.add_entry(task);
       return result.success(function(json) {
         $scope.hide_form();
-        $scope.reset_form_fields();
         return $scope.refresh();
       });
     };
@@ -81,12 +80,25 @@ Angular.js Popup Tasks Controller
       });
     };
     $scope.show_form = function(timer_id) {
-      var $overlay;
+      var $overlay, timer;
       if (timer_id == null) {
         timer_id = 0;
       }
       $scope.active_timer_id = timer_id;
       $overlay = $('#form-overlay');
+      if ($scope.active_timer_id !== 0) {
+        timer = _(bg_app.todays_entries).find(function(item) {
+          return item.id === $scope.active_timer_id;
+        });
+        if (timer) {
+          $scope.form_task.project = parseInt(timer.project_id, 10);
+          $scope.form_task.task = parseInt(timer.task_id, 10);
+          $scope.form_task.hours = timer.hours;
+          $scope.form_task.notes = timer.notes;
+          $scope.project_change();
+        }
+        console.log(timer);
+      }
       if ($('body').height() < 300) {
         $('body').data('oldHeight', $('body').height());
       } else {
@@ -105,9 +117,10 @@ Angular.js Popup Tasks Controller
       $overlay = $('#form-overlay');
       if ($('body').data('oldHeight')) {
         return $overlay.fadeOut(300, function() {
-          return $('body').animate({
+          $('body').animate({
             height: "" + ($('body').data('oldHeight')) + "px"
           }, 300);
+          return $scope.reset_form_fields();
         });
       }
     };
