@@ -30,7 +30,6 @@ Background Page Application Class
       this.refresh_interval_time = 36000;
       this.todays_entries = [];
       this.projects = [];
-      this.clients = {};
       this.preferences = {};
       this.timer_running = false;
     }
@@ -123,12 +122,11 @@ Background Page Application Class
       callback = typeof callback === 'function' ? callback : $.noop;
       todays_hours = this.client.get_today();
       todays_hours.success(function(json) {
-        var clients, current_hours, projects, total_hours;
+        var current_hours, total_hours;
         _this.authorized = true;
         total_hours = 0.0;
         current_hours = '';
         _this.projects = json.projects;
-        _this.project_db = TAFFY(_this.projects);
         _this.todays_entries = json.day_entries;
         $.each(_this.todays_entries, function(i, v) {
           total_hours += v.hours;
@@ -147,29 +145,6 @@ Background Page Application Class
           _this.current_hours = 0.0;
           _this.timer_running = false;
           _this.stop_badge_flash();
-        }
-        if (!_this.projects.isEmpty()) {
-          clients = {};
-          projects = _this.projects;
-          $.each(_this.projects, function(i, v) {
-            var client, client_key, id_exists, project_id;
-            client_key = v.client.toSlug();
-            project_id = v.id;
-            if (!clients[client_key]) {
-              clients[client_key] = {
-                name: v.client,
-                projects: []
-              };
-            }
-            client = clients[client_key];
-            id_exists = _(client.projects).detect(function(p) {
-              return p.id === project_id;
-            });
-            if (!id_exists) {
-              return clients[client_key].projects.push(v);
-            }
-          });
-          _this.clients = clients;
         }
         _this.set_badge();
         return callback.call(_this.todays_entries);

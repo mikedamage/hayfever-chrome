@@ -17,7 +17,6 @@ Angular.js Popup Tasks Controller
     $scope.harvest_url = bg_app.client.subdomain ? bg_app.client.full_url : null;
     $scope.authorized = bg_app.authorized;
     $scope.projects = bg_app.projects;
-    $scope.clients = bg_app.clients;
     $scope.timers = bg_app.todays_entries;
     $scope.prefs = bg_app.get_preferences();
     $scope.current_hours = bg_app.current_hours;

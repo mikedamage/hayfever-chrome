@@ -14,7 +14,6 @@ class BackgroundApplication
 		@refresh_interval_time = 36000
 		@todays_entries = []
 		@projects = []
-		@clients = {}
 		@preferences = {}
 		@timer_running = false
 	
@@ -86,7 +85,6 @@ class BackgroundApplication
 			current_hours = ''
 
 			@projects = json.projects
-			@project_db = TAFFY(@projects)
 			@todays_entries = json.day_entries
 
 			# Add up total hours by looping thru timesheet entries
@@ -105,21 +103,6 @@ class BackgroundApplication
 				@current_hours = 0.0
 				@timer_running = false
 				@stop_badge_flash()
-
-			# Build a grouped list of clients/projects for building optgroups in markup later
-			unless @projects.isEmpty()
-				clients = {}
-				projects = @projects
-				$.each @projects, (i, v) ->
-					client_key = v.client.toSlug()
-					project_id = v.id
-					clients[client_key] = {name: v.client, projects: []} unless clients[client_key]
-					client = clients[client_key]
-					id_exists = _(client.projects).detect (p) ->
-						p.id == project_id
-					clients[client_key].projects.push(v) unless id_exists
-
-				@clients = clients
 
 			@set_badge()
 			callback.call(@todays_entries)
