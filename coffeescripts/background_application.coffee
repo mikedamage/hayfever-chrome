@@ -30,9 +30,6 @@ class BackgroundApplication
 		prefs = localStorage.getItem 'hayfever_prefs'
 		if prefs then JSON.parse(prefs) else {}
 	
-	get_version: ->
-		@version
-
 	# Instance Methods	
 	upgrade_detected: ->
 		stored_version = localStorage.getItem 'hayfever_version'

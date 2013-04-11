@@ -8,17 +8,16 @@ Background Page Main JavaScript
 (function() {
 
   $(function() {
-    var auth_data;
-    auth_data = {
-      subdomain: localStorage['harvest_subdomain'],
-      auth_string: localStorage['harvest_auth_string'],
-      username: localStorage['harvest_username']
-    };
-    if (!(auth_data.subdomain.isBlank() || auth_data.auth_string.isBlank())) {
+    var auth_data, auth_string, subdomain;
+    auth_data = BackgroundApplication.get_auth_data();
+    subdomain = auth_data.subdomain;
+    auth_string = auth_data.auth_string;
+    if (subdomain && auth_string) {
       window.application = new BackgroundApplication(auth_data.subdomain, auth_data.auth_string);
       setTimeout(window.application.refresh_hours, 500);
       return window.application.start_refresh_interval();
     } else {
+      window.application = new BackgroundApplication(false, false);
       chrome.browserAction.setBadgeText({
         text: '!'
       });

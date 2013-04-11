@@ -3,16 +3,16 @@ Background Page Main JavaScript
 ###
 
 $ ->
-	auth_data =
-		subdomain: localStorage['harvest_subdomain']
-		auth_string: localStorage['harvest_auth_string']
-		username: localStorage['harvest_username']
+	auth_data = BackgroundApplication.get_auth_data()
+	subdomain = auth_data.subdomain
+	auth_string = auth_data.auth_string
 	
-	unless auth_data.subdomain.isBlank() or auth_data.auth_string.isBlank()
+	if subdomain and auth_string
 		window.application = new BackgroundApplication auth_data.subdomain, auth_data.auth_string
 		setTimeout window.application.refresh_hours, 500
 		window.application.start_refresh_interval()
 	else
+		window.application = new BackgroundApplication false, false
 		chrome.browserAction.setBadgeText text: '!'
 		console.error 'Error initializing Hayfever. Please visit the options page.'
 		

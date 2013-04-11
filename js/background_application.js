@@ -55,10 +55,6 @@ Background Page Application Class
       }
     };
 
-    BackgroundApplication.prototype.get_version = function() {
-      return this.version;
-    };
-
     BackgroundApplication.prototype.upgrade_detected = function() {
       var stored_version;
       stored_version = localStorage.getItem('hayfever_version');

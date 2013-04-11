@@ -8,7 +8,7 @@ TasksController = ($scope) ->
 	bg_page = chrome.extension.getBackgroundPage()
 	bg_app = bg_page.application
 
-	$scope.harvest_url     = bg_app.client.full_url
+	$scope.harvest_url     = bg_app.client.full_url if bg_app.client
 	$scope.projects        = bg_app.projects
 	$scope.clients         = bg_app.clients
 	$scope.timers          = bg_app.todays_entries
@@ -68,8 +68,7 @@ TasksController = ($scope) ->
 		$overlay = $('#form-overlay')
 
 		unless $scope.active_timer_id is 0
-			timer = _(bg_app.todays_entries).find (item) ->
-				item.id == $scope.active_timer_id
+			timer = _(bg_app.todays_entries).find (item) -> item.id == $scope.active_timer_id
 
 			if timer
 				$scope.form_task.project = parseInt timer.project_id, 10
