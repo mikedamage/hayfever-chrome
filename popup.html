@@ -24,7 +24,7 @@
 			<tr ng-repeat="timer in timers" id="entry-{{timer.id}}" ng-class="{entry: true, running: timer.running, even: ($index % 2 == 0), odd: ($index % 2 != 0)}" ng-dblclick="toggle_timer(timer.id)">
 				<td class="entry-name">
 					<strong>{{timer.client}}</strong> {{timer.project}} ({{timer.task}})
-					<div class="notes" ng-show="prefs.show_task_notes">
+					<div class="notes" ui-if="prefs.show_task_notes">
 						<strong>Notes:</strong> <em>{{timer.notes}}</em>
 					</div>
 				</td>
@@ -34,9 +34,9 @@
 				</td>
 
 				<td class="entry-toggle" align="center">
-					<a href="#" class="toggle option" ng-click="toggle_timer(timer.id)" data-timer-id="{{timer.id}}">Toggle</a>
-					<a href="#" class="edit option" ng-click="show_form(timer.id)" data-timer-id="{{timer.id}}">Edit</a>
-					<a href="#" class="delete option" ng-click="delete_timer(timer.id)" data-timer-id="{{timer.id}}">Delete</a>
+					<a href="#" class="toggle option" ng-click="toggle_timer(timer.id)">Toggle</a>
+					<a href="#" class="edit option" ng-click="show_form(timer.id)">Edit</a>
+					<a href="#" class="delete option" ng-click="delete_timer(timer.id)">Delete</a>
 				</td>
 			</tr>
 			<tr class="noentries" ui-if="authorized && timers.length == 0">
