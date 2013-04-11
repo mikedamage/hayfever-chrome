@@ -9,6 +9,7 @@ tasks_controller = ($scope) ->
 	bg_page = chrome.extension.getBackgroundPage()
 	bg_app = bg_page.application
 
+	$scope.form_visible    = false
 	$scope.harvest_url     = if bg_app.client.subdomain then bg_app.client.full_url else null
 	$scope.authorized      = bg_app.authorized
 	$scope.projects        = bg_app.projects
@@ -80,21 +81,10 @@ tasks_controller = ($scope) ->
 				$scope.form_task.notes = timer.notes
 				$scope.project_change()
 		
-		if $('body').height() < 300
-			$('body').data 'oldHeight', $('body').height()
-		else
-			$('body').removeData 'oldHeight'
-
-		$overlay.fadeIn 300, ->
-			$('body').animate {height: "#{$overlay.height()}px"}, 300 if $('body').height() < $overlay.height()
+		$scope.form_visible = true
 	
 	$scope.hide_form = ->
-		$overlay = $('#form-overlay')
-
-		if $('body').data 'oldHeight'
-			$overlay.fadeOut 300, ->
-				$('body').animate {height: "#{$('body').data('oldHeight')}px"}, 300
-				$scope.reset_form_fields()
+		$scope.form_visible = false
 	
 	$scope.reset_form_fields = ->
 		$scope.form_task =

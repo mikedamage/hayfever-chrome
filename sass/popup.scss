@@ -68,6 +68,12 @@ a {
     &.right {
       -webkit-border-top-right-radius: 6px; } }
   tbody {
+		tr {
+			-webkit-transition: all 0.5s ease;
+		}
+		tr.ui-animate {
+			opacity: 0;
+		}
     tr.odd {
       background: $tr-odd-bg;
     }
@@ -171,13 +177,18 @@ ul.toolbar {
 }
 
 #form-overlay {
-  display: none;
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.55); }
+  background: rgba(0, 0, 0, 0.55);
+	-webkit-transition: all 0.5s ease;
+	
+	&.ui-animate {
+		opacity: 0;
+	}
+}
 
 #entry-form {
   font-size: 12px;

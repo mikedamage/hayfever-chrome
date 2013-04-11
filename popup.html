@@ -79,7 +79,7 @@
 		</li>
 	</ul>
 
-	<div id="form-overlay">
+	<div id="form-overlay" ui-if="form_visible" ui-animate>
 		<form id="entry-form" ng-submit="add_timer()">
 			<p>
 				<a class="cancel" href="#" ng-click="hide_form()">Cancel</a>
