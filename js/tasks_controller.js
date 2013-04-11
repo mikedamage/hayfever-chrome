@@ -97,7 +97,6 @@ Angular.js Popup Tasks Controller
           $scope.form_task.notes = timer.notes;
           $scope.project_change();
         }
-        console.log(timer);
       }
       if ($('body').height() < 300) {
         $('body').data('oldHeight', $('body').height());
