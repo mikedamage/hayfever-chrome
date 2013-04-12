@@ -23,7 +23,7 @@ by Mike Green (mike.is.green@gmail.com)
     $subdomain_field = $('#harvest-subdomain');
     $username_field = $('#harvest-username');
     $password_field = $('#harvest-password');
-    $form_fields = $('input[type!="submit"], select');
+    $form_fields = $('input[type!= "submit"], select');
     subdomain = localStorage['harvest_subdomain'];
     username = localStorage['harvest_username'];
     auth_string = localStorage['harvest_auth_string'];

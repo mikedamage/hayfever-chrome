@@ -48,13 +48,12 @@ body {
 
 /* line 44, ../sass/options.scss */
 #status {
-  display: none;
   width: 70%;
   text-align: center;
   margin: 10px auto;
   padding: 10px;
 }
-/* line 50, ../sass/options.scss */
+/* line 49, ../sass/options.scss */
 #status.success {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ddffdd), color-stop(100%, #c1e4c1));
   background-image: -webkit-linear-gradient(top, #ddffdd, #c1e4c1);
@@ -67,20 +66,20 @@ body {
   /* capsule shaped edges if the div is short enough */
 }
 
-/* line 57, ../sass/options.scss */
+/* line 56, ../sass/options.scss */
 fieldset {
   border: 1px #ccc solid;
   -webkit-border-radius: 8px;
   margin-bottom: 20px;
 }
-/* line 61, ../sass/options.scss */
+/* line 60, ../sass/options.scss */
 fieldset p span.hint {
   font-size: 11px;
   display: block;
   font-style: italic;
 }
 
-/* line 67, ../sass/options.scss */
+/* line 66, ../sass/options.scss */
 input[type="text"], input[type="password"] {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(10%, #f7f7f7), color-stop(100%, #ffffff));
   background-image: -webkit-linear-gradient(top, #ffffff, #f7f7f7 10%, #ffffff);
@@ -101,14 +100,14 @@ input[type="text"], input[type="password"] {
   border: 1px solid #e5e5e5;
   color: #4d4d4d;
 }
-/* line 77, ../sass/options.scss */
+/* line 76, ../sass/options.scss */
 input[type="text"]:hover, input[type="password"]:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px;
   -moz-box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px;
   box-shadow: rgba(0, 0, 0, 0.35) 0 0 8px;
 }
 
-/* line 83, ../sass/options.scss */
+/* line 82, ../sass/options.scss */
 button {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f58752), to(#d44d0d));
   -webkit-border-radius: 5px;
@@ -130,17 +129,17 @@ button {
   padding: 7px;
   border: none;
 }
-/* line 100, ../sass/options.scss */
+/* line 99, ../sass/options.scss */
 button:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 1px 3px 0;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f6976a), to(#f26522));
 }
-/* line 105, ../sass/options.scss */
+/* line 104, ../sass/options.scss */
 button:active {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f26522), to(#f6976a));
 }
 
-/* line 110, ../sass/options.scss */
+/* line 109, ../sass/options.scss */
 p.info {
   font-size: 11px;
   font-style: italic;
