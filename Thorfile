@@ -33,6 +33,7 @@ class Project < Thor
 
 	desc 'prep_release', 'Syncs all necessary files to ~/ProjectFiles/Hayfever/hayfever in preparation for packing in Chrome'
 	def prep_release
+		invoke 'css:compile'
 		invoke 'coffeescript:compile'
 
 		sync_dir = Pathname.new("~/ProjectFiles/Hayfever/hayfever")
@@ -42,7 +43,7 @@ class Project < Thor
 			`mkdir -p ~/ProjectFiles/Hayfever/hayfever`
 		end
 
-		say_status 'sync', 'Copying files to ~/ProjectFiles/Hayfever/hayfever'
+		say 'Copying files to ~/ProjectFiles/Hayfever/hayfever', :blue
 		IO.popen("rsync -avr #{@@excludes} ./ ~/ProjectFiles/Hayfever/hayfever/") do |rsync|
 			while line = rsync.gets
 				say line
@@ -70,6 +71,7 @@ class Coffeescript < Thor
 		cs_dir = project_dir.join 'coffeescripts'
 		js_dir = project_dir.join 'js'
 
+		say 'Compiling CoffeeScripts...', :blue
 		cs_dir.children.each do |child|
 			if child.basename.to_s =~ /\.coffee$/
 				say_status 'compile', child.basename.to_s, :blue
@@ -78,6 +80,24 @@ class Coffeescript < Thor
 		end
 	end
 
+end
+
+# module: css
+class CSS < Thor
+	include Thor::Actions
+
+	desc 'compile', 'Compile Compass/SASS stylesheets to CSS'
+	def compile
+		Dir.chdir(File.dirname(__FILE__))
+
+		say 'Compiling stylesheets...', :blue
+
+		IO.popen 'compass compile' do |compass|
+			while line = compass.gets
+				say line
+			end
+		end
+	end
 end
 
 # vim: set ft=ruby sw=2 ts=2 :

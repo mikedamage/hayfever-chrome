@@ -4,7 +4,9 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
   color: #4d4d4d; 
-	width: $popup-width; }
+	width: $popup-width;
+	min-height: 245px;
+}
 
 a {
   color: #DB9C59; }
