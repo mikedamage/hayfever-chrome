@@ -18,16 +18,13 @@ class BackgroundApplication
 		@timer_running = false
 	
 	# Class Methods
-	@get_auth_data: ->
-		data =
-			subdomain: localStorage.getItem 'harvest_subdomain'
-			auth_string: localStorage.getItem 'harvest_auth_string'
-			username: localStorage.getItem 'harvest_username'
-		data
+	@get_auth_data: (callback) ->
+		chrome.storage.local.get [ 'harvest_subdomain', 'harvest_auth_string', 'harvest_username' ], (items) ->
+			callback(items)
 	
-	@get_preferences: ->
-		prefs = localStorage.getItem 'hayfever_prefs'
-		if prefs then JSON.parse(prefs) else {}
+	@get_preferences: (callback) ->
+		chrome.storage.local.get 'hayfever_prefs', (items) ->
+			callback(items)
 	
 	# Instance Methods	
 	upgrade_detected: ->
@@ -43,21 +40,18 @@ class BackgroundApplication
 		@refresh_interval = setInterval @refresh_hours, 36000
 	
 	get_preferences: ->
-		@preferences = BackgroundApplication.get_preferences()
+		BackgroundApplication.get_preferences (items) =>
+			@preferences = items.hayfever_prefs || {}
 	
-	get_auth_data: ->
-		data =
-			subdomain: localStorage.getItem 'harvest_subdomain'
-			auth_string: localStorage.getItem 'harvest_auth_string'
-			username: localStorage.getItem 'harvest_username'
-		data
-	
+	get_auth_data: (callback) ->
+			
 	auth_data_exists: ->
 		auth = @get_auth_data()
 		!auth.subdomain.isBlank() and !auth.auth_string.isBlank()
 	
-	set_badge: ->
-		prefs = BackgroundApplication.get_preferences()
+	set_badge: =>
+		@get_preferences()
+		prefs = @preferences
 		badge_color = $.hexColorToRGBA prefs.badge_color
 
 		switch prefs.badge_display
@@ -73,7 +67,8 @@ class BackgroundApplication
 	
 	refresh_hours: (callback, force=false) =>
 		console.log 'refreshing hours'
-		prefs = BackgroundApplication.get_preferences()
+		@get_preferences()
+		prefs = @preferences
 		callback = if typeof callback is 'function' then callback else $.noop
 		#last_updated = localStorage.getItem 'hayfever_last_refresh'
 		#now = new Date().getTime()
@@ -117,7 +112,8 @@ class BackgroundApplication
 				chrome.browserAction.setBadgeText text: '!'
 	
 	badge_color: (alpha) =>
-		prefs = @get_preferences()
+		@get_preferences()
+		prefs = @preferences
 		color = $.hexColorToRGBA prefs.badge_color, alpha
 		chrome.browserAction.setBadgeBackgroundColor color: color
 	
@@ -127,7 +123,8 @@ class BackgroundApplication
 	
 	start_badge_flash: ->
 		console.log 'Starting badge blink'
-		prefs = @get_preferences()
+		@get_preferences()
+		prefs = @preferences
 
 		if @badge_flash_interval is 0 and prefs.badge_blink
 			@badge_flash_interval = setInterval @badge_flash, 2000

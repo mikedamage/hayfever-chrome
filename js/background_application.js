@@ -20,6 +20,8 @@ Background Page Application Class
 
       this.refresh_hours = __bind(this.refresh_hours, this);
 
+      this.set_badge = __bind(this.set_badge, this);
+
       this.client = new Harvest(this.subdomain, this.auth_string);
       this.version = '0.3.0';
       this.authorized = false;
@@ -34,24 +36,16 @@ Background Page Application Class
       this.timer_running = false;
     }
 
-    BackgroundApplication.get_auth_data = function() {
-      var data;
-      data = {
-        subdomain: localStorage.getItem('harvest_subdomain'),
-        auth_string: localStorage.getItem('harvest_auth_string'),
-        username: localStorage.getItem('harvest_username')
-      };
-      return data;
+    BackgroundApplication.get_auth_data = function(callback) {
+      return chrome.storage.local.get(['harvest_subdomain', 'harvest_auth_string', 'harvest_username'], function(items) {
+        return callback(items);
+      });
     };
 
-    BackgroundApplication.get_preferences = function() {
-      var prefs;
-      prefs = localStorage.getItem('hayfever_prefs');
-      if (prefs) {
-        return JSON.parse(prefs);
-      } else {
-        return {};
-      }
+    BackgroundApplication.get_preferences = function(callback) {
+      return chrome.storage.local.get('hayfever_prefs', function(items) {
+        return callback(items);
+      });
     };
 
     BackgroundApplication.prototype.upgrade_detected = function() {
@@ -70,18 +64,13 @@ Background Page Application Class
     };
 
     BackgroundApplication.prototype.get_preferences = function() {
-      return this.preferences = BackgroundApplication.get_preferences();
+      var _this = this;
+      return BackgroundApplication.get_preferences(function(items) {
+        return _this.preferences = items.hayfever_prefs || {};
+      });
     };
 
-    BackgroundApplication.prototype.get_auth_data = function() {
-      var data;
-      data = {
-        subdomain: localStorage.getItem('harvest_subdomain'),
-        auth_string: localStorage.getItem('harvest_auth_string'),
-        username: localStorage.getItem('harvest_username')
-      };
-      return data;
-    };
+    BackgroundApplication.prototype.get_auth_data = function(callback) {};
 
     BackgroundApplication.prototype.auth_data_exists = function() {
       var auth;
@@ -91,7 +80,8 @@ Background Page Application Class
 
     BackgroundApplication.prototype.set_badge = function() {
       var badge_color, badge_text, prefs;
-      prefs = BackgroundApplication.get_preferences();
+      this.get_preferences();
+      prefs = this.preferences;
       badge_color = $.hexColorToRGBA(prefs.badge_color);
       switch (prefs.badge_display) {
         case 'current':
@@ -118,7 +108,8 @@ Background Page Application Class
         force = false;
       }
       console.log('refreshing hours');
-      prefs = BackgroundApplication.get_preferences();
+      this.get_preferences();
+      prefs = this.preferences;
       callback = typeof callback === 'function' ? callback : $.noop;
       todays_hours = this.client.get_today();
       todays_hours.success(function(json) {
@@ -165,7 +156,8 @@ Background Page Application Class
 
     BackgroundApplication.prototype.badge_color = function(alpha) {
       var color, prefs;
-      prefs = this.get_preferences();
+      this.get_preferences();
+      prefs = this.preferences;
       color = $.hexColorToRGBA(prefs.badge_color, alpha);
       return chrome.browserAction.setBadgeBackgroundColor({
         color: color
@@ -180,7 +172,8 @@ Background Page Application Class
     BackgroundApplication.prototype.start_badge_flash = function() {
       var prefs;
       console.log('Starting badge blink');
-      prefs = this.get_preferences();
+      this.get_preferences();
+      prefs = this.preferences;
       if (this.badge_flash_interval === 0 && prefs.badge_blink) {
         return this.badge_flash_interval = setInterval(this.badge_flash, 2000);
       }

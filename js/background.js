@@ -8,21 +8,22 @@ Background Page Main JavaScript
 (function() {
 
   $(function() {
-    var auth_data, auth_string, subdomain;
-    auth_data = BackgroundApplication.get_auth_data();
-    subdomain = auth_data.subdomain;
-    auth_string = auth_data.auth_string;
-    if (subdomain && auth_string) {
-      window.application = new BackgroundApplication(auth_data.subdomain, auth_data.auth_string);
-      setTimeout(window.application.refresh_hours, 500);
-      return window.application.start_refresh_interval();
-    } else {
-      window.application = new BackgroundApplication(false, false);
-      chrome.browserAction.setBadgeText({
-        text: '!'
-      });
-      return console.error('Error initializing Hayfever. Please visit the options page.');
-    }
+    return BackgroundApplication.get_auth_data(function(items) {
+      var auth_string, subdomain;
+      subdomain = items.harvest_subdomain;
+      auth_string = items.harvest_auth_string;
+      if (subdomain && auth_string) {
+        window.application = new BackgroundApplication(subdomain, auth_string);
+        setTimeout(window.application.refresh_hours, 500);
+        return window.application.start_refresh_interval();
+      } else {
+        window.application = new BackgroundApplication(false, false);
+        chrome.browserAction.setBadgeText({
+          text: '!'
+        });
+        return console.error('Error initializing Hayfever. Please visit the options page.');
+      }
+    });
   });
 
 }).call(this);
