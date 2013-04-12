@@ -41,6 +41,8 @@ options_controller = ($scope) ->
 			$scope.password = null
 			$scope.options_saved = true
 			$scope.auth_string = options.harvest_auth_string
+			bg_page.location.reload()
+			bg_page.application.start_refresh_interval() unless bg_page.application.refresh_interval
 			$scope.$apply()
 			scrollTo 0, 0
 

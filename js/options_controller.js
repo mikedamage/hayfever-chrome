@@ -51,6 +51,10 @@ by Mike Green (mike.is.green@gmail.com)
         $scope.password = null;
         $scope.options_saved = true;
         $scope.auth_string = options.harvest_auth_string;
+        bg_page.location.reload();
+        if (!bg_page.application.refresh_interval) {
+          bg_page.application.start_refresh_interval();
+        }
         $scope.$apply();
         return scrollTo(0, 0);
       });
