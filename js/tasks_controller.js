@@ -19,7 +19,7 @@ Angular.js Popup Tasks Controller
     $scope.authorized = bg_app.authorized;
     $scope.projects = bg_app.projects;
     $scope.timers = bg_app.todays_entries;
-    $scope.prefs = bg_app.get_preferences();
+    $scope.prefs = bg_app.preferences;
     $scope.current_hours = bg_app.current_hours;
     $scope.total_hours = bg_app.total_hours;
     $scope.active_timer_id = 0;
@@ -37,9 +37,12 @@ Angular.js Popup Tasks Controller
         $scope.projects = bg_app.projects;
         $scope.clients = bg_app.clients;
         $scope.timers = bg_app.todays_entries;
-        $scope.prefs = bg_app.get_preferences();
         $scope.current_hours = bg_app.current_hours;
         $scope.total_hours = bg_app.total_hours;
+        bg_app.get_preferences(function() {
+          $scope.prefs = bg_app.preferences;
+          return $scope.$apply();
+        });
         return $scope.$apply();
       });
     };
