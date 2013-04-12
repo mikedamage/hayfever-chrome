@@ -26,6 +26,17 @@ class BackgroundApplication
 		chrome.storage.local.get 'hayfever_prefs', (items) ->
 			callback(items)
 	
+	@migrate_preferences: (callback) ->
+		options =
+			harvest_subdomain: localStorage['harvest_subdomain']
+			harvest_auth_string: localStorage['harvest_auth_string']
+			harvest_username: localStorage['harvest_username']
+		prefs = if localStorage['hayfever_prefs'] then JSON.parse(localStorage['hayfever_prefs']) else null
+		options.hayfever_prefs = prefs if prefs
+
+		chrome.storage.local.set options, ->
+			callback(options)
+	
 	# Instance Methods	
 	upgrade_detected: ->
 		stored_version = localStorage.getItem 'hayfever_version'

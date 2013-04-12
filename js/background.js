@@ -17,11 +17,20 @@ Background Page Main JavaScript
         setTimeout(window.application.refresh_hours, 500);
         return window.application.start_refresh_interval();
       } else {
-        window.application = new BackgroundApplication(false, false);
-        chrome.browserAction.setBadgeText({
-          text: '!'
-        });
-        return console.error('Error initializing Hayfever. Please visit the options page.');
+        if (localStorage['harvest_subdomain'] && localStorage['harvest_auth_string']) {
+          console.log("Migrating preferences from localStorage to chrome.storage.local");
+          return BackgroundApplication.migrate_preferences(function(items) {
+            window.application = new BackgroundApplication(items.harvest_subdomain, items.harvest_auth_string);
+            setTimeout(window.application.refresh_hours, 500);
+            return window.application.start_refresh_interval();
+          });
+        } else {
+          window.application = new BackgroundApplication(false, false);
+          chrome.browserAction.setBadgeText({
+            text: '!'
+          });
+          return console.error('Error initializing Hayfever. Please visit the options page.');
+        }
       }
     });
   });

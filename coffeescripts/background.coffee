@@ -12,7 +12,14 @@ $ ->
 			setTimeout window.application.refresh_hours, 500
 			window.application.start_refresh_interval()
 		else
-			window.application = new BackgroundApplication false, false
-			chrome.browserAction.setBadgeText text: '!'
-			console.error 'Error initializing Hayfever. Please visit the options page.'
+			if localStorage['harvest_subdomain'] and localStorage['harvest_auth_string']
+				console.log "Migrating preferences from localStorage to chrome.storage.local"
+				BackgroundApplication.migrate_preferences (items) ->
+					window.application = new BackgroundApplication items.harvest_subdomain, items.harvest_auth_string
+					setTimeout window.application.refresh_hours, 500
+					window.application.start_refresh_interval()
+			else
+				window.application = new BackgroundApplication false, false
+				chrome.browserAction.setBadgeText text: '!'
+				console.error 'Error initializing Hayfever. Please visit the options page.'
 		

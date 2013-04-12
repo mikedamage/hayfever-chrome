@@ -48,6 +48,22 @@ Background Page Application Class
       });
     };
 
+    BackgroundApplication.migrate_preferences = function(callback) {
+      var options, prefs;
+      options = {
+        harvest_subdomain: localStorage['harvest_subdomain'],
+        harvest_auth_string: localStorage['harvest_auth_string'],
+        harvest_username: localStorage['harvest_username']
+      };
+      prefs = localStorage['hayfever_prefs'] ? JSON.parse(localStorage['hayfever_prefs']) : null;
+      if (prefs) {
+        options.hayfever_prefs = prefs;
+      }
+      return chrome.storage.local.set(options, function() {
+        return callback(options);
+      });
+    };
+
     BackgroundApplication.prototype.upgrade_detected = function() {
       var stored_version;
       stored_version = localStorage.getItem('hayfever_version');
