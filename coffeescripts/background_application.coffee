@@ -48,7 +48,7 @@ class BackgroundApplication
 			stored_version == @version
 	
 	start_refresh_interval: ->
-		@refresh_interval = setInterval @refresh_hours, 36000
+		@refresh_interval = setInterval @refresh_hours, @refresh_interval_time
 	
 	get_preferences: ->
 		BackgroundApplication.get_preferences (items) =>

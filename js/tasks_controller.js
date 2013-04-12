@@ -15,6 +15,7 @@ Angular.js Popup Tasks Controller
     bg_page = chrome.extension.getBackgroundPage();
     bg_app = bg_page.application;
     $scope.form_visible = false;
+    $scope.runaway_timer = false;
     $scope.harvest_url = bg_app.client.subdomain ? bg_app.client.full_url : null;
     $scope.authorized = bg_app.authorized;
     $scope.projects = bg_app.projects;
@@ -87,12 +88,12 @@ Angular.js Popup Tasks Controller
       });
     };
     $scope.show_form = function(timer_id) {
-      var $overlay, timer;
+      var timer;
       if (timer_id == null) {
         timer_id = 0;
       }
       $scope.active_timer_id = timer_id;
-      $overlay = $('#form-overlay');
+      $scope.reset_form_fields();
       if ($scope.active_timer_id !== 0) {
         timer = _(bg_app.todays_entries).find(function(item) {
           return item.id === $scope.active_timer_id;

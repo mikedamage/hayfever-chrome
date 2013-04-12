@@ -76,7 +76,7 @@ Background Page Application Class
     };
 
     BackgroundApplication.prototype.start_refresh_interval = function() {
-      return this.refresh_interval = setInterval(this.refresh_hours, 36000);
+      return this.refresh_interval = setInterval(this.refresh_hours, this.refresh_interval_time);
     };
 
     BackgroundApplication.prototype.get_preferences = function() {

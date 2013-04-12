@@ -10,6 +10,7 @@ tasks_controller = ($scope) ->
 	bg_app = bg_page.application
 
 	$scope.form_visible    = false
+	$scope.runaway_timer   = false
 	$scope.harvest_url     = if bg_app.client.subdomain then bg_app.client.full_url else null
 	$scope.authorized      = bg_app.authorized
 	$scope.projects        = bg_app.projects
@@ -73,7 +74,7 @@ tasks_controller = ($scope) ->
 	
 	$scope.show_form = (timer_id=0) ->
 		$scope.active_timer_id = timer_id
-		$overlay = $('#form-overlay')
+		$scope.reset_form_fields()
 
 		unless $scope.active_timer_id is 0
 			timer = _(bg_app.todays_entries).find (item) -> item.id == $scope.active_timer_id
