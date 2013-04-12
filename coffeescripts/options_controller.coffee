@@ -26,7 +26,7 @@ options_controller = ($scope) ->
 		$scope.subdomain = items.harvest_subdomain
 		$scope.username = items.harvest_username
 		$scope.auth_string = items.harvest_auth_string
-		$scope.preferences = items.hayfever_prefs
+		$scope.preferences = items.hayfever_prefs || { badge_display: 'total', badge_format: 'clock', badge_color: '#207aac' }
 		color_picker.setColor($scope.preferences.badge_color) if $scope.preferences.hasOwnProperty('badge_color')
 		$scope.$apply()
 
@@ -40,6 +40,7 @@ options_controller = ($scope) ->
 		storage.set options, ->
 			$scope.password = null
 			$scope.options_saved = true
+			$scope.auth_string = options.harvest_auth_string
 			$scope.$apply()
 			scrollTo 0, 0
 

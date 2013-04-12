@@ -27,7 +27,11 @@ by Mike Green (mike.is.green@gmail.com)
       $scope.subdomain = items.harvest_subdomain;
       $scope.username = items.harvest_username;
       $scope.auth_string = items.harvest_auth_string;
-      $scope.preferences = items.hayfever_prefs;
+      $scope.preferences = items.hayfever_prefs || {
+        badge_display: 'total',
+        badge_format: 'clock',
+        badge_color: '#207aac'
+      };
       if ($scope.preferences.hasOwnProperty('badge_color')) {
         color_picker.setColor($scope.preferences.badge_color);
       }
@@ -46,9 +50,9 @@ by Mike Green (mike.is.green@gmail.com)
       return storage.set(options, function() {
         $scope.password = null;
         $scope.options_saved = true;
+        $scope.auth_string = options.harvest_auth_string;
         $scope.$apply();
-        scrollTo(0, 0);
-        return console.log(options);
+        return scrollTo(0, 0);
       });
     };
   };
