@@ -42,6 +42,5 @@ options_controller = ($scope) ->
 			$scope.options_saved = true
 			$scope.$apply()
 			scrollTo 0, 0
-			console.log options
 
 app.controller 'OptionsController', [ '$scope', options_controller ]
