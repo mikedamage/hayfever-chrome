@@ -9,6 +9,7 @@ class BackgroundApplication
 		@authorized = false
 		@total_hours = 0.0
 		@current_hours = 0.0
+		@current_task = null
 		@badge_flash_interval = 0
 		@refresh_interval = 0
 		@refresh_interval_time = 36000
@@ -16,6 +17,8 @@ class BackgroundApplication
 		@projects = []
 		@preferences = {}
 		@timer_running = false
+
+		chrome.browserAction.setTitle title: "Hayfever for Harvest"
 	
 	# Class Methods
 	@get_auth_data: (callback) ->
@@ -87,6 +90,7 @@ class BackgroundApplication
 
 		todays_hours.success (json) =>
 			@authorized = true
+			@current_task = null
 			total_hours = 0.0
 			current_hours = ''
 
@@ -96,8 +100,12 @@ class BackgroundApplication
 			# Add up total hours by looping thru timesheet entries
 			$.each @todays_entries, (i, v) =>
 				total_hours += v.hours
-				current_hours = parseFloat(v.hours) if v.timer_started_at?
-				v.running = v.hasOwnProperty('timer_started_at') and v.timer_started_at
+
+				if v.hasOwnProperty('timer_started_at') and v.timer_started_at
+					current_hours = parseFloat(v.hours)
+					v.running = true
+					@current_task = v
+
 				@todays_entries[i] = v
 			@total_hours = total_hours
 
@@ -105,10 +113,12 @@ class BackgroundApplication
 				@current_hours = current_hours
 				@timer_running = true
 				@start_badge_flash()
+				chrome.browserAction.setTitle title: "Currently working on: #{@current_task.client} - #{@current_task.project}"
 			else
 				@current_hours = 0.0
 				@timer_running = false
 				@stop_badge_flash()
+				chrome.browserAction.setTitle title: 'Hayfever for Harvest'
 
 			@set_badge()
 			callback.call(@todays_entries)

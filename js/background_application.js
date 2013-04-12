@@ -27,6 +27,7 @@ Background Page Application Class
       this.authorized = false;
       this.total_hours = 0.0;
       this.current_hours = 0.0;
+      this.current_task = null;
       this.badge_flash_interval = 0;
       this.refresh_interval = 0;
       this.refresh_interval_time = 36000;
@@ -34,6 +35,9 @@ Background Page Application Class
       this.projects = [];
       this.preferences = {};
       this.timer_running = false;
+      chrome.browserAction.setTitle({
+        title: "Hayfever for Harvest"
+      });
     }
 
     BackgroundApplication.get_auth_data = function(callback) {
@@ -131,16 +135,18 @@ Background Page Application Class
       todays_hours.success(function(json) {
         var current_hours, total_hours;
         _this.authorized = true;
+        _this.current_task = null;
         total_hours = 0.0;
         current_hours = '';
         _this.projects = json.projects;
         _this.todays_entries = json.day_entries;
         $.each(_this.todays_entries, function(i, v) {
           total_hours += v.hours;
-          if (v.timer_started_at != null) {
+          if (v.hasOwnProperty('timer_started_at') && v.timer_started_at) {
             current_hours = parseFloat(v.hours);
+            v.running = true;
+            _this.current_task = v;
           }
-          v.running = v.hasOwnProperty('timer_started_at') && v.timer_started_at;
           return _this.todays_entries[i] = v;
         });
         _this.total_hours = total_hours;
@@ -148,10 +154,16 @@ Background Page Application Class
           _this.current_hours = current_hours;
           _this.timer_running = true;
           _this.start_badge_flash();
+          chrome.browserAction.setTitle({
+            title: "Currently working on: " + _this.current_task.client + " - " + _this.current_task.project
+          });
         } else {
           _this.current_hours = 0.0;
           _this.timer_running = false;
           _this.stop_badge_flash();
+          chrome.browserAction.setTitle({
+            title: 'Hayfever for Harvest'
+          });
         }
         _this.set_badge();
         return callback.call(_this.todays_entries);

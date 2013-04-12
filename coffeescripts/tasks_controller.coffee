@@ -18,6 +18,7 @@ tasks_controller = ($scope) ->
 	$scope.prefs           = bg_app.preferences
 	$scope.current_hours   = bg_app.current_hours
 	$scope.total_hours     = bg_app.total_hours
+	$scope.current_task    = bg_app.current_task
 	$scope.active_timer_id = 0
 	$scope.tasks           = []
 	$scope.form_task       =
@@ -35,6 +36,7 @@ tasks_controller = ($scope) ->
 			$scope.timers        = bg_app.todays_entries
 			$scope.current_hours = bg_app.current_hours
 			$scope.total_hours   = bg_app.total_hours
+			$scope.current_task  = bg_app.current_task
 
 			bg_app.get_preferences ->
 				$scope.prefs = bg_app.preferences
