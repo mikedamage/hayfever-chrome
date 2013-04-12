@@ -73,7 +73,7 @@ Depends on:
       if (async == null) {
         async = true;
       }
-      day_url = date === 'today' ? this.build_url('daily') : this.build_url(date.getDOY(), date.getFullYear());
+      day_url = date === 'today' ? this.build_url('daily') : this.build_url('daily', date.getDOY(), date.getFullYear());
       ajax_opts = $.extend(this.ajax_defaults, {
         async: async
       });
@@ -119,25 +119,30 @@ Depends on:
     /*
     	Find runaway timers from yesterday
     
+    	@param {Function} callback
     	@param {Boolean} async
-    	@returns {Boolean}
+    	@returns {jqXHR}
     */
 
 
-    Harvest.prototype.runaway_timers = function(async) {
+    Harvest.prototype.runaway_timers = function(callback, async) {
       var request, yesterday;
+      if (callback == null) {
+        callback = $.noop;
+      }
       if (async == null) {
         async = true;
       }
       yesterday = Date.create('yesterday');
       request = this.get_day(yesterday, async);
       return request.success(function(json) {
-        var entries;
+        var entries, runaways;
         if (json.day_entries != null) {
           entries = json.day_entries;
-          return _(entries).detect(function(entry) {
-            return entry.timer_started_at != null;
+          runaways = _(entries).filter(function(entry) {
+            return entry.hasOwnProperty('timer_started_at');
           });
+          return callback.call(entries, runaways);
         }
       });
     };

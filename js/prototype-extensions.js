@@ -2,6 +2,9 @@
 
 /*
 JavaScript Core Prototype Extensions
+
+Depends On:
+	- Sugar.js
 */
 
 
@@ -66,8 +69,8 @@ Convert string to slug
 
   Date.prototype.getDOY = function() {
     var jan_one;
-    jan_one = new Date(this.getFullYear(), 0, 1);
-    return Math.ceil((this - jan_one) / 86400000);
+    jan_one = Date.create().beginningOfYear();
+    return Math.round((this - jan_one) / 864e5) + 1;
   };
 
   /*

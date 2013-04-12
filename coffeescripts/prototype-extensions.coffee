@@ -1,5 +1,8 @@
 ###
 JavaScript Core Prototype Extensions
+
+Depends On:
+	- Sugar.js
 ###
 
 ###
@@ -43,8 +46,8 @@ Date.prototype.toHarvestString = ->
 Get day of year
 ###
 Date.prototype.getDOY = ->
-	jan_one = new Date this.getFullYear(), 0, 1
-	Math.ceil((this - jan_one) / 86400000)
+	jan_one = Date.create().beginningOfYear()
+	Math.round((this - jan_one) / 864e5) + 1
 
 ###
 Array any() function

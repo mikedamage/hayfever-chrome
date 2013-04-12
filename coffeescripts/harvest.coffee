@@ -46,7 +46,7 @@ class Harvest
 	@returns {jqXHR}
 	###
 	get_day: (date, async=true) ->
-		day_url = if date is 'today' then @build_url('daily') else @build_url(date.getDOY(), date.getFullYear())
+		day_url = if date is 'today' then @build_url('daily') else @build_url('daily', date.getDOY(), date.getFullYear())
 		ajax_opts = $.extend @ajax_defaults, async: async
 		$.ajax day_url, ajax_opts
 	
@@ -74,18 +74,19 @@ class Harvest
 	###
 	Find runaway timers from yesterday
 
+	@param {Function} callback
 	@param {Boolean} async
-	@returns {Boolean}
+	@returns {jqXHR}
 	###
-	runaway_timers: (async=true) ->
+	runaway_timers: (callback=$.noop, async=true) ->
 		yesterday = Date.create 'yesterday'
 		request = @get_day yesterday, async
 
 		request.success (json) ->
 			if json.day_entries?
 				entries = json.day_entries
-				_(entries).detect (entry) ->
-					entry.timer_started_at?
+				runaways = _(entries).filter (entry) -> entry.hasOwnProperty 'timer_started_at'
+				callback.call entries, runaways
 	
 	###
 	Toggle a single timer on/off
