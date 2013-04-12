@@ -44,7 +44,7 @@ class Project < Thor
 		end
 
 		say 'Copying files to ~/ProjectFiles/Hayfever/hayfever', :blue
-		IO.popen("rsync -avr #{@@excludes} ./ ~/ProjectFiles/Hayfever/hayfever/") do |rsync|
+		IO.popen("rsync -avr #{@@excludes} --delete ./ ~/ProjectFiles/Hayfever/hayfever/") do |rsync|
 			while line = rsync.gets
 				say line
 			end
