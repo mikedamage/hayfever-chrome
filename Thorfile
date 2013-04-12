@@ -10,7 +10,11 @@ class Project < Thor
 		'sass',
 		'.sass-cache',
 		'test',
-		'coffeescripts'
+		'coffeescripts',
+		'config.rb',
+		'.rvmrc',
+		'Gemfile',
+		'Gemfile.lock'
 	].map {|exc| "--exclude=#{exc}"}.join(' ')
 
 	desc 'bundle DIRNAME', 'Bundle the project into a zip file'
