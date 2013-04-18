@@ -40,7 +40,7 @@
 					<a href="#" class="delete option" ng-click="delete_timer(timer.id)">Delete</a>
 				</td>
 			</tr>
-			<tr class="noentries" ui-if="authorized && timers.length == 0">
+			<tr class="noentries" ui-if="authorized && timers.length == 0" ng-dblclick="show_form()">
 				<td colspan="3" align="center">
 					<em>No Entries Today</em>
 				</td>
