@@ -23,21 +23,28 @@ class Project < Thor
     thor "coffeescript:compile"
   end
 
-	desc 'bundle', 'Bundle the project into a zip file'
-	def bundle
+	desc 'bundle [OUTPUT_DIR]', 'Bundle the project into a zip file'
+	def bundle(output_dir = $root_dir.join('pkg'))
     require 'json'
     require 'zip'
 
     thor "project:build"
 
-    pkg_dir  = $root_dir.join 'pkg'
+    pkg_dir  = Pathname.new output_dir
     dist_dir = $root_dir.join 'build'
     manifest = JSON.parse dist_dir.join('manifest.json').read
     version  = manifest['version']
     output   = pkg_dir.join "hayfever-v#{version}.zip"
 
-    Dir.mkdir pkg_dir unless pkg_dir.directory?
-    output.unlink if output.file?
+    unless pkg_dir.directory?
+      say_status 'mkdir', pkg_dir.to_s, :yellow
+      Dir.mkdir pkg_dir
+    end
+
+    if output.file?
+      say_status 'rm', output.to_s, :yellow
+      output.unlink
+    end
 
     Zip::File.open(output.to_s, Zip::File::CREATE) do |zip|
       Pathname.glob(dist_dir.join('**', '**')).each do |file|
