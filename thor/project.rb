@@ -31,7 +31,7 @@ class Project < Thor
     thor "project:build"
 
     pkg_dir  = $root_dir.join 'pkg'
-    dist_dir = $root_dir.join 'dist'
+    dist_dir = $root_dir.join 'build'
     manifest = JSON.parse dist_dir.join('manifest.json').read
     version  = manifest['version']
     output   = pkg_dir.join "hayfever-v#{version}.zip"
@@ -39,11 +39,16 @@ class Project < Thor
     Dir.mkdir pkg_dir unless pkg_dir.directory?
     output.unlink if output.file?
 
-    Zip::File.open output.to_s do |zip|
+    Zip::File.open(output.to_s, Zip::File::CREATE) do |zip|
       Pathname.glob(dist_dir.join('**', '**')).each do |file|
         # [todo] - Finish bundle zip task
+        zip_path = file.to_s.gsub(dist_dir.to_s, 'hayfever')
+        say_status 'add', zip_path, :yellow
+        zip.add zip_path, file.to_s
       end
     end
+
+    say_status 'saved', "Saved plugin to #{output.to_s}", :green
 	end
 
 	desc 'prep_release', 'Syncs all necessary files to ~/ProjectFiles/Hayfever/hayfever in preparation for packing in Chrome'

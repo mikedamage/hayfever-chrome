@@ -4,4 +4,4 @@
 *.tmproj
 *.vimsession
 .sass-cache
-build/*
+pkg/*

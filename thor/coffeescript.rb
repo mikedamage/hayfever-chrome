@@ -12,7 +12,7 @@ class Coffeescript < Thor
 		end
 
 		cs_dir = $root_dir.join 'coffeescripts'
-		js_dir = $root_dir.join 'dist', 'js'
+		js_dir = $root_dir.join 'build', 'js'
 
 		say 'Compiling CoffeeScripts...', :blue
 		cs_dir.children.each do |child|
