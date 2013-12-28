@@ -3,158 +3,158 @@ Background Page Application Class
 ###
 
 class BackgroundApplication
-	constructor: (@subdomain, @auth_string) ->
-		@client = new Harvest(@subdomain, @auth_string)
-		@version = '0.3.0'
-		@authorized = false
-		@total_hours = 0.0
-		@current_hours = 0.0
-		@current_task = null
-		@badge_flash_interval = 0
-		@refresh_interval = 0
-		@refresh_interval_time = 36000
-		@todays_entries = []
-		@projects = []
-		@preferences = {}
-		@timer_running = false
+  constructor: (@subdomain, @auth_string) ->
+    @client = new Harvest(@subdomain, @auth_string)
+    @version = '0.3.0'
+    @authorized = false
+    @total_hours = 0.0
+    @current_hours = 0.0
+    @current_task = null
+    @badge_flash_interval = 0
+    @refresh_interval = 0
+    @refresh_interval_time = 36000
+    @todays_entries = []
+    @projects = []
+    @preferences = {}
+    @timer_running = false
 
-		chrome.browserAction.setTitle title: "Hayfever for Harvest"
-	
-	# Class Methods
-	@get_auth_data: (callback) ->
-		chrome.storage.local.get [ 'harvest_subdomain', 'harvest_auth_string', 'harvest_username' ], (items) ->
-			callback(items)
-	
-	@get_preferences: (callback) ->
-		chrome.storage.local.get 'hayfever_prefs', (items) ->
-			callback(items)
-	
-	@migrate_preferences: (callback) ->
-		options =
-			harvest_subdomain: localStorage['harvest_subdomain']
-			harvest_auth_string: localStorage['harvest_auth_string']
-			harvest_username: localStorage['harvest_username']
-		prefs = if localStorage['hayfever_prefs'] then JSON.parse(localStorage['hayfever_prefs']) else null
-		options.hayfever_prefs = prefs if prefs
+    chrome.browserAction.setTitle title: "Hayfever for Harvest"
+  
+  # Class Methods
+  @get_auth_data: (callback) ->
+    chrome.storage.local.get [ 'harvest_subdomain', 'harvest_auth_string', 'harvest_username' ], (items) ->
+      callback(items)
+  
+  @get_preferences: (callback) ->
+    chrome.storage.local.get 'hayfever_prefs', (items) ->
+      callback(items)
+  
+  @migrate_preferences: (callback) ->
+    options =
+      harvest_subdomain: localStorage['harvest_subdomain']
+      harvest_auth_string: localStorage['harvest_auth_string']
+      harvest_username: localStorage['harvest_username']
+    prefs = if localStorage['hayfever_prefs'] then JSON.parse(localStorage['hayfever_prefs']) else null
+    options.hayfever_prefs = prefs if prefs
 
-		chrome.storage.local.set options, ->
-			callback(options)
-	
-	# Instance Methods	
-	upgrade_detected: ->
-		stored_version = localStorage.getItem 'hayfever_version'
+    chrome.storage.local.set options, ->
+      callback(options)
+  
+  # Instance Methods  
+  upgrade_detected: ->
+    stored_version = localStorage.getItem 'hayfever_version'
 
-		unless stored_version
-			localStorage.setItem 'hayfever_version', @version
-			false
-		else
-			stored_version == @version
-	
-	start_refresh_interval: ->
-		@refresh_interval = setInterval @refresh_hours, @refresh_interval_time
-	
-	get_preferences: ->
-		BackgroundApplication.get_preferences (items) =>
-			@preferences = items.hayfever_prefs || {}
-	
-	get_auth_data: (callback) ->
-			
-	auth_data_exists: ->
-		auth = @get_auth_data()
-		!auth.subdomain.isBlank() and !auth.auth_string.isBlank()
-	
-	set_badge: =>
-		@get_preferences()
-		prefs = @preferences
-		badge_color = $.hexColorToRGBA prefs.badge_color
+    unless stored_version
+      localStorage.setItem 'hayfever_version', @version
+      false
+    else
+      stored_version == @version
+  
+  start_refresh_interval: ->
+    @refresh_interval = setInterval @refresh_hours, @refresh_interval_time
+  
+  get_preferences: ->
+    BackgroundApplication.get_preferences (items) =>
+      @preferences = items.hayfever_prefs || {}
+  
+  get_auth_data: (callback) ->
+      
+  auth_data_exists: ->
+    auth = @get_auth_data()
+    !auth.subdomain.isBlank() and !auth.auth_string.isBlank()
+  
+  set_badge: =>
+    @get_preferences()
+    prefs = @preferences
+    badge_color = $.hexColorToRGBA prefs.badge_color
 
-		switch prefs.badge_display
-			when 'current'
-				badge_text = if prefs.badge_format is 'decimal' then @current_hours.toFixed(2) else @current_hours.toClockTime()
-			when 'total'
-				badge_text = if prefs.badge_format is 'decimal' then @total_hours.toFixed(2) else @total_hours.toClockTime()
-			else
-				badge_text = ''
+    switch prefs.badge_display
+      when 'current'
+        badge_text = if prefs.badge_format is 'decimal' then @current_hours.toFixed(2) else @current_hours.toClockTime()
+      when 'total'
+        badge_text = if prefs.badge_format is 'decimal' then @total_hours.toFixed(2) else @total_hours.toClockTime()
+      else
+        badge_text = ''
 
-		chrome.browserAction.setBadgeBackgroundColor color: badge_color
-		chrome.browserAction.setBadgeText text: badge_text
-	
-	refresh_hours: (callback, force=false) =>
-		console.log 'refreshing hours'
-		@get_preferences()
-		prefs = @preferences
-		callback = if typeof callback is 'function' then callback else $.noop
-		#last_updated = localStorage.getItem 'hayfever_last_refresh'
-		#now = new Date().getTime()
-		todays_hours = @client.get_today()
+    chrome.browserAction.setBadgeBackgroundColor color: badge_color
+    chrome.browserAction.setBadgeText text: badge_text
+  
+  refresh_hours: (callback, force=false) =>
+    console.log 'refreshing hours'
+    @get_preferences()
+    prefs = @preferences
+    callback = if typeof callback is 'function' then callback else $.noop
+    #last_updated = localStorage.getItem 'hayfever_last_refresh'
+    #now = new Date().getTime()
+    todays_hours = @client.get_today()
 
-		todays_hours.success (json) =>
-			@authorized = true
-			@current_task = null
-			total_hours = 0.0
-			current_hours = ''
+    todays_hours.success (json) =>
+      @authorized = true
+      @current_task = null
+      total_hours = 0.0
+      current_hours = ''
 
-			@projects = json.projects
-			@todays_entries = json.day_entries
+      @projects = json.projects
+      @todays_entries = json.day_entries
 
-			# Add up total hours by looping thru timesheet entries
-			$.each @todays_entries, (i, v) =>
-				total_hours += v.hours
+      # Add up total hours by looping thru timesheet entries
+      $.each @todays_entries, (i, v) =>
+        total_hours += v.hours
 
-				if v.hasOwnProperty('timer_started_at') and v.timer_started_at
-					current_hours = parseFloat(v.hours)
-					v.running = true
-					@current_task = v
+        if v.hasOwnProperty('timer_started_at') and v.timer_started_at
+          current_hours = parseFloat(v.hours)
+          v.running = true
+          @current_task = v
 
-				@todays_entries[i] = v
-			@total_hours = total_hours
+        @todays_entries[i] = v
+      @total_hours = total_hours
 
-			if typeof current_hours is 'number'
-				@current_hours = current_hours
-				@timer_running = true
-				@start_badge_flash()
-				chrome.browserAction.setTitle title: "Currently working on: #{@current_task.client} - #{@current_task.project}"
-			else
-				@current_hours = 0.0
-				@timer_running = false
-				@stop_badge_flash()
-				chrome.browserAction.setTitle title: 'Hayfever for Harvest'
+      if typeof current_hours is 'number'
+        @current_hours = current_hours
+        @timer_running = true
+        @start_badge_flash()
+        chrome.browserAction.setTitle title: "Currently working on: #{@current_task.client} - #{@current_task.project}"
+      else
+        @current_hours = 0.0
+        @timer_running = false
+        @stop_badge_flash()
+        chrome.browserAction.setTitle title: 'Hayfever for Harvest'
 
-			@set_badge()
-			callback.call(@todays_entries)
+      @set_badge()
+      callback.call(@todays_entries)
 
-		todays_hours.error (xhr, text_status, error_thrown) =>
-			console.log 'Error refreshing hours!'
+    todays_hours.error (xhr, text_status, error_thrown) =>
+      console.log 'Error refreshing hours!'
 
-			if xhr.status == 401
-				# Authentication failure
-				@authorized = false
-				chrome.browserAction.setBadgeBackgroundColor color: [255, 0, 0, 255]
-				chrome.browserAction.setBadgeText text: '!'
-	
-	badge_color: (alpha) =>
-		@get_preferences()
-		prefs = @preferences
-		color = $.hexColorToRGBA prefs.badge_color, alpha
-		chrome.browserAction.setBadgeBackgroundColor color: color
-	
-	badge_flash: (alpha) =>
-		@badge_color(255)
-		setTimeout @badge_color, 1000, 100
-	
-	start_badge_flash: ->
-		console.log 'Starting badge blink'
-		@get_preferences()
-		prefs = @preferences
+      if xhr.status == 401
+        # Authentication failure
+        @authorized = false
+        chrome.browserAction.setBadgeBackgroundColor color: [255, 0, 0, 255]
+        chrome.browserAction.setBadgeText text: '!'
+  
+  badge_color: (alpha) =>
+    @get_preferences()
+    prefs = @preferences
+    color = $.hexColorToRGBA prefs.badge_color, alpha
+    chrome.browserAction.setBadgeBackgroundColor color: color
+  
+  badge_flash: (alpha) =>
+    @badge_color(255)
+    setTimeout @badge_color, 1000, 100
+  
+  start_badge_flash: ->
+    console.log 'Starting badge blink'
+    @get_preferences()
+    prefs = @preferences
 
-		if @badge_flash_interval is 0 and prefs.badge_blink
-			@badge_flash_interval = setInterval @badge_flash, 2000
-	
-	stop_badge_flash: ->
-		if @badge_flash_interval != 0
-			console.log 'Stopping badge blink'
-			clearInterval @badge_flash_interval
-			@badge_flash_interval = 0
-			@badge_color 255
+    if @badge_flash_interval is 0 and prefs.badge_blink
+      @badge_flash_interval = setInterval @badge_flash, 2000
+  
+  stop_badge_flash: ->
+    if @badge_flash_interval != 0
+      console.log 'Stopping badge blink'
+      clearInterval @badge_flash_interval
+      @badge_flash_interval = 0
+      @badge_color 255
 
 window.BackgroundApplication = BackgroundApplication
