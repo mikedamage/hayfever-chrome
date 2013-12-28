@@ -42,7 +42,18 @@ I also bundle the extension up as a CRX file and post it here whenever I release
 
 ### The Hacker Method
 
-If you're *REALLY* the DIY type, you can clone this repo and install it ninja-style. If that's your plan, you don't need me to tell you how to do it.
+If you're *REALLY* the DIY type, you can clone this repo and install it ninja-style. You'll need to run a few commands to compile CSS, CoffeeScript, and package the extension as a zip file. You must have CoffeeScript installed and in your `PATH`.
+
+```
+# Install dependencies and compile CSS + CoffeeScripts:
+$ bundle install
+$ thor project:build
+
+# There's also a thor task for packaging the extension as a zip file inside the pkg/ folder:
+$ thor project:bundle
+```
+
+From there you can install the extension by enabling developer mode in chrome://extensions and loadng the `build` directory as an unpacked extension.
 
 ## Screenshots
 
