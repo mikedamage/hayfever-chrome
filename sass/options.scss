@@ -47,11 +47,11 @@ body {
   margin: 10px auto;
   padding: 10px;
   &.success {
-		@include background-image(linear-gradient(top, $success-green, #c1e4c1));
+    @include background-image(linear-gradient(top, $success-green, #c1e4c1));
     border: 1px solid #9C6;
     color: #4d4d4d;
     -webkit-border-radius: 5px;
-    /* capsule shaped edges if the div is short enough */ } }
+    } }
 
 fieldset {
   border: 1px #ccc solid;
@@ -64,46 +64,47 @@ fieldset {
 
 input {
   &[type="text"], &[type="password"] {
-		@include background-image(linear-gradient(top, white, #f7f7f7 10%, white));
-		@include box-shadow($ultralight-shadow 0 0 8px);
-		@include border-radius(5px);
-		-webkit-transition: all 200ms ease-in 50ms;
+    @include background-image(linear-gradient(top, white, #f7f7f7 10%, white));
+    @include box-shadow($ultralight-shadow 0 0 8px);
+    @include border-radius(5px);
+    @include transition(all 200ms ease-in 50ms);
+    //-webkit-transition: all 200ms ease-in 50ms;
     width: 300px;
     padding: 5px;
-		border: 1px solid $light-gray;
-		color: $dark-gray;
+    border: 1px solid $light-gray;
+    color: $dark-gray;
 
-		&:hover {
-			@include box-shadow($medium-shadow 0 0 8px);
-		}
-	} 
+    &:hover {
+        @include box-shadow($medium-shadow 0 0 8px);
+    }
+  } 
 }
 
 button {
-	@include simple-gradient-vert($button-top, $button-bottom);
-	@include border-radius(5px);
-	@include box-shadow($light-shadow 0 1px 3px);
-	-webkit-transition: all 200ms ease-in 50ms;
-	text-shadow: $light-shadow 0 -1px 1px;
-	color: white;
-	cursor: pointer;
-	font: {
-		size: 14px;
-		weight: bold;
-		family: Helvetica, Arial, sans-serif;
-	}
-	text-align: center;
-	padding: 7px;
-	border: none;
+    @include simple-gradient-vert($button-top, $button-bottom);
+    @include border-radius(5px);
+    @include box-shadow($light-shadow 0 1px 3px);
+    -webkit-transition: all 200ms ease-in 50ms;
+    text-shadow: $light-shadow 0 -1px 1px;
+    color: white;
+    cursor: pointer;
+    font: {
+      size: 14px;
+      weight: bold;
+      family: Helvetica, Arial, sans-serif;
+    }
+    text-align: center;
+    padding: 7px;
+    border: none;
 
-	&:hover {
-		-webkit-box-shadow: $dark-shadow 0 1px 3px 0;
-		@include simple-gradient-vert($button-hover-top, $orange);
-	}
+    &:hover {
+      -webkit-box-shadow: $dark-shadow 0 1px 3px 0;
+      @include simple-gradient-vert($button-hover-top, $orange);
+    }
 
-	&:active {
-		@include simple-gradient-vert($orange, $button-hover-top);
-	}
+    &:active {
+      @include simple-gradient-vert($orange, $button-hover-top);
+    }
 }
 
 p.info {
