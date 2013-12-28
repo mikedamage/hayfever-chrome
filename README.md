@@ -29,17 +29,6 @@ Hayfever is available for download on the Chrome Web Store, for the low low pric
 
 [Get Hayfever from the Chrome Web Store](https://chrome.google.com/extensions/detail/hieiheiincjomjoiiknfcmiioakhlhmj)
 
-### The DIY Method
-
-I also bundle the extension up as a CRX file and post it here whenever I release an update. If you're the DIY type, you can grab it and install it the old fashioned way.
-
-1. Click the downloads link above and grab the most recent CRX file.
-2. Open it in Chrome.
-3. Install it, then right-click on the Hayfever icon in your toolbar.
-4. Fill in your Harvest subdomain, username, and password.
-	* Please consider allowing me to gather usage statistics! I'm a privacy nut, so I turned this off by default, but it would definitely help me to understand my users.
-5. Use Hayfever!
-
 ### The Hacker Method
 
 If you're *REALLY* the DIY type, you can clone this repo and install it ninja-style. You'll need to run a few commands to compile CSS, CoffeeScript, and package the extension as a zip file. You must have CoffeeScript installed and in your `PATH`.
