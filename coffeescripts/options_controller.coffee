@@ -17,9 +17,6 @@ options_controller = ($scope) ->
 		'harvest_auth_string'
 		'hayfever_prefs'
 	]
-	color_picker = $.farbtastic '#badge-color-picker', (color) ->
-		$scope.preferences.badge_color = color
-		$scope.$apply()
 
 	# Load options from local storage
 	storage.get option_keys, (items) ->
@@ -27,7 +24,6 @@ options_controller = ($scope) ->
 		$scope.username = items.harvest_username
 		$scope.auth_string = items.harvest_auth_string
 		$scope.preferences = items.hayfever_prefs || { badge_display: 'total', badge_format: 'clock', badge_color: '#207aac' }
-		color_picker.setColor($scope.preferences.badge_color) if $scope.preferences.hasOwnProperty('badge_color')
 		$scope.$apply()
 
 	$scope.save_options = ->

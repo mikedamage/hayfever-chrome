@@ -242,3 +242,7 @@ Depends on:
   window.Harvest = Harvest;
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=harvest.map
+*/

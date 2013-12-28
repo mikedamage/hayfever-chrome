@@ -5,3 +5,6 @@
 *.vimsession
 .sass-cache
 pkg/*
+build/js/*.js
+build/js/*.map
+build/css/*.css

@@ -1,6 +1,6 @@
 # module: project
 class Project < Thor
-	include Thor::Actions
+  include Thor::Actions
 
   desc 'build', 'Compile all Sass and CoffeeScript assets'
   def build
@@ -8,8 +8,8 @@ class Project < Thor
     thor "coffeescript:compile"
   end
 
-	desc 'zip_release [OUTPUT_DIR]', 'Bundle the project into a zip file'
-	def zip_release(output_dir = $root_dir.join('pkg'))
+  desc 'zip_release [OUTPUT_DIR]', 'Bundle the project into a zip file'
+  def zip_release(output_dir = $root_dir.join('pkg'))
     require 'json'
     require 'zip'
 
@@ -33,7 +33,6 @@ class Project < Thor
 
     Zip::File.open(output.to_s, Zip::File::CREATE) do |zip|
       Pathname.glob(dist_dir.join('**', '**')).each do |file|
-        # [todo] - Finish bundle zip task
         zip_path = file.to_s.gsub(dist_dir.to_s, 'hayfever')
         say_status 'add', zip_path, :yellow
         zip.add zip_path, file.to_s
@@ -41,5 +40,5 @@ class Project < Thor
     end
 
     say_status 'saved', "Saved plugin to #{output.to_s}", :green
-	end
+  end
 end

@@ -1,100 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="hayfeverOptions" ng-csp>
 <head>
-	<meta charset="UTF-8" />
-	<title>Hayfever for Chrome: Options</title>
+    <meta charset="UTF-8" />
+    <title>Hayfever for Chrome: Options</title>
 
-	<link href="css/options.css" rel="stylesheet" type="text/css" />
-	<link href="css/farbtastic.css" rel="stylesheet" type="text/css" />
+    <link href="css/options.css" rel="stylesheet" type="text/css" />
 
-	<script src="js/prototype-extensions.js"></script>
-	<script src="js/underscore-min.js"></script>
-	<!--<script src="js/jquery-1.7.1.min.js"></script>-->
-	<script src="js/jquery-1.9.1.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="js/angular-ui.js"></script>
-	<script src="js/farbtastic.js"></script>
-	<script src="js/options_controller.js"></script>
+    <script src="js/prototype-extensions.js"></script>
+    <script src="js/vendor/underscore-min.js"></script>
+    <script src="js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="js/vendor/angular.min.js"></script>
+    <script src="js/vendor/angular-ui.js"></script>
+    <script src="js/options_controller.js"></script>
 </head>
 <body ng-controller="OptionsController">
-	<div id="header">
-		<h1>Hayfever Options</h1>	 
-	</div>
+    <div id="header">
+        <h1>Hayfever Options</h1>    
+    </div>
 
-	<div id="status" class="success" ui-if="options_saved">Options successfully saved</div>
+    <div id="status" class="success" ui-if="options_saved">Options successfully saved</div>
 
-	<form action="" ng-submit="save_options()">
-	    <div id="gc-settings-content">
-	        <fieldset id="authentication">
-				<legend>Authentication</legend>
-				<p>
-					<label for="harvest-subdomain">Harvest Subdomain</label>
-					<input type="text" ng-model="subdomain" />
-					<span class="hint">Just the beginning (i.e. "yourbusiness" if your Harvest subdomain is http://yourbusiness.harvestapp.com)</span>
-				</p>
-				<p>
-					<label for="harvest-username">Harvest Username</label>
-					<input type="text" ng-model="username" />
-					<span class="hint">Usually your email address</span>
-				</p>
-				<p>
-					<label for="harvest-password">Harvest Password</label>
-					<input type="password" ng-model="password" />
-					<span class="hint" ui-if="auth_string">
-						We've successfully used your password to build an authentication string. This field will remain blank because we don't actually store your password. You can enter a new password at any time to rebuild the authentication string.
-					</span>
-					<span class="hint" ui-if="!auth_string">Hayfever doesn't actually save your password &mdash; we just use it to build an authentication key</span>
-				</p>
-	        </fieldset>
-			<fieldset id="plugin-prefs">
-			    <legend>Plugin Preferences</legend>
+    <form action="" ng-submit="save_options()">
+        <div id="gc-settings-content">
+            <fieldset id="authentication">
+                <legend>Authentication</legend>
+                <p>
+                    <label for="harvest-subdomain">Harvest Subdomain</label>
+                    <input type="text" ng-model="subdomain" />
+                    <span class="hint">Just the beginning (i.e. "yourbusiness" if your Harvest subdomain is http://yourbusiness.harvestapp.com)</span>
+                </p>
+                <p>
+                    <label for="harvest-username">Harvest Username</label>
+                    <input type="text" ng-model="username" />
+                    <span class="hint">Usually your email address</span>
+                </p>
+                <p>
+                    <label for="harvest-password">Harvest Password</label>
+                    <input type="password" ng-model="password" />
+                    <span class="hint" ui-if="auth_string">
+                        We've successfully used your password to build an authentication string. This field will remain blank because we don't actually store your password. You can enter a new password at any time to rebuild the authentication string.
+                    </span>
+                    <span class="hint" ui-if="!auth_string">Hayfever doesn't actually save your password &mdash; we just use it to build an authentication key</span>
+                </p>
+            </fieldset>
+            <fieldset id="plugin-prefs">
+                <legend>Plugin Preferences</legend>
 
-				<p>	
-					<input type="checkbox" name="enable_analytics" id="enable-analytics" ng-model="preferences.enable_analytics" />
-			        <label for="enable-analytics">Collect anonymous usage statistics?</label>
-					<span class="hint">Help us improve Hayfever by allowing us to collect anonymous usage info. Enabling this option injects a Google Analytics snippet into the extension's popup page.</span>
-				</p>
+                <p> 
+                    <input type="checkbox" name="enable_analytics" id="enable-analytics" ng-model="preferences.enable_analytics" />
+                    <label for="enable-analytics">Collect anonymous usage statistics?</label>
+                    <span class="hint">Help us improve Hayfever by allowing us to collect anonymous usage info. Enabling this option injects a Google Analytics snippet into the extension's popup page.</span>
+                </p>
 
-				<p>
-					<label for="badge-display">Badge displays</label>
-					<select name="badge_display" id="badge-display" ng-model="preferences.badge_display">
-						<option value="total">Total Hours Today</option>
-						<option value="current">Active Task Hours</option>
-						<option value="nothing">Nothing (disable badge)</option>
-					</select>
-				</p>
+                <p>
+                    <label for="badge-display">Badge displays</label>
+                    <select name="badge_display" id="badge-display" ng-model="preferences.badge_display">
+                        <option value="total">Total Hours Today</option>
+                        <option value="current">Active Task Hours</option>
+                        <option value="nothing">Nothing (disable badge)</option>
+                    </select>
+                </p>
 
-				<p>
-					<label for="badge-format">Badge Format</label>
-					<select name="badge_format" id="badge-format" ng-model="preferences.badge_format">
-						<option value="decimal">Decimal (i.e. 1.50)</option>
-						<option value="clock">Clock (i.e. 1:30)</option>
-					</select>
-				</p>
+                <p>
+                    <label for="badge-format">Badge Format</label>
+                    <select name="badge_format" id="badge-format" ng-model="preferences.badge_format">
+                        <option value="decimal">Decimal (i.e. 1.50)</option>
+                        <option value="clock">Clock (i.e. 1:30)</option>
+                    </select>
+                </p>
 
-				<p>
-					<input type="checkbox" name="badge_blink" id="badge-blink" ng-model="preferences.badge_blink" />
-					<label for="badge-blink">Blink Badge on Active Timer?</label>
-					<span class="hint">If checked, the hours badge will blink when a timer is running.</span>
-				</p>
+                <p>
+                    <input type="checkbox" name="badge_blink" id="badge-blink" ng-model="preferences.badge_blink" />
+                    <label for="badge-blink">Blink Badge on Active Timer?</label>
+                    <span class="hint">If checked, the hours badge will blink when a timer is running.</span>
+                </p>
 
-				<p>
-					<label for="badge-color">Badge Color</label>
-					<input type="text" id="badge-color" ng-model="preferences.badge_color" />
-				</p>
-				<p id="badge-color-picker"></p>
-			</fieldset>
+                <p>
+                    <label for="badge-color">Badge Color</label>
+                    <input type="color" id="badge-color" ng-model="preferences.badge_color">
+                </p>
+            </fieldset>
 
-			<fieldset id="timesheet-prefs">
-				<legend>Time Sheet Preferences</legend>
+            <fieldset id="timesheet-prefs">
+                <legend>Time Sheet Preferences</legend>
 
-				<p>
-					<input type="checkbox" id="show-task-notes" name="show_task_notes" ng-model="preferences.show_task_notes" />
-					<label for="show-task-notes">Show task notes in timesheet?</label>
-				</p>
-			</fieldset>
-			<button id="save-settings">Save Settings &raquo;</button>
-	    </div>
-	</form>
+                <p>
+                    <input type="checkbox" id="show-task-notes" name="show_task_notes" ng-model="preferences.show_task_notes" />
+                    <label for="show-task-notes">Show task notes in timesheet?</label>
+                </p>
+            </fieldset>
+            <button id="save-settings">Save Settings &raquo;</button>
+        </div>
+    </form>
 </body>
 </html>

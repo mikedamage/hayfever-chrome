@@ -13,15 +13,11 @@ by Mike Green (mike.is.green@gmail.com)
   app = angular.module('hayfeverOptions', ['ui']);
 
   options_controller = function($scope) {
-    var bg_app, bg_page, color_picker, option_keys, storage;
+    var bg_app, bg_page, option_keys, storage;
     bg_page = chrome.extension.getBackgroundPage();
     bg_app = bg_page.application;
     storage = chrome.storage.local;
     option_keys = ['harvest_subdomain', 'harvest_username', 'harvest_auth_string', 'hayfever_prefs'];
-    color_picker = $.farbtastic('#badge-color-picker', function(color) {
-      $scope.preferences.badge_color = color;
-      return $scope.$apply();
-    });
     storage.get(option_keys, function(items) {
       $scope.subdomain = items.harvest_subdomain;
       $scope.username = items.harvest_username;
@@ -31,9 +27,6 @@ by Mike Green (mike.is.green@gmail.com)
         badge_format: 'clock',
         badge_color: '#207aac'
       };
-      if ($scope.preferences.hasOwnProperty('badge_color')) {
-        color_picker.setColor($scope.preferences.badge_color);
-      }
       return $scope.$apply();
     });
     return $scope.save_options = function() {
@@ -63,3 +56,7 @@ by Mike Green (mike.is.green@gmail.com)
   app.controller('OptionsController', ['$scope', options_controller]);
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=options_controller.map
+*/

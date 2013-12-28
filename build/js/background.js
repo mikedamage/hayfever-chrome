@@ -34,3 +34,7 @@ Background Page Main JavaScript
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=background.map
+*/

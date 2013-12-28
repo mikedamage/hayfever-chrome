@@ -217,3 +217,7 @@ Background Page Application Class
   window.BackgroundApplication = BackgroundApplication;
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=background_application.map
+*/

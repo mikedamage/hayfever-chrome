@@ -133,3 +133,7 @@ Angular.js Popup Tasks Controller
   app.filter('clockTime', clock_time_filter);
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=tasks_controller.map
+*/

@@ -81,3 +81,7 @@ Convert string to slug
   };
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=prototype-extensions.map
+*/

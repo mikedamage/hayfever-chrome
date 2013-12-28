@@ -30,3 +30,7 @@ Hex Color Utility Functions
   };
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=jquery.hexcolors.map
+*/
