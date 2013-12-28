@@ -1,11 +1,12 @@
-@import 'partials/base';
+@import "compass";
+@import "partials/base";
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
   color: #4d4d4d; 
-	width: $popup-width;
-	min-height: 245px;
+  width: $popup-width;
+  min-height: 245px;
 }
 
 a {
@@ -22,7 +23,8 @@ a {
     margin-top: 10px; } }
 
 #status {
-  -webkit-border-radius: 8px;
+  //-webkit-border-radius: 8px;
+  @include border-radius(8px);
   border: 1px solid #E9E6CF;
   background: #FFFCE0;
   padding: 5px;
@@ -83,12 +85,12 @@ a {
       font-size: 11px;
       padding: 8px;
 
-	  a.option {
-	  	text-indent: -9999px;
-		width: 16px;
-		height: 16px;
-		display: inline-block;
-	  }
+      a.option {
+        text-indent: -9999px;
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+      }
 
       a.toggle {
         background: url(../img/icons/silk/control_play_blue.png) top left no-repeat;
@@ -102,6 +104,7 @@ a {
         background: url(../img/icons/silk/delete.png) top left no-repeat;
       }
     } 
+
     tr.running {
       -webkit-animation: runningtimer 4s;
       -webkit-animation-iteration-count: infinite;
@@ -203,36 +206,37 @@ ul.toolbar {
     font-size: 20px;
     padding-top: 5px; }
   a.cancel {
-    /* TODO: Display block, background image of an X */ }
+    // [todo] - Display block, background image of an X
+  }
 	.error {
 		color: $error-color;
 		font-size: 11px; }
-  label {
-    float: left;
-    display: block;
-    width: 65px;
-    font-size: 14px;
-    &.checkbox {
-      float: right;
-      width: 216px; } }
-  select {
-    width: 205px; }
-  input[type='text'], textarea {
-    border: 1px solid #e5e5e5;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #4d4d4d;
-    width: 200px;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
-    background: -webkit-gradient(linear, left top, left 25, from(white), color-stop(10%, #f7f7f7), to(white));
-    -webkit-transition: all 200ms ease-in 50ms; }
-  input[type='text']:hover, textarea:hover, input[type='text']:focus, textarea:focus {
-    -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 8px; }
-  input[type='text'] {
-    font-size: 14px;
-    font-weight: bold; }
-  textarea {
-    font-size: 12px;
-    height: 60px; } }
+    label {
+      float: left;
+      display: block;
+      width: 65px;
+      font-size: 14px;
+      &.checkbox {
+        float: right;
+        width: 216px; } }
+    select {
+      width: 205px; }
+    input[type='text'], textarea {
+      border: 1px solid #e5e5e5;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #4d4d4d;
+      width: 200px;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+      background: -webkit-gradient(linear, left top, left 25, from(white), color-stop(10%, #f7f7f7), to(white));
+      -webkit-transition: all 200ms ease-in 50ms; }
+    input[type='text']:hover, textarea:hover, input[type='text']:focus, textarea:focus {
+      -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 8px; }
+    input[type='text'] {
+      font-size: 14px;
+      font-weight: bold; }
+    textarea {
+      font-size: 12px;
+      height: 60px; } }
 
 @-webkit-keyframes runningtimer {
   0% {
