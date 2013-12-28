@@ -2,7 +2,10 @@
 <html lang="en" ng-app="hayfeverApp" ng-csp>
 <head>
     <meta charset="UTF-8" />
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
+
     <script src="js/prototype-extensions.js"></script>
     <script src="js/vendor/underscore-min.js"></script>
     <script src="js/vendor/jquery-1.9.1.min.js"></script>
@@ -44,21 +47,23 @@
             </tr>
             <tr class="noentries" ui-if="authorized && timers.length == 0" ng-dblclick="show_form()">
                 <td colspan="3" align="center">
+                    <span class="fa fa-calendar"></span>
                     <em>No Entries Today</em>
                 </td>
             </tr>
             <tr class="configure" ui-if="!authorized">
                 <td colspan="3" align="center">
+                    <span class="fa fa-cog"></span>
                     <em>Please visit the <a href="options.html" target="_blank">Options Page</a> and sign in to Harvest.</em>
                 </td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" align="center">
-                    <a href="#" class="icon" id="new-entry-link" ng-click="show_form()">New Entry</a>
-                    <a href="#" class="icon" id="refresh" ng-click="refresh()">Refresh</a>
-                    <a href="options.html" target="_blank" class="icon" id="options-link">Options</a>
+                <td colspan="3" align="left" id="actions">
+                    <a href="#" ng-click="show_form()"><span class="fa fa-plus"></span></a>
+                    <a href="#" ng-click="refresh()"><span class="fa fa-refresh"></span></a>
+                    <a href="options.html" target="_blank"><span class="fa fa-cog"></span></a>
                 </td>
             </tr>
         </tfoot>
@@ -66,11 +71,11 @@
 
     <div id="stats">
         <div class="stat-clock" id="total-hours-stat">
-            <p id="total-hours-time">{{total_hours | clockTime}}</p>
+            <p id="total-hours-time">{{total_hours | clockTime}}&nbsp;<span class="fa fa-clock-o"></span></p>
             <span class="stat-caption">Total Hours Today</span>
         </div>
         <div class="stat-clock" id="current-hours-stat">
-            <p id="current-hours-time">{{current_hours | clockTime}}</p>
+            <p id="current-hours-time">{{current_hours | clockTime}}&nbsp;<span class="fa fa-clock-o"></span></p>
             <span class="stat-caption">Current Task Hours</span>
         </div>
         <div class="clear">&nbsp;</div>

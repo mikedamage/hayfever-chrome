@@ -119,33 +119,11 @@ a {
     -webkit-border-bottom-right-radius: 6px;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(1, #b6d9ff), color-stop(0, #d3ebff)); } }
 
-a {
-  &.icon {
-    margin-right: 5px;
-  }
-  &#refresh {
-    background: url(../img/icons/silk/arrow_refresh_bw.png) top left no-repeat;
-    text-indent: -9999px;
-    display: block;
-    width: 16px;
-    height: 16px;
-    float: left;
-  }
-  &#new-entry-link {
-    background: url(../img/icons/silk/add_bw.png) top left no-repeat;
-    text-indent: -9999px;
-    display: block;
-    width: 18px;
-    height: 18px;
-    float: left;
-  }
-  &#options-link {
-    background: url(../img/icons/silk/cog.png) top left no-repeat;
-    text-indent: -9999px;
-    display: block;
-    width: 16px;
-    height: 16px;
-    float: left;
+#actions {
+  a {
+    font-size: 1.3em;
+    color: $dark-gray;
+    margin-right: 4px;
   }
 }
 
