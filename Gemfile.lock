@@ -18,9 +18,8 @@ GEM
     sass (3.2.13)
     slop (3.4.7)
     thor (0.18.1)
-    watson (0.0.2)
-      yajl-ruby
-    yajl-ruby (1.2.0)
+    watson-ruby (1.5.1)
+      json
 
 PLATFORMS
   ruby
@@ -31,4 +30,4 @@ DEPENDENCIES
   pry
   rubyzip
   thor
-  watson
+  watson-ruby
