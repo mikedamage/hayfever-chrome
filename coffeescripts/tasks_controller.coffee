@@ -6,6 +6,9 @@ app = angular.module 'hayfeverApp', ['ui']
 
 
 tasks_controller = ($scope) ->
+  # DEBUG MODE: set this to true to show debug content in popup
+  $scope.debug_mode            = false
+
   $scope.form_visible          = false
   $scope.table_spinner_visible = false
   $scope.form_spinner_visible  = false
@@ -35,6 +38,8 @@ tasks_controller = ($scope) ->
     $scope.$apply()
 
   $scope.refresh = ->
+    $scope.table_spinner_visible = true
+
     chrome.runtime.sendMessage { method: 'refresh_hours' }, (resp) ->
       $scope.harvest_url   = resp.harvest_url
       $scope.authorized    = resp.authorized
@@ -45,20 +50,22 @@ tasks_controller = ($scope) ->
       $scope.prefs         = resp.preferences
       $scope.total_hours   = resp.total_hours
       $scope.current_task  = resp.current_task
-      console.dir resp
       $scope.$apply()
 
     chrome.runtime.sendMessage { method: 'get_preferences' }, (resp) ->
-      $scope.prefs = resp.preferences
+      $scope.prefs                 = resp.preferences
+      $scope.table_spinner_visible = false
       $scope.$apply()
   
   $scope.add_timer = ->
+    $scope.form_spinner_visible = true
     task =
       project_id: $scope.form_task.project
       task_id: $scope.form_task.task
       hours: $scope.form_task.hours
       notes: $scope.form_task.notes
     chrome.runtime.sendMessage { method: 'add_timer', active_timer_id: $scope.active_timer_id, task: task }, (resp) ->
+      $scope.form_spinner_visible = false
       $scope.hide_form()
       $scope.refresh()
   
@@ -72,11 +79,15 @@ tasks_controller = ($scope) ->
       $scope.tasks.push task
   
   $scope.toggle_timer = (timer_id) ->
+    $scope.table_spinner_visible = true
     chrome.runtime.sendMessage { method: 'toggle_timer', timer_id: timer_id }, (resp) ->
+      $scope.table_spinner_visible = false
       $scope.refresh()
   
   $scope.delete_timer = (timer_id) ->
+    $scope.table_spinner_visible = true
     chrome.runtime.sendMessage { method: 'delete_timer', timer_id: timer_id }, (resp) ->
+      $scope.table_spinner_visible = false
       $scope.refresh()
   
   $scope.show_form = (timer_id=0) ->
@@ -104,6 +115,10 @@ tasks_controller = ($scope) ->
       task: null
       hours: null
       notes: null
+
+  $scope.toggle_spinners = ->
+    $scope.table_spinner_visible = !$scope.table_spinner_visible
+    $scope.form_spinner_visible = !$scope.form_spinner_visible
 
 clock_time_filter = ->
   (input) ->
