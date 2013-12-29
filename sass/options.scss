@@ -99,11 +99,11 @@ button {
 
     &:hover {
       -webkit-box-shadow: $dark-shadow 0 1px 3px 0;
-      @include simple-gradient-vert($button-hover-top, $orange);
+      @include simple-gradient-vert($button-hover-top, $options-orange);
     }
 
     &:active {
-      @include simple-gradient-vert($orange, $button-hover-top);
+      @include simple-gradient-vert($options-orange, $button-hover-top);
     }
 }
 
