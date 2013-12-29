@@ -55,13 +55,13 @@ a {
     tr {
       border: 1px solid #e6e6e6; }
     th {
-      background: -webkit-gradient(linear, left bottom, left top, color-stop(1, #d8ebff), color-stop(0, #b6d9ff));
+      background: #b6d9ff;
       font-size: 13px;
       padding: 5px;
       text-shadow: 0 1px 0px #fff;
       color: #536082; } }
   tfoot td {
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(1, #d8ebff), color-stop(0, #b6d9ff));
+    background: #b6d9ff;
     font-size: 13px;
     padding: 5px;
     text-shadow: 0 1px 0px #fff;
@@ -85,23 +85,10 @@ a {
       font-size: 11px;
       padding: 8px;
 
-      a.option {
-        text-indent: -9999px;
-        width: 16px;
-        height: 16px;
-        display: inline-block;
-      }
-
-      a.toggle {
-        background: url(../img/icons/silk/control_play_blue.png) top left no-repeat;
-      }
-
-      a.edit {
-        background: url(../img/icons/silk/clock_edit.png) top left no-repeat;
-      }
-
-      a.delete {
-        background: url(../img/icons/silk/delete.png) top left no-repeat;
+      a {
+        font-size: 16px;
+        color: $dark-gray;
+        text-decoration: none;
       }
     } 
 
@@ -117,7 +104,9 @@ a {
   tfoot td {
     -webkit-border-bottom-left-radius: 6px;
     -webkit-border-bottom-right-radius: 6px;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(1, #b6d9ff), color-stop(0, #d3ebff)); } }
+    background: #b6d9ff;
+  }
+}
 
 #actions {
   a {

@@ -40,9 +40,15 @@
                 </td>
 
                 <td class="entry-toggle" align="center">
-                    <a href="#" class="toggle option" ng-click="toggle_timer(timer.id)">Toggle</a>
-                    <a href="#" class="edit option" ng-click="show_form(timer.id)">Edit</a>
-                    <a href="#" class="delete option" ng-click="delete_timer(timer.id)">Delete</a>
+                    <a href="#" ng-click="toggle_timer(timer.id)">
+                        <span class="fa fa-play"></span>
+                    </a>
+                    <a href="#" ng-click="show_form(timer.id)">
+                        <span class="fa fa-pencil-square-o"></span>
+                    </a>
+                    <a href="#" ng-click="delete_timer(timer.id)">
+                        <span class="fa fa-minus-circle"></span>
+                    </a>
                 </td>
             </tr>
             <tr class="noentries" ui-if="authorized && timers.length == 0" ng-dblclick="show_form()">
@@ -83,7 +89,8 @@
 
     <ul class="toolbar" ui-if="harvest_url">
         <li>
-            <a href="{{harvest_url}}" id="harvest-link" target="_blank">&laquo; Visit Harvest App</a>
+            <span class="fa fa-arrow-circle-o-left"></span>
+            <a href="{{harvest_url}}" id="harvest-link" target="_blank">Visit Harvest App</a>
         </li>
     </ul>
 
