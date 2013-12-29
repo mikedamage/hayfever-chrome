@@ -19,12 +19,14 @@ todo
 [ignore]
 .git
 *.swp
-dist/img
-dist/css
-dist/js
+build/img
+build/css
+build/js
+build/fonts
 *.png
 *.jpg
 LICENSE
 .DS_Store
 .versions.conf
 Gemfile*
+pkg/*

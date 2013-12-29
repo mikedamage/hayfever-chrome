@@ -89,6 +89,7 @@ a {
         font-size: 16px;
         color: $dark-gray;
         text-decoration: none;
+        margin-right: 4px;
       }
     } 
 
@@ -96,8 +97,10 @@ a {
       -webkit-animation: runningtimer 4s;
       -webkit-animation-iteration-count: infinite;
 
-      td a.toggle {
-        background: url(../img/icons/silk/control_pause_blue.png) top left no-repeat !important;
+      a.toggle-timer span {
+        &:before {
+          content: "\f04c";
+        }
       }
     }
   }
@@ -105,14 +108,17 @@ a {
     -webkit-border-bottom-left-radius: 6px;
     -webkit-border-bottom-right-radius: 6px;
     background: #b6d9ff;
-  }
-}
-
-#actions {
-  a {
-    font-size: 1.3em;
     color: $dark-gray;
-    margin-right: 4px;
+    padding: {
+      left: 10px;
+      bottom: 3px;
+    };
+
+    a {
+      font-size: 1.3em;
+      color: $dark-gray;
+      margin-right: 4px;
+    }
   }
 }
 
