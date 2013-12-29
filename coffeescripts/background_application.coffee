@@ -5,7 +5,7 @@ Background Page Application Class
 class BackgroundApplication
   constructor: (@subdomain, @auth_string) ->
     @client = new Harvest(@subdomain, @auth_string)
-    @version = '0.3.1'
+    @version = '0.3.2'
     @authorized = false
     @total_hours = 0.0
     @current_hours = 0.0
