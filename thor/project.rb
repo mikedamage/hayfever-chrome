@@ -2,6 +2,10 @@
 class Project < Thor
   include Thor::Actions
 
+  @@excludes = [
+    /\.map$/
+  ]
+
   desc 'build', 'Compile all Sass and CoffeeScript assets'
   def build
     thor "css:compile"
@@ -32,7 +36,14 @@ class Project < Thor
     end
 
     Zip::File.open(output.to_s, Zip::File::CREATE) do |zip|
-      Pathname.glob(dist_dir.join('**', '**')).each do |file|
+      files = Pathname.glob dist_dir.join('**', '**')
+
+      files.delete_if do |f|
+        matches = @@excludes.map {|pattern| f.expand_path.to_s =~ pattern }
+        matches.any? {|m| m.is_a?(Fixnum) }
+      end
+
+      files.each do |file|
         zip_path = file.to_s.gsub(dist_dir.to_s, 'hayfever')
         say_status 'add', zip_path, :yellow
         zip.add zip_path, file.to_s
