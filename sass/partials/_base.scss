@@ -5,12 +5,14 @@
 $popup-width: 440px;
 
 // Fonts
+$helvetica: Helvetica, Arial, sans-serif;
 $helvetica-neue: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Colors
 $options-orange: #f26522;
 $orange: #db9c59;
 $success-green: #ddffdd;
+$success-border: #9c6;
 $light-gray: #e5e5e5;
 $tr-border: #e6e6e6;
 $tr-odd-bg: #ebf5fc;
@@ -21,6 +23,7 @@ $error-color: #A33434;
 $running-timer-start: #f2ffec;
 $running-timer-middle: #dbf8cd;
 $blinkey-middle: #ffefc7;
+$options-fieldset-border: #ccc;
 
 $ultralight-shadow: rgba(0, 0, 0, 0.1);
 $light-shadow: rgba(0, 0, 0, 0.25);

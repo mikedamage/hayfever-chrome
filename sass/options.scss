@@ -10,10 +10,10 @@
 @import "partials/mixins";
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: $helvetica;
   font-size: 1em;
   margin: 10px;
-  color: #4d4d4d; }
+  color: $dark-gray; }
 
 #header {
   padding-bottom: 2.5em;
@@ -24,7 +24,7 @@ body {
     padding-bottom: 43px;
     padding-left: 75px;
     padding-top: 34px;
-    background: url(../app_icon_64.png) no-repeat;
+    background: url(../img/app_icon_64.png) no-repeat;
     background-size: 64px;
     background-position: 1px 18px;
     letter-spacing: -1px; } }
@@ -35,11 +35,12 @@ body {
   margin-top: 12px; }
 
 .gc-settings-content {
+  @include border-radius(5px 5px);
   margin: 15px 6px 0 6px;
   padding: 10px;
   color: #333;
   border: 1px solid #dedede;
-  -webkit-border-radius: 5px 5px; }
+}
 
 #status {
   width: 70%;
@@ -48,14 +49,15 @@ body {
   padding: 10px;
   &.success {
     @include background-image(linear-gradient(top, $success-green, #c1e4c1));
-    border: 1px solid #9C6;
-    color: #4d4d4d;
-    -webkit-border-radius: 5px;
-    } }
+    @include border-radius(5px);
+    border: 1px solid $success-border;
+    color: $dark-gray;
+  }
+}
 
 fieldset {
-  border: 1px #ccc solid;
-  -webkit-border-radius: 8px;
+  @include border-radius(8px);
+  border: 1px $options-fieldset-border solid;
   margin-bottom: 20px;
   p span.hint {
     font-size: 11px;
@@ -68,7 +70,6 @@ input {
     @include box-shadow($ultralight-shadow 0 0 8px);
     @include border-radius(5px);
     @include transition(all 200ms ease-in 50ms);
-    //-webkit-transition: all 200ms ease-in 50ms;
     width: 300px;
     padding: 5px;
     border: 1px solid $light-gray;
@@ -84,21 +85,21 @@ button {
     @include simple-gradient-vert($button-top, $button-bottom);
     @include border-radius(5px);
     @include box-shadow($light-shadow 0 1px 3px);
-    -webkit-transition: all 200ms ease-in 50ms;
+    @include transition(all 200ms ease-in 50ms);
     text-shadow: $light-shadow 0 -1px 1px;
     color: white;
     cursor: pointer;
     font: {
       size: 14px;
       weight: bold;
-      family: Helvetica, Arial, sans-serif;
+      family: $helvetica;
     }
     text-align: center;
     padding: 7px;
     border: none;
 
     &:hover {
-      -webkit-box-shadow: $dark-shadow 0 1px 3px 0;
+      @include box-shadow($dark-shadow 0 1px 3px 0);
       @include simple-gradient-vert($button-hover-top, $options-orange);
     }
 
