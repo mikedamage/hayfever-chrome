@@ -39,7 +39,7 @@ $ bundle install
 $ thor project:build
 
 # There's also a thor task for packaging the extension as a zip file inside the pkg/ folder:
-$ thor project:bundle
+$ thor project:zip_release
 ```
 
 From there you can install the extension by enabling developer mode in chrome://extensions and loadng the `build` directory as an unpacked extension.
