@@ -31,11 +31,15 @@ Hayfever is available for download on the Chrome Web Store, for the low low pric
 
 ### The Hacker Method
 
-If you're *REALLY* the DIY type, you can clone this repo and install it ninja-style. You'll need to run a few commands to compile CSS, CoffeeScript, and package the extension as a zip file. You must have CoffeeScript installed and in your `PATH`.
+If you're *REALLY* the DIY type, you can clone this repo and install it ninja-style. You'll need to run a few commands to compile CSS, CoffeeScript, and package the extension as a zip file. You must have CoffeeScript and Bower installed and in your `PATH`.
 
 ```
+# Install CoffeeScript and Bower if necessary:
+$ npm install -g coffee-script bower
+
 # Install dependencies and compile CSS + CoffeeScripts:
 $ bundle install
+$ bower install
 $ thor project:build
 
 # There's also a thor task for packaging the extension as a zip file inside the pkg/ folder:

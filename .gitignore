@@ -7,4 +7,5 @@
 pkg/*
 build/js/*.js
 build/js/*.map
+build/js/vendor/*
 build/css/*.css
