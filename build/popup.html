@@ -101,7 +101,7 @@
         </li>
     </ul>
 
-    <div id="form-overlay" ui-if="form_visible" ui-animate>
+    <div id="form-overlay" ng-show="form_visible" ui-animate>
         <form id="entry-form" ng-submit="add_timer()">
             <p>
                 <a class="cancel" href="#" ng-click="hide_form()">Cancel</a>
@@ -137,6 +137,7 @@
             </p>
             <input type="hidden" value="{{active_timer_id}}" ng-model="active_timer_id" name="timer_id">
             <input type="submit" value="Save">
+            <div id="form-spinner" ng-show="form_spinner_visible"></div>
         </form>
     </div>
 </body>

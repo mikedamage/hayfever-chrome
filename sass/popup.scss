@@ -148,6 +148,14 @@ ul.toolbar {
 	&.ui-animate {
 		opacity: 0;
 	}
+
+  #form-spinner {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
 }
 
 #entry-form {
@@ -157,6 +165,7 @@ ul.toolbar {
   width: 85%;
   margin: 0 auto;
   padding: 0 5px 10px 10px;
+  position: relative;
   h2 {
     font-size: 20px;
     padding-top: 5px; }
