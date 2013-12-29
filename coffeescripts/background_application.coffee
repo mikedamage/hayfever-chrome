@@ -5,7 +5,7 @@ Background Page Application Class
 class BackgroundApplication
   constructor: (@subdomain, @auth_string) ->
     @client = new Harvest(@subdomain, @auth_string)
-    @version = '0.3.0'
+    @version = '0.3.1'
     @authorized = false
     @total_hours = 0.0
     @current_hours = 0.0
@@ -19,6 +19,7 @@ class BackgroundApplication
     @timer_running = false
 
     chrome.browserAction.setTitle title: "Hayfever for Harvest"
+    @register_message_listeners()
   
   # Class Methods
   @get_auth_data: (callback) ->
@@ -49,6 +50,49 @@ class BackgroundApplication
       false
     else
       stored_version == @version
+
+  register_message_listeners: ->
+    console.debug "Registering asynchronous message listeners"
+    chrome.runtime.onMessage.addListener (request, sender, send_response) =>
+      send_json_response = (json) => send_response json
+
+      console.debug "Received message from popup: %s", request.method
+
+      if request.method is 'refresh_hours'
+        @refresh_hours =>
+          send_response
+            authorized: @authorized
+            projects: @projects
+            clients: @clients
+            timers: @todays_entries
+            total_hours: @total_hours
+            current_task: @current_task
+            harvest_url: if @client.subdomain then @client.full_url else null
+            preferences: @preferences
+        true
+      else if request.method is 'get_entries'
+        send_response
+          authorized: @authorized
+          projects: @projects
+          clients: @clients
+          timers: @todays_entries
+          total_hours: @total_hours
+          current_task: @current_task
+          harvest_url: if @client.subdomain then @client.full_url else null
+          preferences: @preferences
+       else if request.method is 'add_timer'
+         if request.active_timer_id != 0
+           result = @client.update_entry request.active_timer_id, request.task
+         else
+           result = @client.add_entry request.task
+
+         result.success send_json_response
+       else if request.method is 'toggle_timer'
+         result = @client.toggle_timer request.timer_id
+         result.success send_json_response
+       else if request.method is 'delete_timer'
+         result = @client.delete_entry request.timer_id
+         result.success send_json_response
   
   start_refresh_interval: ->
     @refresh_interval = setInterval @refresh_hours, @refresh_interval_time
@@ -82,16 +126,14 @@ class BackgroundApplication
   refresh_hours: (callback, force=false) =>
     console.log 'refreshing hours'
     @get_preferences()
-    prefs = @preferences
-    callback = if typeof callback is 'function' then callback else $.noop
-    #last_updated = localStorage.getItem 'hayfever_last_refresh'
-    #now = new Date().getTime()
+    prefs        = @preferences
+    callback     = if typeof callback is 'function' then callback else $.noop
     todays_hours = @client.get_today()
 
     todays_hours.success (json) =>
-      @authorized = true
+      @authorized   = true
       @current_task = null
-      total_hours = 0.0
+      total_hours   = 0.0
       current_hours = ''
 
       @projects = json.projects

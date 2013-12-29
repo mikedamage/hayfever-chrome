@@ -7,9 +7,10 @@ app = angular.module 'hayfeverApp', ['ui']
 
 tasks_controller = ($scope) ->
   bg_page = chrome.extension.getBackgroundPage()
-  bg_app = bg_page.application
+  bg_app  = bg_page.application
 
   $scope.form_visible    = false
+  $scope.spinner_visible = false
   $scope.runaway_timer   = false
   $scope.harvest_url     = if bg_app.client.subdomain then bg_app.client.full_url else null
   $scope.authorized      = bg_app.authorized
