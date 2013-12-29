@@ -87,12 +87,15 @@ class BackgroundApplication
            result = @client.add_entry request.task
 
          result.success send_json_response
+         true
        else if request.method is 'toggle_timer'
          result = @client.toggle_timer request.timer_id
          result.success send_json_response
+         true
        else if request.method is 'delete_timer'
          result = @client.delete_entry request.timer_id
          result.success send_json_response
+         true
   
   start_refresh_interval: ->
     @refresh_interval = setInterval @refresh_hours, @refresh_interval_time
