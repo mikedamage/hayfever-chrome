@@ -52,4 +52,44 @@ class Project < Thor
 
     say_status 'saved', "Saved plugin to #{output.to_s}", :green
   end
+
+  desc 'watch', 'Compile Sass and CoffeeScript files when they change'
+  def watch
+    require 'listen'
+
+    listener = Listen.to $root_dir.expand_path.to_s do |modified, added, removed|
+      if modified.any?
+        commands = modified.map do |file|
+          if file =~ /\.scss$/
+            'css:compile'
+          elsif file =~ /\.coffee$/
+            'coffeescript:compile'
+          else
+            nil
+          end
+        end
+
+        commands.uniq!
+        commands.delete_if {|cmd| cmd.nil? } if commands.any?
+        commands.each {|cmd| thor cmd } if commands.any?
+      end
+    end
+
+    listener.start
+    listener.ignore %r{\.git}
+    listener.ignore %r{build/}
+    listener.ignore %r{thor/}
+    listener.ignore %r{pkg/}
+    listener.ignore %r{test/}
+    listener.ignore %r{thor/}
+
+    Signal.trap 'INT' do
+      say 'Stopping listener and exiting...', :yellow
+      listener.stop
+      exit 0
+    end
+
+    say 'Watching project folder for changes...', :yellow
+    sleep
+  end
 end
