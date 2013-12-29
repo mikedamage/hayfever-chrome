@@ -6,14 +6,15 @@ app = angular.module 'hayfeverApp', ['ui']
 
 
 tasks_controller = ($scope) ->
-  $scope.form_visible    = false
-  $scope.spinner_visible = false
-  $scope.runaway_timer   = false
-  $scope.active_timer_id = 0
-  $scope.current_hours   = 0.0
-  $scope.total_hours     = 0.0
-  $scope.tasks           = []
-  $scope.form_task       =
+  $scope.form_visible          = false
+  $scope.table_spinner_visible = false
+  $scope.form_spinner_visible  = false
+  $scope.runaway_timer         = false
+  $scope.active_timer_id       = 0
+  $scope.current_hours         = 0.0
+  $scope.total_hours           = 0.0
+  $scope.tasks                 = []
+  $scope.form_task             =
     project: null
     task: null
     hours: null
