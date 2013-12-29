@@ -66,6 +66,7 @@ class BackgroundApplication
             clients: @clients
             timers: @todays_entries
             total_hours: @total_hours
+            current_hours: @current_hours
             current_task: @current_task
             harvest_url: if @client.subdomain then @client.full_url else null
             preferences: @preferences
@@ -77,9 +78,14 @@ class BackgroundApplication
           clients: @clients
           timers: @todays_entries
           total_hours: @total_hours
+          current_hours: @current_hours
           current_task: @current_task
           harvest_url: if @client.subdomain then @client.full_url else null
           preferences: @preferences
+       else if request.method is 'get_preferences'
+         @get_preferences (prefs) =>
+           send_response preferences: prefs
+         true
        else if request.method is 'add_timer'
          if request.active_timer_id != 0
            result = @client.update_entry request.active_timer_id, request.task
@@ -90,19 +96,20 @@ class BackgroundApplication
          true
        else if request.method is 'toggle_timer'
          result = @client.toggle_timer request.timer_id
-         result.success send_json_response
+         result.complete send_json_response
          true
        else if request.method is 'delete_timer'
          result = @client.delete_entry request.timer_id
-         result.success send_json_response
+         result.complete send_json_response
          true
   
   start_refresh_interval: ->
     @refresh_interval = setInterval @refresh_hours, @refresh_interval_time
   
-  get_preferences: ->
+  get_preferences: (callback = $.noop) ->
     BackgroundApplication.get_preferences (items) =>
       @preferences = items.hayfever_prefs || {}
+      callback(items)
   
   get_auth_data: (callback) ->
       
