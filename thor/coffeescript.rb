@@ -32,7 +32,7 @@ class Coffeescript < Thor
 
         coffee_cmd = "coffee #{coffee_opts.join(' ')} #{child.expand_path.to_s}"
 
-        run coffee_cmd
+        run coffee_cmd, verbose: false
       end
     end
   end

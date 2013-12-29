@@ -23,20 +23,28 @@ class Harvest
   @param {String[]} arguments
   @returns {String}
   ###
-  build_url: ->
+  _build_url: ->
     url = @full_url
     $.each arguments, (i, v) ->
       url += "/#{v}"
     "#{url}.json"
+
+  ###
+  Build an AJAX options object by merging with @ajax_defaults
+
+  @param {Object} opts
+  @returns {Object}
+  ###
+  _build_ajax_options: (opts = {}) -> $.extend @ajax_defaults, opts
   
   ###
   Get API rate limit status
 
   @returns {jqXHR}
   ###
-  rate_limit_status: ->
-    url = @build_url 'account', 'rate_limit_status'
-    $.ajax url, @ajax_defaults
+  rate_limit_status: (ajax_opts = {}) ->
+    url = @_build_url 'account', 'rate_limit_status'
+    $.ajax url, @_build_ajax_options(ajax_opts)
   
   ###
   Get all timesheet entries (and project list) for a given day
@@ -45,9 +53,9 @@ class Harvest
   @param {Boolean} async
   @returns {jqXHR}
   ###
-  get_day: (date, async=true) ->
-    day_url = if date is 'today' then @build_url('daily') else @build_url('daily', date.getDOY(), date.getFullYear())
-    ajax_opts = $.extend @ajax_defaults, async: async
+  get_day: (date, ajax_opts = {}) ->
+    day_url = if date is 'today' then @_build_url('daily') else @_build_url('daily', date.getDOY(), date.getFullYear())
+    ajax_opts = @_build_ajax_options ajax_opts
     $.ajax day_url, ajax_opts
   
   ###
@@ -56,8 +64,8 @@ class Harvest
   @param {Boolean} async
   @returns {jqXHR}
   ###
-  get_today: (async=true) ->
-    @get_day('today', async)
+  get_today: (ajax_opts = {}) ->
+    @get_day('today', ajax_opts)
   
   ###
   Get an individual timer by ID
@@ -66,9 +74,9 @@ class Harvest
   @param {Boolean} async
   @returns {jqXHR}
   ###
-  get_entry: (eid, async=true) ->
-    url = @build_url 'daily', 'show', eid
-    ajax_opts = $.extend @ajax_defaults, async: async
+  get_entry: (eid, ajax_opts = {}) ->
+    url = @_build_url 'daily', 'show', eid
+    ajax_opts = @_build_ajax_options ajax_opts
     $.ajax url, ajax_opts
   
   ###
@@ -78,9 +86,9 @@ class Harvest
   @param {Boolean} async
   @returns {jqXHR}
   ###
-  runaway_timers: (callback=$.noop, async=true) ->
+  runaway_timers: (callback = $.noop, ajax_opts = {}) ->
     yesterday = Date.create 'yesterday'
-    request = @get_day yesterday, async
+    request = @get_day yesterday, ajax_opts
 
     request.success (json) ->
       if json.day_entries?
@@ -95,9 +103,9 @@ class Harvest
   @param {Boolean} async
   @returns {jqXHR}
   ###
-  toggle_timer: (eid, async=true) ->
-    url = @build_url 'daily', 'timer', String(eid)
-    ajax_opts = $.extend @ajax_defaults, async: async
+  toggle_timer: (eid, ajax_opts) ->
+    url       = @_build_url 'daily', 'timer', String(eid)
+    ajax_opts = @_build_ajax_options ajax_opts
     $.ajax url, ajax_opts
   
   ###
@@ -107,9 +115,9 @@ class Harvest
   @param {Boolean} async
   @returns {jqXHR}
   ###
-  add_entry: (props, async=true) ->
-    url = @build_url 'daily', 'add'
-    ajax_opts = $.extend @ajax_defaults, type: 'POST', async: async, data: props
+  add_entry: (props, ajax_opts = {}) ->
+    url       = @_build_url 'daily', 'add'
+    ajax_opts = @_build_ajax_options $.extend(ajax_opts, type: 'POST', data: props)
     $.ajax url, ajax_opts
   
   ###
@@ -119,9 +127,9 @@ class Harvest
   @param {Boolean} async
   @returns {jqXHR}
   ###
-  delete_entry: (eid, async=true) ->
-    url = @build_url 'daily', 'delete', String(eid)
-    ajax_opts = $.extend @ajax_defaults, type: 'DELETE', async: async
+  delete_entry: (eid, ajax_opts = {}) ->
+    url = @_build_url 'daily', 'delete', String(eid)
+    ajax_opts = @_build_ajax_options $.extend(ajax_opts, type: 'DELETE')
     $.ajax url, ajax_opts
   
   ###
@@ -132,9 +140,9 @@ class Harvest
   @param {Boolean} async
   @returns {jqXHR}
   ###
-  update_entry: (eid, props, async=true) ->
-    url = @build_url 'daily', 'update', String(eid)
-    ajax_opts = $.extend @ajax_defaults, type: 'POST', async: async, data: props
+  update_entry: (eid, props, ajax_opts = {}) ->
+    url = @_build_url 'daily', 'update', String(eid)
+    ajax_opts = @_build_ajax_options $.extend(ajax_opts, type: 'POST', data: props)
     $.ajax url, ajax_opts
 
 window.Harvest = Harvest
