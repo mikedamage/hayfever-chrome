@@ -12,7 +12,7 @@ class BackgroundApplication
     @current_task = null
     @badge_flash_interval = 0
     @refresh_interval = 0
-    @refresh_interval_time = 36000
+    @refresh_interval_time = 36e3
     @todays_entries = []
     @projects = []
     @preferences = {}
