@@ -103,7 +103,7 @@ class Harvest
   @param {Boolean} async
   @returns {jqXHR}
   ###
-  toggle_timer: (eid, ajax_opts) ->
+  toggle_timer: (eid, ajax_opts = {}) ->
     url       = @_build_url 'daily', 'timer', String(eid)
     ajax_opts = @_build_ajax_options ajax_opts
     $.ajax url, ajax_opts
