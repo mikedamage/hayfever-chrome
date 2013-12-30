@@ -59,10 +59,17 @@ fieldset {
   @include border-radius(8px);
   border: 1px $options-fieldset-border solid;
   margin-bottom: 20px;
+
+  legend {
+    font-weight: bold;
+  }
+
   p span.hint {
     font-size: 11px;
     display: block;
-    font-style: italic; } }
+    font-style: italic;
+  }
+}
 
 input {
   &[type="text"], &[type="password"] {
