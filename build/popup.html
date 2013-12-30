@@ -104,7 +104,9 @@
     <div id="form-overlay" ng-show="form_visible" ui-animate>
         <form id="entry-form" ng-submit="add_timer()">
             <p>
-                <a class="cancel" href="#" ng-click="hide_form()">Cancel</a>
+                <a class="cancel" href="#" ng-click="hide_form()">
+                    <span class="fa fa-times-circle"></span>
+                </a>
             </p>
             <p>
                 <label for="client-select">Client</label>

@@ -163,15 +163,28 @@ ul.toolbar {
   font-size: 12px;
   background: white;
   width: 85%;
-  margin: 0 auto;
-  padding: 0 5px 10px 10px;
+  margin: 10px auto;
+  padding: 5px 5px 10px 10px;
   position: relative;
+
   h2 {
     font-size: 20px;
-    padding-top: 5px; }
-  a.cancel {
-    // [todo] - Display block, background image of an X
+    padding-top: 5px;
   }
+
+  a.cancel {
+    color: $dark-gray;
+    font-size: 20px;
+    text-decoration: none;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+
+    &:hover {
+      color: $cancel-hover;
+    }
+  }
+
 	.error {
 		color: $error-color;
 		font-size: 11px; }
