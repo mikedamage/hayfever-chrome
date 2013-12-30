@@ -187,35 +187,40 @@ ul.toolbar {
 
 	.error {
 		color: $error-color;
-		font-size: 11px; }
-    label {
-      float: left;
-      display: block;
-      width: 65px;
-      font-size: 14px;
-      &.checkbox {
-        float: right;
-        width: 216px; } }
-    select {
-      width: 205px; }
-    input[type='text'], textarea {
-      @include transition(all 200ms ease-in 50ms);
-      @include box-shadow($ultralight-shadow 0 0 8px);
-      border: 1px solid #e5e5e5;
-      font-family: $helvetica-neue;
-      color: $dark-gray;
-      width: 200px;
-      background: -webkit-gradient(linear, left top, left 25, from(white), color-stop(10%, #f7f7f7), to(white));
+		font-size: 11px; 
+  }
+  label {
+    float: left;
+    display: block;
+    width: 65px;
+    font-size: 14px;
+    &.checkbox {
+      float: right;
+      width: 216px;
     }
-    input[type='text']:hover, textarea:hover, input[type='text']:focus, textarea:focus {
-      @include box-shadow($light-shadow 0 0 8px);
-    }
-    input[type='text'] {
-      font-size: 14px;
-      font-weight: bold; }
-    textarea {
-      font-size: 12px;
-      height: 60px; } }
+  }
+  select {
+    width: 205px;
+  }
+  input[type='number'], textarea {
+    font-family: $helvetica-neue;
+    color: $dark-gray;
+    outline: none;
+  }
+  input[type='number'] {
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    width: 50px;
+  }
+  textarea {
+    @include border-radius(6px);
+    font-size: 12px;
+    height: 60px;
+    width: 200px;
+    border: 1px solid #bfbfbf;
+  } 
+}
 
 @-webkit-keyframes runningtimer {
   0% {
