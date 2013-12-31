@@ -9,15 +9,27 @@
 @import "partials/base";
 @import "partials/mixins";
 
+html {
+  font-size: 16px;
+}
+
 body {
   font-family: $helvetica;
   font-size: 1em;
   margin: 10px;
-  color: $dark-gray; }
+  color: $dark-gray;
+}
+
+.container {
+  width: 70%;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
 #header {
   padding-bottom: 2.5em;
   padding-top: 1.5em;
+
   h1 {
     font-size: 1.8em;
     display: inline;
@@ -27,92 +39,110 @@ body {
     background: url(../img/app_icon_64.png) no-repeat;
     background-size: 64px;
     background-position: 1px 18px;
-    letter-spacing: -1px; } }
-
-#footer {
-  float: left;
-  margin-left: 24px;
-  margin-top: 12px; }
-
-.gc-settings-content {
-  @include border-radius(5px 5px);
-  margin: 15px 6px 0 6px;
-  padding: 10px;
-  color: #333;
-  border: 1px solid #dedede;
+    letter-spacing: -1px;
+  }
 }
 
 #status {
-  width: 70%;
-  text-align: center;
-  margin: 10px auto;
-  padding: 10px;
+  @include border-radius(4px);
+  margin: 20px 0 40px 0;
+  padding: 15px;
+
   &.success {
-    @include background-image(linear-gradient(top, $success-green, #c1e4c1));
-    @include border-radius(5px);
+    background: $success-background;
     border: 1px solid $success-border;
-    color: $dark-gray;
+    color: $success-text;
   }
 }
 
-fieldset {
-  @include border-radius(8px);
+.input-group {
+  @include border-radius(4px);
   border: 1px $options-fieldset-border solid;
   margin-bottom: 20px;
+  padding: {
+    top: 0;
+    bottom: 5px;
+    left: 20px;
+    right: 20px;
+  };
 
-  legend {
-    font-weight: bold;
+  h2 {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $options-fieldset-border;
+    font: {
+      size: 0.9em;
+      weight: bold;
+    };
+  }
+
+  label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font: {
+      weight: bold;
+      size: 0.9em;
+    };
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    @include border-radius(4px);
+    @include transition(border-color ease-in-out 150ms, box-shadow ease-in-out 150ms);
+    display: block;
+    width: 97%;
+    height: 34px;
+    padding: 2px 10px;
+    margin-bottom: 8px;
+    font-size: 0.88em;
+    vertical-align: middle;
+    background-color: white;
+    line-height: 1.428571429;
+    border: 1px solid $options-input-border;
+    outline: none;
+
+    &:focus {
+      @include box-shadow(
+        inset 0 1px 1px $input-shadow-inner,
+        0 0 8px $input-shadow-outer
+      );
+      border-color: $options-input-border-focus;
+    }
+  }
+
+  select, input[type="color"] {
+    display: block;
   }
 
   p span.hint {
-    font-size: 11px;
+    font-size: 0.7em;
     display: block;
     font-style: italic;
   }
 }
 
-input {
-  &[type="text"], &[type="password"] {
-    @include background-image(linear-gradient(top, white, #f7f7f7 10%, white));
-    @include box-shadow($ultralight-shadow 0 0 8px);
-    @include border-radius(5px);
-    @include transition(all 200ms ease-in 50ms);
-    width: 300px;
-    padding: 5px;
-    border: 1px solid $light-gray;
-    color: $dark-gray;
-
-    &:hover {
-        @include box-shadow($medium-shadow 0 0 8px);
-    }
-  } 
-}
-
 button {
-    @include simple-gradient-vert($button-top, $button-bottom);
-    @include border-radius(5px);
-    @include box-shadow($light-shadow 0 1px 3px);
-    @include transition(all 200ms ease-in 50ms);
-    text-shadow: $light-shadow 0 -1px 1px;
-    color: white;
-    cursor: pointer;
-    font: {
-      size: 14px;
-      weight: bold;
-      family: $helvetica;
-    }
-    text-align: center;
-    padding: 7px;
-    border: none;
+  @include border-radius(4px);
+  color: white;
+  cursor: pointer;
+  font: {
+    size: 0.88em;
+    family: $helvetica;
+  };
+  text-align: center;
+  padding: 6px 12px;
+  border: 1px solid $options-button-border;
+  background: $options-button-background;
+  outline: none;
+  cursor: pointer;
 
-    &:hover {
-      @include box-shadow($dark-shadow 0 1px 3px 0);
-      @include simple-gradient-vert($button-hover-top, $options-orange);
-    }
+  &:hover, &:focus {
+    background: $options-button-background-focus;
+    border-color: $options-button-border-focus;
+  }
 
-    &:active {
-      @include simple-gradient-vert($options-orange, $button-hover-top);
-    }
+  &:focus {
+    @include box-shadow(inset 0 2px 4px $options-button-shadow);
+  }
 }
 
 p.info {
