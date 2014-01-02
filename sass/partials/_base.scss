@@ -37,6 +37,10 @@ $options-button-background: #f26522;
 $options-button-background-focus: lighten($options-button-background, 5%);
 $options-button-shadow: rgba(0, 0, 0, 0.08);
 
+$popup-button-background: darken($th-background, 20%);
+$popup-button-background-focus: darken($popup-button-background, 5%);
+$popup-button-border: #3f89ca;
+
 $ultralight-shadow: rgba(0, 0, 0, 0.1);
 $light-shadow: rgba(0, 0, 0, 0.25);
 $medium-shadow: rgba(0, 0, 0, 0.35);

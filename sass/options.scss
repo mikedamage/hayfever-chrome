@@ -133,7 +133,6 @@ button {
   border: 1px solid $options-button-border;
   background: $options-button-background;
   outline: none;
-  cursor: pointer;
 
   &:hover, &:focus {
     background: $options-button-background-focus;

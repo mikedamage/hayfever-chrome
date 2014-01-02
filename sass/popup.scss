@@ -204,7 +204,7 @@ ul.toolbar {
   }
   input[type='text'], textarea {
     @include border-radius(6px);
-    border: 1px solid #bfbfbf;
+    border: 1px solid $options-input-border;
     font-family: $helvetica-neue;
     color: $dark-gray;
     outline: none;
@@ -213,12 +213,29 @@ ul.toolbar {
     font-size: 16px;
     font-weight: bold;
     width: 50px;
+    padding: 4px 6px;
   }
   textarea {
     font-size: 12px;
     height: 60px;
     width: 200px;
-  } 
+  }
+
+  input[type="submit"] {
+    @include border-radius(4px);
+    color: white;
+    cursor: pointer;
+    font-size: 0.88em;
+    text-align: center;
+    padding: 6px 12px;
+    border: 1px solid $popup-button-border;
+    background: $popup-button-background;
+    outline: none;
+
+    &:hover, &:focus {
+      background: $popup-button-background-focus;
+    }
+  }
 }
 
 @-webkit-keyframes runningtimer {
