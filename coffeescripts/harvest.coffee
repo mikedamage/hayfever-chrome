@@ -20,10 +20,11 @@ class Harvest
   ###
   Build URL for and API call
 
+  @private
   @param {String[]} arguments
   @returns {String}
   ###
-  _build_url: ->
+  build_url = ->
     url = @full_url
     $.each arguments, (i, v) ->
       url += "/#{v}"
@@ -32,10 +33,11 @@ class Harvest
   ###
   Build an AJAX options object by merging with @ajax_defaults
 
+  @private
   @param {Object} opts
   @returns {Object}
   ###
-  _build_ajax_options: (opts = {}) -> $.extend @ajax_defaults, opts
+  build_ajax_options = (opts = {}) -> $.extend @ajax_defaults, opts
   
   ###
   Get API rate limit status
@@ -43,8 +45,8 @@ class Harvest
   @returns {jqXHR}
   ###
   rate_limit_status: (ajax_opts = {}) ->
-    url = @_build_url 'account', 'rate_limit_status'
-    $.ajax url, @_build_ajax_options(ajax_opts)
+    url = build_url.call this, 'account', 'rate_limit_status'
+    $.ajax url, build_ajax_options.call(this, ajax_opts)
   
   ###
   Get all timesheet entries (and project list) for a given day
@@ -54,8 +56,8 @@ class Harvest
   @returns {jqXHR}
   ###
   get_day: (date, ajax_opts = {}) ->
-    day_url = if date is 'today' then @_build_url('daily') else @_build_url('daily', date.getDOY(), date.getFullYear())
-    ajax_opts = @_build_ajax_options ajax_opts
+    day_url   = if date is 'today' then build_url.call(this, 'daily') else build_url.call(this, 'daily', date.getDOY(), date.getFullYear())
+    ajax_opts = build_ajax_options.call this, ajax_opts
     $.ajax day_url, ajax_opts
   
   ###
@@ -75,8 +77,8 @@ class Harvest
   @returns {jqXHR}
   ###
   get_entry: (eid, ajax_opts = {}) ->
-    url = @_build_url 'daily', 'show', eid
-    ajax_opts = @_build_ajax_options ajax_opts
+    url = build_url.call this, 'daily', 'show', eid
+    ajax_opts = build_ajax_options.call this, ajax_opts
     $.ajax url, ajax_opts
   
   ###
@@ -104,8 +106,8 @@ class Harvest
   @returns {jqXHR}
   ###
   toggle_timer: (eid, ajax_opts = {}) ->
-    url       = @_build_url 'daily', 'timer', String(eid)
-    ajax_opts = @_build_ajax_options ajax_opts
+    url       = build_url.call this, 'daily', 'timer', String(eid)
+    ajax_opts = build_ajax_options.call this, ajax_opts
     $.ajax url, ajax_opts
   
   ###
@@ -116,8 +118,8 @@ class Harvest
   @returns {jqXHR}
   ###
   add_entry: (props, ajax_opts = {}) ->
-    url       = @_build_url 'daily', 'add'
-    ajax_opts = @_build_ajax_options $.extend(ajax_opts, type: 'POST', data: props)
+    url       = build_url.call this, 'daily', 'add'
+    ajax_opts = build_ajax_options.call this, $.extend(ajax_opts, type: 'POST', data: props)
     $.ajax url, ajax_opts
   
   ###
@@ -128,8 +130,8 @@ class Harvest
   @returns {jqXHR}
   ###
   delete_entry: (eid, ajax_opts = {}) ->
-    url = @_build_url 'daily', 'delete', String(eid)
-    ajax_opts = @_build_ajax_options $.extend(ajax_opts, type: 'DELETE')
+    url       = build_url.call this, 'daily', 'delete', String(eid)
+    ajax_opts = build_ajax_options.call this, $.extend(ajax_opts, type: 'DELETE')
     $.ajax url, ajax_opts
   
   ###
@@ -141,8 +143,8 @@ class Harvest
   @returns {jqXHR}
   ###
   update_entry: (eid, props, ajax_opts = {}) ->
-    url = @_build_url 'daily', 'update', String(eid)
-    ajax_opts = @_build_ajax_options $.extend(ajax_opts, type: 'POST', data: props)
+    url       = build_url.call this, 'daily', 'update', String(eid)
+    ajax_opts = build_ajax_options.call this, $.extend(ajax_opts, type: 'POST', data: props)
     $.ajax url, ajax_opts
 
 window.Harvest = Harvest

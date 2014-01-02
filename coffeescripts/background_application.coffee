@@ -3,55 +3,7 @@ Background Page Application Class
 ###
 
 class BackgroundApplication
-  constructor: (@subdomain, @auth_string) ->
-    @client = new Harvest(@subdomain, @auth_string)
-    @version = '0.3.4'
-    @authorized = false
-    @total_hours = 0.0
-    @current_hours = 0.0
-    @current_task = null
-    @badge_flash_interval = 0
-    @refresh_interval = 0
-    @refresh_interval_time = 36e3
-    @todays_entries = []
-    @projects = []
-    @preferences = {}
-    @timer_running = false
-
-    chrome.browserAction.setTitle title: "Hayfever for Harvest"
-    @register_message_listeners()
-  
-  # Class Methods
-  @get_auth_data: (callback) ->
-    chrome.storage.local.get [ 'harvest_subdomain', 'harvest_auth_string', 'harvest_username' ], (items) ->
-      callback(items)
-  
-  @get_preferences: (callback) ->
-    chrome.storage.local.get 'hayfever_prefs', (items) ->
-      callback(items)
-  
-  @migrate_preferences: (callback) ->
-    options =
-      harvest_subdomain: localStorage['harvest_subdomain']
-      harvest_auth_string: localStorage['harvest_auth_string']
-      harvest_username: localStorage['harvest_username']
-    prefs = if localStorage['hayfever_prefs'] then JSON.parse(localStorage['hayfever_prefs']) else null
-    options.hayfever_prefs = prefs if prefs
-
-    chrome.storage.local.set options, ->
-      callback(options)
-  
-  # Instance Methods  
-  upgrade_detected: ->
-    stored_version = localStorage.getItem 'hayfever_version'
-
-    unless stored_version
-      localStorage.setItem 'hayfever_version', @version
-      false
-    else
-      stored_version == @version
-
-  register_message_listeners: ->
+  register_message_listeners = ->
     console.debug "Registering asynchronous message listeners"
     chrome.runtime.onMessage.addListener (request, sender, send_response) =>
       send_json_response = (json) => send_response json
@@ -102,7 +54,55 @@ class BackgroundApplication
          result = @client.delete_entry request.timer_id
          result.complete send_json_response
          true
+
+  constructor: (@subdomain, @auth_string) ->
+    @client = new Harvest(@subdomain, @auth_string)
+    @version = '0.3.4'
+    @authorized = false
+    @total_hours = 0.0
+    @current_hours = 0.0
+    @current_task = null
+    @badge_flash_interval = 0
+    @refresh_interval = 0
+    @refresh_interval_time = 36e3
+    @todays_entries = []
+    @projects = []
+    @preferences = {}
+    @timer_running = false
+
+    chrome.browserAction.setTitle title: "Hayfever for Harvest"
+    register_message_listeners.call(this)
   
+  # Class Methods
+  @get_auth_data: (callback) ->
+    chrome.storage.local.get [ 'harvest_subdomain', 'harvest_auth_string', 'harvest_username' ], (items) ->
+      callback(items)
+  
+  @get_preferences: (callback) ->
+    chrome.storage.local.get 'hayfever_prefs', (items) ->
+      callback(items)
+  
+  @migrate_preferences: (callback) ->
+    options =
+      harvest_subdomain: localStorage['harvest_subdomain']
+      harvest_auth_string: localStorage['harvest_auth_string']
+      harvest_username: localStorage['harvest_username']
+    prefs = if localStorage['hayfever_prefs'] then JSON.parse(localStorage['hayfever_prefs']) else null
+    options.hayfever_prefs = prefs if prefs
+
+    chrome.storage.local.set options, ->
+      callback(options)
+  
+  # Instance Methods  
+  upgrade_detected: ->
+    stored_version = localStorage.getItem 'hayfever_version'
+
+    unless stored_version
+      localStorage.setItem 'hayfever_version', @version
+      false
+    else
+      stored_version == @version
+
   start_refresh_interval: ->
     @refresh_interval = setInterval @refresh_hours, @refresh_interval_time
   
