@@ -29,6 +29,10 @@ options_controller = ($scope) ->
     $scope.password_placeholder = if $scope.auth_string then 'Password Saved' else 'Enter Password'
     $scope.$apply()
 
+  $scope.hide_banner = ->
+    $scope.options_saved = false
+    $scope.$apply()
+
   $scope.save_options = ->
     options =
       harvest_subdomain: $scope.subdomain
@@ -38,11 +42,12 @@ options_controller = ($scope) ->
 
     storage.set options, ->
       $scope.password      = null
-      $scope.options_saved = true
       $scope.auth_string   = options.harvest_auth_string
-      bg_page.location.reload()
-      bg_page.application.start_refresh_interval() unless bg_page.application.refresh_interval
-      $scope.$apply()
-      scrollTo 0, 0
+
+      chrome.runtime.sendMessage { method: 'reload_app' }, (resp) ->
+        setTimeout $scope.hide_banner, 5e3
+        $scope.options_saved = true
+        $scope.$apply()
+        scrollTo 0, 0
 
 app.controller 'OptionsController', [ '$scope', options_controller ]
