@@ -5,7 +5,7 @@ Options Page Controller
 by Mike Green (mike.is.green@gmail.com)
 ###
 
-app = angular.module 'hayfeverOptions', []
+app = angular.module 'hayfeverOptions', [ 'ngAnimate' ]
 
 options_controller = ($scope) ->
   bg_page     = chrome.extension.getBackgroundPage()
@@ -18,7 +18,7 @@ options_controller = ($scope) ->
     'hayfever_prefs'
   ]
 
-  $scope.debug_mode           = true
+  $scope.debug_mode           = false
   $scope.password_placeholder = ''
 
   # Load options from local storage

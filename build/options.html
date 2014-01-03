@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <title>Hayfever for Chrome: Options</title>
 
-    <link href="css/options.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="js/vendor/angular/angular-csp.css">
+    <link rel="stylesheet" href="css/options.css">
 
     <script src="js/prototype-extensions.js"></script>
     <script src="js/vendor/underscore/underscore-min.js"></script>
     <script src="js/vendor/jquery/jquery.min.js"></script>
     <script src="js/vendor/angular/angular.min.js"></script>
+    <script src="js/vendor/angular-animate/angular-animate.min.js"></script>
     <script src="js/options_controller.js"></script>
 </head>
 <body ng-controller="OptionsController">
@@ -21,7 +23,7 @@
             </span>
         </header>
 
-        <div id="status" class="success" ng-if="options_saved">Options successfully saved!</div>
+        <div id="status" ng-show="options_saved">Options successfully saved!</div>
 
         <form action="" ng-submit="save_options()">
             <div class="input-group" id="authentication">

@@ -45,12 +45,21 @@ body {
 
 #status {
   @include border-radius(4px);
-  @include transition(opacity ease-out 500ms);
+  @include transition(all linear 500ms);
   margin: 20px 0 40px 0;
   padding: 15px;
   background: $success-background;
   border: 1px solid $success-border;
   color: $success-text;
+  opacity: 1;
+
+  &.ng-hide-add, &.ng-hide-remove {
+    display: block !important;
+  }
+
+  &.ng-hide {
+    opacity: 0;
+  }
 }
 
 .input-group {
