@@ -3,15 +3,31 @@ Background Page Application Class
 ###
 
 class BackgroundApplication
+  # @private
+  start_refresh_interval = ->
+    console.debug "Setting refresh interval to every %d milliseconds", @refresh_interval_time
+    @refresh_interval = setInterval @refresh_hours, @refresh_interval_time
+
+  # @private
   register_message_listeners = ->
     console.debug "Registering asynchronous message listeners"
+
     chrome.runtime.onMessage.addListener (request, sender, send_response) =>
       send_json_response = (json) => send_response json
-
-      console.debug "Received message from popup: %s", request.method
-
-      if request.method is 'refresh_hours'
-        @refresh_hours =>
+      methods =
+        refresh_hours: =>
+          @refresh_hours =>
+            send_response
+              authorized: @authorized
+              projects: @projects
+              clients: @clients
+              timers: @todays_entries
+              total_hours: @total_hours
+              current_hours: @current_hours
+              current_task: @current_task
+              harvest_url: if @client.subdomain then @client.full_url else null
+              preferences: @preferences
+        get_entries: =>
           send_response
             authorized: @authorized
             projects: @projects
@@ -22,56 +38,50 @@ class BackgroundApplication
             current_task: @current_task
             harvest_url: if @client.subdomain then @client.full_url else null
             preferences: @preferences
-        true
-      else if request.method is 'get_entries'
-        send_response
-          authorized: @authorized
-          projects: @projects
-          clients: @clients
-          timers: @todays_entries
-          total_hours: @total_hours
-          current_hours: @current_hours
-          current_task: @current_task
-          harvest_url: if @client.subdomain then @client.full_url else null
-          preferences: @preferences
-       else if request.method is 'get_preferences'
-         @get_preferences (prefs) =>
-           send_response preferences: prefs
-         true
-       else if request.method is 'add_timer'
-         if request.active_timer_id != 0
-           result = @client.update_entry request.active_timer_id, request.task
-         else
-           result = @client.add_entry request.task
+        get_preferences: =>
+          @get_preferences (prefs) => send_response preferences: prefs
+        add_timer: =>
+          if request.active_timer_id != 0
+            result = @client.update_entry request.active_timer_id, request.task
+          else
+            result = @client.add_entry request.task
+          result.success send_json_response
+        toggle_timer: =>
+          result = @client.toggle_timer request.timer_id
+          result.complete send_json_response
+        delete_timer: =>
+          result = @client.delete_entry request.timer_id
+          result.complete send_json_response
+        reload_app: =>
+          send_response reloading: true
+          window.location.reload true
 
-         result.success send_json_response
-         true
-       else if request.method is 'toggle_timer'
-         result = @client.toggle_timer request.timer_id
-         result.complete send_json_response
-         true
-       else if request.method is 'delete_timer'
-         result = @client.delete_entry request.timer_id
-         result.complete send_json_response
-         true
+      if methods.hasOwnProperty request.method
+        console.debug "Received message from popup: %s", request.method
+        methods[request.method].call this
+        true
+      else
+        console.warn "Unknown method: %s", request.method
+        false
 
   constructor: (@subdomain, @auth_string) ->
-    @client = new Harvest(@subdomain, @auth_string)
-    @version = '0.3.4'
-    @authorized = false
-    @total_hours = 0.0
-    @current_hours = 0.0
-    @current_task = null
-    @badge_flash_interval = 0
-    @refresh_interval = 0
+    @client                = new Harvest(@subdomain, @auth_string)
+    @version               = '0.3.4'
+    @authorized            = false
+    @total_hours           = 0.0
+    @current_hours         = 0.0
+    @current_task          = null
+    @badge_flash_interval  = 0
+    @refresh_interval      = 0
     @refresh_interval_time = 36e3
-    @todays_entries = []
-    @projects = []
-    @preferences = {}
-    @timer_running = false
+    @todays_entries        = []
+    @projects              = []
+    @preferences           = {}
+    @timer_running         = false
 
     chrome.browserAction.setTitle title: "Hayfever for Harvest"
-    register_message_listeners.call(this)
+    register_message_listeners.call this
+    start_refresh_interval.call this if @subdomain and @auth_string
   
   # Class Methods
   @get_auth_data: (callback) ->
@@ -91,31 +101,17 @@ class BackgroundApplication
     options.hayfever_prefs = prefs if prefs
 
     chrome.storage.local.set options, ->
+      localStorage.removeItem 'harvest_subdomain'
+      localStorage.removeItem 'harvest_auth_string'
+      localStorage.removeItem 'harvest_username'
+      localStorage.removeItem 'hayfever_prefs'
       callback(options)
   
   # Instance Methods  
-  upgrade_detected: ->
-    stored_version = localStorage.getItem 'hayfever_version'
-
-    unless stored_version
-      localStorage.setItem 'hayfever_version', @version
-      false
-    else
-      stored_version == @version
-
-  start_refresh_interval: ->
-    @refresh_interval = setInterval @refresh_hours, @refresh_interval_time
-  
   get_preferences: (callback = $.noop) ->
     BackgroundApplication.get_preferences (items) =>
       @preferences = items.hayfever_prefs || {}
       callback(items)
-  
-  get_auth_data: (callback) ->
-      
-  auth_data_exists: ->
-    auth = @get_auth_data()
-    !auth.subdomain.isBlank() and !auth.auth_string.isBlank()
   
   set_badge: =>
     @get_preferences()
@@ -133,11 +129,10 @@ class BackgroundApplication
     chrome.browserAction.setBadgeBackgroundColor color: badge_color
     chrome.browserAction.setBadgeText text: badge_text
   
-  refresh_hours: (callback, force=false) =>
-    console.log 'refreshing hours'
+  refresh_hours: (callback = $.noop) =>
+    console.debug 'refreshing hours'
     @get_preferences()
     prefs        = @preferences
-    callback     = if typeof callback is 'function' then callback else $.noop
     todays_hours = @client.get_today()
 
     todays_hours.success (json) =>
@@ -164,19 +159,19 @@ class BackgroundApplication
       if typeof current_hours is 'number'
         @current_hours = current_hours
         @timer_running = true
-        @start_badge_flash()
         chrome.browserAction.setTitle title: "Currently working on: #{@current_task.client} - #{@current_task.project}"
+        @start_badge_flash() if @badge_flash_interval is 0 and prefs.badge_blink
       else
         @current_hours = 0.0
         @timer_running = false
-        @stop_badge_flash()
         chrome.browserAction.setTitle title: 'Hayfever for Harvest'
+        @stop_badge_flash() if @badge_flash_interval isnt 0
 
       @set_badge()
       callback.call(@todays_entries)
 
     todays_hours.error (xhr, text_status, error_thrown) =>
-      console.log 'Error refreshing hours!'
+      console.warn 'Error refreshing hours!'
 
       if xhr.status == 401
         # Authentication failure
@@ -185,28 +180,21 @@ class BackgroundApplication
         chrome.browserAction.setBadgeText text: '!'
   
   badge_color: (alpha) =>
-    @get_preferences()
-    prefs = @preferences
-    color = $.hexColorToRGBA prefs.badge_color, alpha
+    color = $.hexColorToRGBA @preferences.badge_color, alpha
     chrome.browserAction.setBadgeBackgroundColor color: color
   
   badge_flash: (alpha) =>
-    @badge_color(255)
+    @badge_color 255
     setTimeout @badge_color, 1000, 100
   
   start_badge_flash: ->
-    console.log 'Starting badge blink'
-    @get_preferences()
-    prefs = @preferences
-
-    if @badge_flash_interval is 0 and prefs.badge_blink
-      @badge_flash_interval = setInterval @badge_flash, 2000
+    console.debug 'Starting badge blink'
+    @badge_flash_interval = setInterval @badge_flash, 2000
   
   stop_badge_flash: ->
-    if @badge_flash_interval != 0
-      console.log 'Stopping badge blink'
-      clearInterval @badge_flash_interval
-      @badge_flash_interval = 0
-      @badge_color 255
+    console.debug 'Stopping badge blink'
+    clearInterval @badge_flash_interval
+    @badge_flash_interval = 0
+    @badge_color 255
 
 window.BackgroundApplication = BackgroundApplication
