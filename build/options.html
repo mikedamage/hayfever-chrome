@@ -15,7 +15,10 @@
 <body ng-controller="OptionsController">
     <div class="container">
         <header id="header">
-            <h1>Hayfever Options</h1>    
+            <h1>Hayfever Options</h1>
+            <span ng-show="debug_mode">
+                <input type="checkbox" ng-model="options_saved"> Show banner?
+            </span>
         </header>
 
         <div id="status" class="success" ng-if="options_saved">Options successfully saved!</div>

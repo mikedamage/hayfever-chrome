@@ -18,6 +18,7 @@ options_controller = ($scope) ->
     'hayfever_prefs'
   ]
 
+  $scope.debug_mode           = true
   $scope.password_placeholder = ''
 
   # Load options from local storage

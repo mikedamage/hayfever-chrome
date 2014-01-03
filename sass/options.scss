@@ -45,14 +45,12 @@ body {
 
 #status {
   @include border-radius(4px);
+  @include transition(opacity ease-out 500ms);
   margin: 20px 0 40px 0;
   padding: 15px;
-
-  &.success {
-    background: $success-background;
-    border: 1px solid $success-border;
-    color: $success-text;
-  }
+  background: $success-background;
+  border: 1px solid $success-border;
+  color: $success-text;
 }
 
 .input-group {
