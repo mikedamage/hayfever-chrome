@@ -48,12 +48,6 @@ a {
     &.right {
       -webkit-border-top-right-radius: 6px; } }
   tbody {
-		tr {
-      @include transition(all 500ms ease);
-		}
-		tr.ui-animate {
-			opacity: 0;
-		}
     tr.odd {
       background: $tr-odd-bg;
     }
@@ -70,8 +64,10 @@ a {
     } 
 
     tr.running {
-      -webkit-animation: runningtimer 4s;
-      -webkit-animation-iteration-count: infinite;
+      td {
+        -webkit-animation: running-timer 4s;
+        -webkit-animation-iteration-count: infinite;
+      }
 
       a.toggle-timer span {
         &:before {
@@ -144,10 +140,15 @@ ul.toolbar {
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.55);
-	
-	&.ui-animate {
-		opacity: 0;
-	}
+  opacity: 1;
+
+  &.ng-hide-add, &.ng-hide-remove {
+    display: block !important;
+  }
+
+  &.ng-hide {
+    opacity: 0;
+  }
 
   #form-spinner {
     width: 25px;
@@ -238,28 +239,16 @@ ul.toolbar {
   }
 }
 
-@-webkit-keyframes runningtimer {
+@-webkit-keyframes running-timer {
   0% {
-    background: $running-timer-start;
+    background: white;
   }
 
   50% {
-    background: $running-timer-middle;
+    background: $running-timer-background;
   }
 
   100% {
-    background: $running-timer-start;
-  }
-}
-
-@-webkit-keyframes blinkey {
-  0% {
-    color: black;
-  }
-  50% {
-    color: $blinkey-middle;
-  }
-  100% {
-    color: black;
+    background: white;
   }
 }

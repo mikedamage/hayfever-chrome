@@ -2,7 +2,7 @@
 Angular.js Popup Tasks Controller
 ###
 
-app = angular.module 'hayfeverApp', []
+app = angular.module 'hayfeverApp', [ 'ngAnimate' ]
 
 tasks_controller = ($scope) ->
   # DEBUG MODE: set this to true to show debug content in popup
