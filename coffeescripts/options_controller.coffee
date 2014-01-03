@@ -5,7 +5,7 @@ Options Page Controller
 by Mike Green (mike.is.green@gmail.com)
 ###
 
-app = angular.module 'hayfeverOptions', [ 'ui' ]
+app = angular.module 'hayfeverOptions', []
 
 options_controller = ($scope) ->
   bg_page     = chrome.extension.getBackgroundPage()

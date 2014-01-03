@@ -10,7 +10,6 @@
     <script src="js/vendor/underscore/underscore-min.js"></script>
     <script src="js/vendor/jquery/jquery.min.js"></script>
     <script src="js/vendor/angular/angular.min.js"></script>
-    <script src="js/vendor/angular-ui/build/angular-ui.js"></script>
     <script src="js/options_controller.js"></script>
 </head>
 <body ng-controller="OptionsController">
@@ -19,7 +18,7 @@
             <h1>Hayfever Options</h1>    
         </header>
 
-        <div id="status" class="success" ui-if="options_saved">Options successfully saved!</div>
+        <div id="status" class="success" ng-if="options_saved">Options successfully saved!</div>
 
         <form action="" ng-submit="save_options()">
             <div class="input-group" id="authentication">

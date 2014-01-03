@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8" />
 
-    <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="js/vendor/angular/angular-csp.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/popup.css">
 
     <script src="js/prototype-extensions.js"></script>
     <script src="js/vendor/underscore/underscore-min.js"></script>
     <script src="js/vendor/jquery/jquery.min.js"></script>
     <script src="js/vendor/angular/angular.min.js"></script>
-    <script src="js/vendor/angular-ui/build/angular-ui.js"></script>
     <script src="js/vendor/spin.js/spin.js"></script>
     <script src="js/vendor/spin.js/jquery.spin.js"></script>
     <script src="js/init-spinners.js"></script>
@@ -18,7 +18,7 @@
     <script src="js/google-analytics.js"></script>
 </head>
 <body ng-controller="TasksController">
-    <table cellspacing="0" width="340" id="timesheet" >
+    <table cellspacing="0" width="340" id="timesheet">
         <thead>
             <tr>
                 <th class="left" width="60%">Task</th>
@@ -33,7 +33,7 @@
                 ng-dblclick="toggle_timer(timer.id)">
                 <td class="entry-name">
                     <strong>{{timer.client}}</strong> {{timer.project}} ({{timer.task}})
-                    <div class="notes" ui-if="prefs.show_task_notes">
+                    <div class="notes" ng-if="prefs.show_task_notes">
                         <strong>Notes:</strong> <em>{{timer.notes}}</em>
                     </div>
                 </td>
@@ -54,13 +54,13 @@
                     </a>
                 </td>
             </tr>
-            <tr class="noentries" ui-if="authorized && timers.length == 0" ng-dblclick="show_form()">
+            <tr class="noentries" ng-if="authorized && timers.length == 0" ng-dblclick="show_form()">
                 <td colspan="3" align="center">
                     <span class="fa fa-calendar"></span>
                     <em>No Entries Today</em>
                 </td>
             </tr>
-            <tr class="configure" ui-if="!authorized">
+            <tr class="configure" ng-if="!authorized">
                 <td colspan="3" align="center">
                     <span class="fa fa-cog"></span>
                     <em>Please visit the <a href="options.html" target="_blank">Options Page</a> and sign in to Harvest.</em>
@@ -91,17 +91,17 @@
         <div class="clear">&nbsp;</div>
     </div>
 
-    <ul class="toolbar" ui-if="harvest_url">
+    <ul class="toolbar" ng-if="harvest_url">
         <li>
             <span class="fa fa-arrow-circle-o-left"></span>
             <a href="{{harvest_url}}" id="harvest-link" target="_blank">Visit Harvest App</a>
         </li>
-        <li ui-if="debug_mode">
+        <li ng-if="debug_mode">
             <a href="#" ng-click="toggle_spinners()">Toggle Spinners</a>
         </li>
     </ul>
 
-    <div id="form-overlay" ng-show="form_visible" ui-animate>
+    <div id="form-overlay" ng-show="form_visible">
         <form id="entry-form" ng-submit="add_timer()">
             <p>
                 <a class="cancel" href="#" ng-click="hide_form()">

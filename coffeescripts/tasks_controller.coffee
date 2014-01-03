@@ -2,8 +2,7 @@
 Angular.js Popup Tasks Controller
 ###
 
-app = angular.module 'hayfeverApp', ['ui']
-
+app = angular.module 'hayfeverApp', []
 
 tasks_controller = ($scope) ->
   # DEBUG MODE: set this to true to show debug content in popup
@@ -22,6 +21,7 @@ tasks_controller = ($scope) ->
     task: null
     hours: null
     notes: null
+  console.debug $scope.form_visible
 
   # Grab background application data
   chrome.runtime.sendMessage { method: 'get_entries' }, (resp) ->
