@@ -204,11 +204,23 @@ ul.toolbar {
     width: 205px;
   }
   input[type='text'], textarea {
-    @include border-radius(6px);
+    @include border-radius(4px);
+    @include transition(
+      border-color ease-in-out 150ms,
+      box-shadow ease-in-out 150ms
+    );
     border: 1px solid $options-input-border;
     font-family: $helvetica-neue;
     color: $dark-gray;
     outline: none;
+
+    &:focus {
+      @include box-shadow(
+        inset 0 1px 1px $input-shadow-inner,
+        0 0 8px $input-shadow-outer
+      );
+      border-color: $options-input-border-focus;
+    }
   }
   input[type='text'] {
     font-size: 16px;
