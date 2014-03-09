@@ -1,40 +1,37 @@
 # module: coffeescript
+
+require 'coffee-script'
+
 class Coffeescript < Thor
   include Thor::Actions
 
   desc 'compile', 'Compile CoffeeScripts to js/ folder'
   method_option :source_maps, type: :boolean, desc: "Generate source maps along with JS files"
   def compile
-    `which coffee`
-
-    if $?.exitstatus != 0
-      say 'CoffeeScript executable not found', :red
-      exit
-    end
-
     cs_dir = $root_dir.join 'coffeescripts'
-    js_dir = $root_dir.join 'build', 'js'
+    js_dir = $build_dir.join 'js'
 
-    say 'Compiling CoffeeScripts...', :blue
-    cs_dir.children.each do |child|
-      if child.basename.to_s =~ /\.coffee$/
-        say_status 'compile', child.basename.to_s, :blue
+    say 'Compiling CoffeeScripts...', :bold
 
-        coffee_opts = {
-          output: js_dir.expand_path.to_s,
-          compile: true
-        }
-        coffee_opts[:map] = true if options.source_maps
+    Pathname.glob(cs_dir.join('*.coffee')).each do |file|
+      input_cs        = file.read
+      timestamp       = Time.now.strftime '%Y-%m-%d %H:%M:%S'
+      compile_header  = "// Compiled by CoffeeScript #{CoffeeScript.version} on #{timestamp}\n"
+      bare_compile    = input_cs =~ /^#\s*@bare$/ ? true : false
+      output_filename = file.basename.sub_ext '.js'
 
-        coffee_opts = coffee_opts.map do |pair|
-          if pair.last === true then "--#{pair.first}" else "--#{pair.first} #{pair.last}" end
-        end
+      begin
+        output_js = CoffeeScript.compile input_cs, bare: bare_compile
+      rescue
+        say_status 'error', file.basename.to_s, red
+        next
+      end
 
-        coffee_cmd = "coffee #{coffee_opts.join(' ')} #{child.expand_path.to_s}"
-
-        run coffee_cmd, verbose: false
+      say_status 'save', output_filename.to_s, :green
+      js_dir.join(output_filename).open('w') do |js_file|
+        js_file.puts  compile_header
+        js_file.write output_js
       end
     end
   end
-
 end
