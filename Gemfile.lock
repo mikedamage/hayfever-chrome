@@ -36,6 +36,7 @@ GEM
     timers (1.1.0)
     watson-ruby (1.5.1)
       json
+    yui-compressor (0.12.0)
 
 PLATFORMS
   ruby
@@ -49,3 +50,4 @@ DEPENDENCIES
   rubyzip
   thor
   watson-ruby
+  yui-compressor
