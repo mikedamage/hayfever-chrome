@@ -1,0 +1,10 @@
+{
+    "name": "hayfever-chrome",
+    "version": "0.3.5",
+    "description": "A Harvest time tracking extension for Google Chrome",
+    "homepage": "https://github.com/mikedamage/hayfever-chrome",
+    "dependencies": {
+        "bower": "~1.3.0",
+        "coffee-script": "~1.7.0"
+    }
+}
