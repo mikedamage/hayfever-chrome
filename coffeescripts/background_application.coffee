@@ -148,6 +148,9 @@ class BackgroundApplication
       $.each @todays_entries, (i, v) =>
         total_hours += v.hours
 
+        project = _.find @projects, (proj) -> proj.name is v.project and proj.client is v.client
+        v.code  = if _.isEmpty project then '' else project.code
+
         if v.hasOwnProperty('timer_started_at') and v.timer_started_at
           current_hours = parseFloat(v.hours)
           v.running = true
@@ -159,7 +162,8 @@ class BackgroundApplication
       if typeof current_hours is 'number'
         @current_hours = current_hours
         @timer_running = true
-        chrome.browserAction.setTitle title: "Currently working on: #{@current_task.client} - #{@current_task.project}"
+        chrome.browserAction.setTitle
+          title: "Currently working on: #{@current_task.client} - #{@current_task.project}"
         @start_badge_flash() if @badge_flash_interval is 0 and prefs.badge_blink
       else
         @current_hours = 0.0

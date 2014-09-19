@@ -33,7 +33,7 @@
                 ng-class="{entry: true, running: timer.running, even: ($index % 2 == 0), odd: ($index % 2 != 0)}"
                 ng-dblclick="toggle_timer(timer.id)">
                 <td class="entry-name">
-                    <strong>{{timer.client}}</strong> {{timer.project}} ({{timer.task}})
+                    <strong>{{timer.code ? '[' + timer.code + ']' : ''}} {{timer.client}}</strong> {{timer.project}} ({{timer.task}})
                     <div class="notes" ng-if="prefs.show_task_notes">
                         <strong>Notes:</strong> <em>{{timer.notes}}</em>
                     </div>
@@ -115,7 +115,7 @@
                     name="client"
                     ng-model="form_task.project"
                     ng-change="project_change()"
-                    ng-options="p.id as p.name group by p.client for p in projects"
+                    ng-options="p.id as (p.code ? '[' + p.code + '] ' + p.name : p.name ) group by p.client for p in projects"
                     required>
                     <option value="">- Select a Project -</option>
                 </select>
