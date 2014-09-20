@@ -1,6 +1,6 @@
 {
     "name": "Hayfever for Harvest",
-    "version": "0.3.5",
+    "version": "0.3.6",
     "dependencies": {
         "jquery": "2.0.3",
         "angular": "1.2.6",

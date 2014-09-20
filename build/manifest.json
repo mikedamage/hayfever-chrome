@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Hayfever for Harvest",
     "short_name": "Hayfever",
-    "version": "0.3.5",
+    "version": "0.3.6",
     "description": "A simple Harvest timesheet manager for Google Chrome",
     "homepage_url": "https://github.com/mikedamage/hayfever-chrome",
     "minimum_chrome_version": "22",
