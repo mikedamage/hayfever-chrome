@@ -10,3 +10,5 @@ build/js/*.map
 build/js/vendor/*
 build/css/*.css
 node_modules
+.atom-build.json
+
